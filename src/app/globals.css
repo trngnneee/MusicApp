@@ -1,21 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*{
+  font-family: "Quicksand", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.range-sm::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ADEF;
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 0px #000000EB;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.range-sm::-moz-range-thumb{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ADEF;
+  cursor: pointer;
+  box-shadow: 0px 0px 8px 0px #000000EB;
 }
