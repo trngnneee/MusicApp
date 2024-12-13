@@ -1,6 +1,8 @@
 import { CardInfor } from "@/app/components/CardInfor/CardInfor";
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { Title } from "@/app/components/Title/Title";
+import { dbFirebase } from "@/app/FirebaseConfig";
+import { onValue, ref } from "firebase/database";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,58 +10,46 @@ export const metadata: Metadata = {
   description: "Nghe nhạc trực tuyến",
 };
 
-export default function CategoryDetailPage() {
-  const data = [
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "Hồ Quang Hiếu, Huỳnh Vân",
-      listener: 24500,
-      time: "4:32"
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "abc",
-      listener: 24500,
-      time: "4:32"
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "bc",
-      listener: 24500,
-      time: "4:32"
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "Hồ Quang Hiếu, Huỳnh Vân",
-      listener: 24500,
-      time: "4:32"
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "abc",
-      listener: 24500,
-      time: "4:32"
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "bc",
-      listener: 24500,
-      time: "4:32"
-    },
-  ]
+export default async function CategoryDetailPage(props: any) {
   
-  const cardInfor = {
-    img: "/card1.svg",
-    title: "Nhạc Trẻ",
-    content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ, được Zing MP3 tự động tổng hợp dựa trên thông tin số liệu lượt nghe và lượt chia sẻ của từng bài hát trên phiên bản web và phiên bản Mobile. Dữ liệu sẽ được lấy trong 30 ngày gần nhất và được cập nhật liên tục."
-  }
+  // Card Information
+  const {id} = await props.params;
+  var cardInfor = {};
+  onValue(ref(dbFirebase, 'categories/' + id), (data) => {
+    const dataCardInfor = data.val();
+    cardInfor = {
+      img: dataCardInfor.image,
+      title: dataCardInfor.title,
+      content: dataCardInfor.description
+    };
+  })
+  // End Card Information
 
+  // Song data
+  const dataSection: any[] = [];
+  const songRef = ref(dbFirebase, 'songs');
+  onValue(songRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
+
+      if (data.categoryId === id) {
+        onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
+          const dataSinger = itemSinger.val();
+          dataSection.push({
+            id: key,
+            img: data.image,
+            title: data.title,
+            singer: dataSinger.title,
+            listener: data.listen,
+            link: `/songs/${key}`
+          })
+        })
+      }
+    })
+  });
+  // End Song data
+  
   return (
     <>
       {/* Section1 */}
@@ -72,7 +62,7 @@ export default function CategoryDetailPage() {
           title="Danh Sách Bài Hát"
         />
         <div>
-          {data.map((item, index) => (
+          {dataSection.map((item, index) => (
             <SongItem2
               item={item}
               key={index}

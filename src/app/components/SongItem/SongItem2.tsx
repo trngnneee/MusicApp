@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaPlay } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
@@ -15,13 +16,13 @@ export const SongItem2 = (props: { item: any }) => {
                             src={item.img}
                             className="w-[76px] h-auto"
                         />
-                        <div className="text-white font-[600] text-[16px">{item.title}</div>
+                        <Link href={item.link} className="text-white font-[600] text-[16px">{item.title}</Link>
                     </div>
                     <div className="text-white font-[400] text-[14px]">{item.singer}</div>
                     <div className="flex gap-[18px] mr-[23px]">
                         <div className="font-[400] text-[14px] text-white">{item.time}</div>
                         <button className="text-[#00ADEF]">
-                            <FaHeart/>
+                            <FaHeart />
                         </button>
                     </div>
                 </div>

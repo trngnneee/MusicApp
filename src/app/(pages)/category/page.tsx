@@ -1,5 +1,7 @@
 import { CardItem } from "@/app/components/CardItem/CardItem";
 import { Title } from "@/app/components/Title/Title";
+import { dbFirebase } from "@/app/FirebaseConfig";
+import { onValue, ref } from "firebase/database";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,69 +10,23 @@ export const metadata: Metadata = {
 };
 
 export default function CategoryPage() {
-  const data = [
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc Bolero",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc Bolero",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-  ]
-  
+  const dataSection: any[] = []
+  const categoryRef = ref(dbFirebase, 'categories');
+  onValue(categoryRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
+
+      dataSection.push({
+        id: key,
+        img: data.image,
+        title: data.title,
+        content: data.description,
+        link: `/category/${key}`
+      })
+    })
+  });
+
   return (
     <>
       <div>
@@ -78,7 +34,7 @@ export default function CategoryPage() {
           title="Danh Mục Bài Hát"
         />
         <div className="grid grid-cols-5 gap-[20px]">
-          {data.map((item, index) => (
+          {dataSection.map((item, index) => (
             <CardItem
               item={item}
               key={index}

@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import { Title } from "./components/Title/Title";
 import { CardItem } from "./components/CardItem/CardItem";
 import { SongItem } from "./components/SongItem/SongItem";
+import { dbFirebase } from "./FirebaseConfig";
+import { onValue, ref } from "firebase/database";
 
 export const metadata: Metadata = {
   title: "Trang chủ",
@@ -9,60 +11,73 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const dataSection1 = [
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "Hồ Quang Hiếu, Huỳnh Vân",
-      listener: 24500
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "abc",
-      listener: 24500
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "bc",
-      listener: 24500
-    },
-  ]
+  // Data section 1 
+  const dataSection1: any[] = [];
+  const songRef = ref(dbFirebase, 'songs');
+  onValue(songRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
 
-  const dataSection2 = [
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc Bolero",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
+      if (dataSection1.length < 3) {
+        onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
+          const dataSinger = itemSinger.val();
+          dataSection1.push({
+            id: key,
+            img: data.image,
+            title: data.title,
+            singer: dataSinger.title,
+            listener: data.listen,
+            link: `/songs/${key}`
+          })
+        })
+      }
+    })
+  });
+  // End Data section 1
 
-  ]
+  // Data section 2
+  const dataSection2: any[] = []
+  const categoryRef = ref(dbFirebase, 'categories');
+  onValue(categoryRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
+
+      if (dataSection2.length < 5) {
+        dataSection2.push({
+          id: key,
+          img: data.image,
+          title: data.title,
+          content: data.description,
+          link: `/category/${key}`
+        })
+      }
+    })
+  });
+  // End Data section 2
+  const dataSection3: any[] = []
+  const singerRef = ref(dbFirebase, 'singers');
+  onValue(singerRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
+
+      if (dataSection3.length < 5) {
+        dataSection3.push({
+          id: key,
+          img: data.image,
+          title: data.title,
+          content: data.description,
+          link: `/singers/${key}`
+        })
+      }
+    })
+  });
+  // Data section 3
+
+  // End Data section 3
+
 
   return (
     <>
@@ -113,7 +128,12 @@ export default function Home() {
       <div className="mb-[30px]">
         <Title title="Ca Sĩ Nổi Bật" />
         <div className="grid grid-cols-5 gap-[20px]">
-            {/* Đổ data vào đây */}
+          {dataSection3.map((item, index) => (
+            <CardItem
+              item={item}
+              key={index}
+            />
+          ))}
         </div>
       </div>
     </>

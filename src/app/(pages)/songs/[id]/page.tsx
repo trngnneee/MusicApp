@@ -1,6 +1,8 @@
 import { CardInfor } from "@/app/components/CardInfor/CardInfor";
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { Title } from "@/app/components/Title/Title";
+import { dbFirebase } from "@/app/FirebaseConfig";
+import { onValue, ref } from "firebase/database";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,12 +10,26 @@ export const metadata: Metadata = {
   description: "Nghe nhạc trực tuyến",
 };
 
-export default function SongDetailPage() {
-  const cardInfor = {
-    img: "/Rectangle15.png",
-    title: "Cô Phòng",
-    content: "Hồ Quang Hiếu, Huỳnh Văn"
-  }
+export default async function SongDetailPage(props: any) {
+  
+  // Card Information
+  const { id } = await props.params;
+  let dataCardInfor: any = null;
+  let cardInfor = {};
+  onValue(ref(dbFirebase, '/songs/' + id), (item) => {
+    dataCardInfor = item.val();
+    onValue(ref(dbFirebase, '/singers/' + dataCardInfor.singerId[0]), (itemSinger) => {
+      const dataSinger = itemSinger.val();
+      console.log(dataSinger);
+      dataCardInfor["singer"] = dataSinger.title;
+    })
+    cardInfor = {
+      img: dataCardInfor.image,
+      title: dataCardInfor.title,
+      content: dataCardInfor.singer
+    }
+  })
+  // End Card Information
 
   const lyrics = `Verse:
     Níu ngàn lời cũng không ngăn được
@@ -45,42 +61,48 @@ export default function SongDetailPage() {
       title: "Cô Phòng",
       singer: "Hồ Quang Hiếu, Huỳnh Vân",
       listener: 24500,
-      time: "4:32"
+      time: "4:32",
+      link: `#`
     },
     {
       img: "/Rectangle15.png",
       title: "Cô Phòng",
       singer: "abc",
       listener: 24500,
-      time: "4:32"
+      time: "4:32",
+      link: `#`
     },
     {
       img: "/Rectangle15.png",
       title: "Cô Phòng",
       singer: "bc",
       listener: 24500,
-      time: "4:32"
+      time: "4:32",
+      link: `#`
     },
     {
       img: "/Rectangle15.png",
       title: "Cô Phòng",
       singer: "Hồ Quang Hiếu, Huỳnh Vân",
       listener: 24500,
-      time: "4:32"
+      time: "4:32",
+      link: `#`
     },
     {
       img: "/Rectangle15.png",
       title: "Cô Phòng",
       singer: "abc",
       listener: 24500,
-      time: "4:32"
+      time: "4:32",
+      link: `#`
     },
     {
       img: "/Rectangle15.png",
       title: "Cô Phòng",
       singer: "bc",
       listener: 24500,
-      time: "4:32"
+      time: "4:32",
+      link: `#`
     },
   ]
 

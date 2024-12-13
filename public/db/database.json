@@ -1,0 +1,104 @@
+{
+  "categories": {
+    "1": {
+      "image": "https://backend.daca.vn/assets/images/nhac-tre.jpg",
+      "title": "Nhạc trẻ",
+      "description": "Tổng hợp nhạc Nhạc trẻ mới nhất"
+    },
+    "2": {
+      "image": "https://backend.daca.vn/assets/images/bolero.jpg",
+      "title": "Bolero",
+      "description": "Tổng hợp nhạc Bolero mới nhất"
+    },
+    "3": {
+      "image": "https://backend.daca.vn/assets/images/remix.jpg",
+      "title": "Remix",
+      "description": "Tổng hợp nhạc Remix mới nhất"
+    },
+    "4": {
+      "image": "https://backend.daca.vn/assets/images/hip-hop.jpg",
+      "title": "Hip-Hop",
+      "description": "Tổng hợp nhạc Hip-Hop mới nhất"
+    },
+    "5": {
+      "image": "https://backend.daca.vn/assets/images/latin.jpg",
+      "title": "Latin",
+      "description": "Tổng hợp nhạc Latin mới nhất"
+    },
+    "6": {
+      "image": "https://backend.daca.vn/assets/images/acoustic.jpg",
+      "title": "Acoustic",
+      "description": "Tổng hợp nhạc Acoustic mới nhất"
+    },
+    "7": {
+      "image": "https://backend.daca.vn/assets/images/rock.jpg",
+      "title": "Rock",
+      "description": "Tổng hợp nhạc Rock mới nhất"
+    }
+  },
+  "singers": {
+    "1": {
+      "image": "https://backend.daca.vn/assets/images/tang-duy-tan.jpg",
+      "title": "Tăng Duy Tân",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    "2": {
+      "image": "https://backend.daca.vn/assets/images/thanh-dat.jpg",
+      "title": "Thành Đạt",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    "3": {
+      "image": "https://backend.daca.vn/assets/images/cao-thai-son.jpg",
+      "title": "Cao Thái Sơn",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    "4": {
+      "image": "https://backend.daca.vn/assets/images/tlong.jpg",
+      "title": "TLong",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    },
+    "5": {
+      "image": "https://backend.daca.vn/assets/images/nal.jpg",
+      "title": "Nal",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+    }
+  },
+  "songs": {
+    "1": {
+      "image": "https://backend.daca.vn/assets/images/cat-doi-noi-sau.jpg",
+      "title": "Cắt Đôi Nỗi Sầu",
+      "categoryId": "1",
+      "singerId": ["1", "3"],
+      "audio": "https://backend.daca.vn/assets/audios/cat-doi-noi-sau.mp3",
+      "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "listen": 24500
+    },
+    "2": {
+      "image": "https://backend.daca.vn/assets/images/ngay-mai-nguoi-ta-lay-chong.jpg",
+      "title": "Ngày Mai Người Ta Lấy Chồng",
+      "categoryId": "1",
+      "singerId": ["2"],
+      "audio": "https://backend.daca.vn/assets/audios/ngay-mai-nguoi-ta-lay-chong.mp3",
+      "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "listen": 20500
+    },
+    "3": {
+      "image": "https://backend.daca.vn/assets/images/tat-ca-hoac-khong-la-gi-ca.jpg",
+      "title": "Tất Cả Hoặc Không Là Gì Cả",
+      "categoryId": "3",
+      "singerId": ["3"],
+      "audio": "https://backend.daca.vn/assets/audios/tat-ca-hoac-khong-la-gi-ca.mp3",
+      "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "listen": 18800
+    },
+    "4": {
+      "image": "https://backend.daca.vn/assets/images/ruou-mung-hoa-nguoi-dung.jpg",
+      "title": "Rượu Mừng Hóa Người Dưng",
+      "categoryId": "6",
+      "singerId": ["4", "3"],
+      "audio": "https://backend.daca.vn/assets/audios/ruou-mung-hoa-nguoi-dung.mp3",
+      "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "listen": 22800
+    }
+  }
+}
