@@ -1,5 +1,7 @@
 import { CardItem } from "@/app/components/CardItem/CardItem";
 import { Title } from "@/app/components/Title/Title";
+import { dbFirebase } from "@/app/FirebaseConfig";
+import { onValue, ref } from "firebase/database";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,47 +10,30 @@ export const metadata: Metadata = {
 };
 
 export default function SingerCategoryPage() {
-  const dataSection2 = [
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc trẻ",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
-    {
-      img: "/card1.svg",
-      title: "Nhạc Bolero",
-      content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ",
-      link: "#"
-    },
+  const dataSection: any[] = []
+  const singerRef = ref(dbFirebase, 'singers');
+  onValue(singerRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
 
-  ]
-  
+      dataSection.push({
+        id: key,
+        img: data.image,
+        title: data.title,
+        content: data.description,
+        link: `/singers/${key}`
+      })
+    })
+  });
+
   return (
     <>
       <Title
         title="Danh Sách Ca Sĩ"
       />
       <div className="grid grid-cols-5 gap-[20px]">
-        {dataSection2.map((item, index) => (
+        {dataSection.map((item, index) => (
           <CardItem
             item={item}
             key={index}

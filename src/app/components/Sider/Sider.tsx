@@ -50,7 +50,6 @@ export const Sider = () => {
         },
     ]
     const pathname = usePathname();
-    console.log(pathname);
     return (
         <>
             <div className="bg-[#212121] h-[100vh] fixed w-[280px]">

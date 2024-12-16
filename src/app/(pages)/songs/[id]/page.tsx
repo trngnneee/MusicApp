@@ -31,6 +31,33 @@ export default async function SongDetailPage(props: any) {
   })
   // End Card Information
 
+  // Same category songs
+  const dataSection3: any[] = [];
+  const songRef = ref(dbFirebase, 'songs');
+  onValue(songRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
+
+      if (data.categoryId === dataCardInfor.categoryId && key != id) {
+        onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
+          const dataSinger = itemSinger.val();
+          console.log(dataSinger);
+          dataSection3.push({
+            id: key,
+            img: data.image,
+            title: data.title,
+            singer: dataSinger.title,
+            listener: data.listen,
+            time: data.time,
+            link: key
+          })
+        })
+      }
+    })
+  });
+  // End Same category songs
+
   const lyrics = `Verse:
     Níu ngàn lời cũng không ngăn được
     Bàn chân bước đi không báo trước
@@ -55,57 +82,6 @@ export default async function SongDetailPage(props: any) {
     Thì ra duyên kiếp để mình gặp nhau
     Dạy nhau tốt hơn xong dành lại cho người sau…`;
 
-  const data = [
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "Hồ Quang Hiếu, Huỳnh Vân",
-      listener: 24500,
-      time: "4:32",
-      link: `#`
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "abc",
-      listener: 24500,
-      time: "4:32",
-      link: `#`
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "bc",
-      listener: 24500,
-      time: "4:32",
-      link: `#`
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "Hồ Quang Hiếu, Huỳnh Vân",
-      listener: 24500,
-      time: "4:32",
-      link: `#`
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "abc",
-      listener: 24500,
-      time: "4:32",
-      link: `#`
-    },
-    {
-      img: "/Rectangle15.png",
-      title: "Cô Phòng",
-      singer: "bc",
-      listener: 24500,
-      time: "4:32",
-      link: `#`
-    },
-  ]
-
   return (
     <>
       {/* Section1 */}
@@ -116,7 +92,7 @@ export default async function SongDetailPage(props: any) {
       <Title
         title="Lời Bài Hát"
       />
-      <div className="bg-[#212121] rounded-[15px] p-[20px] text-white text-[14px] font-[500] whitespace-pre-line">
+      <div className="bg-[#212121] rounded-[15px] p-[20px] mb-[15px] text-white text-[14px] font-[500] whitespace-pre-line">
         {lyrics}
       </div>
       {/* Section3 */}
@@ -124,7 +100,7 @@ export default async function SongDetailPage(props: any) {
         title="Bài Hát Cùng Danh Mục"
       />
       <div>
-        {data.map((item, index) => (
+        {dataSection3.map((item, index) => (
           <SongItem2
             item={item}
             key={index}

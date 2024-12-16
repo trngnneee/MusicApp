@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { FaPlay } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
+import { PlayButton } from "../Button/PlayButton";
 
 export const SongItem = (props: {item: any}) => {
     const {item} = props;
@@ -18,9 +18,7 @@ export const SongItem = (props: {item: any}) => {
                         <div className="text-white font-[400] text-[12px]">{item.listener.toLocaleString()} lượt nghe</div>
                     </Link>
                     <div className="flex gap-[10px]">
-                        <button className="bg-[#00ADEF] rounded-[50%] p-[8px] text-white">
-                            <FaPlay />
-                        </button>
+                        <PlayButton item={item}/>
                         <button className="bg-[#00ADEF] rounded-[50%] p-[8px] text-white">
                             <FaRegHeart />
                         </button>

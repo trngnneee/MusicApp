@@ -28,7 +28,8 @@ export default function Home() {
             title: data.title,
             singer: dataSinger.title,
             listener: data.listen,
-            link: `/songs/${key}`
+            link: `/songs/${key}`,
+            audio: data.audio
           })
         })
       }
@@ -56,6 +57,8 @@ export default function Home() {
     })
   });
   // End Data section 2
+  
+  // Data section 3
   const dataSection3: any[] = []
   const singerRef = ref(dbFirebase, 'singers');
   onValue(singerRef, (items) => {
@@ -74,10 +77,7 @@ export default function Home() {
       }
     })
   });
-  // Data section 3
-
   // End Data section 3
-
 
   return (
     <>

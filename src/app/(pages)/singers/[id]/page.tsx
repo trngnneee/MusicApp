@@ -1,4 +1,9 @@
+import { CardInfor } from "@/app/components/CardInfor/CardInfor";
 import { CardItem } from "@/app/components/CardItem/CardItem";
+import { SongItem2 } from "@/app/components/SongItem/SongItem2";
+import { Title } from "@/app/components/Title/Title";
+import { dbFirebase } from "@/app/FirebaseConfig";
+import { onValue, ref } from "firebase/database";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,16 +11,64 @@ export const metadata: Metadata = {
   description: "Nghe nhạc trực tuyến",
 };
 
-export default function SingerDetailPage() {
-  const cardInfor = {
-    img: "/card1.svg",
-    title: "Sơn Tùng MTP",
-    content: "Top 100 Nhạc Trẻ là danh sách 100 ca khúc hot nhất hiện tại của thể loại Nhạc Trẻ, được Zing MP3 tự động tổng hợp dựa trên thông tin số liệu lượt nghe và lượt chia sẻ của từng bài hát trên phiên bản web và phiên bản Mobile. Dữ liệu sẽ được lấy trong 30 ngày gần nhất và được cập nhật liên tục."
-  }
+export default async function SingerDetailPage(props: any) {
+  // Card Infor
+  const { id } = await props.params;
+  var cardInfor = {};
+  onValue(ref(dbFirebase, 'singers/' + id), (data) => {
+    const dataCardInfor = data.val();
+    cardInfor = {
+      img: dataCardInfor.image,
+      title: dataCardInfor.title,
+      content: dataCardInfor.description
+    };
+  })
+  // End Card Infor
+
+  // Song List
+  const dataSection: any[] = [];
+  const songRef = ref(dbFirebase, 'songs');
+  onValue(songRef, (items) => {
+    items.forEach((item) => {
+      const key = item.key;
+      const data = item.val();
+
+      if (data.singerId.includes(id)) {
+        onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
+          const dataSinger = itemSinger.val();
+          dataSection.push({
+            id: key,
+            img: data.image,
+            title: data.title,
+            singer: dataSinger.title,
+            listener: data.listen,
+            time: "3:45",
+            link: key
+          })
+        })
+      }
+    })
+  });
+  // End Song List
 
   return (
     <>
-      <h1>Trang chi tiết ca sĩ</h1>
+      <div className="mb-[30px]">
+        <CardInfor
+          item={cardInfor}
+        />
+      </div>
+      <Title
+        title="Danh Sách Bài Hát"
+      />
+      <div>
+        {dataSection.map((item, index) => (
+          <SongItem2
+            item={item}
+            key={index}
+          />
+        ))}
+      </div>
     </>
   );
 }
