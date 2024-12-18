@@ -33,6 +33,8 @@ export default async function CategoryDetailPage(props: any) {
       const key = item.key;
       const data = item.val();
 
+      console.log(data);
+
       if (data.categoryId === id) {
         onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
           const dataSinger = itemSinger.val();
@@ -42,7 +44,9 @@ export default async function CategoryDetailPage(props: any) {
             title: data.title,
             singer: dataSinger.title,
             listener: data.listen,
-            link: `/songs/${key}`
+            link: `/songs/${key}`,
+            time: "4:32",
+            audio: data.audio
           })
         })
       }

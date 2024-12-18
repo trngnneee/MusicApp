@@ -31,7 +31,8 @@ export const SearchResult = () => {
                         singer: "",
                         singerId: data.singerId,
                         listener: data.listen,
-                        link: `/songs/${key}`
+                        link: `/songs/${key}`,
+                        audio: data.audio
                     })
                 }
             });

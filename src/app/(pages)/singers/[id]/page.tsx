@@ -43,7 +43,8 @@ export default async function SingerDetailPage(props: any) {
             singer: dataSinger.title,
             listener: data.listen,
             time: "3:45",
-            link: key
+            link: key,
+            audio: data.audio
           })
         })
       }

@@ -9,9 +9,25 @@ import { FaUser } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa6";
 import { FaPodcast } from "react-icons/fa";
 import { usePathname } from "next/navigation";
-import path from "path";
+import { onAuthStateChanged } from "firebase/auth";
+import { authFireBase } from "@/app/FirebaseConfig";
+import { useEffect, useState } from "react";
+import { MenuItem } from "../MenuItem/MenuItem";
 
 export const Sider = () => {
+    const [isLogin, setIsLogin] = useState<boolean>();
+
+    useEffect(() => {
+        onAuthStateChanged(authFireBase, (user) => {
+            if (user) {
+                setIsLogin(true);
+            }
+            else {
+                setIsLogin(false);
+            }
+        });
+    }, [])
+
     const menu = [
         {
             icon: <AiFillHome />,
@@ -36,20 +52,22 @@ export const Sider = () => {
         {
             icon: <MdLogout />,
             title: "Đăng xuất",
-            link: "/logout"
+            link: "/logout",
+            isLogin: true
         },
         {
             icon: <FaUser />,
             title: "Đăng nhập",
-            link: "/login"
+            link: "/login",
+            isLogin: false
         },
         {
             icon: <FaUserPlus />,
             title: "Đăng ký",
-            link: "/register"
+            link: "/register",
+            isLogin: false
         },
     ]
-    const pathname = usePathname();
     return (
         <>
             <div className="bg-[#212121] h-[100vh] fixed w-[280px]">
@@ -64,16 +82,11 @@ export const Sider = () => {
                     <nav className="px-[20px]">
                         <ul className="">
                             {menu.map((item, index) => (
-                                <li className="mb-[30px]" key={index}>
-                                    <Link
-                                        href={item.link}
-                                        className={`flex items-center hover:text-[#00ADEF] ${pathname === item.link ? "text-[#00ADEF]" : "text-white"
-                                            }`}
-                                    >
-                                        <span className="text-[16px] mr-[20px]">{item.icon}</span>
-                                        <span className="font-[700] text-[16px]">{item.title}</span>
-                                    </Link>
-                                </li>
+                               <MenuItem
+                                item={item}
+                                isLogin={isLogin}
+                                key={index}
+                                />
                             ))}
                         </ul>
                     </nav>

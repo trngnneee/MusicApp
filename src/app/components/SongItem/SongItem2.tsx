@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { FaPlay } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
+import { PlayButton } from "../Button/PlayButton";
 
 export const SongItem2 = (props: { item: any }) => {
     const { item } = props;
@@ -9,9 +9,9 @@ export const SongItem2 = (props: { item: any }) => {
             <div className="mb-[12px]">
                 <div className="flex justify-between items-center bg-[#212121] p-[10px] rounded-[15px]">
                     <div className="flex items-center gap-[12px] ml-[23px]">
-                        <button className="text-white">
-                            <FaPlay />
-                        </button>
+                        <PlayButton
+                            item={item}
+                        />
                         <img
                             src={item.img}
                             className="w-[76px] h-auto"
