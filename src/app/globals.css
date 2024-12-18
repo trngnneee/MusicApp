@@ -27,18 +27,18 @@
   box-shadow: 0px 0px 8px 0px #000000EB;
 }
 
-.play-audio .inner-button-play .inner-icon-play{
-  display: none;
+.inner-icon-pause {
+  display: none;  
 }
 
-.play-audio .inner-button-play .inner-icon-block{
-  display: block;
+.inner-icon-play {
+  display: block;  
 }
 
-.play-audio .inner-button-play.play .inner-icon-play{
-  display: none;
+.inner-button-play.play .inner-icon-pause {
+  display: block;  
 }
 
-.play-audio .inner-button-play.play .inner-icon-pause{
-  display: block;
+.inner-button-play.play .inner-icon-play {
+  display: none;  
 }

@@ -10,15 +10,12 @@ export const PlayMidButton = () => {
         const elementPlayAudio: any = document.querySelector(".play-audio");
         const elementPauseButton = elementPlayAudio.querySelector(".inner-button-play");
         const elementAudio = elementPlayAudio?.querySelector(".inner-audio");
-        if (elementPauseButton.classList.contains("play"))
-        {
-            elementPauseButton.classList.remove("play");
-            elementAudio.pause();
-        }
-        else
-        {
-            elementPauseButton.classList.add("play");
+        if (elementAudio.paused) {
             elementAudio.play();
+            elementPauseButton.classList.add("play");  
+        } else {
+            elementAudio.pause();
+            elementPauseButton.classList.remove("play");  
         }
     }
     
@@ -29,11 +26,11 @@ export const PlayMidButton = () => {
                     <MdSkipPrevious />
                 </button>
                 <button 
-                    className="inner-button-play play"
+                    className="inner-button-play"
                     onClick={handleClick}
                 >
-                    <FaPlay className="inner-icon-play"/>
                     <FaPause className="inner-icon-pause"/>
+                    <FaPlay className="inner-icon-play"/>
                 </button>
                 <button>
                     <MdSkipNext />
