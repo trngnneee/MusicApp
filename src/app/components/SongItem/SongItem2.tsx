@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { FaHeart } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
 import { PlayButton } from "../Button/PlayButton";
+import { HeartButton } from "../Button/HeartButton";
 
 export const SongItem2 = (props: { item: any }) => {
     const { item } = props;
@@ -21,9 +22,9 @@ export const SongItem2 = (props: { item: any }) => {
                     <div className="text-white font-[400] text-[14px]">{item.singer}</div>
                     <div className="flex gap-[18px] mr-[23px]">
                         <div className="font-[400] text-[14px] text-white">{item.time}</div>
-                        <button className="text-[#00ADEF]">
-                            <FaHeart />
-                        </button>
+                        <HeartButton
+                            item={item}
+                        />
                     </div>
                 </div>
             </div>

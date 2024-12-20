@@ -29,7 +29,8 @@ export default function Home() {
             singer: dataSinger.title,
             listener: data.listen,
             link: `/songs/${key}`,
-            audio: data.audio
+            audio: data.audio,
+            wishlist: data.wishlist
           })
         })
       }
