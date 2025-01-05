@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PlayButton } from "../Button/PlayButton";
 import { HeartButton } from "../Button/HeartButton";
+import { AddPlayListButton } from "../Button/AddPlaylistButton";
 
 export const SongItem = (props: {item: any}) => {
     const {item} = props;
@@ -20,6 +21,7 @@ export const SongItem = (props: {item: any}) => {
                     <div className="flex gap-[10px]">
                         <PlayButton item={item}/>
                         <HeartButton item={item}/>
+                        <AddPlayListButton item={item}/>
                     </div>
                 </div>
             </div>

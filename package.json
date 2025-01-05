@@ -13,7 +13,9 @@
     "next": "15.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.4.0"
+    "react-icons": "^5.4.0",
+    "sass": "^1.83.1",
+    "sweetalert2": "^11.15.10"
   },
   "devDependencies": {
     "@types/node": "^20",

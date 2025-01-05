@@ -1,0 +1,86 @@
+"use client"
+
+import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { get, onValue, ref,set } from "firebase/database";
+import { useEffect, useState } from "react";
+import { CgPlayListAdd } from "react-icons/cg";
+import { CgPlayListRemove } from "react-icons/cg";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+
+export const AddPlayListButton = (props: any) => {    
+    const {item} = props;
+    const [isActive, setIsActive] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const [playlist, setPlayList] = useState(null);
+    
+    useEffect(() => {
+        const fetchUserID = () => {
+            onAuthStateChanged(authFireBase, (user) => {
+                if (user) setUserId(user.uid);
+                else setUserId(null);
+            })
+        }
+        fetchUserID();
+    }, [])
+        
+    useEffect(() => {
+        const fetchPlayList = () => {
+            const playListRef = ref(dbFirebase, `users/${userId}/playlist`);
+            onValue(playListRef, (snapshot) => {
+                const data = snapshot.val();
+                setPlayList(data);
+            })
+        }
+        if (userId != null) fetchPlayList();
+    }, [userId])
+
+    useEffect(() => {
+        if (playlist != null && playlist.includes(item.id))
+            setIsActive(true);
+    }, [playlist])
+
+    const handleAddPlayList = async () => {
+        const userId  = authFireBase?.currentUser?.uid;
+        if (userId && item.id)
+        {
+            const userRef = ref(dbFirebase, `/users/${userId}/playlist`);
+            get(userRef).then(async (snapshot) => {
+                let playlists = snapshot.val() || [];
+                if (!playlists.includes(item.id)) {
+                    playlists.push(item.id); 
+                    setIsActive(true);
+                    Swal.fire({
+                        title: "Thêm thành công bài hát vào danh sách phát!",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+                else 
+                {
+                    playlists = playlists.filter((playlistId:string) => playlistId !== item.id);
+                    console.log(playlist);
+                    setIsActive(false);
+                    Swal.fire({
+                        title: "Xóa thành công bài hát ra khỏi danh sách phát!",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+                await set(userRef, playlists);
+            })
+        }
+    }
+    
+    return (
+        <>
+            <button 
+                className="text-[white] text-[20px] p-[8px]"
+                onClick={handleAddPlayList}    
+            >
+                {isActive ? <div className="text-[#00ADEF]"><CgPlayListRemove /></div> : <CgPlayListAdd />}
+            </button>
+        </>
+    );
+}

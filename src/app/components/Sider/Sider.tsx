@@ -13,6 +13,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { authFireBase } from "@/app/FirebaseConfig";
 import { useEffect, useState } from "react";
 import { MenuItem } from "../MenuItem/MenuItem";
+import { BsFillMusicPlayerFill } from "react-icons/bs";
+import { MdLibraryMusic } from "react-icons/md";
 
 export const Sider = () => {
     const [isLogin, setIsLogin] = useState<boolean>();
@@ -31,39 +33,44 @@ export const Sider = () => {
     const menu = [
         {
             icon: <AiFillHome />,
-            title: "Trang chủ",
+            title: "Trang Chủ",
             link: "/"
         },
         {
             icon: <FaMusic />,
-            title: "Danh mục bài hát",
+            title: "Danh Mục Bài Hát",
             link: "/category"
         },
         {
             icon: <FaPodcast />,
-            title: "Ca sĩ",
+            title: "Ca Sĩ",
             link: "/singers"
         },
         {
             icon: <FaHeart />,
-            title: "Bài hát ưu thích",
+            title: "Bài Hát Ưu Thích",
             link: "/wishlist"
         },
         {
+            icon: <MdLibraryMusic />,
+            title: "Danh Sách Phát",
+            link: "/playlist",
+        },
+        {
             icon: <MdLogout />,
-            title: "Đăng xuất",
+            title: "Đăng Xuất",
             link: "/logout",
             isLogin: true
         },
         {
             icon: <FaUser />,
-            title: "Đăng nhập",
+            title: "Đăng Nhập",
             link: "/login",
             isLogin: false
         },
         {
             icon: <FaUserPlus />,
-            title: "Đăng ký",
+            title: "Đăng Ký",
             link: "/register",
             isLogin: false
         },
@@ -72,12 +79,9 @@ export const Sider = () => {
         <>
             <div className="bg-[#212121] h-[100vh] fixed w-[280px]">
                 <div className="">
-                    <div className="bg-[#1C1C1C] py-[25px] pl-[20px] mb-[30px]">
-                        <img
-                            src="/Logo.png"
-                            alt="Logo"
-                            className="h-[42px] w-auto"
-                        />
+                    <div className="bg-[#1C1C1C] py-[25px] pl-[20px] mb-[30px] text-[white] text-[36px] flex items-center gap-[30px]">
+                        <BsFillMusicPlayerFill />
+                        <div className="font-[800]">Music App</div>
                     </div>
                     <nav className="px-[20px]">
                         <ul className="">

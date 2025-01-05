@@ -16,6 +16,7 @@ export default async function SongDetailPage(props: any) {
   const { id } = await props.params;
   let dataCardInfor: any = null;
   let cardInfor = {};
+  let lyrics = "";
   onValue(ref(dbFirebase, '/songs/' + id), (item) => {
     dataCardInfor = item.val();
     onValue(ref(dbFirebase, '/singers/' + dataCardInfor.singerId[0]), (itemSinger) => {
@@ -28,6 +29,7 @@ export default async function SongDetailPage(props: any) {
       title: dataCardInfor.title,
       content: dataCardInfor.singer
     }
+    lyrics = dataCardInfor.lyric;
   })
   // End Card Information
 
@@ -50,37 +52,13 @@ export default async function SongDetailPage(props: any) {
             singer: dataSinger.title,
             listener: data.listen,
             time: data.time,
-            link: key
+            link: key,
           })
         })
       }
     })
   });
   // End Same category songs
-
-  const lyrics = `Verse:
-    Níu ngàn lời cũng không ngăn được
-    Bàn chân bước đi không báo trước
-    Có những điều cất riêng trong lòng
-    Giờ bốn vách ngăn cùng cô phòng
-    Trốn chạy rồi hàn huyên với men
-    Cứ thế kết thân cùng ánh đèn
-    Lối mòn ngày nào trên phố quen
-    Vẫn đó dáng hình ngày người đến
-    Pre:
-    Rời xa, lòng đau, chết trong cơn u sầu
-    Liệu rằng tình đời ai sẽ thấu
-    Dĩ vãng xưa vẫn in sâu trong đầu
-    (hah a hah)
-    Chorus:
-    Thời gian không thể xoá nhoà đôi ta
-    Có chăng chỉ là mờ phai đi theo tháng năm
-    Rồi khi tỉnh giấc mới chợt nhận ra
-    Thật quá khó để quên đi một người
-    Màn đêm u tối bao trùm không gian
-    Nói thay tiếng lòng này từ lâu đã vỡ tan
-    Thì ra duyên kiếp để mình gặp nhau
-    Dạy nhau tốt hơn xong dành lại cho người sau…`;
 
   return (
     <>

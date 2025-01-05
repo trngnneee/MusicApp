@@ -53,52 +53,127 @@
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
     },
     "4": {
-      "image": "https://backend.daca.vn/assets/images/tlong.jpg",
-      "title": "TLong",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735959436/drt_ktwlnp.jpg",
+      "title": "DangRangTo",
+      "description": "DRT (aka Trần Lả Lướt) là một rapper trẻ đầy triển vọng, nổi bật với chất giọng độc đáo và khả năng chơi chữ thông minh. Với phong cách phóng khoáng và lời rap chân thật, DRT thường khai thác những câu chuyện đời thường và cảm xúc cá nhân, kết hợp cùng nhịp beat hiện đại. Anh không chỉ gây ấn tượng bởi tài năng âm nhạc mà còn bởi tinh thần sáng tạo không ngừng, tạo dấu ấn riêng trong làng rap Việt."
     },
     "5": {
-      "image": "https://backend.daca.vn/assets/images/nal.jpg",
-      "title": "Nal",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735959435/hth_rle9fa.jpg",
+      "title": "HieuThuHai",
+      "description": "HIEUTHUHAI là một rapper nổi bật trong thế hệ trẻ của rap Việt, gây ấn tượng mạnh mẽ với phong cách lãng tử và chất nhạc cuốn hút. Anh sở hữu flow mượt mà, lời rap tinh tế pha chút hài hước và gần gũi, thường khai thác các chủ đề tình yêu và cuộc sống. Với hình ảnh thư sinh và chất giọng đặc trưng, HIEUTHUHAI không chỉ thành công trong âm nhạc mà còn trở thành biểu tượng phong cách được giới trẻ yêu mến."
     }
   },
   "songs": {
     "1": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735960151/wrongtime_t69qab.jpg",
+      "title": "Wrong Times",
+      "categoryId": "4",
+      "singerId": [
+        "4"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735959968/wrong-times_au4sw8.mp3",
+      "lyric": "Yeah mỗi buổi sáng thức giấc muốn thấy bình yên vẫn đang rộng chờ\\nNgoài kia bao la điều mới phải nhanh chân lên không có thì giờ\\nVậy em phải đi về đâu yah phía trước toàn vực sâu kìa\\nBao nhiêu là cạm bẫy vẫn đang chờ em khiến em chìm sâu\\n\\nVà có những lúc gục ngã vụt mất niềm tin yeah I'm a loner\\nGiam mình trong màn đêm cô đơn bủa vây chẳng thấy ai đâu yah\\nGiấu nước mắt vào trong ah coi như chuyện đã xong ah\\nCòn điều gì để nói nữa khi thực tâm em chẳng còn mong\\n\\nNgười nói em nghe vài câu đi em chỉ muốn được nghe giọng anh\\nDù cho ta không hợp nhau nhưng trong đầu em vẫn đang giậm phanh\\nHay do ta đã đậm sâu nên con tim em mãi chẳng thể quên\\nAnh đã ôm em thật lâu nhưng vẫn xem như ta chưa từng quen yah\\n\\nBaby yeah you know it I can feel that all (baby know)\\nMiss me call my phone đi em không muốn chờ lâu\\nLiệu ta có thể cùng nhau bước tiếp hết quãng đời sau\\nCòn nhiều dòng suy nghĩ nữa em chẳng thể thành câu yah\\n\\nI feel alone yeah\\nI feel alone yeah\\nI feel alone I feel alone yeah\\n\\nI gotta love yeah\\nI gotta love yeah\\nI gotta love I gotta love yeah\\n\\nMỗi buổi sáng thức giấc muốn thấy bình yên vẫn đang rộng chờ\\nNgoài kia bao la điều mới phải nhanh chân lên không có thì giờ\\nVậy em phải đi về đâu yah phía trước toàn vực sâu kìa\\nBao nhiêu là cạm bẫy vẫn đang chờ em khiến em chìm sâu\\n\\nVà có những lúc gục ngã vụt mất niềm tin yeah I'm a loner yeah\\nGiam mình trong màn đêm cô đơn bủa vây chẳng thấy ai đâu yeah\\nGiấu nước mắt vào trong ah coi như chuyện đã xong ah\\nCòn điều gì để nói nữa khi thực tâm em chẳng còn mong yah (chờ lần nữa)\\n\\nYeah em quay đi ta mất nhau yêu thương kia đành cất sâu\\nYeah con tim anh đã rất đau đi nơi đâu để có phép nhiệm màu nhở\\nAnh không muốn phải níu đâu hai ta chưa từng hiểu nhau\\nCứ chạy đi tìm nơi mà em thấy em thuộc về\\n\\nMặc kệ những tiếc nuối tìm tới khi mưa cùng rơi\\nCơn đau kia anh nhận lấy riêng anh mà thôi em đâu cần quay đầu lại\\nVà chỉ cần một lần cuối gỡ những nút thắt quên đi mắt môi\\n350 xé đôi cơn đau kia sẽ nguôi\\n\\nBởi vì anh cũng sẽ phải quên\\nLiệu không cần em ở bên\\nNhìn mưa lao đi trong đêm\\nRồi lại lay lắt trên bậc thềm\\n\\nLiệu rằng mưa sẽ cuốn nàng đi\\nHoặc là vương ngay trên đôi mi\\nChỉ là cô đơn anh mỗi khi\\nKhua tay anh giấu đi\\n\\nAnh chỉ anh chỉ muốn được yên bình muốn có em của riêng mình\\nEm nói anh bị điên vì sự thật giờ đây có lẽ\\nEm giờ đang ở bên một ai rồi quên đi anh là ai rồi\\nQuay bước anh rời đi anh đâu hề muốn gây khó dễ\\n\\nQuay về nơi được cho là yên bình châm nó lên và nghiêng mình\\nChỉ là chua xót kia lại đang tuôn rơi từ ngay đôi mắt díu\\nVì tình yêu đôi khi thật khó để anh chấp nhận và cho đi\\nLựa chọn thêm bao nhiêu lần nữa yeah I still falling for you\\n\\nYeah mỗi buổi sáng thức giấc muốn thấy bình yêu vẫn đang rộng chờ\\nNgoài kia bao la điều mới phải nhanh chân lên không có thì giờ\\nVậy em phải đi về đâu yah phía trước toàn vực sâu yah\\nBao nhiêu là cạm bẫy vẫn đang chờ em khiến em chìm sâu​ yah yah\\nHmm bao nhiêu là cạm bẫy khiến em chìm sâu uh..",
+      "listen": 22800
+    },
+    "2": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735960152/loveis_dng5tj.jpg",
+      "title": "Love Is",
+      "categoryId": "1",
+      "singerId": [
+        "4"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735959877/love-is_s5m6c0.mp3",
+      "lyric": "love is, suy tư một người\nlàm mình phát điên\ncon tim bồi hồi\nchỉ cần sát bên\nnguyên đêm ngồi cười\nvà chỉ muốn em trong đôi mắt anh\nbởi vì\nbaby chẳng thể giữ em bên anh bên anh lâu thật lâu\nphút đắm đuối bên em anh luôn coi như phép màu\ncất kí ức bên em trong tim anh sâu thật sâu\nvà chẳng thể giấu\nem xinh như mùa thu yeah\ntrong veo như lười ru yeah\nem như tia nắng đến khi mưa dần tàn\nbbi im a fool\nchẳng thể giống như cũ\nanh đã để tuột mất tình mình vỡ tan\nanh chẳng muốn phải ướt mi thêm chút nào\nanh chỉ ước có trái tim em dựa vào\nbuông ra bao lời than, chẳng thể tua thời gian\nchỉ để có em ở cạnh\n\nbaby anh chẳng muốn phải mắc những sai lầm\nbên cạnh nhau tại sao lại cứ mãi lặng câm\ncố từng nghĩ rằng everything's okay, yeah lại thốt lên sorry bey\nrồi lại khiến tình yêu ấy phai dần (x2)\n\nđó là một ngày dở hơi khi vừa mới về vĩnh yên\nvà cái nóng nực của mùa hè này sẽ hằn trong anh vĩnh viễn\nvì anh lỡ say ánh nắng bỗng dưng từ đâu ập đến\nchỉ qua vài câu chuyện phiếm, thuyền tình thấy nơi cập bến\nem xinh như mary jane, bước tới gửi anh lời chào\nrồi vô tình cướp trái tim anh mà chẳng gửi anh lời nào\nkhiến anh lại nhớ với cách em cười với từng nụ hôn ta trao\ngiây phút đó anh biết yêu rồi mặc kệ ngày mai ra sao\nrồi những ngày sau đó thấy mặt chẳng còn cau có\nanh như vớ được vàng, môi mỉm cười là một điều đâu khó\nem như điều tuyệt nhất ở trong cuộc đời mà anh được gặp\nthế nên mỗi lần chạm mặt làm anh chỉ muốn ôm em thật chặt\nvà anh đã quá nhiều lần thất hứa, anh biết là em ko vui\nanh biết anh thật ích kỉ vì anh chỉ nghĩ về anh không thôi\nđể và rồi em à, anh lại ngồi, ngồi thật lâu một góc\ngắm mây đang bật khóc, hút hơi thuốc vơi đi mệt nhọc và\n\nbaby anh chẳng muốn phải mắc những sai lầm\nbên cạnh nhau tại sao lại cứ mãi lặng câm\ncố từng nghĩ rằng everything's okay, yeah lại thốt lên sorry bey\nrồi lại khiến tình yêu ấy phai dần (x2)\n\nvì mỗi lúc vàng rơi thu về\nlà mỗi lúc anh chỉ muốn with chu\nhọ thấy lúc anh thường tryna be cool yeah\nbut baby i cant wait to see uuu\nvà anh lay hoay ở đây đã rất lâu\ndể tìm cách có thể khâu con tim anh\nwhen you go baby\ndù đứng mãi đây có riêng tôi thì\nnguyện chúc nếu em ở đó sẽ yên vui\n\nbaby anh chẳng muốn phải mắc những sai lầm\nbên cạnh nhau tại sao lại cứ mãi lặng câm\ncố từng nghĩ rằng everything's okay, yeah lại thốt lên sorry bey\nrồi lại khiến tình yêu ấy phai dần (x2)",
+      "listen": 22800
+    },
+    "3": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735960153/12_st6hre.jpg",
+      "title": "1/2",
+      "categoryId": "1",
+      "singerId": [
+        "4"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735959877/12_qddcvz.mp3",
+      "lyric": "Giờ thì còn gì nữa đâu\nGiờ thì còn gì nữa đâu\nMột mùa mưa lại ghé\nỞ ngay bên ô cửa\nAnh vội thu đống quần áo\nBộn bề ngoài kia\nBão lại về lá lại rơi hơn nửa\nTrong căn nhà từ ngày\nAnh vấp ngã cũng đã khá lâu rồi\nVẫn còn đang tu sửa\nAnh lại nhớ điều gì\nAnh cũng không biết nữa\nThi thoảng bão lại về\nHỏi anh đã ổn hơn chưa\nLiệu rằng em có về cùng cơn mưa\nAnh đưa tay ngăn em tan biến mất\nLao vào anh cho\nBong bóng phập phồng\nĐể lại một lỗ hổng\nSao không ai đến lấp\nTa từng hứa sẽ luôn là một nửa\nKhông lẽ để mất mát ấy\nCứa tim quặn đau\nNhững cuốn sách được xếp cùng một tủ\nChiếc bàn chải được đứng bên cạnh nhau\nNhớ những lần anh ngắm em thật lâu\nTrân trọng người cùng anh\nBăng qua bao biến cố\nÔm sau lưng cuốn lấy anh thật chặt\nThủ thỉ nhau câu chuyện\nDài tầm ba tuyến phố\nEm muốn đi đâu\nAnh sẽ đưa em đến đó\nDù trời mưa tầm tã\nHay lại nắng khô hanh\nĐối với anh thành phố như thật nhỏ\nHơn những gì em gửi gắm cho anh\nAnh chẳng mong tháng năm ấy tua nhanh\nRồi hiện lên thật đẹp\nBên trong ngăn ý thức\nBan ngày anh phải ký những hợp đồng\nĐể đêm về lại lạc\nTrong miên man kí ức\nVới ngần ấy yêu thương\nAnh đành cất trong rương\nNhư một chương đáng nhớ\nCủa một thuở đầu đời\nNgười từng khiến con tim anh vỡ nát\nEm đã mang nắng đi\nCả một nửa bầu trời\nGiờ thì còn gì nữa đâu\nAnh cũng không muốn\nĐôi mắt em phải u sầu\nĐem lòng yêu để giờ ôm nỗi đau\nĐem lòng yêu để giờ ôm nỗi đau\nChỉ mong cho mưa đêm nay đừng rơi\nChẳng thể níu lấy\nĐôi tay nhỏ bé của em\nĐể ôm vào tôi\nTình yêu cứ đến như một trò chơi\nPhải đau bao nhiêu lần nữa\nThì con tim anh mới được thảnh thơi\nVà ta lại khoác lên vai của mình\nNhững chiếc áo mới\nBóng hình em thi thoảng lại ùa về\nQua lời người khác nói tới\nAnh chỉ mong một lần\nAnh ước bản thân mình\nCó thể can đảm hơn\nAnh vẫn chẳng thể\nLàm điều tưởng như giản đơn\nChạy tới nói với em\nMột vài câu cảm ơn\nVì em đã ở cạnh\nLuôn đồng hành suốt cả mấy chương dài\nMình cùng nhau nắn nót\nCảm ơn em vì đã hiểu cho anh\nTừng là một cậu trai\nCòn biết bao thiếu sót\nHọ yêu nhau làm anh nhớ chúng mình\nCũng thường hay quấn quýt\nBên mấy hàng ăn đêm\nNgày anh đưa em trên chiếc xe xoàng\nMấy hôm trời trở gió\nCó em quàng khăn lên\nNhưng ngày tháng êm đềm\nKhông dài mãi những áp lực\nCứ hoài đan xen\nNhững lần về bỗng trở nên thưa thớt\nNhững cuộc cãi vã\nCứ không ngừng tăng lên\nAnh cố kiếm lại cảm giác yên bình\nTrên mấy con phố cũ\nChúng ta từng đi qua\nTrong khi trái tim anh cằn cỗi nhất\nThì ở ngay nơi ấy\nCó thêm một bông hoa\nTỏa ra hương thơm lạ\nNắng chẳng còn gắt mỗi khi sang hạ\nTrao anh nhiều lắm những lời động viên\nLàm anh bối rối như một thằng điên\nNhững cảm xúc ấy\nNhư của ngày đầu tiên\nÔm chặt lấy anh đã không gạt bỏ\nBiết quyết định này vốn không hề nhỏ\nAnh vẫn cố chấp\nChọn ánh dương le lói đó\nSợ khi trời trở gió anh sẽ lại\nCo ro một mình\nAnh từng nghĩ mình vẫn ổn\nNếu như em biến mất\nNên anh tin vào mình\nRằng tình yêu một lần nữa\nRồi sẽ lại vươn lên\nChiếc váy cưới lung linh\nAnh sẽ khoác lên người khác\nAnh đã nói là làm\nQuyết định tuôn ra một tràng\nNhững lời ngu ngốc đó\nGiờ chỉ còn bão tố\nCùng với khói và tàn\nCho em nếm dòng nước mắt\nCó vị mặn chan chát\nThân xác kiệt quệ\nVì đã ngấm mưa lâu\nAnh trao cả cho một cô gái khác\nVà làm em vỡ nát\nAi rồi cũng như nhau\nVới ngần ấy yêu thương\nEm đành cất trong rương\nNhư một chương đáng nhớ\nCủa một thuở đầu đời\nNgười từng khiến con tim em vỡ nát\nAnh đã mang nắng đi\nCả một nửa bầu trời\nGiờ thì còn gì nữa đâu\nAnh cũng không muốn\nĐôi mắt em phải u sầu\nĐem lòng yêu để giờ ôm nỗi đau\nĐem lòng yêu để giờ ôm nỗi đau\nChỉ mong cho mưa đêm nay đừng rơi\nChẳng thể níu lấy đôi tay nhỏ bé\nCủa em để ôm vào tôi\nTình yêu cứ đến như một trò chơi\nPhải đau bao nhiêu lần nữa\nThì con tim anh mới được thảnh thơi",
+      "listen": 22800
+    },
+    "4": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735970039/h%E1%BA%B9n-g%E1%BA%B7p-em-d%C6%B0%E1%BB%9Bi-%C3%A1nh-tr%C4%83ng_u0nrno.jpg",
+      "title": "Hẹn Gặp Em Dưới Ánh Trăng",
+      "categoryId": "1",
+      "singerId": [
+        "5"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735970042/h%E1%BA%B9n-g%E1%BA%B7p-em-d%C6%B0%E1%BB%9Bi-%C3%A1nh-tr%C4%83ng_kvhde3.mp3",
+      "lyric": "Vì anh muốn vào ngày mai ta\ncùng nhau sánh bước mặc bao ánh mắt\nngoài những lời nói làm đầy tai ra\nem là duy nhất anh không thể đánh mất\nđôi mắt hướng về em một chút thôi\nmà thời gian trôi em rạng ngời\nngắm nhìn em thêm một phút thôi\nvậy mà đôi môi mang nụ cười\ndòng suy nghĩ đang còn vắt ngang\nnhiều giây trôi qua em thì vẫn đang\nem nhanh chạy ngay đến nơi anh hẹn\nmà bài hát em thích vẫn còn phát vang\nchờ em trong đêm và rồi bật khóc\nngồi rồi cười khẩy như là Batman\ndừng để anh cô đơn như 1 thằng ngốc\nnhư Joker nhảy trên những nấc thang\nkhông yêu thêm một ai\nnếu mai sau người đó không phải em\ncơn mưa kia mờ phai\nrồi từng ngọn đèn đường sẽ cháy lên\nvà dòng thời gian đứng yên cho một tình yêu mãi mãi\nvà anh mơ khi sớm mai ta còn ở bên như lúc này\nHIEUTHUHAI\nvà trên môi son\ngiày cao gót, buổi tối Saigon\nWe both wild and the nights young\nbước đi cùng nhau con đường mài mòn\ntrên tay 1 điếu thuốc cùng với 2 lon\nngày mai không tồn tại\nrượu không cần rót vì mật ngọt em đầy tai\ncho nhau một điệu nhảy tựa đầu trên bờ vai\nyêu đi em vì thời gian không đợi chờ ai\nvà anh muốn siết chặt vào bờ môi nàng\nêm như sóng biển vỏ kim khôi vàng\nem có ước sống mãi trong giây phút này,\nbên nhau lúc này nếu em có cỗ máy thời gian\nWhiskey không say bằng ánh mắt em\ngiai điệu êm ái cho ngây ngất thêm\nhai ta khiêu vũ dưới ánh đèn đường\nThey say we're nuts we say fuck them\nnhững khoảnh khắc y như lúc này\nchỉ trải qua một lần trong đời\ntan đi mất thật nhanh,\nhơn những gì mà em mong đợi\nđể lý trí em hỏi con tim em trả lời\nthề ở dưới ánh trăng là sẽ cạnh mãi không rời\ntrước khi bình minh trước khi ngắm thấy mây xanh\nnói cho tình yêu/ trước khi gió thoáng bay nhanh\nnên điệu nhảy này sẽ kéo dài đến mãi mãi\nliệu em từ chối hay là nắm lấy tay anh\nkhông yêu thêm một ai\nnếu mai sau người đó không phải em\ncơn mưa kia mờ phai\nrồi từng ngọn đèn đường sẽ cháy lên\nvà dòng thời gian đứng yên cho một tình yêu mãi mãi\nvà anh mơ khi sớm mai ta còn ở bên như lúc này\nMANBO\nnhảy múa theo điệu nhạc cùng nhau\nta đã bắt đầu yêu từ đâu?\nyêu anh giống như pepsi kem\nđã ngọt ngào còn thêm có em\nmột đêm say tối nay em ơi\nhẹn gặp nhau không có gì thêm mong/đợi\nphóng nhanh con xe mình rong chơi,\nta có những cảm xúc niềm vui có em trong đời\nmình nắm tay dưới ánh trăng\nsáng thức giấc hôn mà không mùi kem đánh răng, ye\nUm! Tình yêu có thật là vĩnh cửu\nkhông quần áo, không ăn bận quá chỉn chu\nanh chỉ mong cuộc sống đơn giản nhất\nmỗi ngày mình thức giấc sống đúng với bản chất\ncon người bên trong luôn chân thật\nmỗi buổi tối đơn giản bên em cùng thân mật\nkhông yêu thêm một ai\nnếu mai sau người đó không phải em\nkhông yêu thêm một ai\nnếu mai sau người đó không phải em\ncơn mưa kia mờ phai\nrồi từng ngọn đèn đường sẽ cháy lên\nvà dòng thời gian đứng yên cho một tình yêu mãi mãi\nvà anh mơ khi sớm mai ta còn ở bên như lúc này",
+      "listen": 22800
+    },
+    "5": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735970039/kh%C3%B4ng-th%E1%BB%83-say_pawprr.jpg",
+      "title": "Không Thể Say",
+      "categoryId": "1",
+      "singerId": [
+        "5"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735970041/kh%C3%B4ng-th%E1%BB%83-say_lw75pv.mp3",
+      "lyric": "Đã hơn một năm trôi qua\nMà mẹ vẫn thế cứ tiếc đôi ta xoá cả hình xăm trên da\nChuyện tình mình cũng chẳng thể phôi phai chắc cũng đã lâu anh không muốn say mà\nCuối cùng là hôm nay anh lại nhớ tới em\nCó thể sẽ phone cho em\nVà sẽ lại nói anh vẫn yêu em bấm chuông nhà em trong đêm\nVà hàng ngàn thứ biết chắc không nên hứa trong lòng anh sẽ không uống thêm được\nVì em là lý do số một làm cho anh không thể say\nAnh giờ đây thì vẫn đang cố quên những ngày ta còn được nằm ở bên\nCó thêm thành công hay kiếm thêm nhiều tiền\nĐược biết tên bởi nhiều người chẳng giúp anh nở nụ cười được nữa đâu\nBởi vì đăng sau ánh đèn ở cạnh anh thì chẳng có ai\nVà cũng đã cố gắng để yêu thêm rất nhiều mặc dù biết là điều đó sai\nCó lẽ anh chẳng thể yêu thêm\nGiờ mọi thông báo anh luôn mong là của em\nƯớt ở trên mi\nMỗi lần qua từng nơi dấu chân ta đi\nGiờ còn đâu tình yêu lúc không là gì\nUống thêm là vì\nNước mắt anh rơi vào tận trong ly\nChúng ta không sai\nNhưng giờ đây làm sao để em quay lại\nNhà và xe làm chi ngóng trông em hoài\nThức cả đêm dài\nMuốn em bên anh phải gọi thêm chai\nĐã hơn một năm trôi qua\nMà mẹ vẫn thế cứ tiếc đôi ta xoá cả hình xăm trên da\nChuyện tình mình cũng chẳng thể phôi phai chắc cũng đã lâu anh không muốn say mà\nCuối cùng là hôm nay anh lại nhớ tới em\nCó thể sẽ phone cho em\nVà sẽ lại nói anh vẫn yêu em bấm chuông nhà em trong đêm\nVà hàng ngàn thứ biết chắc không nên hứa trong lòng anh sẽ không uống thêm được\nVì em là lý do số một làm cho anh không thể say\nBiết chắc chắn chẳng thể nào lại gặp nhau ở trên đường đời\nVà chỉ muốn ước mai sau em sẽ gặp thêm một ai tuyệt vời\nAnh cũng sẽ đi tiếp tục\nChẳng tổn thương người đến sau nhiều như em\nVì anh đã từng thấy em đây phải đau\nKhóc khi ta cãi nhau\nChẳng thể ngủ được đâu\nVà mắt sưng qua ngày sau cũng chẳng thể níu thêm chi\nChi bằng hãy giữ lấy nước mắt em đi\nƯớt ở trên mi\nMỗi lần qua từng nơi dấu chân ta đi\nGiờ còn đâu tình yêu lúc không là gì\nUống thêm là vì\nNước mắt anh rơi vào tận trong ly\nChúng ta không sai\nNhưng giờ đây làm sao để em quay lại\nNhà và xe làm chi ngóng trông em hoài\nThức cả đêm dài\nMuốn em bên anh phải gọi thêm chai\nTừng hứa bao nhiêu câu giờ cũng không bên nhau\nChẳng biết hôm chia tay em đã ngồi khóc trong bao lâu\nLúc đó đủ can đảm đâu mà nhìn lại\nCố gắng hết bao nhiêu và cũng xa nhau mãi",
+      "listen": 22800
+    },
+    "6": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735970038/sao-h%E1%BA%A1ng-a_kl7yms.jpg",
+      "title": "Sao Hạng A",
+      "categoryId": "1",
+      "singerId": [
+        "5"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735970042/sao-h%E1%BA%A1ng-a_afarif.mp3",
+      "lyric": "Rảnh không baby\nAnh phi qua này\nEm thèm đồ tây\nĐể đưa em qua Hàn\nCó một sự thật là tính hơi Lowkey\nNhưng khi cạnh em mất luôn lầm lì\nSuốt bấy lâu nay anh sống trong lý trí\nNhưng bên cạnh em thì luôn easy\nAnh không nói dối bao giờ đâu (Yeah, anh không)\nMà hào quang phát ra đằng sau (Khi em tới)\nSao em có thể không biết em lung linh được như nào\nBình thường em không có thói quen soi gương hay sao\n\nThề là thấy em giây đầu tiên\nAnh đã muốn đưa em lên thuyền\nBaby bấy lâu nay ở đâu\nSao giờ mới được nhìn thấy nhau\nThật lòng những ngôi sao ngoài kia\nChẳng có ai lọt vào được mắt anh\nXứng tầm làm một ngôi sao ở tận trên cao nếu anh ngay bên cạnh\n\nBaby girl be mine là English\nLàm người yêu anh nha em, đó là tiếng Việt\nMà từ xa em y như người nổi tiếng thiệt\nNhìn muốn tăng huyết áp cần một hôm đi xông hơi\nEm muốn trốn ra đại dương anh cũng bơi\nVisa đây baby cứ thích em cứ cà\nTiền và xe của anh em cứ đem về nhà giữ nha\n\nAnh không nói dối bao giờ đâu (Yeah, anh không)\nMà hào quang phát ra đằng sau (Khi em tới)\nSao em có thể không biết em lung linh được như nào\nBình thường em không có thói quen soi gương hay sao\n\nThề là thấy em giây đầu tiên\nAnh đã muốn đưa em lên thuyền\nBaby bấy lâu nay ở đâu\nSao giờ mới được nhìn thấy nhau\nThật lòng những ngôi sao ngoài kia\nChẳng có ai lọt vào được mắt anh\nXứng tầm làm một ngôi sao ở tận trên cao nếu anh ngay bên cạnh\nChắc chắn là hạng A A A\nPhải là hạng A A A\nXứng đáng là hạng A A A\nPhải làm hạng A A A\nVậy mà bấy lâu nay ở đâu\nGiờ mới thấy nhau\nXứng tầm làm một ngôi sao ở tận trên cao nếu anh ngay bên cạnh\n\nFan anh trước giờ không hay linh tinh\nTỷ lệ 9 ở trên 10 anh gặp lung linh la lung linh\nCòn mình em bayby ơi sao mà xinh hơn minh tinh\nLàm anh rung rang rung rinh\nTrong đầu anh xem xoay quanh\nBao tương tư anh vẽ ra\nNhư thằng overthinking yah\nEm ở đâu\nSao lâu nay bao nhiêu là Show, đâu thấy đâu\nAnh từ idol nhưng từ khi gặp em\nSao anh giống fan vầy\nChuẩn bị giấy tờ\nBaby lemme sign\nBiết là cuối ngày em sẽ kêu tên ai\nAi khen em bé như hoa hậu chưa\nĐang yêu ai không để mà biết anh còn cưa\nI dont falling in love with famous\nAnh làm cho kim cương thô thành VVS\nMọi người ở xung quanh anh đều thành sao\nSo If you like, anh có thể làm em y hệt\nLà em đi đến đây gặp anh\nEm còn trong FC của anh\nAnh không biết hết fan của anh xung quanh toàn xinh đẹp\nNhưng mà lần đầu tiên khiến anh lung lay nhường này\n\nThề là thấy em giây đầu tiên\nAnh đã muốn đưa em lên thuyền\nBaby bấy lâu nay ở đâu\nSao giờ mới được nhìn thấy nhau\nThật lòng những ngôi sao ngoài kia\nChẳng có ai lọt vào được mắt anh\nXứng tầm làm một ngôi sao ở tận trên cao nếu anh ngay bên cạnh\nChắc chắn là hạng A A A\nPhải là hạng A A A\nXứng đáng là hạng A A A\nPhải làm hạng A A A\nVậy mà bấy lâu nay ở đâu\nGiờ mới thấy nhau\nXứng tầm làm một ngôi sao ở tận trên cao nếu anh ngay bên cạnh\n",
+      "listen": 22800
+    },
+    "7": {
+      "image": "https://backend.daca.vn/assets/images/ruou-mung-hoa-nguoi-dung.jpg",
+      "title": "Rượu Mừng Hóa Người Dưng",
+      "categoryId": "6",
+      "singerId": [
+        "3"
+      ],
+      "audio": "https://backend.daca.vn/assets/audios/ruou-mung-hoa-nguoi-dung.mp3",
+      "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "listen": 22800
+    },
+    "8": {
       "image": "https://backend.daca.vn/assets/images/cat-doi-noi-sau.jpg",
       "title": "Cắt Đôi Nỗi Sầu",
       "categoryId": "1",
-      "singerId": ["1", "3"],
+      "singerId": [
+        "1",
+        "3"
+      ],
       "audio": "https://backend.daca.vn/assets/audios/cat-doi-noi-sau.mp3",
       "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "listen": 24500
     },
-    "2": {
+    "9": {
       "image": "https://backend.daca.vn/assets/images/ngay-mai-nguoi-ta-lay-chong.jpg",
       "title": "Ngày Mai Người Ta Lấy Chồng",
       "categoryId": "1",
-      "singerId": ["2"],
+      "singerId": [
+        "2"
+      ],
       "audio": "https://backend.daca.vn/assets/audios/ngay-mai-nguoi-ta-lay-chong.mp3",
       "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "listen": 20500
     },
-    "3": {
+    "10": {
       "image": "https://backend.daca.vn/assets/images/tat-ca-hoac-khong-la-gi-ca.jpg",
       "title": "Tất Cả Hoặc Không Là Gì Cả",
       "categoryId": "3",
-      "singerId": ["3"],
+      "singerId": [
+        "3"
+      ],
       "audio": "https://backend.daca.vn/assets/audios/tat-ca-hoac-khong-la-gi-ca.mp3",
       "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
       "listen": 18800
-    },
-    "4": {
-      "image": "https://backend.daca.vn/assets/images/ruou-mung-hoa-nguoi-dung.jpg",
-      "title": "Rượu Mừng Hóa Người Dưng",
-      "categoryId": "6",
-      "singerId": ["4", "3"],
-      "audio": "https://backend.daca.vn/assets/audios/ruou-mung-hoa-nguoi-dung.mp3",
-      "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-      "listen": 22800
     }
   }
 }
