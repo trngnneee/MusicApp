@@ -54,7 +54,6 @@ export const AddPlayListButton = (props: any) => {
                     Swal.fire({
                         title: "Thêm thành công bài hát vào danh sách phát!",
                         icon: "success",
-                        draggable: true
                     });
                 }
                 else 
@@ -65,7 +64,6 @@ export const AddPlayListButton = (props: any) => {
                     Swal.fire({
                         title: "Xóa thành công bài hát ra khỏi danh sách phát!",
                         icon: "success",
-                        draggable: true
                     });
                 }
                 await set(userRef, playlists);

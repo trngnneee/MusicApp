@@ -3,16 +3,22 @@
 import { authFireBase } from "@/app/FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
 export const LoginForm = () => {
     const router = useRouter();
-    
+
     const handleLogin = (event: any) => {
         event.preventDefault();
         const email = event.target.email.value
         const password = event.target.password.value;
         signInWithEmailAndPassword(authFireBase, email, password).then(() => {
             router.push("/");
+            Swal.fire({
+                title: "Đăng nhập thành công!",
+                icon: "success",
+            });
         })
     }
 

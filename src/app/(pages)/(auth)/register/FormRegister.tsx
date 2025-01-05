@@ -4,6 +4,8 @@ import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, set } from "firebase/database";
 import { useRouter } from "next/navigation";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
 
 export const RegisterForm = () => {
     const router = useRouter();
@@ -21,6 +23,10 @@ export const RegisterForm = () => {
                         set(ref(dbFirebase, `users/${user.uid}`), {
                             fullName: fullName
                         }).then(() => {
+                            Swal.fire({
+                                title: "Đăng kí thành công!",
+                                icon: "success",
+                            });
                             router.push("/");
                         })
                     }
@@ -30,7 +36,7 @@ export const RegisterForm = () => {
                 });
         }
     }
-    
+
     return (
         <>
             <form onSubmit={handleSubmit}>

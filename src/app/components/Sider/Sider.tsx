@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link";
 import { AiFillHome } from "react-icons/ai";
 import { FaMusic } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
@@ -8,7 +7,6 @@ import { MdLogout } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa6";
 import { FaPodcast } from "react-icons/fa";
-import { usePathname } from "next/navigation";
 import { onAuthStateChanged } from "firebase/auth";
 import { authFireBase } from "@/app/FirebaseConfig";
 import { useEffect, useState } from "react";
