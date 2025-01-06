@@ -18,12 +18,11 @@ export const SearchResult = () => {
         const fetchData = async () => {
             const items = await get(songRef);
 
-            items.forEach((item:any) => {
+            items.forEach((item: any) => {
                 const key = item.key;
                 const data = item.val();
 
-                if (data.title.includes(defaultKeyword))
-                {
+                if (data.title.includes(defaultKeyword)) {
                     dataSection.push({
                         id: key,
                         img: data.image,
@@ -36,8 +35,7 @@ export const SearchResult = () => {
                     })
                 }
             });
-            for (const item of dataSection)
-            {
+            for (const item of dataSection) {
                 const itemSinger = await get(ref(dbFirebase, 'singers/' + item.singerId[0]));
                 const dataSinger = itemSinger.val();
                 console.log(dataSinger);
@@ -54,10 +52,11 @@ export const SearchResult = () => {
                 {dataFinal && (
                     <>
                         {dataFinal.map((item: any, index: number) => (
-                            <SongItem2
-                                item={item}
-                                key={index}
-                            />
+                            <div data-aos="fade-up" key={index}>
+                                <SongItem2
+                                    item={item}
+                                />
+                            </div>
                         ))}
                     </>
                 )}

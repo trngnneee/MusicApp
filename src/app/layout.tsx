@@ -4,6 +4,7 @@ import { Sider } from "./components/Sider/Sider";
 import { Search } from "./components/Search/Search";
 import { Play } from "./components/Play/Play";
 import { Suspense } from "react";
+import { AOSConfig } from "./AOSConfig";
 
 export const metadata: Metadata = {
   title: "MusicApp",
@@ -17,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
+      <AOSConfig/>
       <body className="bg-[#292929]">
         <div className="container mx-auto">
           <div className="flex item-start">

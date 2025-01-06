@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default async function CategoryDetailPage(props: any) {
-  
+
   // Card Information
-  const {id} = await props.params;
+  const { id } = await props.params;
   var cardInfor = {};
   onValue(ref(dbFirebase, 'categories/' + id), (data) => {
     const dataCardInfor = data.val();
@@ -53,7 +53,7 @@ export default async function CategoryDetailPage(props: any) {
     })
   });
   // End Song data
-  
+
   return (
     <>
       {/* Section1 */}
@@ -67,10 +67,11 @@ export default async function CategoryDetailPage(props: any) {
         />
         <div>
           {dataSection.map((item, index) => (
-            <SongItem2
-              item={item}
-              key={index}
-            />
+            <div data-aos="fade-up" key={index}>
+              <SongItem2
+                item={item}
+              />
+            </div>
           ))}
         </div>
       </div>

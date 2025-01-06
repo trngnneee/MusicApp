@@ -78,10 +78,11 @@ export default function PlayListPage() {
                 <div>
                     {dataSection ? (
                         dataSection.map((item, index) => (
-                            <SongItem2
-                                key={index}
-                                item={item}
-                            />
+                            <div data-aos="fade-up" key={index}>
+                                <SongItem2
+                                    item={item}
+                                />
+                            </div>
                         ))
                     ) : (
                         <div className="flex flex-col items-center">

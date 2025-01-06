@@ -64,10 +64,11 @@ export default async function SingerDetailPage(props: any) {
       />
       <div>
         {dataSection.map((item, index) => (
-          <SongItem2
-            item={item}
-            key={index}
-          />
+          <div data-aos="fade-up" key={index}>
+            <SongItem2
+              item={item}
+            />
+          </div>
         ))}
       </div>
     </>

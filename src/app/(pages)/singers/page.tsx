@@ -34,10 +34,11 @@ export default function SingerCategoryPage() {
       />
       <div className="grid grid-cols-5 gap-[20px]">
         {dataSection.map((item, index) => (
-          <CardItem
-            item={item}
-            key={index}
-          />
+          <div data-aos="fade-up" key={index}>
+            <CardItem
+              item={item}
+            />
+          </div>
         ))}
       </div>
     </>

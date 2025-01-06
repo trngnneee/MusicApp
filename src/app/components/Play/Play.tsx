@@ -80,8 +80,9 @@ export const Play = () => {
                     <PlayLeft />
                     {/* Mid */}
                     <PlayMid />
-                    {/* Right */}
+                    {/* Right */}   
                     <PlayRight />
+
                 </div>
                 <div className="hidden song-item-2">
                     {dataSection && (

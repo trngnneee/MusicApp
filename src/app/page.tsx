@@ -58,7 +58,7 @@ export default function Home() {
     })
   });
   // End Data section 2
-  
+
   // Data section 3
   const dataSection3: any[] = []
   const singerRef = ref(dbFirebase, 'singers');
@@ -104,10 +104,11 @@ export default function Home() {
             <div className="text-white font-[700] text-[24px] mb-[20px]">Nghe nhiều</div>
             <div>
               {dataSection1.map((item, index) => (
-                <SongItem
-                  item={item}
-                  key={index}
-                />
+                <div data-aos="fade-left" key={index}>
+                  <SongItem
+                    item={item}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -118,10 +119,11 @@ export default function Home() {
         <Title title="Danh Mục Nổi Bật" />
         <div className="grid grid-cols-5 gap-[20px]">
           {dataSection2.map((item, index) => (
-            <CardItem
-              item={item}
-              key={index}
-            />
+            <div data-aos="fade-up" key={index}>
+              <CardItem
+                item={item}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -130,10 +132,11 @@ export default function Home() {
         <Title title="Ca Sĩ Nổi Bật" />
         <div className="grid grid-cols-5 gap-[20px]">
           {dataSection3.map((item, index) => (
-            <CardItem
-              item={item}
-              key={index}
-            />
+            <div data-aos="fade-up" key={index}>
+              <CardItem
+                item={item}
+              />
+            </div>
           ))}
         </div>
       </div>

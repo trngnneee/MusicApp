@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function SongDetailPage(props: any) {
-  
+
   // Card Information
   const { id } = await props.params;
   let dataCardInfor: any = null;
@@ -79,10 +79,11 @@ export default async function SongDetailPage(props: any) {
       />
       <div>
         {dataSection3.map((item, index) => (
-          <SongItem2
-            item={item}
-            key={index}
-          />
+          <div data-aos="fade-up" key={index}>
+            <SongItem2
+              item={item}
+            />
+          </div>
         ))}
       </div>
     </>
