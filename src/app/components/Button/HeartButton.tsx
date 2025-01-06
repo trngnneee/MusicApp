@@ -38,7 +38,8 @@ export const HeartButton = (props: any) => {
                         Swal.fire({
                             title: "Đã xóa khỏi Yêu thích!",
                             icon: "success",
-                            draggable: true
+                            showConfirmButton: false,
+                            timer: 1000
                         });
                     } else {
                         if (!song.wishlist) {
@@ -49,7 +50,8 @@ export const HeartButton = (props: any) => {
                         Swal.fire({
                             title: "Đã thêm vào Yêu thích!",
                             icon: "success",
-                            draggable: true
+                            showConfirmButton: false,
+                            timer: 1000
                         });
                     }
                 }

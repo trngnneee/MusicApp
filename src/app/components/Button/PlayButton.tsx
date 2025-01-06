@@ -1,22 +1,24 @@
 "use client"
 
+import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
+import { get, onValue, ref, set } from "firebase/database";
 import { FaPlay } from "react-icons/fa";
 export const PlayButton = (props: any) => {
-    const {item} = props;
-    
+    const { item } = props;
+
     const handlePlay = () => {
         const audio = item.audio;
-
         // Play Music
         const elementPlayAudio: any = document.querySelector(".play-audio");
+        // Add an ID
+        elementPlayAudio.setAttribute("id", item.id);
+        // End Add an ID
         const elementAudio = elementPlayAudio?.querySelector(".inner-audio");
         const elementSource = elementAudio?.querySelector("source");
-        if (elementSource)
-        {
+        if (elementSource) {
             elementSource.src = audio;
         }
-        if (elementAudio)
-        {
+        if (elementAudio) {
             elementAudio.load();
             elementAudio.play();
         }
@@ -29,7 +31,7 @@ export const PlayButton = (props: any) => {
         // Display image, title, singer
         const elementImage = elementPlayAudio.querySelector(".inner-image");
         elementImage.src = item.img;
-        
+
         const elementTitle = elementPlayAudio.querySelector(".inner-title");
         elementTitle.innerHTML = item.title;
 
@@ -64,7 +66,7 @@ export const PlayButton = (props: any) => {
     return (
         <>
             <button
-                className="rounded-[50%] p-[8px] text-white"
+                className="rounded-[50%] p-[8px] text-white play-button"
                 onClick={handlePlay}
             >
                 <FaPlay />

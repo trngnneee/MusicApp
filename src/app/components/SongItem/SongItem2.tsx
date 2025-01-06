@@ -9,7 +9,7 @@ export const SongItem2 = (props: { item: any }) => {
         <>
             <div className="mb-[12px]">
                 <div className="flex justify-between items-center bg-[#212121] p-[10px] rounded-[15px]">
-                    <div className="flex items-center gap-[12px] ml-[23px]">
+                    <div className="flex items-center gap-[20px] ml-[23px]">
                         <PlayButton
                             item={item}
                         />
@@ -19,8 +19,8 @@ export const SongItem2 = (props: { item: any }) => {
                         />
                         <Link href={item.link} className="text-white font-[600] text-[16px">{item.title}</Link>
                     </div>
-                    <div className="flex gap-[18px] mr-[23px]">
-                        <div className="text-white font-[400] text-[14px] w-[200px] mr-[20px]">{item.singer}</div>
+                    <div className="flex gap-[18px] items-center">
+                        <div className="text-white font-[400] text-[14px] w-[200px] mr-[20px] p-0">{item.singer}</div>
                         <div className="font-[400] text-[14px] text-white">{item.time}</div>
                         <HeartButton
                             item={item}

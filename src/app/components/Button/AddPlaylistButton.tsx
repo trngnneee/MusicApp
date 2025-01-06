@@ -52,18 +52,21 @@ export const AddPlayListButton = (props: any) => {
                     playlists.push(item.id); 
                     setIsActive(true);
                     Swal.fire({
-                        title: "Thêm thành công bài hát vào danh sách phát!",
+                        title: "Thêm vào danh sách phát!",
                         icon: "success",
+                        timer: 1000,
+                        showConfirmButton: false
                     });
                 }
                 else 
                 {
                     playlists = playlists.filter((playlistId:string) => playlistId !== item.id);
-                    console.log(playlist);
                     setIsActive(false);
                     Swal.fire({
-                        title: "Xóa thành công bài hát ra khỏi danh sách phát!",
+                        title: "Xóa khỏi danh sách phát!",
                         icon: "success",
+                        timer: 1000,
+                        showConfirmButton: false
                     });
                 }
                 await set(userRef, playlists);
