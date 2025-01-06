@@ -5,6 +5,7 @@ import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { get, onValue, ref } from "firebase/database";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 
 export const Wishlist = () => {
@@ -47,6 +48,13 @@ export const Wishlist = () => {
                     setData(dataSection);
                 }
                 fetchData();
+            }
+            else {
+                Swal.fire({
+                    title: "Vui Lòng Đăng Nhập",
+                    icon: "error",
+                    showConfirmButton: true
+                });
             }
         })
     }, [])

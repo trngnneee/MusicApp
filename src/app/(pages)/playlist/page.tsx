@@ -5,6 +5,8 @@ import { Title } from "@/app/components/Title/Title";
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { get, onValue, ref } from "firebase/database";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function PlayListPage() {
@@ -21,7 +23,7 @@ export default function PlayListPage() {
         }
         fetchUserID();
     }, [])
-        
+
     useEffect(() => {
         const fetchPlayList = () => {
             const playListRef = ref(dbFirebase, `users/${userId}/playlist`);
@@ -39,12 +41,11 @@ export default function PlayListPage() {
 
         const fetchData = async () => {
             const items = await get(songRef);
-            items.forEach((item:any) => {
+            items.forEach((item: any) => {
                 const key = item.key;
                 const data = item.val();
 
-                if (playlist.includes(key))
-                {
+                if (playlist.includes(key)) {
                     tmp.push({
                         id: key,
                         img: data.image,
@@ -57,8 +58,7 @@ export default function PlayListPage() {
                     })
                 }
             });
-            for (const item of tmp)
-            {
+            for (const item of tmp) {
                 const itemSinger = await get(ref(dbFirebase, 'singers/' + item.singerId[0]));
                 const dataSinger = itemSinger.val();
                 item.singer = dataSinger.title;
@@ -76,13 +76,22 @@ export default function PlayListPage() {
                     title="Danh Sách Phát"
                 />
                 <div>
-                    {dataSection && (
+                    {dataSection ? (
                         dataSection.map((item, index) => (
                             <SongItem2
                                 key={index}
                                 item={item}
                             />
                         ))
+                    ) : (
+                        <div className="flex flex-col items-center">
+                            <Title
+                                title="Vui Lòng Đăng Nhập Để Sử Dụng Tính Năng"
+                            />
+                            <Link href="/login">
+                                <button className="bg-[#00ADEF] w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng nhập</button>
+                            </Link>
+                        </div>
                     )}
                 </div>
             </div>

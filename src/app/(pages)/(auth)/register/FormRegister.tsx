@@ -3,6 +3,7 @@
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, set } from "firebase/database";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
@@ -88,6 +89,12 @@ export const RegisterForm = () => {
                     />
                 </div>
                 <button className="bg-[#00ADEF] w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng nhập</button>
+                <div className="mt-[10px] flex text-white gap-[8px] justify-end items-center">
+                    <div className="">Đã có tài khoản?</div>
+                    <Link href="/login">
+                        <u>Đăng nhập</u>
+                    </Link>
+                </div>
             </form>
         </>
     );
