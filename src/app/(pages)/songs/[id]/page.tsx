@@ -19,15 +19,23 @@ export default async function SongDetailPage(props: any) {
   let lyrics = "";
   onValue(ref(dbFirebase, '/songs/' + id), (item) => {
     dataCardInfor = item.val();
-    onValue(ref(dbFirebase, '/singers/' + dataCardInfor.singerId[0]), (itemSinger) => {
-      const dataSinger = itemSinger.val();
-      console.log(dataSinger);
-      dataCardInfor["singer"] = dataSinger.title;
+    // onValue(ref(dbFirebase, '/singers/' + dataCardInfor.singerId[0]), (itemSinger) => {
+    //   const dataSinger = itemSinger.val();
+    //   console.log(dataSinger);
+    //   dataCardInfor["singer"] = dataSinger.title;
+    // })
+    let singerList = "";
+    dataCardInfor.singerId.forEach((id, index) => {
+      onValue(ref(dbFirebase, '/singers/' + id), (itemSinger) => {
+        const dataSinger = itemSinger.val();
+        if (index != dataCardInfor.singerId.length - 1) singerList += dataSinger.title + ", ";
+        else singerList += dataSinger.title;
+      })
     })
     cardInfor = {
       img: dataCardInfor.image,
       title: dataCardInfor.title,
-      content: dataCardInfor.singer
+      content: singerList
     }
     lyrics = dataCardInfor.lyric;
   })
@@ -42,18 +50,23 @@ export default async function SongDetailPage(props: any) {
       const data = item.val();
 
       if (data.categoryId === dataCardInfor.categoryId && key != id) {
-        onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
-          const dataSinger = itemSinger.val();
-          console.log(dataSinger);
-          dataSection3.push({
-            id: key,
-            img: data.image,
-            title: data.title,
-            singer: dataSinger.title,
-            listener: data.listen,
-            time: data.time,
-            link: key,
+        let singerList = "";
+        data.singerId.forEach((id, index) => {
+          onValue(ref(dbFirebase, 'singers/' + id), (itemSinger) => {
+            const dataSinger = itemSinger.val();
+            if (index != data.singerId.length - 1) singerList += dataSinger.title + ", ";
+            else singerList += dataSinger.title;
           })
+        })
+        dataSection3.push({
+          id: key,
+          img: data.image,
+          title: data.title,
+          singer: singerList,
+          listener: data.listen,
+          link: `/songs/${key}`,
+          time: "4:32",
+          audio: data.audio
         })
       }
     })

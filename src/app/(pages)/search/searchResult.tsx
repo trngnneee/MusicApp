@@ -36,10 +36,13 @@ export const SearchResult = () => {
                 }
             });
             for (const item of dataSection) {
-                const itemSinger = await get(ref(dbFirebase, 'singers/' + item.singerId[0]));
-                const dataSinger = itemSinger.val();
-                console.log(dataSinger);
-                item.singer = dataSinger.title;
+                let singerListArray = [];
+                for (const id of item.singerId) {
+                    const singerSnapshot = await get(ref(dbFirebase, 'singers/' + id));
+                    const singerData = singerSnapshot.val();
+                    singerListArray.push(singerData.title);
+                }
+                item.singer = singerListArray.join(", ");
             }
             setDataFinal(dataSection);
         }

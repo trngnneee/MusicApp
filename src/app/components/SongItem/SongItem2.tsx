@@ -20,7 +20,9 @@ export const SongItem2 = (props: { item: any }) => {
                         <Link href={item.link} className="text-white font-[600] text-[16px">{item.title}</Link>
                     </div>
                     <div className="flex gap-[18px] items-center">
-                        <div className="text-white font-[400] text-[14px] w-[200px] mr-[20px] p-0">{item.singer}</div>
+                        <div className="text-white font-[400] text-[14px] w-[200px] mr-[20px] p-0 flex gap-[5px]">
+                            {<div>{item.singer}</div>}
+                        </div>
                         <div className="font-[400] text-[14px] text-white">{item.time}</div>
                         <HeartButton
                             item={item}

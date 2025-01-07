@@ -36,6 +36,12 @@ export const RegisterForm = () => {
                     console.log(error);
                 });
         }
+        else{
+            Swal.fire({
+                title: "Email Đã Được Sử Dụng",
+                icon: "error",
+            });
+        }
     }
 
     return (

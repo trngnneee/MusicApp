@@ -34,18 +34,23 @@ export default async function SingerDetailPage(props: any) {
       const data = item.val();
 
       if (data.singerId.includes(id)) {
-        onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
-          const dataSinger = itemSinger.val();
-          dataSection.push({
-            id: key,
-            img: data.image,
-            title: data.title,
-            singer: dataSinger.title,
-            listener: data.listen,
-            time: "3:45",
-            link: key,
-            audio: data.audio
+        let singerList = "";
+        data.singerId.forEach((id, index) => {
+          onValue(ref(dbFirebase, 'singers/' + id), (itemSinger) => {
+            const dataSinger = itemSinger.val();
+            if (index != data.singerId.length - 1) singerList += dataSinger.title + ", ";
+            else singerList += dataSinger.title;
           })
+        })
+        dataSection.push({
+          id: key,
+          img: data.image,
+          title: data.title,
+          singer: singerList,
+          listener: data.listen,
+          link: `/songs/${key}`,
+          time: "4:32",
+          audio: data.audio
         })
       }
     })

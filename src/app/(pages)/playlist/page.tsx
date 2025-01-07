@@ -59,9 +59,13 @@ export default function PlayListPage() {
                 }
             });
             for (const item of tmp) {
-                const itemSinger = await get(ref(dbFirebase, 'singers/' + item.singerId[0]));
-                const dataSinger = itemSinger.val();
-                item.singer = dataSinger.title;
+                let singerListArray = [];
+                for (const id of item.singerId) {
+                    const singerSnapshot = await get(ref(dbFirebase, 'singers/' + id));
+                    const singerData = singerSnapshot.val();
+                    singerListArray.push(singerData.title);
+                }
+                item.singer = singerListArray.join(", ");
             }
             setDataSection(tmp);
         }
@@ -76,7 +80,7 @@ export default function PlayListPage() {
                     title="Danh Sách Phát"
                 />
                 <div>
-                    {dataSection ? (
+                    {dataSection && (
                         dataSection.map((item, index) => (
                             <div data-aos="fade-up" key={index}>
                                 <SongItem2
@@ -84,15 +88,6 @@ export default function PlayListPage() {
                                 />
                             </div>
                         ))
-                    ) : (
-                        <div className="flex flex-col items-center">
-                            <Title
-                                title="Vui Lòng Đăng Nhập Để Sử Dụng Tính Năng"
-                            />
-                            <Link href="/login">
-                                <button className="bg-[#00ADEF] w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng nhập</button>
-                            </Link>
-                        </div>
                     )}
                 </div>
             </div>
