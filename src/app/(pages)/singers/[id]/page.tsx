@@ -1,5 +1,4 @@
 import { CardInfor } from "@/app/components/CardInfor/CardInfor";
-import { CardItem } from "@/app/components/CardItem/CardItem";
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { Title } from "@/app/components/Title/Title";
 import { dbFirebase } from "@/app/FirebaseConfig";
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
 export default async function SingerDetailPage(props: any) {
   // Card Infor
   const { id } = await props.params;
-  var cardInfor = {};
+  let cardInfor = {};
   onValue(ref(dbFirebase, 'singers/' + id), (data) => {
     const dataCardInfor = data.val();
     cardInfor = {

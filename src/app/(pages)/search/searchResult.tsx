@@ -2,7 +2,7 @@
 
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { dbFirebase } from "@/app/FirebaseConfig";
-import { get, onValue, ref } from "firebase/database";
+import { get, ref } from "firebase/database";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -39,7 +39,7 @@ export const SearchResult = () => {
                 }
             });
             for (const item of dataSection) {
-                let singerListArray = [];
+                const singerListArray = [];
                 for (const id of item.singerId) {
                     const singerSnapshot = await get(ref(dbFirebase, 'singers/' + id));
                     const singerData = singerSnapshot.val();

@@ -3,7 +3,7 @@
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { get, onValue, ref } from "firebase/database";
+import { get, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -43,7 +43,7 @@ export const Wishlist = () => {
                         }
                     });
                     for (const item of dataSection) {
-                        let singerListArray = [];
+                        const singerListArray = [];
                         for (const id of item.singerId) {
                             const singerSnapshot = await get(ref(dbFirebase, 'singers/' + id));
                             const singerData = singerSnapshot.val();

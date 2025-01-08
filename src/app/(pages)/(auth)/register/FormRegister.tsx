@@ -61,6 +61,7 @@ export const RegisterForm = () => {
                     }
                 })
                 .catch((error) => {
+                    console.log(error);
                     Swal.fire({
                         title: "Email Đã Được Sử Dụng",
                         icon: "error",

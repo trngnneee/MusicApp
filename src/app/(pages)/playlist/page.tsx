@@ -5,8 +5,6 @@ import { Title } from "@/app/components/Title/Title";
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { get, onValue, ref } from "firebase/database";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function PlayListPage() {
@@ -60,7 +58,7 @@ export default function PlayListPage() {
                 }
             });
             for (const item of tmp) {
-                let singerListArray = [];
+                const singerListArray = [];
                 for (const id of item.singerId) {
                     const singerSnapshot = await get(ref(dbFirebase, 'singers/' + id));
                     const singerData = singerSnapshot.val();
