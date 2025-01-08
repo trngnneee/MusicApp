@@ -14,7 +14,7 @@ export const LoginForm = () => {
     const router = useRouter();
     const [view, setView] = useState(false);
 
-    const handleLogin = async (event) => {
+    const handleLogin = async (event: any) => {
         event.preventDefault();
         const email = event.target.email.value
         const password = event.target.password.value;
