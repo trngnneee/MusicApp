@@ -41,6 +41,7 @@ export const Play = () => {
 
         const fetchData = async () => {
             const items = await get(songRef);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             items.forEach((item: any) => {
                 const key = item.key;
                 const data = item.val();

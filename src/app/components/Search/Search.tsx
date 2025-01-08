@@ -6,6 +6,7 @@ export const Search = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleSearch = (event: any) => {
         event.preventDefault();
         const keyword = event.target.keyword.value;

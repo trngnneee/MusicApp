@@ -11,6 +11,7 @@ export const PlayMidButton = () => {
     const router = useRouter(); 
 
     const handleClick = () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const elementPlayAudio: any = document.querySelector(".play-audio");
         const elementPauseButton = elementPlayAudio.querySelector(".inner-button-play");
         const elementAudio = elementPlayAudio?.querySelector(".inner-audio");
@@ -24,6 +25,7 @@ export const PlayMidButton = () => {
     }
 
     const handleNext = () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const elementPlayAudio: any = document.querySelector(".play-audio");
         const target = elementPlayAudio.getAttribute("id");
 
@@ -44,6 +46,7 @@ export const PlayMidButton = () => {
     }
 
     const handlePre = () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const elementPlayAudio: any = document.querySelector(".play-audio");
         const target = elementPlayAudio.getAttribute("id");
 

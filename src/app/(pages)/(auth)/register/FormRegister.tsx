@@ -16,6 +16,7 @@ export const RegisterForm = () => {
     const [view, setView] = useState(false);
     const [view2, setView2] = useState(false);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleSubmit = (event: any) => {
         event.preventDefault();
         const fullName = event.target.fullName.value;
@@ -68,10 +69,12 @@ export const RegisterForm = () => {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleViewPassword = (event: any) => {
         event.preventDefault();
         setView(!view);
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleViewPassword2 = (event: any) => {
         event.preventDefault();
         setView2(!view2);

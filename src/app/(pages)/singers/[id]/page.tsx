@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: "Nghe nhạc trực tuyến",
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function SingerDetailPage(props: any) {
   // Card Infor
   const { id } = await props.params;
@@ -26,6 +27,7 @@ export default async function SingerDetailPage(props: any) {
   // End Card Infor
 
   // Song List
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection: any[] = [];
   const songRef = ref(dbFirebase, 'songs');
   onValue(songRef, (items) => {

@@ -3,9 +3,11 @@
 import { FaVolumeUp } from "react-icons/fa";
 
 export const PlayRight = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (event: any) => {
         const elementTotal = event.target;
         const value = parseInt(elementTotal.value);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const elementPlayAudio: any = document.querySelector(".play-audio");
         const elementAudio = elementPlayAudio?.querySelector(".inner-audio");
         elementAudio.volume = value / 100;

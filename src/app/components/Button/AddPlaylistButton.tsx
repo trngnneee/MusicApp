@@ -9,6 +9,7 @@ import { CgPlayListRemove } from "react-icons/cg";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const AddPlayListButton = (props: any) => {    
     const {item} = props;
     const [isActive, setIsActive] = useState(false);

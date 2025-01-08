@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   // Data section 1 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection1: any[] = [];
   const songRef = ref(dbFirebase, 'songs');
   onValue(songRef, (items) => {
@@ -39,6 +40,7 @@ export default function Home() {
   // End Data section 1
 
   // Data section 2
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection2: any[] = []
   const categoryRef = ref(dbFirebase, 'categories');
   onValue(categoryRef, (items) => {
@@ -60,6 +62,7 @@ export default function Home() {
   // End Data section 2
 
   // Data section 3
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection3: any[] = []
   const singerRef = ref(dbFirebase, 'singers');
   onValue(singerRef, (items) => {

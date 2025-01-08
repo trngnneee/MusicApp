@@ -8,16 +8,19 @@ import { useEffect, useState } from "react";
 
 export const SearchResult = () => {
     const searchParams = useSearchParams();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [dataFinal, setDataFinal] = useState<any>(null);
 
     const defaultKeyword = searchParams.get("keyword") || "";
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const dataSection: any[] = [];
         const songRef = ref(dbFirebase, 'songs');
         const fetchData = async () => {
             const items = await get(songRef);
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             items.forEach((item: any) => {
                 const key = item.key;
                 const data = item.val();
@@ -54,6 +57,7 @@ export const SearchResult = () => {
             <div>
                 {dataFinal && (
                     <>
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                         {dataFinal.map((item: any, index: number) => (
                             <div data-aos="fade-up" key={index}>
                                 <SongItem2

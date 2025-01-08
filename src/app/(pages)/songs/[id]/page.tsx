@@ -10,20 +10,17 @@ export const metadata: Metadata = {
   description: "Nghe nhạc trực tuyến",
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function SongDetailPage(props: any) {
 
   // Card Information
   const { id } = await props.params;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let dataCardInfor: any = null;
   let cardInfor = {};
   let lyrics = "";
   onValue(ref(dbFirebase, '/songs/' + id), (item) => {
     dataCardInfor = item.val();
-    // onValue(ref(dbFirebase, '/singers/' + dataCardInfor.singerId[0]), (itemSinger) => {
-    //   const dataSinger = itemSinger.val();
-    //   console.log(dataSinger);
-    //   dataCardInfor["singer"] = dataSinger.title;
-    // })
     let singerList = "";
     dataCardInfor.singerId.forEach((id, index) => {
       onValue(ref(dbFirebase, '/singers/' + id), (itemSinger) => {
@@ -42,6 +39,7 @@ export default async function SongDetailPage(props: any) {
   // End Card Information
 
   // Same category songs
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection3: any[] = [];
   const songRef = ref(dbFirebase, 'songs');
   onValue(songRef, (items) => {

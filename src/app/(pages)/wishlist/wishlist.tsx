@@ -9,17 +9,20 @@ import Swal from "sweetalert2";
 
 
 export const Wishlist = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
         onAuthStateChanged(authFireBase, (user) => {
             if (user) {
                 const userId = user.uid;
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const dataSection: any[] = [];
                 const songRef = ref(dbFirebase, 'songs');
                 const fetchData = async () => {
                     const items = await get(songRef);
 
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     items.forEach((item: any) => {
                         const key = item.key;
                         const data = item.val();

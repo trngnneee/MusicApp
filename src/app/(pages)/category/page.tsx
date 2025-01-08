@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function CategoryPage() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection: any[] = []
   const categoryRef = ref(dbFirebase, 'categories');
   onValue(categoryRef, (items) => {

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const CardInfor = (props: {item: any}) => {
     const {item} = props;
     return (

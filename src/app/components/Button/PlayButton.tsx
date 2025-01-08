@@ -1,14 +1,14 @@
 "use client"
 
-import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
-import { get, onValue, ref, set } from "firebase/database";
 import { FaPlay } from "react-icons/fa";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const PlayButton = (props: any) => {
     const { item } = props;
 
     const handlePlay = () => {
         const audio = item.audio;
         // Play Music
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const elementPlayAudio: any = document.querySelector(".play-audio");
         // Add an ID
         elementPlayAudio.setAttribute("id", item.id);

@@ -10,11 +10,12 @@ export const metadata: Metadata = {
   description: "Nghe nhạc trực tuyến",
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function CategoryDetailPage(props: any) {
 
   // Card Information
   const { id } = await props.params;
-  var cardInfor = {};
+  let cardInfor = {};
   onValue(ref(dbFirebase, 'categories/' + id), (data) => {
     const dataCardInfor = data.val();
     cardInfor = {
@@ -26,6 +27,7 @@ export default async function CategoryDetailPage(props: any) {
   // End Card Information
 
   // Song data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection: any[] = [];
   const songRef = ref(dbFirebase, 'songs');
   onValue(songRef, (items) => {

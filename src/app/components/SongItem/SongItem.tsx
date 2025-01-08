@@ -3,6 +3,7 @@ import { PlayButton } from "../Button/PlayButton";
 import { HeartButton } from "../Button/HeartButton";
 import { AddPlayListButton } from "../Button/AddPlaylistButton";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SongItem = (props: {item: any}) => {
     const {item} = props;
     return (

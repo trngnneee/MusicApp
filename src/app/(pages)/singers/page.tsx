@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function SingerCategoryPage() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dataSection: any[] = []
   const singerRef = ref(dbFirebase, 'singers');
   onValue(singerRef, (items) => {
