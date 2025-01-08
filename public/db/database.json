@@ -53,16 +53,26 @@
       "description": "RHYDER tên thật là Nguyễn Quang Anh, sinh ngày 18/03/2001, là một nam ca sĩ kiêm nhạc sĩ, rapper và producer. Quang Anh nổi danh từ khi đoạt giải quán quân mùa đầu tiên của Giọng hát Việt nhí (The Voice Kids). Sau đó, anh bắt đầu tham gia các hoạt động âm nhạc với vai trò ca sĩ. Tuy lúc đó chỉ mới 12 tuổi, nhưng anh đã được giới chuyên môn và khán giả đánh giá cao bởi khả năng ca hát, cảm thụ âm nhạc và phong cách trình diễn nghệ sĩ của mình. Năm 2023, Rhyder gây sự chú ý trở lại với công chúng khi tham gia mùa thứ ba của cuộc thi Rap Việt. Cuối năm đó, anh cho ra mắt đĩa đơn Chịu cách mình nói thua và gặt hái được nhiều thành công về mặt thương mại. Năm 2024, anh trở nên đột phá trong mùa đầu tiên của Anh trai say hi và giành ngôi á quân, đồng thời lọt vào đội hình nhóm nhạc năm thành viên xuất sắc nhất."
     },
     "4": {
-      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736228651/1603946096776_yzchky.jpg",
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736343859/th_jegicv.jpg",
       "title": "Hurrkng",
       "description": "Hurrykng là một rapper nổi bật trong cộng đồng âm nhạc Việt Nam, được biết đến với phong cách rap độc đáo, sáng tạo và những ca từ sâu sắc. Anh thường khai thác các chủ đề về cuộc sống, xã hội và cảm xúc cá nhân, kết hợp cùng kỹ thuật rap điêu luyện và giai điệu cuốn hút. Hurrykng không chỉ gây ấn tượng bởi khả năng biểu diễn mà còn bởi sự nhiệt huyết và sáng tạo trong từng sản phẩm âm nhạc, giúp anh trở thành một gương mặt triển vọng trong làng rap Việt."
     },
     "5": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736343096/channels4_profile_o12avh.jpg",
+      "title": "MCK",
+      "description": "MCK, tên thật Nghiêm Vũ Hoàng Long, là một rapper và nghệ sĩ đa tài trong làng nhạc Việt Nam. Anh nổi bật với phong cách âm nhạc độc đáo, kết hợp giữa rap, R&B và hip-hop, cùng với khả năng viết lời sâu sắc và chất giọng đặc trưng. MCK từng gây ấn tượng mạnh tại chương trình Rap Việt và nhanh chóng trở thành gương mặt trẻ được yêu thích, đại diện cho thế hệ nghệ sĩ mới đầy sáng tạo và nhiệt huyết."
+    },
+    "6": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736343085/OIP_e0rrvo.jpg",
+      "title": "Coolkid",
+      "description": "Coolkid là một nghệ sĩ trẻ đầy triển vọng trong làng nhạc Việt Nam, nổi bật với phong cách cá tính và âm nhạc hiện đại. Anh chinh phục khán giả bằng những bản rap chất lừ, giai điệu bắt tai và lời ca đầy sáng tạo, thể hiện chất cool riêng biệt. Coolkid không chỉ là cái tên ấn tượng mà còn là biểu tượng của sự tự tin, dám nghĩ dám làm của thế hệ nghệ sĩ trẻ."
+    },
+    "7": {
       "image": "https://backend.daca.vn/assets/images/tang-duy-tan.jpg",
       "title": "Tăng Duy Tân",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
     },
-    "6": {
+    "8": {
       "image": "https://backend.daca.vn/assets/images/thanh-dat.jpg",
       "title": "Thành Đạt",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
@@ -140,7 +150,7 @@
       "title": "Chịu Cách Mình Nói Thua",
       "categoryId": "2",
       "singerId": [
-        "3"
+        "3", "6"
       ],
       "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736227102/ChiuCachMinhNoiThua-RHYDERCoolkidBAN-12449134_huvpen.mp3",
       "lyric": "Đang cập nhật...",
@@ -151,7 +161,7 @@
       "title": "Sau Cơn Mưa",
       "categoryId": "1",
       "singerId": [
-        "3"
+        "3", "6"
       ],
       "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736227101/SauConMua-CoolkidsQuangAnhRhyder-10242197_o3siao.mp3",
       "lyric": "Đang cập nhật...",
@@ -164,7 +174,7 @@
       "singerId": [
         "3"
       ],
-      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735970042/sao-h%E1%BA%A1ng-a_afarif.mp3",
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343108/anh-biet-roi-_AudioTrimmer.com_rjpnld.mp3",
       "lyric": "Đang cập nhật...",
       "listen": 22800
     },
@@ -173,7 +183,7 @@
       "title": "Rượu Mừng Hóa Người Dưng",
       "categoryId": "1",
       "singerId": [
-        "6"
+        "8"
       ],
       "audio": "https://backend.daca.vn/assets/audios/ruou-mung-hoa-nguoi-dung.mp3",
       "lyric": "Đang cập nhật...",
@@ -184,7 +194,7 @@
       "title": "Cắt Đôi Nỗi Sầu",
       "categoryId": "1",
       "singerId": [
-        "5"
+        "7"
       ],
       "audio": "https://backend.daca.vn/assets/audios/cat-doi-noi-sau.mp3",
       "lyric": "Đang cập nhật...",
@@ -195,7 +205,7 @@
       "title": "Ngày Mai Người Ta Lấy Chồng",
       "categoryId": "1",
       "singerId": [
-        "6"
+        "8"
       ],
       "audio": "https://backend.daca.vn/assets/audios/ngay-mai-nguoi-ta-lay-chong.mp3",
       "lyric": "Đang cập nhật...",
@@ -206,9 +216,75 @@
       "title": "Tất Cả Hoặc Không Là Gì Cả",
       "categoryId": "1",
       "singerId": [
-        "6"
+        "8"
       ],
       "audio": "https://backend.daca.vn/assets/audios/tat-ca-hoac-khong-la-gi-ca.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 18800
+    },
+    "14":{
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736343085/mdanniversary_ajgske.jpg",
+      "title": "MD Anniverary",
+      "categoryId": "2",
+      "singerId": [
+        "6"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343087/y2mate.com_-_MD_ANNIVERSARY_BAN_x_COOLKID_OFFICIAL_VISUALIZER_Prod_By_PETERVUX_gtiudk.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 18800
+    },
+    "15":{
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736343085/1200x1200bf-60_imw6mu.jpg",
+      "title": "Viên Thuốc Thần Kỳ",
+      "categoryId": "2",
+      "singerId": [
+        "6"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343087/vi%C3%AAn-thu%E1%BB%91c-th%E1%BA%A7n-k%E1%BB%B3-official-lyrics-video_wfkrxr.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 18800
+    },
+    "16":{
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736344285/loi-bai-hat-anh-da-on-hon-mck-700_ubg93j.jpg",
+      "title": "Anh Đã Ổn Hơn",
+      "categoryId": "1",
+      "singerId": [
+        "5"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343098/y2mate.com_-_14_Anh_%C4%90%C3%A3_%E1%BB%94n_H%C6%A1n_RPT_MCK_99_the_album_uw8gse.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 18800
+    },
+    "17":{
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736344282/thoiemdungdi_pdqsut.jpg",
+      "title": "Thôi Em Đừng Đi",
+      "categoryId": "2",
+      "singerId": [
+        "5"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343098/y2mate.com_-_07_Th%C3%B4i_Em_%C4%90%E1%BB%ABng_%C4%90i_RPT_MCK_ft_Trung_Tr%E1%BA%A7n_99_the_album_myljyu.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 18800
+    },
+    "18":{
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736343098/maxresdefault_cxwxdo.jpg",
+      "title": "Nghe Như Tình Yêu (Remix)",
+      "categoryId": "2",
+      "singerId": [
+        "5"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343096/y2mate.com_-_Nghe_nh%C6%B0_t%C3%ACnh_y%C3%AAu_MCK_remixx_prod_By_Kewtiie_bf7rs5.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 18800
+    },
+    "19":{
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736344292/gbrocky_tajnwf.jpg",
+      "title": "Goodbye Rocky",
+      "categoryId": "2",
+      "singerId": [
+        "1"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343111/y2mate.com_-_GOODBYE_ROCKY_dpzsmx.mp3",
       "lyric": "Đang cập nhật...",
       "listen": 18800
     }
