@@ -1,6 +1,7 @@
 import { Title } from "@/app/components/Title/Title";
 import { Metadata } from "next";
 import { SearchResult } from "./searchResult";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Kết quả tìm kiếm",
@@ -13,7 +14,9 @@ export default function SearchPage() {
       <Title
         title="Kết Quả Tìm Kiếm"
       />
-      <SearchResult/>
+      <Suspense>
+        <SearchResult/>
+      </Suspense>
     </>
   );
 }
