@@ -14,6 +14,7 @@ export const LoginForm = () => {
     const router = useRouter();
     const [view, setView] = useState(false);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleLogin = async (event: any) => {
         event.preventDefault();
         const email = event.target.email.value
@@ -44,6 +45,7 @@ export const LoginForm = () => {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleViewPassword = (event:any) => {
         event.preventDefault();
         setView(!view);
