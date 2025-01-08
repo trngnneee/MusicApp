@@ -14,7 +14,7 @@ export const LoginForm = () => {
     const router = useRouter();
     const [view, setView] = useState(false);
 
-    const handleLogin = async (event: any) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
         const email = event.target.email.value
         const password = event.target.password.value;
@@ -35,6 +35,7 @@ export const LoginForm = () => {
                     icon: "success",
                 });
             } catch (error) {
+                console.log(error);
                 Swal.fire({
                     title: "Thông Tin Đăng Nhập Không Chính Xác!",
                     icon: "error",
