@@ -162,7 +162,7 @@ export const RegisterForm = () => {
                         </button>
                     </div>
                 </div>
-                <button className="bg-[#00ADEF] w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng nhập</button>
+                <button className="bg-[#00ADEF] w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng Kí</button>
                 <div className="mt-[10px] flex text-white gap-[8px] justify-end items-center">
                     <div className="">Đã có tài khoản?</div>
                     <Link href="/login">
