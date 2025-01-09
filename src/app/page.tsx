@@ -83,10 +83,6 @@ export default function Home() {
   });
   // End Data section 3
 
-  console.log(dataSection1);
-  console.log(dataSection2);
-  console.log(dataSection3);
-
   return (
     <>
       {/* Section1 */}
