@@ -1,8 +1,6 @@
-import { CardItem } from "@/app/components/CardItem/CardItem";
 import { Title } from "@/app/components/Title/Title";
-import { dbFirebase } from "@/app/FirebaseConfig";
-import { onValue, ref } from "firebase/database";
 import { Metadata } from "next";
+import { DataSection } from "./DataSection";
 
 export const metadata: Metadata = {
   title: "Danh mục bài hát",
@@ -10,39 +8,13 @@ export const metadata: Metadata = {
 };
 
 export default function CategoryPage() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dataSection: any[] = []
-  const categoryRef = ref(dbFirebase, 'categories');
-  onValue(categoryRef, (items) => {
-    items.forEach((item) => {
-      const key = item.key;
-      const data = item.val();
-
-      dataSection.push({
-        id: key,
-        img: data.image,
-        title: data.title,
-        content: data.description,
-        link: `/category/${key}`
-      })
-    })
-  });
-
   return (
     <>
       <div>
         <Title
           title="Danh Mục Bài Hát"
         />
-        <div className="grid grid-cols-5 gap-[20px]">
-          {dataSection.map((item, index) => (
-            <div data-aos="fade-up" key={index}>
-              <CardItem
-                item={item}
-              />
-            </div>
-          ))}
-        </div>
+        <DataSection/>
       </div>
     </>
   );

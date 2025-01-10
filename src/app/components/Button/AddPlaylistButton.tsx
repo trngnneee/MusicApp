@@ -2,7 +2,7 @@
 
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { get, onValue, ref,set } from "firebase/database";
+import { get, ref,set } from "firebase/database";
 import { useEffect, useState } from "react";
 import { CgPlayListAdd } from "react-icons/cg";
 import { CgPlayListRemove } from "react-icons/cg";
@@ -27,12 +27,11 @@ export const AddPlayListButton = (props: any) => {
     }, [])
         
     useEffect(() => {
-        const fetchPlayList = () => {
+        const fetchPlayList = async () => {
             const playListRef = ref(dbFirebase, `users/${userId}/playlist`);
-            onValue(playListRef, (snapshot) => {
-                const data = snapshot.val();
-                setPlayList(data);
-            })
+            const snapshot = await get(playListRef);
+            const data = snapshot.val();
+            setPlayList(data);
         }
         if (userId != null) fetchPlayList();
     }, [userId])

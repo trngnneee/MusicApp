@@ -1,9 +1,8 @@
 import { Metadata } from "next";
 import { Title } from "./components/Title/Title";
-import { CardItem } from "./components/CardItem/CardItem";
-import { SongItem } from "./components/SongItem/SongItem";
-import { dbFirebase } from "./FirebaseConfig";
-import { onValue, ref } from "firebase/database";
+import { DataSection1 } from "./components/HomePageDataSection/DataSection1";
+import { DataSection2 } from "./components/HomePageDataSection/DataSection2";
+import { DataSection3 } from "./components/HomePageDataSection/DataSection3";
 
 export const metadata: Metadata = {
   title: "Trang chủ",
@@ -11,78 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // Data section 1 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dataSection1: any[] = [];
-  const songRef = ref(dbFirebase, 'songs');
-  onValue(songRef, (items) => {
-    items.forEach((item) => {
-      const key = item.key;
-      const data = item.val();
-
-      if (dataSection1.length < 3) {
-        onValue(ref(dbFirebase, 'singers/' + data.singerId[0]), (itemSinger) => {
-          const dataSinger = itemSinger.val();
-          dataSection1.push({
-            id: key,
-            img: data.image,
-            title: data.title,
-            singer: dataSinger.title,
-            listener: data.listen,
-            link: `/songs/${key}`,
-            audio: data.audio,
-            wishlist: data.wishlist
-          })
-        })
-      }
-    })
-  });
-  // End Data section 1
-
-  // Data section 2
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dataSection2: any[] = []
-  const categoryRef = ref(dbFirebase, 'categories');
-  onValue(categoryRef, (items) => {
-    items.forEach((item) => {
-      const key = item.key;
-      const data = item.val();
-
-      if (dataSection2.length < 5) {
-        dataSection2.push({
-          id: key,
-          img: data.image,
-          title: data.title,
-          content: data.description,
-          link: `/category/${key}`
-        })
-      }
-    })
-  });
-  // End Data section 2
-
-  // Data section 3
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dataSection3: any[] = []
-  const singerRef = ref(dbFirebase, 'singers');
-  onValue(singerRef, (items) => {
-    items.forEach((item) => {
-      const key = item.key;
-      const data = item.val();
-
-      if (dataSection3.length < 5) {
-        dataSection3.push({
-          id: key,
-          img: data.image,
-          title: data.title,
-          content: data.description,
-          link: `/singers/${key}`
-        })
-      }
-    })
-  });
-  // End Data section 3
-
   return (
     <>
       {/* Section1 */}
@@ -106,13 +33,7 @@ export default function Home() {
           <div className="flex-1">
             <div className="text-white font-[700] text-[24px] mb-[20px]">Nghe nhiều</div>
             <div>
-              {dataSection1.map((item, index) => (
-                <div data-aos="fade-left" key={index}>
-                  <SongItem
-                    item={item}
-                  />
-                </div>
-              ))}
+              <DataSection1/>
             </div>
           </div>
         </div>
@@ -120,28 +41,12 @@ export default function Home() {
       {/* Section2 */}
       <div className="mb-[30px]">
         <Title title="Danh Mục Nổi Bật" />
-        <div className="grid grid-cols-5 gap-[20px]">
-          {dataSection2.map((item, index) => (
-            <div data-aos="fade-up" key={index}>
-              <CardItem
-                item={item}
-              />
-            </div>
-          ))}
-        </div>
+        <DataSection2/>
       </div>
       {/* Section3 */}
       <div className="mb-[30px]">
         <Title title="Ca Sĩ Nổi Bật" />
-        <div className="grid grid-cols-5 gap-[20px]">
-          {dataSection3.map((item, index) => (
-            <div data-aos="fade-up" key={index}>
-              <CardItem
-                item={item}
-              />
-            </div>
-          ))}
-        </div>
+        <DataSection3/>
       </div>
     </>
   );

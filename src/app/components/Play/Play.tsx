@@ -6,7 +6,7 @@ import { PlayMid } from "./PlayMid";
 import { PlayRight } from "./PlayRight";
 import { onAuthStateChanged } from "firebase/auth";
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
-import { get, onValue, ref } from "firebase/database";
+import { get, ref } from "firebase/database";
 import { SongItem2 } from "../SongItem/SongItem2";
 
 export const Play = () => {
@@ -25,12 +25,11 @@ export const Play = () => {
     }, [])
 
     useEffect(() => {
-        const fetchPlayList = () => {
+        const fetchPlayList = async () => {
             const playListRef = ref(dbFirebase, `users/${userId}/playlist`);
-            onValue(playListRef, (snapshot) => {
-                const data = snapshot.val();
-                setPlayList(data);
-            })
+            const snapshot = await get(playListRef);
+            const data = snapshot.val();
+            setPlayList(data);
         }
         if (userId != null) fetchPlayList();
     }, [userId])
