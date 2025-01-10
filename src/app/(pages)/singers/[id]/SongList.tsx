@@ -15,6 +15,7 @@ export const SongList = (props) => {
             const items = await get(songRef);
             const itemArray = Object.entries(items.val() || {});
             const tmp = [];
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             for (const [key, data] of itemArray as [string, any][]) {
                 if (data.singerId.includes(id)) {
                     const singerArray = [];

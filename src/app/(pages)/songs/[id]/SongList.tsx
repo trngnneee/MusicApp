@@ -18,7 +18,7 @@ export const SongList = (props) => {
 
             const snapshot = await get(ref(dbFirebase, 'songs/' + id));
             const targetId = snapshot.val().categoryId;
-
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             for (const [key, data] of itemArray as [string, any][]) {
                 if (data.categoryId === targetId) {
                     const singerArray = [];
