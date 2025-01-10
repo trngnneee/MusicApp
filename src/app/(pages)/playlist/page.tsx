@@ -53,7 +53,8 @@ export default function PlayListPage() {
                         singerId: data.singerId,
                         listener: data.listen,
                         link: `/songs/${key}`,
-                        audio: data.audio
+                        audio: data.audio,
+                        wishlist: data.wishlist
                     })
                 }
             });
