@@ -77,7 +77,7 @@ export const AddPlayListButton = (props: any) => {
     return (
         <>
             <button 
-                className="text-[white] text-[20px] p-[8px] rounded-[50%] border-[2px] border-[#fff] hover:bg-[#9d9c9c43]"
+                className="text-[white] p-[5px] sm:p-[8px] text-[10px] sm:text-[15px] rounded-[50%] border-[2px] border-[#fff] hover:bg-[#9d9c9c43]"
                 onClick={handleAddPlayList}    
             >
                 {isActive ? <div className="text-[#00ADEF]"><CgPlayListRemove /></div> : <CgPlayListAdd />}
