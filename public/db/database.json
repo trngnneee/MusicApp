@@ -38,6 +38,11 @@
   },
   "singers": {
     "1": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736666842/473132982_609055181623802_795282158202635001_n_xs06of.jpg",
+      "title": "Korizone",
+      "description": "Korizone tên thật là Nguyễn Khang, là nghệ sĩ trẻ đến từ Việt Nam. Sinh năm 2005 và sống tại TP.HCM, mang nhiều năng lượng và màu sắc âm nhạc của thế hệ mới"
+    },
+    "9": {
       "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735959436/drt_ktwlnp.jpg",
       "title": "DangRangTo",
       "description": "DRT (aka Trần Lả Lướt) là một rapper trẻ đầy triển vọng, nổi bật với chất giọng độc đáo và khả năng chơi chữ thông minh. Với phong cách phóng khoáng và lời rap chân thật, DRT thường khai thác những câu chuyện đời thường và cảm xúc cá nhân, kết hợp cùng nhịp beat hiện đại. Anh không chỉ gây ấn tượng bởi tài năng âm nhạc mà còn bởi tinh thần sáng tạo không ngừng, tạo dấu ấn riêng trong làng rap Việt."
@@ -84,29 +89,62 @@
       "title": "Wrong Times",
       "categoryId": "2",
       "singerId": [
-        "1"
+        "9"
       ],
       "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735959968/wrong-times_au4sw8.mp3",
       "lyric": "Đang cập nhật...",
       "listen": 22800
     },
     "2": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736666843/Screenshot_2025-01-12_142406_npf8ka.png",
+      "title": "Cỗ Máy Thời Gian",
+      "categoryId": "2",
+      "singerId": [
+        "1"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736666845/y2mate.com_-_KORIZONE_x_DANI_C%E1%BB%97_M%C3%A1y_Th%E1%BB%9Di_Gian_Official_Lyric_Video_snp4gr.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 22800
+    },
+    "3": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736666843/Screenshot_2025-01-12_142211_mfbjsf.png",
+      "title": "Tuyết Rơi Rồi Kìa Em",
+      "categoryId": "2",
+      "singerId": [
+        "1"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736666845/y2mate.com_-_KORIZONE_ft_DANI_tuy%E1%BA%BFt_r%C6%A1i_r%E1%BB%93i_k%C3%ACa_em_Prod_X%C3%A1m_Official_Lyric_Video_lecpae.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 22800
+    },
+    "22": {
+      "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1736666843/Screenshot_2025-01-12_142445_p8thwf.png",
+      "title": "Giờ Em Sao",
+      "categoryId": "2",
+      "singerId": [
+        "1"
+      ],
+      "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736666845/y2mate.com_-_KEYSHI_x_korizoneofficial_GI%E1%BB%9C_EM_SAO_OFFICIAL_MUSIC_VIDEO_jzwfki.mp3",
+      "lyric": "Đang cập nhật...",
+      "listen": 22800
+    },
+    "20": {
       "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735960152/loveis_dng5tj.jpg",
       "title": "Love Is",
       "categoryId": "2",
       "singerId": [
-        "1"
+        "9"
       ],
       "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735959877/love-is_s5m6c0.mp3",
       "lyric": "Đang cập nhật...",
       "listen": 22800
     },
-    "3": {
+    "21": {
       "image": "https://res.cloudinary.com/dx62wzbwc/image/upload/v1735960153/12_st6hre.jpg",
       "title": "1/2",
       "categoryId": "2",
       "singerId": [
-        "1"
+        "9"
       ],
       "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1735959877/12_qddcvz.mp3",
       "lyric": "Đang cập nhật...",
@@ -282,11 +320,33 @@
       "title": "Goodbye Rocky",
       "categoryId": "2",
       "singerId": [
-        "1"
+        "9"
       ],
       "audio": "https://res.cloudinary.com/dx62wzbwc/video/upload/v1736343111/y2mate.com_-_GOODBYE_ROCKY_dpzsmx.mp3",
       "lyric": "Đang cập nhật...",
       "listen": 18800
+    }
+  },
+  "users": {
+    "HbAm12rnEwhLQAolhqVMy49oEvC2": {
+      "fullName": "quanghuy"
+    },
+    "Rw35NBKIaSU61DIuJcyHpU7NsaE3": {
+      "fullName": "Nam Khánh"
+    },
+    "X2m7I2XKaUhrBFQfpxj5JUoWoFx1": {
+      "fullName": "Đặng Trường Nguyên"
+    },
+    "dq60uKROXrbiXxlM5OuybrezvHn1": {
+      "fullName": "Dang Truong Nguyen ",
+      "playlist": [
+        "2",
+        "3",
+        "14"
+      ]
+    },
+    "yIbPBRL5nuebNj81ILbVIa14p9a2": {
+      "fullName": "namkhanh"
     }
   }
 }

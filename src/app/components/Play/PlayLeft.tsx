@@ -1,7 +1,7 @@
 export const PlayLeft = () => {
     return (
         <>
-            <div className="flex gap-[13px]">
+            <div className="flex gap-[10px] sm:gap-[13px] items-center">
                 <div className="w-[50px]">
                     <img
                         src="/"
@@ -12,7 +12,7 @@ export const PlayLeft = () => {
                     <div className="text-white text-[10px] md:text-[15px] font-[700px] inner-title">
 
                     </div>
-                    <div className="text-[#FFFFFF70] text-[9px] md:text-[12px] font-[700px] inner-singer">
+                    <div className="text-[#FFFFFF70] text-[10px] md:text-[12px] font-[700px] inner-singer">
 
                     </div>
                 </div>

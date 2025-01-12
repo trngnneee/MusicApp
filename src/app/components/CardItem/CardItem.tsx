@@ -11,8 +11,8 @@ export const CardItem = (props: { item: any }) => {
                         src={item.img}
                         className="mb-[10px]"
                     />
-                    <div className="text-[14px] font-[700] mb-[10px] text-white">{item.title}</div>
-                    <div className="text-[12px] font-[300] text-[#FFFFFF80] line-clamp-1">{item.content}</div>
+                    <div className="text-[12px] md:text-[14px] font-[700] mb-[5px] md:mb-[10px] text-white">{item.title}</div>
+                    <div className="text-[10px] md:text-[12px] font-[300] text-[#FFFFFF80] line-clamp-1">{item.content}</div>
                 </div>
             </Link>
         </>

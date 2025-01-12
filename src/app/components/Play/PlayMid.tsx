@@ -4,7 +4,7 @@ import { PlayMidInput } from "./PlayMid_Input";
 export const PlayMid = () => {
     return (
         <>
-            <div className="flex-1 mx-[20px] md:mx-[66px]">
+            <div className="flex-1 mx-[15px] md:mx-[66px]">
                 <PlayMidButton/>
                 <PlayMidInput/>
             </div>

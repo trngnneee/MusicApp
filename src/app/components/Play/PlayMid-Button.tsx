@@ -72,8 +72,10 @@ export const PlayMidButton = () => {
 
     return (
         <>
-            <div className="text-white flex justify-center items-center gap-[52px]">
-                <button onClick={handlePre}>
+            <div className="text-white flex justify-center items-center gap-[30px] md:gap-[52px]">
+                <button 
+                    onClick={handlePre}
+                >
                     <MdSkipPrevious />
                 </button>
                 <button
@@ -83,7 +85,9 @@ export const PlayMidButton = () => {
                     <FaPause className="inner-icon-pause" />
                     <FaPlay className="inner-icon-play" />
                 </button>
-                <button onClick={handleNext}>
+                <button 
+                    onClick={handleNext}
+                >
                     <MdSkipNext />
                 </button>
                 <button className="p-0" onClick={handlePlayList}>

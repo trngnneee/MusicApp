@@ -75,14 +75,12 @@ export const Play = () => {
                 <audio className="hidden inner-audio">
                     <source src="/" />
                 </audio>
-                <div className="container mx-auto flex flex-col sm:flex-row gap-[10px] sm:gap-[5px] sm:justify-between items-center">
-                    {/* Left */}
+                <div className="container mx-auto flex flex-row gap-[10px] sm:gap-[5px] sm:justify-between items-center">
                     <PlayLeft />
-                    {/* Mid */}
                     <PlayMid />
-                    {/* Right */}   
-                    <PlayRight />
-
+                    <div className="hidden md:block">
+                        <PlayRight />
+                    </div>
                 </div>
                 <div className="hidden song-item-2">
                     {dataSection && (
