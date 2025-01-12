@@ -19,13 +19,13 @@ export const Search = () => {
     return (
         <>
             <form 
-                className="top-[20px] left-[20px] sticky bg-[#212121] rounded-[50px] py-[15px] px-[30px] z-[999]"
+                className="hidden md:block right-[15px] top-[30px] md:top-[20px] md:left-[20px] absolute md:sticky bg-[#212121] rounded-[50px] py-[15px] px-[30px] z-[999] search-box"
                 onSubmit={handleSearch}
             >
                 <div className="text-white flex items-center gap-[20px]">
                     <FaSearch />
                     <input 
-                        className="text-[16px] font-[500] bg-transparent w-[100%] border-none outline-none" 
+                        className="text-[12px] md:text-[16px] font-[500] bg-transparent w-[100%] border-none outline-none" 
                         placeholder="Tìm kiếm..." 
                         type="text"
                         name="keyword"

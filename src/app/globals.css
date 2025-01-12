@@ -42,3 +42,15 @@
 .inner-button-play.play .inner-icon-play {
   display: none;  
 }
+
+.sider.active{
+    display: block;
+}
+
+.overlay.active{
+  display: block;
+}
+
+.search-box.active{
+  display: block;
+}

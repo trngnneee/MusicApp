@@ -75,7 +75,7 @@ export const Play = () => {
                 <audio className="hidden inner-audio">
                     <source src="/" />
                 </audio>
-                <div className="container mx-auto flex justify-between items-center">
+                <div className="container mx-auto flex flex-col sm:flex-row gap-[10px] sm:gap-[5px] sm:justify-between items-center">
                     {/* Left */}
                     <PlayLeft />
                     {/* Mid */}

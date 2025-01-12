@@ -30,7 +30,7 @@ export const DataSection = () => {
 
     return (
         <>
-            <div className="grid grid-cols-5 gap-[20px]">
+            <div className="grid grid-cols-3 lg:grid-cols-5 gap-[20px]">
                 {dataSection && dataSection.map((item, index) => (
                     <div data-aos="fade-up" key={index}>
                         <CardItem

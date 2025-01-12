@@ -97,7 +97,7 @@ export const RegisterForm = () => {
                         name="fullName"
                         id="fullName"
                         placeholder="Ví dụ: Le Van A"
-                        className="px-[16px] py-[14px] rounded-[6px] outline-none w-[500px]"
+                        className="px-[16px] py-[14px] rounded-[6px] outline-none w-[300px] sm:w-[500px]"
                     />
                 </div>
                 <div className="mb-[15px]">
@@ -113,7 +113,7 @@ export const RegisterForm = () => {
                         name="email"
                         id="email"
                         placeholder="Ví dụ: levana@gmail.com"
-                        className="px-[16px] py-[14px] rounded-[6px] outline-none w-[500px]"
+                        className="px-[16px] py-[14px] rounded-[6px] outline-none w-[300px] sm:w-[500px]"
                     />
                 </div>
                 <div className="mb-[15px]">
@@ -124,7 +124,7 @@ export const RegisterForm = () => {
                         <div className="text-[14px] font-[600] text-white">Mật Khẩu</div>
                         <div className="text-[red]">*</div>
                     </label>
-                    <div className="flex w-[500px] px-[16px] py-[14px] rounded-[6px] bg-white">
+                    <div className="flex w-[300px] sm:w-[500px] px-[16px] py-[14px] rounded-[6px] bg-white">
                         <input
                             type={view ? "text" : "password"}
                             name="password"
@@ -147,7 +147,7 @@ export const RegisterForm = () => {
                         <div className="text-[14px] font-[600] text-white">Xác Nhận Mật Khẩu</div>
                         <div className="text-[red]">*</div>
                     </label>
-                    <div className="flex w-[500px] px-[16px] py-[14px] rounded-[6px] bg-white">
+                    <div className="flex w-[300px] sm:w-[500px] px-[16px] py-[14px] rounded-[6px] bg-white">
                         <input
                             type={view2 ? "text" : "password"}
                             name="confirmPass"
@@ -162,7 +162,7 @@ export const RegisterForm = () => {
                         </button>
                     </div>
                 </div>
-                <button className="bg-[#00ADEF] w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng Kí</button>
+                <button className="bg-[#00ADEF] w-[300px] sm:w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng Kí</button>
                 <div className="mt-[10px] flex text-white gap-[8px] justify-end items-center">
                     <div className="">Đã có tài khoản?</div>
                     <Link href="/login">

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <>
-      <div className="mt-[60px] mx-auto w-[500px]">
+      <div className="mt-[60px] mx-auto w-[300px] sm:w-[500px]">
         <Title
           title="Đăng Nhập Tài Khoản"
           className="text-center"

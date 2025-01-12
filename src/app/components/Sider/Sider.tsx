@@ -75,9 +75,9 @@ export const Sider = () => {
     ]
     return (
         <>
-            <div className="bg-[#212121] h-[100vh] fixed w-[280px]">
+            <div className="bg-[#212121] h-[100vh] fixed w-[200px] lg:w-[250px] xl:w-[280px] z-[999]">
                 <div className="">
-                    <div className="bg-[#1C1C1C] py-[25px] pl-[20px] mb-[30px] text-[white] text-[36px] flex items-center gap-[30px]">
+                    <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] xl:text-[36px] flex items-center gap-[30px]">
                         <BsFillMusicPlayerFill />
                         <div className="font-[800]">Music App</div>
                     </div>

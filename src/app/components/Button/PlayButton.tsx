@@ -66,7 +66,7 @@ export const PlayButton = (props: any) => {
     return (
         <>
             <button
-                className="rounded-[50%] p-[8px] text-white play-button"
+                className="text-[10px] sm:text-[15px] p-[8px] text-white play-button"
                 onClick={handlePlay}
             >
                 <FaPlay />
