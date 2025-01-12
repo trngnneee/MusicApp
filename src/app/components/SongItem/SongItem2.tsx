@@ -10,7 +10,7 @@ export const SongItem2 = (props: { item: any }) => {
         <>
             <div className="mb-[12px]">
                 <div className="flex justify-between items-center bg-[#212121] p-0 lg:px-[10px] py-[10px] rounded-[15px]">
-                    <div className="flex items-center gap-[8px] sm:gap-[20px] ml-[10px] md:ml-[30px]">
+                    <div className="flex items-center gap-[8px] sm:gap-[20px] ml-[10px] md:ml-[20px]">
                         <PlayButton
                             item={item}
                         />
