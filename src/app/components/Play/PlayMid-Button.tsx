@@ -2,8 +2,8 @@ import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa";
 import { BiSolidPlaylist } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import { PreButton } from "./PreButton";
-import { NextButton } from "./NextButton";
+import { PreButton } from "../Button/PreButton";
+import { NextButton } from "../Button/NextButton";
 
 export const PlayMidButton = () => {
     const router = useRouter();

@@ -14,7 +14,7 @@ export const PlayButton = (props: any) => {
         if (userId && item.id) {
             const userRef = ref(dbFirebase, `/users/${userId}/playlist`);
             get(userRef).then(async (snapshot) => {
-                let playlists = snapshot.val() || [];
+                const playlists = snapshot.val() || [];
                 if (!playlists.includes(item.id)) {
                     playlists.push(item.id);
                     Swal.fire({

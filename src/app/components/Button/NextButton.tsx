@@ -94,6 +94,7 @@ export const NextButton = () => {
             const snapshot = await get(playListRef);
             const data = snapshot.val();
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const elementPlayAudio: any = document.querySelector(".play-audio");
             const currentSongId = elementPlayAudio.getAttribute("id");
 
