@@ -1,33 +1,35 @@
-"use client"
-
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
-import { get, ref, set } from "firebase/database";
-import { FaPlay } from "react-icons/fa";
+import { get, ref } from "firebase/database";
+import { MdSkipPrevious } from "react-icons/md";
 import Swal from "sweetalert2";
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const PlayButton = (props: any) => {
-    const { item } = props;
 
-    const handlePlay = () => {
-        // Add to playlist
-        const userId = authFireBase?.currentUser?.uid;
-        if (userId && item.id) {
-            const userRef = ref(dbFirebase, `/users/${userId}/playlist`);
-            get(userRef).then(async (snapshot) => {
-                let playlists = snapshot.val() || [];
-                if (!playlists.includes(item.id)) {
-                    playlists.push(item.id);
-                    Swal.fire({
-                        title: "Thêm vào danh sách phát!",
-                        icon: "success",
-                        timer: 1000,
-                        showConfirmButton: false
-                    });
-                    await set(userRef, playlists);
-                }
-            })
+export const PreButton = () => {
+    const getSongData = async (id) => {
+        let ans: { id: string; img: string; title: string; singer: string; audio: string } = { id: '', img: '', title: '', singer: '', audio: '' };
+        const songRef = ref(dbFirebase, 'songs');
+        const snapshot = await get(songRef);
+        const data = snapshot.val();
+
+        const singerArray = [];
+        for (const singer of data[id].singerId) {
+            const singerRef = ref(dbFirebase, `singers/${singer}`);
+            const snapshot = await get(singerRef);
+            const dataSinger = snapshot.val();
+            singerArray.push(dataSinger.title);
         }
-        // End Add to playlist
+        const singerList = singerArray.join(", ");
+        ans = {
+            id: id,
+            img: data[id].image,
+            title: data[id].title,
+            singer: singerList,
+            audio: data[id].audio,
+        }
+        return ans;
+    }
+
+    const handlePlay = async (id) => {
+        const item = await getSongData(id);
         const audio = item.audio;
         // Play Music
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -85,13 +87,38 @@ export const PlayButton = (props: any) => {
         // End Get total time of song
     }
 
+    const handlePre = async () => {
+        const userId = authFireBase?.currentUser?.uid;
+        if (userId) {
+            const playListRef = ref(dbFirebase, `users/${userId}/playlist`);
+            const snapshot = await get(playListRef);
+            const data = snapshot.val();
+
+            const elementPlayAudio: any = document.querySelector(".play-audio");
+            const currentSongId = elementPlayAudio.getAttribute("id");
+
+            const currentIndex = data.indexOf(currentSongId);
+            let nextIndex = currentIndex - 1;
+            if (nextIndex < 0) nextIndex = data.length - 1;
+            const nextSongId = data[nextIndex];
+
+            handlePlay(nextSongId);
+        }
+        else {
+            Swal.fire({
+                title: "Vui Lòng Đăng Nhập",
+                icon: "error",
+                showConfirmButton: true
+            });
+        }
+    }
+
     return (
         <>
             <button
-                className="text-[10px] sm:text-[15px] p-[5px] md:p-[8px] text-white rounded-[50%] bg-[#00ADEF] hover:bg-[#277594] play-button"
-                onClick={handlePlay}
+                onClick={handlePre}
             >
-                <FaPlay />
+                <MdSkipPrevious />
             </button>
         </>
     );
