@@ -62,11 +62,7 @@ export const PlayMidButton = () => {
                     <FaPlay className="inner-icon-play" />
                 </button>
                 <NextButton />
-                {userId && (
-                    <>
-                        <LoopButton/>
-                    </>
-                )}
+                <LoopButton/>
             </div>
         </>
     );
