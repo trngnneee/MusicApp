@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect } from "react";
 import { PlayLeft } from "./PlayLeft";
 import { PlayMid } from "./PlayMid";
 import { PlayRight } from "./PlayRight";
