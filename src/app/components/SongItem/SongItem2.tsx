@@ -1,11 +1,29 @@
+"use client"
+
 import Link from "next/link";
 import { PlayButton } from "../Button/PlayButton";
 import { HeartButton } from "../Button/HeartButton";
 import { AddPlayListButton } from "../Button/AddPlaylistButton";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { authFireBase } from "@/app/FirebaseConfig";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SongItem2 = (props: { item: any }) => {
     const { item } = props;
+
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const fecthUserID = () => {
+            onAuthStateChanged(authFireBase, (user) => {
+                if (user) setUserId(user.uid);
+                else setUserId(null);
+            })
+        }
+        fecthUserID();
+    }, [])
+
     return (
         <>
             <div className="mb-[12px]">
@@ -25,12 +43,16 @@ export const SongItem2 = (props: { item: any }) => {
                             {<div>{item.singer}</div>}
                         </div>
                         {/* <div className="hidden md:block font-[400] text-[8px] sm:text-[11px] lg:text-[14px] text-white">{item.time}</div> */}
-                        <HeartButton
-                            item={item}
-                        />
-                        <AddPlayListButton
-                            item={item}
-                        />
+                        {userId && (
+                            <>
+                                <HeartButton
+                                    item={item}
+                                />
+                                <AddPlayListButton
+                                    item={item}
+                                />
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

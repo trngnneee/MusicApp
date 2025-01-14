@@ -79,10 +79,23 @@ export const PlayButton = (props: any) => {
                 const percent = currentTime * 100 / totalTime;
                 elementCurrentTime.style.width = `${percent}%`;
                 elementTotalTime.value = currentTime;
-            }
+            };
             // End Get current time of song
-        }
+        };
         // End Get total time of song
+        elementAudio.onended = () => {
+            const loopButton = document.querySelector(".loop-button");
+            if (loopButton.getAttribute("id") == "1")
+            {
+                elementAudio.load();
+                elementAudio.play();
+            }
+            else
+            {
+                const nextButton = document.querySelector(".next-button");
+                (nextButton as HTMLElement).click();
+            }
+        };
     }
 
     return (

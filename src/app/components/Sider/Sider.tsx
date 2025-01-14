@@ -47,12 +47,14 @@ export const Sider = () => {
         {
             icon: <FaHeart />,
             title: "Bài Hát Ưu Thích",
-            link: "/wishlist"
+            link: "/wishlist",
+            isLogin: true
         },
         {
             icon: <MdLibraryMusic />,
             title: "Danh Sách Phát",
             link: "/playlist",
+            isLogin: true
         },
         {
             icon: <MdLogout />,

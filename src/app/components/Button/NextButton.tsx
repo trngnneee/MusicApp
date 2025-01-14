@@ -117,6 +117,7 @@ export const NextButton = () => {
         <>
             <button
                 onClick={handleNext}
+                className="next-button"
             >
                 <MdSkipNext />
             </button>

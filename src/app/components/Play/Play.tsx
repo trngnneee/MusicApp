@@ -1,10 +1,11 @@
 "use client"
 
+import { useEffect } from "react";
 import { PlayLeft } from "./PlayLeft";
 import { PlayMid } from "./PlayMid";
 import { PlayRight } from "./PlayRight";
 
-export const Play = () => {
+export const Play = () => {   
     return (
         <>
             <div className="bg-[#212121] fixed bottom-0 left-0 z-[999] py-[20px] w-[100%] border-t-[1px] border-t-solid border-[#494949] hidden play-audio" id="">

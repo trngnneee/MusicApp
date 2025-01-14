@@ -1,7 +1,7 @@
 export const PlayLeft = () => {
     return (
         <>
-            <div className="flex gap-[10px] sm:gap-[13px] items-center">
+            <div className="flex gap-[10px] sm:gap-[13px] items-center ml-[15px] md:ml-[0px]">
                 <div className="w-[50px]">
                     <img
                         src="/"

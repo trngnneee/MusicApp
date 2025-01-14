@@ -39,25 +39,27 @@ export default function PlayListPage() {
 
         const fetchData = async () => {
             const items = await get(songRef);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            items.forEach((item: any) => {
-                const key = item.key;
-                const data = item.val();
+            for (const id of playlist) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                items.forEach((item: any) => {
+                    const key = item.key;
+                    const data = item.val();
 
-                if (playlist.includes(key)) {
-                    tmp.push({
-                        id: key,
-                        img: data.image,
-                        title: data.title,
-                        singer: "",
-                        singerId: data.singerId,
-                        listener: data.listen,
-                        link: `/songs/${key}`,
-                        audio: data.audio,
-                        wishlist: data.wishlist
-                    })
-                }
-            });
+                    if (key === id) {
+                        tmp.push({
+                            id: key,
+                            img: data.image,
+                            title: data.title,
+                            singer: "",
+                            singerId: data.singerId,
+                            listener: data.listen,
+                            link: `/songs/${key}`,
+                            audio: data.audio,
+                            wishlist: data.wishlist
+                        })
+                    }
+                });
+            }
             for (const item of tmp) {
                 const singerListArray = [];
                 for (const id of item.singerId) {
@@ -80,7 +82,7 @@ export default function PlayListPage() {
                     title="Danh Sách Phát"
                 />
                 <div>
-                    {dataSection && (
+                    {(dataSection && dataSection.length > 0) ? (
                         dataSection.map((item, index) => (
                             <div data-aos="fade-up" key={index}>
                                 <SongItem2
@@ -88,6 +90,11 @@ export default function PlayListPage() {
                                 />
                             </div>
                         ))
+                    ) : (
+                        <Title
+                            title="Chưa có bài hát yêu thích"
+                            className="text-center text-[#444343]"
+                        />
                     )}
                 </div>
             </div>

@@ -1,12 +1,29 @@
+"use client"
+
 import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa";
 import { BiSolidPlaylist } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import { PreButton } from "../Button/PreButton";
 import { NextButton } from "../Button/NextButton";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { authFireBase } from "@/app/FirebaseConfig";
+import { LoopButton } from "../Button/LoopButton";
 
 export const PlayMidButton = () => {
     const router = useRouter();
+    const [userId, setUserId] = useState(null);
+
+    useEffect(() => {
+        const fecthUserID = () => {
+            onAuthStateChanged(authFireBase, (user) => {
+                if (user) setUserId(user.uid);
+                else setUserId(null);
+            })
+        }
+        fecthUserID();
+    }, [])
 
     const handleClick = () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,6 +46,13 @@ export const PlayMidButton = () => {
     return (
         <>
             <div className="text-white flex justify-center items-center gap-[30px] md:gap-[52px]">
+                {userId && (
+                    <>
+                        <button className="p-0" onClick={handlePlayList}>
+                            <BiSolidPlaylist />
+                        </button>
+                    </>
+                )}
                 <PreButton />
                 <button
                     className="inner-button-play"
@@ -38,9 +62,11 @@ export const PlayMidButton = () => {
                     <FaPlay className="inner-icon-play" />
                 </button>
                 <NextButton />
-                <button className="p-0" onClick={handlePlayList}>
-                    <BiSolidPlaylist />
-                </button>
+                {userId && (
+                    <>
+                        <LoopButton/>
+                    </>
+                )}
             </div>
         </>
     );

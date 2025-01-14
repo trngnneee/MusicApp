@@ -1,6 +1,7 @@
 "use client"
 
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
+import { Title } from "@/app/components/Title/Title";
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { get, ref } from "firebase/database";
@@ -68,7 +69,7 @@ export const Wishlist = () => {
     return (
         <>
             <div>
-                {data && (
+                {(data && data.length > 0) ? (
                     data.map((item, index) => (
                         <div data-aos="fade-up" key={index}>
                             <SongItem2
@@ -76,6 +77,11 @@ export const Wishlist = () => {
                             />
                         </div>
                     ))
+                ) : (
+                    <Title
+                        title="Chưa có bài hát yêu thích"
+                        className="text-center text-[#444343]"
+                    />
                 )}
             </div>
         </>
