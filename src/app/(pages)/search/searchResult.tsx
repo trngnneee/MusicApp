@@ -34,11 +34,24 @@ export const SearchResult = () => {
                         singerId: data.singerId,
                         listener: data.listen,
                         link: `/songs/${key}`,
-                        audio: data.audio
+                        audio: data.audio,
+                        time: ""
                     })
                 }
             });
             for (const item of dataSection) {
+                const audio = new Audio(item.audio);
+                const duration = await new Promise<number>((resolve) => {
+                    audio.addEventListener('loadedmetadata', () => {
+                        resolve(audio.duration);
+                    })
+                })
+                const minutes = Math.floor(duration / 60);
+                const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
+                const formatTime = `${minutes}:${seconds}`;
+
+                item.time = formatTime;
+
                 const singerListArray = [];
                 for (const id of item.singerId) {
                     const singerSnapshot = await get(ref(dbFirebase, 'singers/' + id));

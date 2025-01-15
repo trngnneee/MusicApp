@@ -38,11 +38,11 @@ export const SongItem2 = (props: { item: any }) => {
                         />
                         <Link href={item.link} className="text-white font-[600] text-[9px] sm:text-[12px] lg:text-[14px] xl:text-[16px] mr-[5px] flex-1 line-clamp-1">{item.title}</Link>
                     </div>
-                    <div className="flex gap-[5px] md:gap-[15px] items-center px-[20px]">
+                    <div className="flex gap-[10px] md:gap-[15px] items-center px-[20px]">
                         <div className="text-white font-[400] text-[8px] sm:text-[11px] lg:text-[14px] w-[70px] sm:w-[100px] lg:w-[160px] xl:w-[200px] p-0 flex gap-[5px] justify-end">
                             {<div>{item.singer}</div>}
                         </div>
-                        {/* <div className="hidden md:block font-[400] text-[8px] sm:text-[11px] lg:text-[14px] text-white">{item.time}</div> */}
+                        <div className="font-[400] text-[7px] sm:text-[10px] lg:text-[12px] text-white">{item.time}</div>
                         {userId && (
                             <>
                                 <HeartButton

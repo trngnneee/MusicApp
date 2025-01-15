@@ -29,6 +29,17 @@ export const SongList = (props) => {
                         singerArray.push(dataSinger.title);
                     }
                     const singerList = singerArray.join(", ");
+
+                    const audio = new Audio(data.audio);
+                    const duration = await new Promise<number>((resolve) => {
+                        audio.addEventListener('loadedmetadata', () => {
+                            resolve(audio.duration);
+                        })
+                    })
+                    const minutes = Math.floor(duration / 60);
+                    const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
+                    const formatTime = `${minutes}:${seconds}`;
+
                     tmp.push({
                         id: key,
                         img: data.image,
@@ -36,7 +47,7 @@ export const SongList = (props) => {
                         singer: singerList,
                         listener: data.listen,
                         link: `/songs/${key}`,
-                        time: "4:32",
+                        time: formatTime,
                         audio: data.audio
                     });
                 }
