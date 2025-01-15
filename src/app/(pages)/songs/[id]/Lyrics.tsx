@@ -14,7 +14,9 @@ export const Lyrics = (props) => {
         const fetchData = async () => {
             const snapshot = await get(songRef);
             const data = snapshot.val();
-            setLyric(data.lyric);
+            const rawLyric = data.lyric;
+            const newLyric = rawLyric.split(" | ").join("\n");
+            setLyric(newLyric);
         }
         fetchData();
     }, [])
