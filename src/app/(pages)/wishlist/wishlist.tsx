@@ -45,17 +45,17 @@ export const Wishlist = () => {
                         }
                     });
                     for (const item of dataSection) {
-                        const audio = new Audio(item.audio);
-                        const duration = await new Promise<number>((resolve) => {
-                            audio.addEventListener('loadedmetadata', () => {
-                                resolve(audio.duration);
-                            })
-                        })
-                        const minutes = Math.floor(duration / 60);
-                        const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
-                        const formatTime = `${minutes}:${seconds}`;
+                        // const audio = new Audio(item.audio);
+                        // const duration = await new Promise<number>((resolve) => {
+                        //     audio.addEventListener('loadedmetadata', () => {
+                        //         resolve(audio.duration);
+                        //     })
+                        // })
+                        // const minutes = Math.floor(duration / 60);
+                        // const seconds = Math.floor(duration % 60).toString().padStart(2, '0');
+                        // const formatTime = `${minutes}:${seconds}`;
 
-                        item.time = formatTime;
+                        // item.time = formatTime;
 
                         const singerListArray = [];
                         for (const id of item.singerId) {

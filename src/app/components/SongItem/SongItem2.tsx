@@ -42,7 +42,7 @@ export const SongItem2 = (props: { item: any }) => {
                         <div className="text-white font-[400] text-[8px] sm:text-[11px] lg:text-[14px] w-[70px] sm:w-[100px] lg:w-[160px] xl:w-[200px] p-0 flex gap-[5px] justify-end">
                             {<div>{item.singer}</div>}
                         </div>
-                        <div className="font-[400] text-[7px] sm:text-[10px] lg:text-[12px] text-white">{item.time}</div>
+                        {/* <div className="font-[400] text-[7px] sm:text-[10px] lg:text-[12px] text-white">{item.time}</div> */}
                         {userId && (
                             <>
                                 <HeartButton
