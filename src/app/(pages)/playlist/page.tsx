@@ -1,6 +1,6 @@
 "use client"
 
-import { SongItem2 } from "@/app/components/client/SongItem/SongItem2";
+import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { Title } from "@/app/components/Title/Title";
 import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";

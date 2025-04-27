@@ -1,6 +1,6 @@
 "use client"
 
-import { SongItem2 } from "@/app/components/client/SongItem/SongItem2";
+import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { dbFirebase } from "@/app/FirebaseConfig";
 import { get, ref } from "firebase/database";
 import { useEffect, useState } from "react";

@@ -1,12 +1,12 @@
 "use client"
 
 import Link from "next/link";
-import { PlayButton } from "../../Button/PlayButton";
-import { HeartButton } from "../../Button/HeartButton";
-import { AddPlayListButton } from "../../Button/AddPlaylistButton";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { authFireBase } from "@/app/client/FirebaseConfig";
+import { authFireBase } from "@/app/FirebaseConfig";
+import { PlayButton } from "../Button/PlayButton";
+import { HeartButton } from "../Button/HeartButton";
+import { AddPlayListButton } from "../Button/AddPlaylistButton";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SongItem2 = (props: { item: any }) => {
