@@ -1,36 +1,33 @@
 "use client"
 
-import { AOSConfig } from "@/app/AOSConfig";
-import { Sider } from "../client/Sider/Sider";
-import { Overlay } from "../client/Overlay/Overlay";
-import { Suspense } from "react";
-import { Search } from "../client/Search/Search";
-import { SearchMobile } from "../client/Search/SearchMobile";
 import { usePathname } from "next/navigation";
-import Admin from "@/app/(pages)/admin/page";
-import { Play } from "../client/Play/Play";
+import { Sider } from "../Sider/Sider";
+import { Overlay } from "../Overlay/Overlay";
+import { Suspense } from "react";
+import { Search } from "../Search/Search";
+import { SearchMobile } from "../Search/SearchMobile";
+import { Play } from "../Play/Play";
 
-export const MainLayout = ({ children }: { children: React.ReactNode }) => {
+export const MainLayout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   const pathName = usePathname();
   const isAdmin = pathName.startsWith("/admin");
-  
+
   return (
     <>
-      {isAdmin ?
-        (
+      {
+        isAdmin ? (
           <>
-            <body>
-              <div className="admin-container">
-                <Admin/>
-              </div>
+            <body className="admin">
+              {children}
             </body>
           </>
-        )
-        :
-        (
+        ) : (
           <>
-            <AOSConfig />
-            <body className="bg-[#292929] relative">
+            <body className="bg-[#292929] relative client">
               <div className="hidden sider">
                 <Sider />
               </div>
@@ -69,7 +66,8 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
               <Play />
             </body>
           </>
-        )}
+        )
+      }
     </>
   );
 }

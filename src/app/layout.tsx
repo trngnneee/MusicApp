@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AOSConfig } from "./AOSConfig";
 import { MainLayout } from "./components/MainLayout/MainLayout";
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({
 
   return (
     <html lang="vi">
+      <AOSConfig />
       <MainLayout
         children={children}
       />

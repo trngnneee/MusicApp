@@ -14,6 +14,11 @@ export default {
       'xl': '1280px',
       '2xl': '1280px',
     },
+    extend: {
+      colors: {
+        dark: '#202224',
+      }
+    },
   },
   plugins: [],
 } satisfies Config;
