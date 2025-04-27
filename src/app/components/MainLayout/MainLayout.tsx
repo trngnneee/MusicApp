@@ -8,7 +8,11 @@ import { Search } from "../Search/Search";
 import { SearchMobile } from "../Search/SearchMobile";
 import { Play } from "../Play/Play";
 
-export const MainLayout = (children) => {
+export const MainLayout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   const pathName = usePathname();
   const isAdmin = pathName.startsWith("/admin");
 
