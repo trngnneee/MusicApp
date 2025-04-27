@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { Title } from "./components/Title/Title";
-import { DataSection1 } from "./components/HomePageDataSection/DataSection1";
-import { DataSection2 } from "./components/HomePageDataSection/DataSection2";
-import { DataSection3 } from "./components/HomePageDataSection/DataSection3";
+import { Title } from "./components/client/Title/Title";
+import { DataSection1 } from "./components/client/HomePageDataSection/DataSection1";
+import { DataSection2 } from "./components/client/HomePageDataSection/DataSection2";
+import { DataSection3 } from "./components/client/HomePageDataSection/DataSection3";
 
 export const metadata: Metadata = {
   title: "Trang chủ",
