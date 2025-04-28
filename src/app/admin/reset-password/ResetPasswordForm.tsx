@@ -77,20 +77,20 @@ export const ResetPasswordForm = () => {
   return (
     <>
       <form className="mb-[30px]" id="reset-password-form">
-        <div className="flex flex-col mb-[30px]">
-          <label className="font-[600] text-[18px] text-dark mb-[15px]" htmlFor="password">Mật khẩu mới</label>
+        <div className="flex flex-col mb-[15px] md:mb-[30px]">
+          <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="password">Mật khẩu mới</label>
           <input
             type="password"
             id="password"
-            className="bg-[#F1F4F9] w-full p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
           />
         </div>
-        <div className="flex flex-col mb-[30px]">
-          <label className="font-[600] text-[18px] text-dark mb-[15px]" htmlFor="confirmPassword">Xác nhận mật khẩu</label>
+        <div className="flex flex-col mb-[15px] md:mb-[30px]">
+          <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="confirmPassword">Xác nhận mật khẩu</label>
           <input
             type="password"
             id="confirmPassword"
-            className="bg-[#F1F4F9] w-full p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
           />
         </div>
         <button className="w-full py-[14px] bg-[#4880FF] hover:bg-[#638df0] rounded-[8px] font-[700] text-[20px] text-white">

@@ -82,42 +82,42 @@ export const RegisterForm = () => {
   return (
     <>
       <form className="mb-[30px]" id="register-form">
-        <div className="flex flex-col mb-[30px]">
-          <label className="font-[600] text-[18px] text-dark mb-[15px]" htmlFor="fullName">Họ tên</label>
+        <div className="flex flex-col mb-[15px] md:mb-[30px]">
+          <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="fullName">Họ tên</label>
           <input
             type="text"
             id="fullName"
             placeholder="Ví dụ: Lê Văn A"
-            className="bg-[#F1F4F9] w-full p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
           />
         </div>
-        <div className="flex flex-col mb-[30px]">
-          <label className="font-[600] text-[18px] text-dark mb-[15px]" htmlFor="email">Email</label>
+        <div className="flex flex-col mb-[15px] md:mb-[30px]">
+          <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
             placeholder="Ví dụ: levana@gmail.com"
-            className="bg-[#F1F4F9] w-full p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
           />
         </div>
-        <div className="mb-[30px]">
-          <label className="font-[600] text-[18px] text-dark mb-[15px]" htmlFor="password">Mật khẩu</label>
+        <div className="flex flex-col mb-[15px] md:mb-[30px]">
+          <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="password">Mật khẩu</label>
           <input
             type="password"
             id="password"
-            className="bg-[#F1F4F9] w-full p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
           />
         </div>
-        <div className="flex items-center gap-[12px]">
+        <div className="flex items-center gap-[8px] sm:gap-[12px]">
           <input
             type="checkbox"
             id="agree"
-            className="w-[24px] h-[24px] rounded-[5px] border-[0.6px] border-[#A3A3A3]"
+            className="w-[15px] md:w-[24px] h-[15px] md:h-[24px] rounded-[5px] border-[0.6px] border-[#A3A3A3]"
           />
-          <label htmlFor="agree" className="font-[600] text-[18px] text-dark opacity-[0.6]">Tôi chấp nhận các điều khoản và điều kiện</label>
+          <label htmlFor="agree" className="font-[600] text-[10px] sm:text-[12px] md:text-[18px] text-dark opacity-[0.6] translate-y-[1.25px]">Tôi chấp nhận các điều khoản và điều kiện</label>
         </div>
-        <div id="terms-error" className="error-message mb-[30px] mt-[5px]"></div>
-        <button className="w-full py-[14px] bg-[#4880FF] hover:bg-[#638df0] rounded-[8px] font-[700] text-[20px] text-white">
+        <div id="terms-error" className="error-message mb-[15px] md:mb-[30px] mt-[5px]"></div>
+        <button className="w-full py-[14px] bg-[#4880FF] hover:bg-[#638df0] rounded-[8px] font-[700] text-[15px] md:text-[20px] text-white">
           Đăng Ký
         </button>
       </form>
