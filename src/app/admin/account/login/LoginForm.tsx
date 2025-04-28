@@ -83,7 +83,7 @@ export const LoginForm = () => {
             />
             <label htmlFor="remember-password" className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.6] translate-y-[1.25px]">Nhớ mật khẩu</label>
           </div>
-          <Link href="/admin/forgot-password" className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.6] hover:opacity-[1]">
+          <Link href="/admin/account/forgot-password" className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.6] hover:opacity-[1]">
             Quên mật khẩu?
           </Link>
         </div>

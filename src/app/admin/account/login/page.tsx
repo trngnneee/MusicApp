@@ -19,7 +19,7 @@ export default function Login() {
           <LoginForm/>
           <div className="flex gap-[10px] items-center justify-center">
             <div className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.65]">Bạn chưa có tài khoản?</div>
-            <Link href="/admin/register" className="font-[700] text-[12px] md:text-[18px] underline text-[#4880FF]">Tạo tài khoản</Link>
+            <Link href="/admin/account/register" className="font-[700] text-[12px] md:text-[18px] underline text-[#4880FF]">Tạo tài khoản</Link>
           </div>
         </div>
       </div>
