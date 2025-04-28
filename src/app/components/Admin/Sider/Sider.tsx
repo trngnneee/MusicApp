@@ -5,6 +5,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaPowerOff } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
+import { GiMicrophone } from "react-icons/gi";
 
 export const AdminSider = () => {
   const pathName = usePathname();
@@ -14,6 +15,11 @@ export const AdminSider = () => {
       icon: <TbCategory className="translate-y-[1.5px]" />,
       link: "/admin/category/list",
       title: "Quản lý danh mục"
+    },
+    {
+      icon: <GiMicrophone className="translate-y-[1.5px]" />,
+      link: "/admin/singer/list",
+      title: "Quản lý ca sĩ"
     },
     {
       icon: <IoMdMusicalNotes className="translate-y-[1.5px]" />,
@@ -29,7 +35,7 @@ export const AdminSider = () => {
 
   return (
     <>
-      <div className="bg-white w-[240px] min-h-screen border-r-[1px] border-r-[#E0E0E0]">
+      <div className="bg-white w-[240px] min-h-screen sticky border-r-[1px] border-r-[#E0E0E0]">
         <div className="border-b-[1px] border-b-[#E0E0E0] py-[10px]">
           <ul>
             {

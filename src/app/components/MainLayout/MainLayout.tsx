@@ -34,9 +34,9 @@ export const MainLayout = ({
     else {
       return (
         <>
-          <body className="admin bg-[#F5F6FA] min-h-screen flex flex-col">
+          <body className="admin bg-[#F5F6FA]">
             <Header />
-            <div className="flex flex-1 items-start">
+            <div className="flex">
               <AdminSider />
               <main className="flex-1 p-[30px] overflow-y-auto">{children}</main>
             </div>
