@@ -1,7 +1,8 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import { Sider } from "../Admin/Sider/Sider";
+import { AdminSider } from "../Admin/Sider/Sider";
+import { Sider } from "../Sider/Sider"
 import { Overlay } from "../Overlay/Overlay";
 import { Suspense } from "react";
 import { Search } from "../Search/Search";
@@ -36,7 +37,7 @@ export const MainLayout = ({
           <body className="admin bg-[#F5F6FA] min-h-screen flex flex-col">
             <Header />
             <div className="flex flex-1 items-start">
-              <Sider />
+              <AdminSider />
               <main className="flex-1 p-[30px] overflow-y-auto">{children}</main>
             </div>
           </body>

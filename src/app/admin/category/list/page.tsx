@@ -16,7 +16,7 @@ export default function Category() {
       <div className="mt-[15px] flex items-center gap-[20px]">
         <MultipleApply />
         <Search />
-        <Create />
+        <Create link={`/admin/category/create`}/>
       </div>
       <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-hidden">
         <table className="bg-white w-full">
