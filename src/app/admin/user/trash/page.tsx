@@ -4,11 +4,11 @@ import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Title } from "@/app/components/Admin/Title/Title";
 
-export default function SongTrash() {
+export default function UserTrash() {
   return (
     <>
       <Title title={"Thùng rác"} />
-      <div className="flex gap-[20px] mt-[30px]">
+      <div className="flex gap-[20px] mt-[15px]">
         <MultipleApplyTrash />
         <Search />
       </div>
@@ -19,12 +19,10 @@ export default function SongTrash() {
               <th className="px-[32px] py-[15px] text-left align-middle">
                 <input type="checkbox" className="translate-y-[2px]" />
               </th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Tên bài hát</th>
+              <th className="px-[32px] py-[15px] text-left align-middle">Tên người dùng</th>
+              <th className="px-[32px] py-[15px] text-left align-middle">Email</th>
               <th className="px-[32px] py-[15px] text-left align-middle">Ảnh đại diện</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Vị trí</th>
               <th className="px-[32px] py-[15px] text-left align-middle">Trạng thái</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Tạo bởi</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Cập nhật bởi</th>
             </tr>
           </thead>
           <tbody>
@@ -32,58 +30,30 @@ export default function SongTrash() {
               <th className="px-[32px] py-[8px] text-left align-middle">
                 <input type="checkbox" className="translate-y-[2px]" />
               </th>
-              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">Bài hát 1</th>
+              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">Lê Văn A</th>
+              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">levana@gmail.com</th>
               <th className="px-[32px] py-[8px] text-left align-middle">
                 <div className="w-[60px] h-[60px] overflow-hidden">
                   <img src="/demoAvatar.png" className="w-full h-full object-cover" />
                 </div>
               </th>
-              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
-                1
-              </th>
               <th className="px-[32px] py-[8px] text-left align-middle">
                 <Active />
-              </th>
-              <th className="px-[32px] py-[8px] text-left align-middle">
-                <div className="flex flex-col items-start">
-                  <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                  <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                </div>
-              </th>
-              <th className="px-[32px] py-[8px] text-left align-middle">
-                <div className="flex flex-col items-start">
-                  <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                  <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                </div>
               </th>
             </tr>
             <tr className="bg-white border-t-[#D5D5D5] border-t-[0.6px]">
               <th className="px-[32px] py-[8px] text-left align-middle">
                 <input type="checkbox" className="translate-y-[2px]" />
               </th>
-              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">Bài hát 2</th>
+              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">Lê Văn B</th>
+              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">levanb@gmail.com</th>
               <th className="px-[32px] py-[8px] text-left align-middle">
                 <div className="w-[60px] h-[60px] overflow-hidden">
                   <img src="/demoAvatar.png" className="w-full h-full object-cover" />
                 </div>
               </th>
-              <th className="px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
-                2
-              </th>
               <th className="px-[32px] py-[8px] text-left align-middle">
                 <Inactive />
-              </th>
-              <th className="px-[32px] py-[8px] text-left align-middle">
-                <div className="flex flex-col items-start">
-                  <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                  <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                </div>
-              </th>
-              <th className="px-[32px] py-[8px] text-left align-middle">
-                <div className="flex flex-col items-start">
-                  <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                  <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                </div>
               </th>
             </tr>
           </tbody>

@@ -66,7 +66,7 @@ export default function Category() {
                 </div>
               </th>
               <th className="px-[32px] py-[8px] text-left align-middle">
-                <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px]">
+                <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
                   <button className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"><FiEdit /></button>
                   <button className="px-[16px] py-[11px] text-[#EF3826]"><FaRegTrashCan /></button>
                 </div>
@@ -101,7 +101,7 @@ export default function Category() {
                 </div>
               </th>
               <th className="px-[32px] py-[8px] text-left align-middle">
-                <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px]">
+                <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
                   <button className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"><FiEdit /></button>
                   <button className="px-[16px] py-[11px] text-[#EF3826]"><FaRegTrashCan /></button>
                 </div>
