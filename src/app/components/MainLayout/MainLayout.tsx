@@ -34,10 +34,10 @@ export const MainLayout = ({
     else {
       return (
         <>
-          <body className="admin bg-[#F5F6FA]">
+          <body className="admin bg-[#F5F6FA] relative">
             <Header />
             <div className="flex">
-              <AdminSider />
+              <AdminSider className={"hidden xl:block sticky"}/>
               <main className="flex-1 p-[30px] overflow-y-auto">{children}</main>
             </div>
           </body>

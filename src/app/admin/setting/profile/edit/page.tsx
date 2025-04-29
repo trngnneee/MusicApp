@@ -15,23 +15,23 @@ export default function ProfileEdit() {
     <>
       <Title title={"Thông tin cá nhân"} />
       <div className="mt-[30px]">
-        <form className="bg-white border-[0.3px] border-[#B9B9B9] rounded-[14px] p-[50px]">
-          <div className="flex gap-[30px] w-full mb-[30px]">
-            <div className="w-[48%]">
+        <form className="bg-white border-[0.3px] border-[#B9B9B9] rounded-[14px] p-[20px] sm:p-[50px]">
+          <div className="flex flex-col sm:flex-row gap-[15px] sm:gap-[30px] w-full mb-[15px] sm:mb-[30px]">
+            <div className="w-full sm:w-[48%]">
               <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Họ tên</label>
               <input type="text" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
             </div>
-            <div className="w-[48%]">
+            <div className="w-full sm:w-[48%]">
               <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Email</label>
               <input type="email" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
             </div>
           </div>
-          <div className="flex gap-[30px] w-full mb-[30px]">
-            <div className="w-[48%]">
+          <div className="flex flex-col sm:flex-row gap-[15px] sm:gap-[30px] w-full mb-[15px] sm:mb-[30px]">
+            <div className="w-full sm:w-[48%]">
               <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Chức vụ</label>
               <input type="text" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
             </div>
-            <div className="w-[48%]">
+            <div className="w-full sm:w-[48%]">
               <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Nhóm quyền</label>
               <input type="text" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
             </div>

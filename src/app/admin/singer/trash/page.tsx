@@ -8,23 +8,23 @@ export default function SingerTrash() {
   return (
     <>
       <Title title={"Thùng rác"} />
-      <div className="flex gap-[20px] mt-[30px]">
+      <div className="flex gap-[20px] mt-[30px] flex-wrap">
         <MultipleApplyTrash />
         <Search />
       </div>
-      <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-hidden">
-        <table className="bg-white w-full">
+      <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-scroll w-full">
+        <table className="bg-white w-full min-w-[1000px]">
           <thead className="">
             <tr className="bg-[#FCFDFD]">
-              <th className="px-[32px] py-[15px] text-left align-middle">
+              <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">
                 <input type="checkbox" className="translate-y-[2px]" />
               </th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Tên bài hát</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Ảnh đại diện</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Vị trí</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Trạng thái</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Tạo bởi</th>
-              <th className="px-[32px] py-[15px] text-left align-middle">Cập nhật bởi</th>
+              <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Tên bài hát</th>
+              <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Ảnh đại diện</th>
+              <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Vị trí</th>
+              <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Trạng thái</th>
+              <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Tạo bởi</th>
+              <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Cập nhật bởi</th>
             </tr>
           </thead>
           <tbody>

@@ -7,8 +7,9 @@ import { FaPowerOff } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
 import { GiMicrophone } from "react-icons/gi";
 
-export const AdminSider = () => {
+export const AdminSider = (props: {className?}) => {
   const pathName = usePathname();
+  const { className } = props;
 
   const data = [
     {
@@ -48,7 +49,7 @@ export const AdminSider = () => {
 
   return (
     <>
-      <div className="bg-white w-[240px] min-h-screen sticky border-r-[1px] border-r-[#E0E0E0]">
+      <div className={"bg-white w-[240px] min-h-screen border-r-[1px] border-r-[#E0E0E0] " + className}>
         <div className="border-b-[1px] border-b-[#E0E0E0] py-[10px]">
           <ul>
             {
