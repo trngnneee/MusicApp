@@ -1,5 +1,5 @@
 import { Create } from "@/app/components/Admin/Create/Create";
-import { Filter } from "@/app/components/Admin/Filter/CategoryFilter";
+import { Filter } from "@/app/admin/category/list/CategoryFilter";
 import { MultipleApply } from "@/app/components/Admin/MultipleApply/MultipleApply";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Active } from "@/app/components/Admin/StatusBar/Active";

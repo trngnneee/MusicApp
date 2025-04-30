@@ -1,4 +1,4 @@
-import { UserFilter } from "@/app/components/Admin/Filter/UserFilter";
+import { UserFilter } from "@/app/admin/user/list/UserFilter";
 import { MultipleApply } from "@/app/components/Admin/MultipleApply/MultipleApply";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Active } from "@/app/components/Admin/StatusBar/Active";

@@ -1,5 +1,5 @@
 import { Create } from "@/app/components/Admin/Create/Create";
-import { SongFilter } from "@/app/components/Admin/Filter/SongFilter";
+import { SongFilter } from "@/app/admin/song/list/SongFilter";
 import { MultipleApply } from "@/app/components/Admin/MultipleApply/MultipleApply";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";

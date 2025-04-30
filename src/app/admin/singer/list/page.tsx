@@ -1,5 +1,5 @@
 import { Create } from "@/app/components/Admin/Create/Create";
-import { SingerFilter } from "@/app/components/Admin/Filter/SingerFilter";
+import { SingerFilter } from "@/app/admin/singer/list/SingerFilter";
 import { MultipleApply } from "@/app/components/Admin/MultipleApply/MultipleApply";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
