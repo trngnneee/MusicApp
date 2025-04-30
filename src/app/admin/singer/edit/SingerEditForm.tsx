@@ -4,38 +4,72 @@ import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import JustValidate from 'just-validate';
 
 registerPlugin(FilePondPluginImagePreview);
 
 export const SingerEditForm = () => {
   const [files, setFiles] = useState([]);
-  
+  const filesRef = useRef(files);
+
+  useEffect(() => {
+    filesRef.current = files;
+  }, [files]);
+
+  useEffect(() => {
+    const validation = new JustValidate('#singer-edit-form');
+
+    validation
+      .addField('#name', [
+        { rule: 'required', errorMessage: 'Tên bắt buộc!' },
+      ])
+      .onSuccess((event) => {
+        event.preventDefault();
+
+        const name = event.target.name.value;
+        const position = event.target.position.value;
+        const status = event.target.status.value;
+        const description = event.target.description.value;
+
+        let avatar = null;
+        if (filesRef.current.length > 0) {
+          avatar = filesRef.current[0].file;
+        }
+
+        console.log(name);
+        console.log(position);
+        console.log(status);
+        console.log(avatar);
+        console.log(description);
+      });
+  }, []);
+
   return (
     <>
-      <form className="bg-white border-[0.3px] border-[#B9B9B9] rounded-[14px] p-[20px] sm:p-[50px]">
+      <form id='singer-edit-form' className="bg-white border-[0.3px] border-[#B9B9B9] rounded-[14px] p-[20px] sm:p-[50px]">
         <div className="flex flex-col sm:flex-row gap-[15px] sm:gap-[30px] w-full mb-[15px] sm:mb-[30px]">
           <div className="w-full sm:w-[48%]">
-            <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Tên ca sĩ</label>
-            <input type="text" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
+            <label htmlFor='name' className="text-[14px] font-[600px] text-dark mb-[11px] block">Tên ca sĩ</label>
+            <input id='name' type="text" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
           </div>
           <div className="w-full sm:w-[48%]">
-            <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Vị trí</label>
-            <input type="number" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
+            <label htmlFor='position' className="text-[14px] font-[600px] text-dark mb-[11px] block">Vị trí</label>
+            <input id='position' type="number" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-[15px] sm:gap-[30px] w-full mb-[15px] sm:mb-[30px]">
           <div className="w-full sm:w-[48%]">
-            <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Trạng thái</label>
-            <select className="block w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]">
+            <label htmlFor='status' className="text-[14px] font-[600px] text-dark mb-[11px] block">Trạng thái</label>
+            <select id='status' className="block w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]">
               <option value="">Hoạt động</option>
               <option value="">Tạm dừng</option>
             </select>
           </div>
         </div>
         <div className="mb-[40px]">
-          <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Ảnh ca sĩ</label>
+          <label htmlFor='avatar' className="text-[14px] font-[600px] text-dark mb-[11px] block">Ảnh ca sĩ</label>
           <FilePond
             files={files}
             onupdatefiles={setFiles}
@@ -47,11 +81,12 @@ export const SingerEditForm = () => {
                 Kéo thả hoặc <u className="cursor-pointer">Chọn file ảnh</u>
               </div>'
             className="w-[150px] h-[150px]"
+            id='avatar'
           />
         </div>
         <div className="mb-[30px]">
-          <label className="text-[14px] font-[600px] text-dark mb-[11px] block">Mô tả</label>
-          <textarea className="w-full h-[200px] py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
+          <label htmlFor='description' className="text-[14px] font-[600px] text-dark mb-[11px] block">Mô tả</label>
+          <textarea id='description' className="w-full h-[200px] py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
         </div>
         <div className="w-full flex justify-center mb-[30px]">
           <button className="px-[98px] py-[16px] bg-[#4880FF] hover:bg-[#7ca0f6] rounded-[12px] font-[700] text-[18px] text-white text-center mx-auto">
