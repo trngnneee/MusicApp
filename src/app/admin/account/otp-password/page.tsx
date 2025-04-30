@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { OTPPasswordForm } from "./OTPPasswordForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Nhập mã OTP",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function OTPPassword() {
   return (

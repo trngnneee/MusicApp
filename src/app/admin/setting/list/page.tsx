@@ -1,7 +1,13 @@
 import { Title } from "@/app/components/Admin/Title/Title";
+import { Metadata } from "next";
 import Link from "next/link";
 import { IoInformationOutline } from "react-icons/io5";
 import { RiUserSettingsLine, RiUserLine } from "react-icons/ri";
+
+export const metadata: Metadata = {
+  title: "Cài đặt chung",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function Setting() {
   return (

@@ -5,8 +5,14 @@ import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { Trash } from "@/app/components/Admin/Trash/Trash";
+import { Metadata } from "next";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
+
+export const metadata: Metadata = {
+  title: "Quản lý người dùng",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function UserList() {
   return (

@@ -2,8 +2,14 @@ import { Create } from "@/app/components/Admin/Create/Create";
 import { RoleMultipleApply } from "@/app/components/Admin/MultipleApply/RoleMultipleApply";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
+import { Metadata } from "next";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
+
+export const metadata: Metadata = {
+  title: "Quản lý nhóm quyền",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function RoleList() {
   return (

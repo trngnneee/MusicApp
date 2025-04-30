@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { ResetPasswordForm } from "./ResetPasswordForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Đổi mật khẩu",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function ResetPassword() {
   return (

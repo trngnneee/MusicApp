@@ -8,6 +8,12 @@ import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Quản lý bài hát",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function Song() {
   return (

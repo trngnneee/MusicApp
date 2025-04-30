@@ -3,6 +3,12 @@ import { Search } from "@/app/components/Admin/Search/Search";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Title } from "@/app/components/Admin/Title/Title";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Thùng rác người dùng",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function UserTrash() {
   return (

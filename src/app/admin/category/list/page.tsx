@@ -8,6 +8,12 @@ import { FiEdit } from "react-icons/fi";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Trash } from "@/app/components/Admin/Trash/Trash";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Quản lý danh mục",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function Category() {
   return (

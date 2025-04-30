@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { ForgotPasswordForm } from "./forgotPasswordForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Quên mật khẩu",
+  description: "Quản trị App Nghe nhạc",
+};
 
 export default function ForgotPassword() {
   return (
