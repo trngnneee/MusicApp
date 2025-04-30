@@ -3,7 +3,6 @@ import { AdminAccountFilter } from "@/app/admin/setting/admin-account/list/Admin
 import { MultipleApply } from "@/app/components/Admin/MultipleApply/MultipleApply";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
-import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { Metadata } from "next";
 import { FaRegTrashCan } from "react-icons/fa6";

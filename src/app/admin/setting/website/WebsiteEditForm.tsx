@@ -7,7 +7,6 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import JustValidate from 'just-validate';
-import { log } from 'console';
 
 registerPlugin(FilePondPluginImagePreview);
 

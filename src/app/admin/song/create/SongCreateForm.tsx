@@ -71,7 +71,7 @@ export const SongCreateForm = () => {
 
         let audio = null;
         if (audioFilesRef.current.length > 0) {
-          avatar = audioFilesRef.current[0].file;
+          audio = audioFilesRef.current[0].file;
         }
 
         console.log(name);
