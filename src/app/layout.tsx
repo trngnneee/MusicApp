@@ -17,9 +17,9 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <AOSConfig />
-      <MainLayout
-        children={children}
-      />
+      <MainLayout>
+        {children}
+      </MainLayout>
     </html>
   );
 }
