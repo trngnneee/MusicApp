@@ -2,8 +2,12 @@
 
 import JustValidate from 'just-validate';
 import { useEffect } from 'react';
+import { BASE_URL } from '../../../baseURL.config'
+import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 export const RegisterForm = () => {
+  const router = useRouter();
   useEffect(() => {
     const validation = new JustValidate('#register-form');
 
@@ -73,9 +77,39 @@ export const RegisterForm = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        console.log(fullName);
-        console.log(email);
-        console.log(password);
+        const finalData = {
+          fullName: fullName,
+          email: email,
+          password: password
+        };
+
+        fetch(`${BASE_URL}/admin/account/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(finalData)
+        })
+          .then(res => res.json())
+          .then((data) => {
+            if (data.code == "error")
+            {
+              Swal.fire({
+                title: `${data.message}`,
+                icon: "error",
+                timer: 3000
+              });
+            }
+            if (data.code == "success")
+            {
+              router.push("/admin/account/login");
+              Swal.fire({
+                title: "Đăng ký thành công!",
+                icon: "success",
+                timer: 3000
+              });
+            }
+          })
       })
   }, [])
 

@@ -3,57 +3,90 @@
 import Link from "next/link";
 import JustValidate from 'just-validate';
 import { useEffect } from "react";
+import { BASE_URL } from "@/app/baseURL.config";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
+  const router = useRouter();
   useEffect(() => {
-    const validation  = new JustValidate('#login-form');
+    const validation = new JustValidate('#login-form');
 
-  validation
-    .addField('#email', [
-      {
-        rule: 'required',
-        errorMessage: 'Email bắt buộc!'
-      },
-      {
-        rule: 'email',
-        errorMessage: 'Email sai định dạng!',
-      },
-    ]) 
-    .addField('#password', [
-      {
-        rule: 'required',
-        errorMessage: 'Vui lòng nhập mật khẩu!',
-      },
-      {
-        validator: (value) => value.length >= 8,
-        errorMessage: 'Mật khẩu phải chứa ít nhất 8 ký tự!',
-      },
-      {
-        validator: (value) => /[A-Z]/.test(value),
-        errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái in hoa!',
-      },
-      {
-        validator: (value) => /[a-z]/.test(value),
-        errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái thường!',
-      },
-      {
-        validator: (value) => /\d/.test(value),
-        errorMessage: 'Mật khẩu phải chứa ít nhất một chữ số!',
-      },
-      {
-        validator: (value) => /[@$!%*?&]/.test(value),
-        errorMessage: 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt!',
-      },
-    ])
+    validation
+      .addField('#email', [
+        {
+          rule: 'required',
+          errorMessage: 'Email bắt buộc!'
+        },
+        {
+          rule: 'email',
+          errorMessage: 'Email sai định dạng!',
+        },
+      ])
+      .addField('#password', [
+        {
+          rule: 'required',
+          errorMessage: 'Vui lòng nhập mật khẩu!',
+        },
+        {
+          validator: (value) => value.length >= 8,
+          errorMessage: 'Mật khẩu phải chứa ít nhất 8 ký tự!',
+        },
+        {
+          validator: (value) => /[A-Z]/.test(value),
+          errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái in hoa!',
+        },
+        {
+          validator: (value) => /[a-z]/.test(value),
+          errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái thường!',
+        },
+        {
+          validator: (value) => /\d/.test(value),
+          errorMessage: 'Mật khẩu phải chứa ít nhất một chữ số!',
+        },
+        {
+          validator: (value) => /[@$!%*?&]/.test(value),
+          errorMessage: 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt!',
+        },
+      ])
       .onSuccess((event) => {
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        console.log(email);
-        console.log(password);
+        const finalData = {
+          email: email,
+          password: password
+        };
+
+        fetch(`${BASE_URL}/admin/account/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(finalData),
+          credentials: "include"
+        })
+          .then(res => res.json())
+          .then((data) => {
+            if (data.code == "error") {
+              Swal.fire({
+                title: `${data.message}`,
+                icon: "error",
+                timer: 3000
+              });
+            }
+            if (data.code == "success") {
+              router.push("/admin/category/list");
+              Swal.fire({
+                title: `${data.message}`,
+                icon: "success",
+                timer: 3000
+              });
+            }
+          })
       })
   }, [])
-  
+
   return (
     <>
       <form className="mb-[30px]" id="login-form">
