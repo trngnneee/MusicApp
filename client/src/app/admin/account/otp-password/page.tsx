@@ -19,7 +19,7 @@ export default function OTPPassword() {
           <OTPPasswordForm/>
           <div className="flex gap-[10px] items-center justify-center">
             <div className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.65]">Bạn đã nhớ mật khẩu?</div>
-            <Link href="/admin/login" className="font-[700] text-[12px] md:text-[18px] underline text-[#4880FF]">Đăng nhập</Link>
+            <Link href="/admin/account/login" className="font-[700] text-[12px] md:text-[18px] underline text-[#4880FF]">Đăng nhập</Link>
           </div>
         </div>
       </div>
