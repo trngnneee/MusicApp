@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #F1F4F9 inset !important;
+  box-shadow: 0 0 0 1000px #F1F4F9 inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+
 .client{
   font-family: "Quicksand", sans-serif;
 }

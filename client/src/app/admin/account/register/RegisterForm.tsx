@@ -2,9 +2,8 @@
 
 import JustValidate from 'just-validate';
 import { useEffect } from 'react';
-import { BASE_URL } from '../../../baseURL.config'
 import { useRouter } from 'next/navigation';
-import Swal from 'sweetalert2';
+import { Toaster, toast } from 'sonner'
 
 export const RegisterForm = () => {
   const router = useRouter();
@@ -83,7 +82,7 @@ export const RegisterForm = () => {
           password: password
         };
 
-        fetch(`${BASE_URL}/admin/account/register`, {
+        const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/account/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -92,29 +91,25 @@ export const RegisterForm = () => {
         })
           .then(res => res.json())
           .then((data) => {
-            if (data.code == "error")
-            {
-              Swal.fire({
-                title: `${data.message}`,
-                icon: "error",
-                timer: 3000
-              });
-            }
-            if (data.code == "success")
-            {
-              router.push("/admin/account/login");
-              Swal.fire({
-                title: "Đăng ký thành công!",
-                icon: "success",
-                timer: 3000
-              });
-            }
+            return data;
           })
+
+        toast.promise(promise, {
+          loading: "Đang xử lý...",
+          success: (data) => {
+            setTimeout(() => {
+              router.push("/admin/account/login");
+            }, 1000);
+            return data.message;
+          },
+          error: (error) => error.message
+        })
       })
   }, [])
 
   return (
     <>
+      <Toaster/>
       <form className="mb-[30px]" id="register-form">
         <div className="flex flex-col mb-[15px] md:mb-[30px]">
           <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="fullName">Họ tên</label>
@@ -122,7 +117,7 @@ export const RegisterForm = () => {
             type="text"
             id="fullName"
             placeholder="Ví dụ: Lê Văn A"
-            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-dark"
           />
         </div>
         <div className="flex flex-col mb-[15px] md:mb-[30px]">
@@ -131,7 +126,7 @@ export const RegisterForm = () => {
             type="email"
             id="email"
             placeholder="Ví dụ: levana@gmail.com"
-            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-dark"
           />
         </div>
         <div className="flex flex-col mb-[15px] md:mb-[30px]">
@@ -139,7 +134,7 @@ export const RegisterForm = () => {
           <input
             type="password"
             id="password"
-            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-dark"
           />
         </div>
         <div className="flex items-center gap-[8px] sm:gap-[12px]">

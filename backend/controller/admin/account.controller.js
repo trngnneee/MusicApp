@@ -1,6 +1,6 @@
 const AdminAccount = require("../../model/admin-account.model")
 const bcrypt = require("bcryptjs");
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 module.exports.registerPost = async (req, res) => {
   const existAccount = await AdminAccount.findOne({
@@ -57,14 +57,15 @@ module.exports.loginPost = async (req, res) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: '1d'
+      expiresIn: req.body.rememberPassword == true ? '30d' : '1d'
     }
   );
 
   res.cookie("token", token, {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: req.body.rememberPassword == true ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "strict"
+    secure: process.env.NODE_ENV === "production" ? true : false,  
+    sameSite: "lax" 
   });
 
   res.json({

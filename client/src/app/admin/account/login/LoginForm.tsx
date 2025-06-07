@@ -3,9 +3,8 @@
 import Link from "next/link";
 import JustValidate from 'just-validate';
 import { useEffect } from "react";
-import { BASE_URL } from "@/app/baseURL.config";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { toast, Toaster } from "sonner";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -52,13 +51,15 @@ export const LoginForm = () => {
       .onSuccess((event) => {
         const email = event.target.email.value;
         const password = event.target.password.value;
+        const rememberPassword = event.target.rememberPassword.checked ? true : false;
 
         const finalData = {
           email: email,
-          password: password
+          password: password,
+          rememberPassword: rememberPassword
         };
 
-        fetch(`${BASE_URL}/admin/account/login`, {
+        const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/account/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -68,27 +69,25 @@ export const LoginForm = () => {
         })
           .then(res => res.json())
           .then((data) => {
-            if (data.code == "error") {
-              Swal.fire({
-                title: `${data.message}`,
-                icon: "error",
-                timer: 3000
-              });
-            }
-            if (data.code == "success") {
-              router.push("/admin/category/list");
-              Swal.fire({
-                title: `${data.message}`,
-                icon: "success",
-                timer: 3000
-              });
-            }
+            return data;
           })
+
+        toast.promise(promise, {
+          loading: "Đang xử lý...",
+          success: (data) => {
+            setTimeout(() => {
+              router.push("/admin/category/list");
+            }, 1000);
+            return data.message;
+          },
+          error: (data) => data.message
+        })
       })
   }, [])
 
   return (
     <>
+      <Toaster/>
       <form className="mb-[30px]" id="login-form">
         <div className="flex flex-col mb-[15px] md:mb-[30px]">
           <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="email">Email</label>
@@ -96,7 +95,7 @@ export const LoginForm = () => {
             type="email"
             id="email"
             placeholder="Ví dụ: levana@gmail.com"
-            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-dark"
           />
         </div>
         <div className="flex flex-col mb-[15px] md:mb-[30px]">
@@ -104,17 +103,17 @@ export const LoginForm = () => {
           <input
             type="password"
             id="password"
-            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-[#A6A6A6]"
+            className="bg-[#F1F4F9] w-full p-[10px] md:p-[16px] rounded-[8px] outline-none border-[1px] border-[#D8D8D8] text-[12px] md:text-[18px] font-[600] text-dark"
           />
         </div>
         <div className="flex justify-between mb-[15px] md:mb-[30px]">
           <div className="flex items-center gap-[8px] sm:gap-[12px]">
             <input
               type="checkbox"
-              id="remember-password"
+              id="rememberPassword"
               className="w-[15px] md:w-[24px] h-[15px] md:h-[24px] rounded-[5px] border-[0.6px] border-[#A3A3A3]"
             />
-            <label htmlFor="remember-password" className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.6] translate-y-[1.25px]">Nhớ mật khẩu</label>
+            <label htmlFor="rememberPassword" className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.6] translate-y-[1.25px]">Nhớ mật khẩu</label>
           </div>
           <Link href="/admin/account/forgot-password" className="font-[600] text-[12px] md:text-[18px] text-dark opacity-[0.6] hover:opacity-[1]">
             Quên mật khẩu?
