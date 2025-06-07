@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
 require('dotenv').config()
 
 const app = express()
@@ -18,6 +19,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const adminRoute = require("./routes/admin/index.route");
 app.use(`/admin`, adminRoute);

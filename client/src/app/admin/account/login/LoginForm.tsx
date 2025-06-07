@@ -75,9 +75,11 @@ export const LoginForm = () => {
         toast.promise(promise, {
           loading: "Đang xử lý...",
           success: (data) => {
-            setTimeout(() => {
-              router.push("/admin/category/list");
-            }, 1000);
+            if (data.code == "success") {
+              setTimeout(() => {
+                router.push("/admin/category/list");
+              }, 1000);
+            }
             return data.message;
           },
           error: (data) => data.message
@@ -87,7 +89,7 @@ export const LoginForm = () => {
 
   return (
     <>
-      <Toaster/>
+      <Toaster />
       <form className="mb-[30px]" id="login-form">
         <div className="flex flex-col mb-[15px] md:mb-[30px]">
           <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="email">Email</label>

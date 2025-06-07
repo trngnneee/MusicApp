@@ -1,6 +1,5 @@
-import { Title } from "@/app/components/Admin/Title/Title";
 import { Metadata } from "next";
-import { RoleCreateForm } from "./RoleCreateForm";
+import { MainPage } from "./MainPage";
 
 export const metadata: Metadata = {
   title: "Tạo nhóm quyền",
@@ -10,10 +9,7 @@ export const metadata: Metadata = {
 export default function RoleCreate() {
   return (
     <>
-      <Title title={"Tạo nhóm quyền"} />
-      <div className="mt-[30px]">
-        <RoleCreateForm/>
-      </div>
+      <MainPage/>
     </>
   );
 }

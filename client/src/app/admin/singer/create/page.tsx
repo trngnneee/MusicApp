@@ -1,6 +1,5 @@
-import { Title } from "@/app/components/Admin/Title/Title";
 import { Metadata } from "next";
-import { SingerCreateForm } from "./SingerCreateForm";
+import { MainPage } from "./MainPage";
 
 export const metadata: Metadata = {
   title: "Thêm ca sĩ",
@@ -10,10 +9,7 @@ export const metadata: Metadata = {
 export default function SingerCreate() {
   return (
     <>
-      <Title title={"Thêm ca sĩ"} />
-      <div className="mt-[30px]">
-        <SingerCreateForm/>
-      </div>
+      <MainPage/>
     </>
   );
 }

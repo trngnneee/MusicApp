@@ -11,7 +11,13 @@ router.post(
 
 router.post(
   "/login",
+  accountValidate.loginPost,
   accountController.loginPost
+)
+
+router.get(
+  '/logout',
+  accountController.logoutGet
 )
 
 module.exports = router;

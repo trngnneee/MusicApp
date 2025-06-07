@@ -1,6 +1,5 @@
-import { Title } from "@/app/components/Admin/Title/Title";
 import { Metadata } from "next";
-import { CategoryCreateForm } from "./CategoryCreateForm";
+import { MainPage } from "./MainPage";
 
 export const metadata: Metadata = {
   title: "Tạo danh mục",
@@ -10,10 +9,7 @@ export const metadata: Metadata = {
 export default function CategoryCreate() {
   return (
     <>
-      <Title title={"Tạo danh mục"} />
-      <div className="mt-[30px]">
-        <CategoryCreateForm/>
-      </div>
+      <MainPage/>
     </>
   );
 }

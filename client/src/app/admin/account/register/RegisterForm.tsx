@@ -97,9 +97,11 @@ export const RegisterForm = () => {
         toast.promise(promise, {
           loading: "Đang xử lý...",
           success: (data) => {
-            setTimeout(() => {
-              router.push("/admin/account/login");
-            }, 1000);
+            if (data.code == "success") {
+              setTimeout(() => {
+                router.push("/admin/account/login");
+              }, 1000);
+            }
             return data.message;
           },
           error: (error) => error.message
@@ -109,7 +111,7 @@ export const RegisterForm = () => {
 
   return (
     <>
-      <Toaster/>
+      <Toaster />
       <form className="mb-[30px]" id="register-form">
         <div className="flex flex-col mb-[15px] md:mb-[30px]">
           <label className="font-[600] text-[12px] md:text-[18px] text-dark mb-[8px] md:mb-[15px]" htmlFor="fullName">Họ tên</label>

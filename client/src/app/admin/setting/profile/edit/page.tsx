@@ -1,6 +1,5 @@
-import { Title } from "@/app/components/Admin/Title/Title";
-import { ProfileEditForm } from "./ProfileEditForm";
 import { Metadata } from "next";
+import { MainPage } from "./MainPage";
 
 export const metadata: Metadata = {
   title: "Chỉnh sửa thông tin cá nhân",
@@ -10,10 +9,7 @@ export const metadata: Metadata = {
 export default function ProfileEdit() {
   return (
     <>
-      <Title title={"Thông tin cá nhân"} />
-      <div className="mt-[30px]">
-        <ProfileEditForm/>
-      </div>
+      <MainPage/>
     </>
   );
 }

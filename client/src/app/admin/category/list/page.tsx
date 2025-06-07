@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Main } from "./Main";
+import { MainPage } from "./MainPage";
 
 export const metadata: Metadata = {
   title: "Quản lý danh mục",
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 
 export default function Category() {
   return (
-      <Main/>
+      <MainPage/>
   );
 }

@@ -1,6 +1,5 @@
-import { Title } from "@/app/components/Admin/Title/Title";
 import { Metadata } from "next";
-import { SongCreateForm } from "./SongCreateForm";
+import { MainPage } from "./MainPage";
 
 export const metadata: Metadata = {
   title: "Tạo bài hát",
@@ -10,10 +9,7 @@ export const metadata: Metadata = {
 export default function SongCreate() {
   return (
     <>
-      <Title title={"Tạo bài hát"} />
-      <div className="mt-[30px]">
-          <SongCreateForm/>
-      </div>
+      <MainPage/>
     </>
   );
 }
