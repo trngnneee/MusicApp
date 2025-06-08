@@ -11,9 +11,21 @@ import { Create } from "@/app/components/Admin/Create/Create";
 import { Trash } from "@/app/components/Admin/Trash/Trash";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { useAuth } from "@/hooks/useAuth";
+import { useEffect, useState } from "react";
 
 export const MainPage = () => {
   const { isLogin, userInfo } = useAuth();
+  const [categoryList, setCategoryList] = useState<any[]>();
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/list`,{
+      credentials: "include"
+    })
+      .then(res => res.json())
+      .then((data) => {
+        setCategoryList(data.category);
+      })
+  }, [])
 
   return (
     <>
@@ -46,76 +58,45 @@ export const MainPage = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white border-t-[#D5D5D5] border-t-[0.6px]">
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <input type="checkbox" className="translate-y-[2px]" />
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">Danh mục 1</th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="w-[60px] h-[60px] overflow-hidden">
-                      <img src="/demoAvatar.png" className="w-full h-full object-cover" />
-                    </div>
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
-                    1
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <Active />
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="flex flex-col items-start">
-                      <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                      <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                    </div>
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="flex flex-col items-start">
-                      <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                      <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                    </div>
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                      <button className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"><FiEdit /></button>
-                      <button className="px-[16px] py-[11px] text-[#EF3826]"><FaRegTrashCan /></button>
-                    </div>
-                  </th>
-                </tr>
-                <tr className="bg-white border-t-[#D5D5D5] border-t-[0.6px]">
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <input type="checkbox" className="translate-y-[2px]" />
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">Danh mục 2</th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="w-[60px] h-[60px] overflow-hidden">
-                      <img src="/demoAvatar.png" className="w-full h-full object-cover" />
-                    </div>
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
-                    2
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <Inactive />
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="flex flex-col items-start">
-                      <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                      <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                    </div>
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="flex flex-col items-start">
-                      <div className="font-[600] text-[14px] text-dark">Lê Văn A</div>
-                      <div className="font-[600] text-[12px] text-dark">16:30 - 20/10/2024</div>
-                    </div>
-                  </th>
-                  <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
-                    <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                      <button className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"><FiEdit /></button>
-                      <button className="px-[16px] py-[11px] text-[#EF3826]"><FaRegTrashCan /></button>
-                    </div>
-                  </th>
-                </tr>
+                {
+                  categoryList && categoryList.length && categoryList.map((item, index) => (
+                    <tr className="bg-white border-t-[#D5D5D5] border-t-[0.6px]" key={index}>
+                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                        <input type="checkbox" className="translate-y-[2px]" />
+                      </th>
+                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">{item.name}</th>
+                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                        <div className="w-[60px] h-[60px] overflow-hidden">
+                          <img src={item.avatar} className="w-full h-full object-cover" />
+                        </div>
+                      </th>
+                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
+                        {item.position}
+                      </th>
+                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                        {item.status=="active" ? <Active /> : <Inactive />}
+                      </th>
+                      <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                        <div className="flex flex-col items-start">
+                          <div className="font-[600] text-[14px] text-dark">{item.createdBy}</div>
+                          <div className="font-[600] text-[12px] text-dark">{item.createdAt}</div>
+                        </div>
+                      </th>
+                      <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                        <div className="flex flex-col items-start">
+                          <div className="font-[600] text-[14px] text-dark">{item.updatedBy}</div>
+                          <div className="font-[600] text-[12px] text-dark">{item.updatedAt}</div>
+                        </div>
+                      </th>
+                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                        <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
+                          <button className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"><FiEdit /></button>
+                          <button className="px-[16px] py-[11px] text-[#EF3826]"><FaRegTrashCan /></button>
+                        </div>
+                      </th>
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           </div>

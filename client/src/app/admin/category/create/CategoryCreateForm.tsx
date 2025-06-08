@@ -58,7 +58,6 @@ export const CategoryCreateForm = () => {
       const description = event.target.description.value;
 
       let avatar = null;
-      console.log(avatars);
       if (avatars && avatars.length > 0) {
         avatar = avatars[0].file;
       }
