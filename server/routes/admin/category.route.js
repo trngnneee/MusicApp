@@ -6,6 +6,7 @@ const upload = multer({ storage: CloudinaryHelper.storage });
 
 const categoryController = require("../../controller/admin/category.controller");
 const categoryValidate = require("../../validate/category.validate");
+const authMiddleware = require("../../middleware/auth.middleware");
 
 router.get(
   "/create",
@@ -15,6 +16,7 @@ router.get(
 router.post(
   "/create", 
   upload.single("avatar"),
+  authMiddleware.verifyToken,
   categoryValidate.createPost,
   categoryController.createPost
 );
