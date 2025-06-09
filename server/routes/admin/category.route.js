@@ -24,4 +24,16 @@ router.get(
   categoryController.listGet
 )
 
+router.patch(
+  "/apply-multi",
+  categoryValidate.applyMultiPatch,
+  categoryController.applyMultiPatch
+)
+
+router.patch(
+  "/delete",
+  categoryValidate.deletePatch,
+  categoryController.deletePatch
+)
+
 module.exports = router;

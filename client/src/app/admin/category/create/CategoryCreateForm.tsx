@@ -22,7 +22,9 @@ export const CategoryCreateForm = () => {
   const [categoryTree, setCategoryTree] = useState<any[]>();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/create`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/create`, {
+      credentials: "include"
+    })
       .then(res => res.json())
       .then(data => {
         setCategoryTree(data.categoryTree);
