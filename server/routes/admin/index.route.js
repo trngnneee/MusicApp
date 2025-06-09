@@ -5,6 +5,7 @@ const authMiddleware = require("../../middleware/auth.middleware");
 const accountRoute = require("./account.route");
 const authRoute = require("./auth.route");
 const categoryRoute = require("./category.route");
+const singerRoute = require("./singer.route");
 
 router.use(
   "/account", 
@@ -20,6 +21,12 @@ router.use(
   "/category",
   authMiddleware.verifyToken, 
   categoryRoute
+);
+
+router.use(
+  "/singer",
+  authMiddleware.verifyToken, 
+  singerRoute
 );
 
 module.exports = router;
