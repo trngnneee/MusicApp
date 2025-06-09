@@ -132,7 +132,7 @@ module.exports.listGet = async (req, res) => {
 
   res.json({
     code: "success",
-    message: "Lấy data thành công!",
+    message: "Lấy dữ liệu thành công!",
     category: category,
     adminAccountList: adminAccountList,
     pagination: pagination

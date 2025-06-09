@@ -14,4 +14,21 @@ router.post(
   singerController.createPost
 )
 
+router.get(
+  "/list",
+  singerController.listGet
+)
+
+router.patch(
+  "/apply-multi",
+  singerValidate.applyMultiPatch,
+  singerController.applyMultiPatch
+)
+
+router.patch(
+  "/delete",
+  singerValidate.deletePatch,
+  singerController.deletePatch
+)
+
 module.exports = router;

@@ -20,14 +20,14 @@ export const MainPage = () => {
   const [categoryList, setCategoryList] = useState<any[]>();
   const [adminAccountList, setAdminAccountList] = useState<any[]>();
   const [pagination, setPagination] = useState<any>();
-  
+
   const [applying, setApplying] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
   const [status, setStatus] = useState("");
   const [createdBy, setCreatedBy] = useState("");
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState("");
 
@@ -61,8 +61,8 @@ export const MainPage = () => {
   const handleClearFilter = () => {
     setStatus("");
     setCreatedBy("");
-    setStartDate(null);
-    setEndDate(null);
+    setStartDate("");
+    setEndDate("");
     setSearch("");
     setPage("");
   };
@@ -71,7 +71,7 @@ export const MainPage = () => {
     if (applying) return;
     if (applyMulti && checkList && checkList.length) {
       setApplying(true);
-      
+
       const finalData = {
         status: applyMulti,
         idList: checkList
@@ -154,6 +154,7 @@ export const MainPage = () => {
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
                 <select
                   className="text-[14px] font-[700] text-dark outline-none"
+                  value={status}
                   onChange={(event) => setStatus(event.target.value)}
                 >
                   <option value="">Trạng thái</option>
@@ -164,6 +165,7 @@ export const MainPage = () => {
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
                 <select
                   className="text-[14px] font-[700] text-dark outline-none"
+                  value={createdBy}
                   onChange={(event) => setCreatedBy(event.target.value)}
                 >
                   <option value="">Người tạo</option>
@@ -176,12 +178,14 @@ export const MainPage = () => {
                 <input
                   type="date"
                   className="text-[12px] font-[700] text-dark outline-none"
+                  value={startDate}
                   onChange={(event) => setStartDate(event.target.value)}
                 />
                 <span className="text-[14px] font-[700] text-dark outline-none">-</span>
                 <input
                   type="date"
                   className="text-[12px] font-[700] text-dark outline-none"
+                  value={endDate}
                   onChange={(event) => setEndDate(event.target.value)}
                 />
               </li>
@@ -300,7 +304,7 @@ export const MainPage = () => {
                       </th>
                       <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
                         <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                          <button 
+                          <button
                             className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
                             onClick={() => {
                               router.push(`/admin/category/edit/${item.id}`)
