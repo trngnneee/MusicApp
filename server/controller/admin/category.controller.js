@@ -183,3 +183,68 @@ module.exports.deletePatch = async (req, res) => {
     message: "Xóa thành công!"
   })
 }
+
+module.exports.editGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const categoryRawDetail = await Category.findOne({
+      _id: id
+    })
+
+    const categoryDetail = {
+      name: categoryRawDetail.name,
+      parent: categoryRawDetail.parent,
+      position: categoryRawDetail.position,
+      status: categoryRawDetail.status,
+      avatar: categoryRawDetail.avatar,
+      description: categoryRawDetail.description
+    };
+
+    const categoryList = await Category.find({
+      deleted: false
+    });
+
+    const categoryTree = categoryHelper.categoryTreeBuild(categoryList);
+
+    res.json({
+      code: "success",
+      message: "Lấy data thành công!",
+      categoryDetail: categoryDetail,
+      categoryTree: categoryTree
+    });
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.editPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (req.file) req.body.avatar = req.file.path;
+    else delete req.body.avatar;
+
+    req.body.updatedBy = req.account.id;
+    req.body.updatedAt = Date.now();
+
+    await Category.updateOne({
+      _id: id
+    }, req.body);
+
+    res.json({
+      code: "success",
+      message: "Cập nhật thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}

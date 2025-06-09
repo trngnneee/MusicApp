@@ -5,7 +5,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
 import FilePondPluginPreview from "filepond-plugin-image-preview"
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import JustValidate from 'just-validate';
 import { toast, Toaster } from "sonner";
@@ -180,7 +180,10 @@ export const CategoryCreateForm = () => {
           />
         </div>
         <div className="w-full flex justify-center mb-[30px]">
-          <button className="px-[98px] py-[16px] bg-[#4880FF] hover:bg-[#7ca0f6] rounded-[12px] font-[700] text-[18px] text-white text-center mx-auto">
+          <button 
+            className="px-[98px] py-[16px] bg-[#4880FF] hover:bg-[#7ca0f6] rounded-[12px] font-[700] text-[18px] text-white text-center mx-auto"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Đang xử lý..." : "Tạo mới"}
           </button>
         </div>
