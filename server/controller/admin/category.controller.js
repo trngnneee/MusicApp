@@ -248,3 +248,129 @@ module.exports.editPatch = async (req, res) => {
     })
   }
 }
+
+module.exports.trashGet = async (req, res) => {
+  const find = {
+    deleted: true
+  };
+
+  if (req.query.search)
+  {
+    const search = slugify(req.query.search, {
+      lower: true
+    });
+    const searchRegex = new RegExp(search);
+    find.slug = searchRegex;
+  }
+
+  const limitItem = 5;
+  const totalRecord = await Category.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItem);
+
+  let page = 1;
+  if (req.query.page)
+  {
+    const tmp = parseInt(req.query.page);
+    if (tmp > 0) page = tmp;
+  }
+  if (totalRecord != 0 && page > totalPage)
+  {
+    page = totalPage;
+  }
+  const skip = (page - 1) * limitItem;
+
+  const pagination = {
+    limitItem: limitItem,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+    skip: skip
+  }
+
+  const trashRawList = await Category.find(find).limit(limitItem).skip(skip);
+  const trashList = [];
+  for (const item of trashRawList) {
+    const tmp = {
+      id: item.id,
+      name: item.name,
+      avatar: item.avatar,
+      position: item.position,
+      status: item.status
+    };
+
+    tmp.createdAt = moment(item.createdAt).format("HH:mm - DD/MM/YYYY");
+    tmp.updatedAt = moment(item.updatedAt).format("HH:mm - DD/MM/YYYY");
+
+    const createdByInfo = await AdminAccount.findOne({
+      _id: item.createdBy
+    });
+    const updatedByInfo = await AdminAccount.findOne({
+      _id: item.updatedBy
+    })
+
+    tmp.createdBy = createdByInfo.fullName;
+    tmp.updatedBy = updatedByInfo.fullName;
+    trashList.push(tmp);
+  }
+
+  res.json({
+    code: "success",
+    message: "Lấy data thành công!",
+    trashList: trashList,
+    pagination: pagination
+  })
+}
+
+module.exports.trashApplyMultiPatch = async (req, res) => {
+  switch(req.body.status)
+  {
+    case "hard-delete":
+      {
+        await Category.deleteMany({
+          _id: { $in: req.body.idList }
+        })
+        break;
+      }
+    case "recovery":
+      {
+        await Category.updateMany({
+          _id: { $in: req.body.idList } 
+        }, {
+          deleted: false,
+          updatedBy: req.account.id,
+          updatedAt: Date.now()
+        })
+        break;
+      }
+  }
+
+  res.json({
+    code: "success",
+    message: "Áp dụng thành công!"
+  })
+}
+
+module.exports.recoveryPatch = async (req, res) => {
+  await Category.updateOne({
+    _id: req.body.id 
+  }, {
+    deleted: false,
+    updatedBy: req.account.id,
+    updatedAt: Date.now()
+  })
+  
+  res.json({
+    code: "success",
+    message: "Khôi phục thành công!"
+  })
+}
+
+module.exports.hardDelete = async (req, res) => {
+  await Category.deleteOne({
+    _id: req.body.id 
+  })
+  
+  res.json({
+    code: "success",
+    message: "Xóa vĩnh viễn thành công!"
+  })
+}

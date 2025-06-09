@@ -48,4 +48,27 @@ router.patch(
   categoryController.editPatch
 )
 
+router.get(
+  "/trash/list",
+  categoryController.trashGet
+)
+
+router.patch(
+  "/trash/apply-multi",
+  categoryValidate.trashApplyMultiPatch,
+  categoryController.trashApplyMultiPatch
+)
+
+router.patch(
+  "/trash/recovery",
+  categoryValidate.recoveryPatch,
+  categoryController.recoveryPatch,
+)
+
+router.delete(
+  "/trash/hard-delete",
+  categoryValidate.hardDelete,
+  categoryController.hardDelete
+)
+
 module.exports = router;
