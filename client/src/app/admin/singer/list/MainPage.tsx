@@ -14,8 +14,10 @@ import { useEffect, useState } from "react";
 import { FaUndoAlt } from "react-icons/fa";
 import { toast, Toaster } from "sonner";
 import { IoSearch } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export const MainPage = () => {
+  const router = useRouter();
   const { isLogin, userInfo } = useAuth();
   const [singerList, setSingerList] = useState<any[]>();
   const [pagination, setPagination] = useState<any>();
@@ -278,7 +280,12 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"><FiEdit /></button>
+                        <button 
+                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+                          onClick={() => router.push(`/admin/singer/edit/${item.id}`)}
+                        >
+                          <FiEdit />
+                        </button>
                         <button
                           className="px-[16px] py-[11px] text-[#EF3826]"
                           onClick={() => handleDelete(item.id)}
