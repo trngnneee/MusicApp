@@ -1,11 +1,9 @@
 "use client"
 
 import { Create } from "@/app/components/Admin/Create/Create";
-import { MultipleApply } from "@/app/components/Admin/MultipleApply/MultipleApply";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Trash } from "@/app/components/Admin/Trash/Trash";
-import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth"
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -209,7 +207,12 @@ export const MainPage = () => {
                 type="text"
                 placeholder="Tìm kiếm"
                 className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onChange={(event) => setSearch(event.target.value)}
+                onKeyUp={(event) => {
+                  if (event.key === "Enter") {
+                    const target = event.target as HTMLInputElement;
+                    setSearch(target.value);
+                  }
+                }}
               />
             </div>
             {/* End Search */}
@@ -280,7 +283,7 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button 
+                        <button
                           className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
                           onClick={() => router.push(`/admin/singer/edit/${item.id}`)}
                         >

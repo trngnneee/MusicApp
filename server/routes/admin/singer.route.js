@@ -31,4 +31,27 @@ router.patch(
   singerController.deletePatch
 )
 
+router.get(
+  "/trash/list",
+  singerController.trashListGet
+)
+
+router.patch(
+  "/trash/apply-multi",
+  singerValidate.trashApplyMultiPatch,
+  singerController.trashApplyMultiPatch
+)
+
+router.patch(
+  "/trash/recovery",
+  singerValidate.recoveryPatch,
+  singerController.recoveryPatch,
+)
+
+router.delete(
+  "/trash/hard-delete",
+  singerValidate.hardDelete,
+  singerController.hardDelete,
+)
+
 module.exports = router;

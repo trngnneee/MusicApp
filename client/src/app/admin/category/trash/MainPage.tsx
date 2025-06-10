@@ -172,7 +172,12 @@ export const MainPage = () => {
                 type="text"
                 placeholder="Tìm kiếm"
                 className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onChange={(event) => setSearch(event.target.value)}
+                onKeyUp={(event) => {
+                  if (event.key === "Enter") {
+                    const target = event.target as HTMLInputElement;
+                    setSearch(target.value);
+                  }
+                }}
               />
             </div>
             {/* End Search */}
