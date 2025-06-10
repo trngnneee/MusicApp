@@ -91,7 +91,7 @@ module.exports.trashApplyMultiPatch = (req, res, next) => {
         "string.empty": "Danh sách phần tử cần áp dụng bắt buộc!",
       }),
   });
-  
+
   const { error } = schema.validate(req.body);
 
   if (error) {
@@ -114,7 +114,7 @@ module.exports.recoveryPatch = (req, res, next) => {
         "string.empty": "ID bắt buộc!",
       })
   });
-  
+
   const { error } = schema.validate(req.body);
 
   if (error) {
@@ -137,7 +137,7 @@ module.exports.hardDelete = (req, res, next) => {
         "string.empty": "ID bắt buộc!",
       })
   });
-  
+
   const { error } = schema.validate(req.body);
 
   if (error) {
@@ -151,3 +151,31 @@ module.exports.hardDelete = (req, res, next) => {
 
   next();
 }
+
+module.exports.editPatch = (req, res, next) => {
+  const schema = Joi.object({
+    name: Joi.string()
+      .required()
+      .messages({
+        "string.empty": "Tên bắt buộc!",
+      }),
+    position: Joi.string().allow(""),
+    status: Joi.string().allow(""),
+    avatar: Joi.string().allow(""),
+    description: Joi.string().allow(""),
+  });
+
+  const { error } = schema.validate(req.body);
+
+  if (error) {
+    const errorMessage = error.details[0].message;
+    res.json({
+      code: "error",
+      message: errorMessage
+    })
+    return;
+  }
+
+  next();
+}
+

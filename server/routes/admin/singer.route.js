@@ -54,4 +54,16 @@ router.delete(
   singerController.hardDelete,
 )
 
+router.get(
+  "/edit/:id",
+  singerController.editGet
+)
+
+router.patch(
+  "/edit/:id",
+  upload.single("avatar"),
+  singerValidate.editPatch,
+  singerController.editPatch
+)
+
 module.exports = router;

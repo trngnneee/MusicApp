@@ -280,3 +280,63 @@ module.exports.hardDelete = async (req, res) => {
     message: "Xóa vĩnh viễn thành công!"
   })
 }
+
+module.exports.editGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const singerRawDetail = await Singer.findOne({
+      _id: id
+    });
+    const singerDetail = {
+      name: singerRawDetail.name,
+      position: singerRawDetail.position,
+      status: singerRawDetail.status,
+      avatar: singerRawDetail.avatar,
+      description: singerRawDetail.description
+    };
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      singerDetail: singerDetail
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.editPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const numDocument = await Singer.countDocuments({});
+    if (!req.body.position) {
+      req.body.position = numDocument;
+    }
+    else {
+      req.body.position = parseInt(req.body.position);
+    }
+    if (req.file) req.body.avatar = req.file.path;
+    else delete req.body.avatar;
+
+    req.body.updatedBy = req.account.id;
+
+    await Singer.updateOne({
+      _id: id
+    }, req.body);
+
+    res.json({
+      code: "success",
+      message: "Cập nhật thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
