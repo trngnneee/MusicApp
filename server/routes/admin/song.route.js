@@ -54,4 +54,27 @@ router.patch(
   songController.editPatch
 )
 
+router.get(
+  "/trash/list",
+  songController.trashListGet
+)
+
+router.patch(
+  "/trash/apply-multi",
+  songValidate.trashApplyMultiPatch,
+  songController.trashApplyMultiPatch,
+)
+
+router.patch(
+  "/trash/recovery",
+  songValidate.recoveryPatch,
+  songController.recoveryPatch,
+)
+
+router.delete(
+  "/trash/hard-delete",
+  songValidate.hardDelete,
+  songController.hardDelete,
+)
+
 module.exports = router;

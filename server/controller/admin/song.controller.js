@@ -309,7 +309,7 @@ module.exports.editPatch = async (req, res) => {
     await Song.updateOne({
       _id: id
     }, req.body);
-    
+
     res.json({
       code: "success",
       message: "Cập nhật thành công"
@@ -321,4 +321,138 @@ module.exports.editPatch = async (req, res) => {
       message: error
     })
   }
+}
+
+module.exports.trashListGet = async (req, res) => {
+  const find = {
+    deleted: true
+  };
+
+  if (req.query.search) {
+    const search = slugify(req.query.search, {
+      lower: true
+    });
+    const searchRegex = new RegExp(search);
+    find.slug = searchRegex;
+  }
+
+  const limitItem = 5;
+  const totalRecord = await Song.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItem);
+
+  let page = 1;
+  if (req.query.page) {
+    const tmp = parseInt(req.query.page);
+    if (tmp > 0) page = tmp;
+  }
+  if (totalPage != 0 && page > totalPage) {
+    page = totalPage;
+  }
+  const skip = (page - 1) * limitItem;
+
+  const pagination = {
+    limitItem: limitItem,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+    skip: skip
+  };
+
+  const songRawList = await Song.find(find).limit(limitItem).skip(skip);
+  const songList = [];
+  for (const item of songRawList) {
+    const tmp = {
+      id: item.id,
+      name: item.name,
+      avatar: item.avatar,
+      status: item.status
+    };
+
+    const categoryDetail = await Category.findOne({
+      _id: item.category
+    });
+    if (categoryDetail) tmp.categoryName = categoryDetail.name;
+
+    tmp.createdAt = moment(item.createdAt).format("HH:mm - DD/MM/YYYY");
+    tmp.updatedAt = moment(item.updatedAt).format("HH:mm - DD/MM/YYYY");
+
+    const createdByInfo = await AdminAccount.findOne({
+      _id: item.createdBy
+    });
+    const updatedByInfo = await AdminAccount.findOne({
+      _id: item.updatedBy
+    });
+    if (createdByInfo) tmp.createdBy = createdByInfo.fullName;
+    if (updatedByInfo) tmp.updatedBy = updatedByInfo.fullName;
+
+    tmp.singerList = [];
+    for (const id of item.singers) {
+      const singerInfo = await Singer.findOne({
+        _id: id
+      });
+      tmp.singerList.push(singerInfo.name);
+    }
+
+    songList.push(tmp);
+  };
+
+  res.json({
+    code: "success",
+    message: "Lấy data thành công!",
+    songList: songList,
+    pagination: pagination
+  })
+}
+
+module.exports.trashApplyMultiPatch = async (req, res) => {
+  switch (req.body.status) {
+    case "hard-delete":
+      {
+        await Song.deleteMany({
+          _id: { $in: req.body.idList }
+        })
+        break;
+      }
+    case "recovery":
+      {
+        await Song.updateMany({
+          _id: { $in: req.body.idList }
+        }, {
+          deleted: false,
+          updatedAt: Date.now(),
+          updatedBy: req.account.id
+        })
+        break;
+      }
+  }
+
+  res.json({
+    code: "success",
+    message: "Áp dụng thành công!"
+  })
+}
+
+module.exports.recoveryPatch = async (req, res) => {
+  await Song.updateOne({
+    _id: req.body.id
+  }, {
+    deleted: false,
+    updatedAt: Date.now(),
+    updatedBy: req.account.id
+  })
+
+  res.json({
+    code: "success",
+    message: "Khôi phục thành công!"
+  })
+}
+
+module.exports.hardDelete = async (req, res) => {
+  await Song.deleteOne({
+    _id: req.body.id
+  });
+
+  res.json({
+    code: "success",
+    message: "Xóa vĩnh viễn thành công!"
+  })
 }
