@@ -34,14 +34,25 @@ export const MainLayout = ({
     else {
       return (
         <>
-          <body className="admin bg-[#F5F6FA] relative">
-            <Header />
+          <body className="admin bg-[#F5F6FA] relative min-h-screen">
+            {/* Sticky Header */}
+            <div className="sticky top-0 z-50">
+              <Header />
+            </div>
+
+            {/* Layout wrapper */}
             <div className="flex">
-              <AdminSider className={"hidden xl:block sticky"}/>
-              <main className="flex-1 p-[30px] overflow-y-auto">{children}</main>
+              {/* Fixed Sidebar */}
+              <div className="hidden xl:block fixed top-[var(--header-height)] left-0 h-[calc(100vh-var(--header-height))] w-[250px]">
+                <AdminSider />
+              </div>
+
+              {/* Main content */}
+              <main className="flex-1 xl:ml-[250px] p-[30px] overflow-y-auto">
+                {children}
+              </main>
             </div>
           </body>
-
         </>
       );
     }

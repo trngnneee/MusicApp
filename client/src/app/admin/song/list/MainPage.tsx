@@ -278,7 +278,7 @@ export const MainPage = () => {
                     />
                   </th>
                   <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Tên bài hát</th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Ảnh đại diện</th>
+                  <th className="px-[15px] xl:px-[20px] py-[15px] text-left align-middle">Ảnh đại diện</th>
                   <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Ca sĩ</th>
                   <th className="px-[15px] xl:px-[20px] py-[15px] text-left align-middle">Danh mục</th>
                   <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Trạng thái</th>
@@ -303,7 +303,7 @@ export const MainPage = () => {
                     <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark w-[200px]">
                       {item.name}
                     </th>
-                    <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                    <th className="px-[15px] xl:px-[20px] py-[8px] text-left align-middle">
                       <div className="w-[60px] h-[60px] overflow-hidden">
                         <img src={item.avatar} className="w-full h-full object-cover" />
                       </div>

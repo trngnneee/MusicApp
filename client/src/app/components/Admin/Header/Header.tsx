@@ -15,13 +15,14 @@ export const Header = () => {
       {isLogin && (
         <>
           <AdminSider className={"xl:hidden fixed top-0 left-0 z-[999] " + (open ? "block" : "hidden")} />
-          <div className={"bg-[#0000004a] w-full h-full absolute z-[100] cursor-pointer " + (open ? "block" : "hidden")} onClick={() => { setOpen(false) }}></div>
-          <div className="border-b-[1px] border-b-[#E0E0E0] py-[22px] bg-white">
+          <div className={"bg-[#0000004a] w-full h-full fixed top-0 left-0 z-[100] cursor-pointer " + (open ? "block" : "hidden")} onClick={() => { setOpen(false) }}></div>
+          <div className="border-b-[1px] border-b-[#E0E0E0] py-[22px] bg-white shadow">
             <div className="mx-[30px] flex justify-between items-center px-[10px] sm:px-0">
               <div className="block xl:hidden text-[18px] sm:text-[24px] cursor-pointer" onClick={() => { setOpen(true) }}><FaListUl /></div>
               <div className="flex items-center gap-[10px]">
                 <BsMusicPlayer className="text-[30px]" />
-                <div className="font-[800] text-[20px] sm:text-[24px]">Music App Admin</div>
+                <div className="font-[800] text-[20px] sm:text-[24px]">MusicApp</div>
+                <span className="font-[800] text-[20px] sm:text-[24px] text-[#4880FF]">Admin</span>
               </div>
               <div className="hidden sm:flex items-center gap-[10px]">
                 <div className="rounded-[50%] overflow-hidden">
