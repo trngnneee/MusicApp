@@ -8,5 +8,12 @@ cloudinary.config({
 });
 
 module.exports.storage = new CloudinaryStorage({
-  cloudinary: cloudinary
+  cloudinary: cloudinary,
+  params: async (req, file) => {
+    return {
+      folder: 'songs', 
+      resource_type: 'auto', 
+      public_id: `${Date.now()}-${file.originalname}`,
+    };
+  }
 });
