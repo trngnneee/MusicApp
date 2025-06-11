@@ -196,6 +196,7 @@ export const SongCreateForm = () => {
               labelIdle="+"
               files={avatars}
               onupdatefiles={setAvatars}
+              className="w-[150px] h-[150px]"
             />
           </div>
           <div>
@@ -208,6 +209,7 @@ export const SongCreateForm = () => {
               labelIdle="+"
               files={audios}
               onupdatefiles={setAudios}
+              className="w-[150px] h-[150px]"
             />
           </div>
         </div>

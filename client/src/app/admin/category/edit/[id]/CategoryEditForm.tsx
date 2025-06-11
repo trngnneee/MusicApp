@@ -21,6 +21,7 @@ export const CategoryEditForm = () => {
   const [categoryDetail, setCategoryDetail] = useState<any>();
   const [categoryTree, setCategoryTree] = useState<any[]>();
   const [status, setStatus] = useState<string>();
+  const [parent, setParent] = useState<string>();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,7 +39,8 @@ export const CategoryEditForm = () => {
             }
           ])
         }
-        if (data.categoryDetail.status) setStatus(data.categoryDetail.status);
+        setStatus(data.categoryDetail.status);
+        setParent(data.categoryDetail.parent);
         setCategoryDetail(data.categoryDetail);
         setCategoryTree(data.categoryTree);
       })
@@ -147,7 +149,8 @@ export const CategoryEditForm = () => {
             <select
               className="block w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]"
               id='parent'
-              value={categoryDetail && categoryDetail.parent}
+              value={parent}
+              onChange={(event) => setParent(event.target.value)}
             >
               <option value="">-- Chọn danh mục --</option>
               {categoryTree && categoryTree.length && renderOption(categoryTree)}
