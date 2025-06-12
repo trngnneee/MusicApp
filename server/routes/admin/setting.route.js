@@ -28,4 +28,21 @@ router.post(
   settingController.roleCreatePost,
 )
 
+router.get(
+  "/role/list",
+  settingController.roleListGet
+)
+
+router.patch(
+  "/role/list/apply-multi",
+  settingValidate.roleListApplyMultiPatch,
+  settingController.roleListApplyMultiPatch
+)
+
+router.patch(
+  "/role/list/delete",
+  settingValidate.roleListDeletePatch,
+  settingController.roleListDeletePatch
+)
+
 module.exports = router;
