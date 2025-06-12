@@ -7,6 +7,7 @@ const authRoute = require("./auth.route");
 const categoryRoute = require("./category.route");
 const singerRoute = require("./singer.route");
 const songRoute = require("./song.route");
+const settingRoute = require("./setting.route");
 
 router.use(
   "/account", 
@@ -28,12 +29,18 @@ router.use(
   "/singer",
   authMiddleware.verifyToken, 
   singerRoute
-)
-;
+);
+
 router.use(
   "/song",
   authMiddleware.verifyToken, 
   songRoute
+);
+
+router.use(
+  "/setting",
+  authMiddleware.verifyToken, 
+  settingRoute
 );
 
 module.exports = router;

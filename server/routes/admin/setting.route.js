@@ -1,0 +1,25 @@
+const router = require('express').Router();
+const multer = require("multer");
+
+const CloudinaryHelper = require("../../helper/cloudinay.helper");
+const upload = multer({ storage: CloudinaryHelper.storage });
+
+const settingController = require("../../controller/admin/setting.controller");
+const settingValidate = require("../../validate/website-info.validate")
+
+router.get(
+  "/website-info",
+  settingController.websiteInfoGet
+)
+
+router.patch(
+  "/website-info",
+  upload.fields([
+    { name: "logo", maxCount: 1 },
+    { name: "favicon", maxCount: 1 },
+  ]),
+  settingValidate.websiteInfoPatch,
+  settingController.websiteInfoPatch
+)
+
+module.exports = router;
