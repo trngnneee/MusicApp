@@ -34,7 +34,7 @@ export const MainPage = () => {
   const [checkList, setCheckList] = useState<string[]>([]);
   const [applyMulti, setApplyMulti] = useState("");
 
-  const fetchData = () => {
+  useEffect(() => {
     let query = "";
     if (status) query += `?status=${status}`;
     if (createdBy) query += `?createdBy=${createdBy}`;
@@ -52,10 +52,6 @@ export const MainPage = () => {
         setAdminAccountList(data.adminAccountList);
         setPagination(data.pagination);
       })
-  }
-
-  useEffect(() => {
-    fetchData();
   }, [status, createdBy, startDate, endDate, search, page])
 
   const handleClearFilter = () => {
@@ -93,7 +89,21 @@ export const MainPage = () => {
         loading: "Đang xử lý...",
         success: (data) => {
           if (data.code == "success") {
-            fetchData();
+            if (applyMulti == "delete") {
+              setCategoryList(categoryList.filter((item) => !checkList.includes(item.id)));
+              setPagination(prev => ({
+                ...prev,
+                totalRecord: prev.totalRecord - 1
+              }));
+            }
+            else {
+              setCategoryList(categoryList.map((item) => {
+                if (checkList.includes(item.id)) {
+                  return { ...item, status: applyMulti }; 
+                }
+                return item;
+              }))
+            }
           }
           return data.message;
         },
@@ -106,7 +116,7 @@ export const MainPage = () => {
     }
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: string) => {
     if (deleting) return;
     setDeleting(true);
     const finalData = {
@@ -129,7 +139,11 @@ export const MainPage = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          fetchData();
+          setCategoryList(categoryList.filter((item) => item.id !== id));
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }))
         }
         return data.message;
       },

@@ -23,7 +23,7 @@ export const MainPage = () => {
   const [idList, setIdList] = useState([]);
   const [applyMultiStatus, setApplyMultiStatus] = useState("");
 
-  const fetchData = () => {
+  useEffect(() => {
     let query = "";
     if (page) query += `?page=${page}`;
     if (search) query += `?search=${search}`;
@@ -36,10 +36,6 @@ export const MainPage = () => {
         setSongList(data.songList);
         setPagination(data.pagination);
       })
-  }
-
-  useEffect(() => {
-    fetchData();
   }, [search, page]);
 
   const handleApplyMulti = () => {
@@ -66,7 +62,11 @@ export const MainPage = () => {
         loading: "Đang xử lý...",
         success: (data) => {
           if (data.code == "success") {
-            fetchData();
+            setSongList(songList.filter((item) => !idList.includes(item.id)));
+            setPagination(prev => ({
+              ...prev,
+              totalRecord: prev.totalRecord - 1
+            }));
           }
           return data.message;
         },
@@ -100,7 +100,11 @@ export const MainPage = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          fetchData();
+          setSongList(songList.filter((item) => item.id != id));
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }));
         }
         return data.message;
       },
@@ -130,7 +134,11 @@ export const MainPage = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          fetchData();
+          setSongList(songList.filter((item) => item.id != id));
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }));
         }
         return data.message;
       },
@@ -171,10 +179,10 @@ export const MainPage = () => {
             {/* Search */}
             <div className="flex gap-[15px] p-[25px] w-[366px] bg-white border-[1px] border-[#E2E2E2] rounded-[14px]">
               <IoSearch className="text-[#979797] text-[20px]" />
-              <input 
-                type="text" 
-                placeholder="Tìm kiếm" 
-                className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]" 
+              <input
+                type="text"
+                placeholder="Tìm kiếm"
+                className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
                 onKeyUp={(event) => {
                   if (event.key === "Enter") {
                     const target = event.target as HTMLInputElement;

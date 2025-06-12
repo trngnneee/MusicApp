@@ -23,7 +23,7 @@ export const MainPage = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState("");
 
-  const fetchData = () => {
+  useEffect(() => {
     let query = "";
 
     if (page) query += `?page=${page}`;
@@ -39,10 +39,6 @@ export const MainPage = () => {
           setPagination(data.pagination);
         }
       })
-  }
-
-  useEffect(() => {
-    fetchData();
   }, [page, search])
 
   const handleApplyMulti = () => {
@@ -69,7 +65,11 @@ export const MainPage = () => {
         loading: "Đang xử lý...",
         success: (data) => {
           if (data.code == "success") {
-            fetchData();
+            setTrashList(trashList.filter((item) => !idList.includes(item.id)));
+            setPagination(prev => ({
+              ...prev,
+              totalRecord: prev.totalRecord - 1
+            }));
           }
           return data.message;
         },
@@ -103,7 +103,11 @@ export const MainPage = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          fetchData();
+          setTrashList(trashList.filter(item => item.id != id))
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }));
         }
         return data.message;
       },
@@ -133,7 +137,11 @@ export const MainPage = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          fetchData();
+          setTrashList(trashList.filter(item => item.id != id))
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }));
         }
         return data.message;
       },

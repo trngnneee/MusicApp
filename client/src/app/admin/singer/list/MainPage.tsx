@@ -29,7 +29,7 @@ export const MainPage = () => {
   const [idList, setIdList] = useState<string[]>([]);
   const [applyStatus, setApplyStatus] = useState("");
 
-  const fetchData = () => {
+  useEffect(() => {
     let query = "";
     if (status) query += `?status=${status}`;
     if (startDate) query += `?startDate=${startDate}`;
@@ -45,10 +45,6 @@ export const MainPage = () => {
         setSingerList(data.singerList);
         setPagination(data.pagination);
       })
-  };
-
-  useEffect(() => {
-    fetchData();
   }, [status, startDate, endDate, search, page])
 
 
@@ -82,7 +78,21 @@ export const MainPage = () => {
         loading: "Đang xử lý...",
         success: (data) => {
           if (data.code == "success") {
-            fetchData();
+            if (applyStatus == "delete") {
+              setSingerList(singerList.filter((item) => !idList.includes(item.id)));
+              setPagination(prev => ({
+                ...prev,
+                totalRecord: prev.totalRecord - 1
+              }));
+            }
+            else {
+              setSingerList(singerList.map((item) => {
+                if (idList.includes(item.id)) {
+                  return { ...item, status: applyStatus };
+                }
+                return item;
+              }))
+            }
           }
           return data.message;
         },
@@ -116,7 +126,11 @@ export const MainPage = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          fetchData();
+          setSingerList(singerList.filter((item) => item.id != id));
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }));
         }
         return data.message;
       },

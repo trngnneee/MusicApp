@@ -34,7 +34,7 @@ export const MainPage = () => {
   const [idList, setIdList] = useState([]);
   const [applyMultiStatus, setApplyMultiStatus] = useState("");
 
-  const fetchData = () => {
+  useEffect(() => {
     let query = "";
     if (status) query += `?status=${status}`;
     if (createdBy) query += `?createdBy=${createdBy}`;
@@ -54,10 +54,6 @@ export const MainPage = () => {
         setCategoryTree(data.categoryTree);
         setPagination(data.pagination);
       })
-  }
-
-  useEffect(() => {
-    fetchData();
   }, [status, createdBy, startDate, endDate, category, search, page]);
 
   const renderOption = (categoryTree: any[], level = 0) => {
@@ -103,7 +99,21 @@ export const MainPage = () => {
         loading: "Đang xử lý...",
         success: (data) => {
           if (data.code == "success") {
-            fetchData();
+            if (applyMultiStatus == "delete") {
+              setSongList(songList.filter((item) => !idList.includes(item.id)));
+              setPagination(prev => ({
+                ...prev,
+                totalRecord: prev.totalRecord - 1
+              }));
+            }
+            else {
+              setSongList(songList.map((item) => {
+                if (idList.includes(item.id)) {
+                  return { ...item, status: applyMultiStatus };
+                }
+                return item;
+              }))
+            }
           }
           return data.message;
         },
@@ -137,7 +147,11 @@ export const MainPage = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          fetchData();
+          setSongList(songList.filter((item) => item.id != id));
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }));
         }
         return data.message;
       },
@@ -335,7 +349,7 @@ export const MainPage = () => {
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
                         <button
                           className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                          onClick={() => {router.push(`/admin/song/edit/${item.id}`)}}
+                          onClick={() => { router.push(`/admin/song/edit/${item.id}`) }}
                         >
                           <FiEdit />
                         </button>
