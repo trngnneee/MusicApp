@@ -1,22 +1,50 @@
 "use client"
 
-import { FilePond, registerPlugin } from 'react-filepond';
-import 'filepond/dist/filepond.min.css';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type"
+import FilePondPluginPreview from "filepond-plugin-image-preview"
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import JustValidate from 'just-validate';
 
-registerPlugin(FilePondPluginImagePreview);
+registerPlugin(FilePondPluginPreview, FilePondPluginFileValidateType);
 
 export const AdminAccountCreateForm = () => {
-  const [files, setFiles] = useState([]);
-  const filesRef = useRef(files);
+  const [avatars, setAvatars] = useState<any[]>();
+  const [isValid, setIsValid] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    filesRef.current = files;
-  }, [files]);
+  const handleSubmit = (event: any) => {
+    if (isSubmitting) return;
+    if (isValid) {
+      setIsSubmitting(true);
+      event.preventDefault();
+
+      const name = event.target.name.value;
+      const email = event.target.email.value;
+      const phone = event.target.phone.value;
+      const role = event.target.role.value;
+      const jobPosition = event.target.jobPosition.value;
+      const status = event.target.status.value;
+      const password = event.target.password.value;
+
+      let avatar = null;
+      if (avatars.length > 0) {
+        avatar = avatars[0].file;
+      }
+
+      console.log(name);
+      console.log(email);
+      console.log(phone);
+      console.log(role);
+      console.log(jobPosition);
+      console.log(status);
+      console.log(password);
+      console.log(avatar);
+    }
+  }
 
   useEffect(() => {
     const validation = new JustValidate('#admin-account-create-form');
@@ -55,31 +83,8 @@ export const AdminAccountCreateForm = () => {
           errorMessage: 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt!',
         },
       ])
-      .onSuccess((event) => {
-        event.preventDefault();
-
-        const name = event.target.name.value;
-        const email = event.target.email.value;
-        const phone = event.target.phone.value;
-        const role = event.target.role.value;
-        const jobPosition = event.target.jobPosition.value;
-        const status = event.target.status.value;
-        const password = event.target.password.value;
-
-        let avatar = null;
-        if (filesRef.current.length > 0) {
-          avatar = filesRef.current[0].file;
-        }
-
-        console.log(name);
-        console.log(email);
-        console.log(phone);
-        console.log(role);
-        console.log(jobPosition);
-        console.log(status);
-        console.log(password);
-        console.log(avatar);
-      });
+      .onSuccess(() => setIsValid(true))
+      .onFail(() => setIsValid(false))
   }, []);
 
   return (
@@ -130,22 +135,21 @@ export const AdminAccountCreateForm = () => {
         <div className="mb-[40px]">
           <label htmlFor='avatar' className="text-[14px] font-[600px] text-dark mb-[11px] block">Ảnh danh mục</label>
           <FilePond
-            files={files}
-            onupdatefiles={setFiles}
+            name="avatar"
             allowMultiple={false}
-            acceptedFileTypes={['image/*']}
-            name="files"
-            labelIdle='
-              <div class="flex flex-col items-center justify-center w-full h-full text-dark text-[16px] font-medium text-center">
-                Kéo thả hoặc <u className="cursor-pointer">Chọn file ảnh</u>
-              </div>'
-            className="w-[150px] h-[150px]"
-            id='avatar'
+            allowRemove={true}
+            acceptedFileTypes={["image/*"]}
+            labelIdle="+"
+            files={avatars}
+            onupdatefiles={setAvatars}
           />
         </div>
         <div className="w-full flex justify-center mb-[30px]">
-          <button className="px-[98px] py-[16px] bg-[#4880FF] hover:bg-[#7ca0f6] rounded-[12px] font-[700] text-[18px] text-white text-center mx-auto">
-            Tạo mới
+          <button  
+            className="px-[98px] py-[16px] bg-[#4880FF] hover:bg-[#7ca0f6] rounded-[12px] font-[700] text-[18px] text-white text-center mx-auto"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Đang xử lý..." : "Tạo mới"}
           </button>
         </div>
         <div className="w-full flex justify-center">

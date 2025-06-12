@@ -2,9 +2,64 @@
 
 import Link from "next/link";
 import JustValidate from 'just-validate';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { permissionList } from "@/config/variable.config";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export const RoleCreateForm = () => {
+  const router = useRouter();
+  const [isValid, setIsValid] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = (event: any) => {
+    if (isSubmitting) return;
+    if (isValid) {
+      setIsSubmitting(true);
+      event.preventDefault();
+
+      const name = event.target.name.value;
+      const description = event.target.description.value;
+      const tmp = new FormData(event.target);
+      const permissions = tmp.getAll('role');
+
+      const finalData = {
+        name: name,
+        description: description,
+        permissions: permissions
+      };
+
+      const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(finalData),
+        credentials: "include"
+      })
+        .then(res => res.json())
+        .then((data) => {
+          return data;
+        });
+    
+      toast.promise(promise, {
+        loading: "Đang xử lý...",
+        success: (data) => {
+          if (data.code == "success")
+          {
+            router.push("/admin/setting/role/list");
+            setIsSubmitting(false);
+          }
+          return data.message;
+        },
+        error: (data) => {
+          setIsSubmitting(false);
+          return data.message;
+        },
+      })
+    }
+  }
+
   useEffect(() => {
     const validation = new JustValidate('#role-create-form');
 
@@ -12,10 +67,10 @@ export const RoleCreateForm = () => {
       .addField('#name', [
         { rule: 'required', errorMessage: 'Tên bắt buộc!' },
       ])
-      .addField('[id="role"]', [
+      .addField('.role-checkbox', [
         {
           validator: () => {
-            const checkboxes = document.querySelectorAll('input[id="role"]');
+            const checkboxes = document.querySelectorAll('.role-checkbox');
             return Array.from(checkboxes).some((cb) => (cb as HTMLInputElement).checked);
           },
           errorMessage: 'Phải chọn ít nhất 1 phân quyền!',
@@ -24,24 +79,13 @@ export const RoleCreateForm = () => {
         errorsContainer: '#roles',
         errorLabelCssClass: 'text-red-500 text-[13px] mt-[6px] block',
       })
-      .onSuccess((event) => {
-        event.preventDefault();
-
-        const name = event.target.name.value;
-        const email = event.target.email.value;
-        const jobPosition = event.target.jobPosition.value;
-        const role = event.target.role.value;
-
-        console.log(name);
-        console.log(email);
-        console.log(jobPosition);
-        console.log(role);
-      });
+      .onSuccess(() => setIsValid(true))
+      .onFail(() => setIsValid(false))
   }, []);
 
   return (
     <>
-      <form id="role-create-form" className="bg-white border-[0.3px] border-[#B9B9B9] rounded-[14px] p-[20px] sm:p-[50px]">
+      <form id="role-create-form" className="bg-white border-[0.3px] border-[#B9B9B9] rounded-[14px] p-[20px] sm:p-[50px]" onSubmit={handleSubmit}>
         <div className="flex flex-col sm:flex-row gap-[15px] sm:gap-[30px] w-full mb-[15px] sm:mb-[30px]">
           <div className="w-full sm:w-[48%]">
             <label htmlFor="name" className="text-[14px] font-[600px] text-dark mb-[11px] block">Tên nhóm quyền</label>
@@ -52,34 +96,23 @@ export const RoleCreateForm = () => {
             <input id="description" type="text" className="w-full py-[18px] px-[23px] text-[14px] font-[500] outline-none bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5]" />
           </div>
         </div>
-        <div id="roles" className="w-full sm:w-[48%] my-[15px] sm:my-[30px]">
+        <div id="roles" className="w-full my-[15px] sm:my-[30px]">
           <label htmlFor="roles" className="text-[14px] font-[600px] text-dark mb-[11px] block">Phân quyền</label>
-          <div className="h-[150px] py-[18px] px-[23px] bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5] overflow-y-scroll flex flex-col gap-[10px]">
-            <div className="flex items-center gap-[10px]">
-              <input id="role" type="checkbox" className="w-[18px] h-[18px]" />
-              <label htmlFor="role" className="text-[14px] font-[600] text-dark">Xem trang Tổng quan</label>
-            </div>
-            <div className="flex items-center gap-[10px]">
-              <input id="role" type="checkbox" className="w-[18px] h-[18px]" />
-              <label htmlFor="role" className="text-[14px] font-[600] text-dark">Xem danh mục</label>
-            </div>
-            <div className="flex items-center gap-[10px]">
-              <input id="role" type="checkbox" className="w-[18px] h-[18px]" />
-              <label htmlFor="role" className="text-[14px] font-[600] text-dark">Tạo danh mục</label>
-            </div>
-            <div className="flex items-center gap-[10px]">
-              <input id="role" type="checkbox" className="w-[18px] h-[18px]" />
-              <label htmlFor="role" className="text-[14px] font-[600] text-dark">Sửa danh mục</label>
-            </div>
-            <div className="flex items-center gap-[10px]">
-              <input id="role" type="checkbox" className="w-[18px] h-[18px]" />
-              <label htmlFor="role" className="text-[14px] font-[600] text-dark">Xóa danh mục</label>
-            </div>
+          <div className="h-[300px] py-[18px] px-[23px] bg-[#F5F6FA] rounded-[4px] border-[0.6px] border-[#D5D5D5] overflow-y-scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[10px]">
+            {permissionList.map((item, index) => (
+              <div className="flex items-center gap-[10px]" key={index}>
+                <input id={`role-${item.value}`} name="role" type="checkbox" className="w-[18px] h-[18px] role-checkbox" value={item.value} />
+                <label htmlFor={`role-${item.value}`} className="text-[10px] sm:text-[14px] font-[600] text-dark">{item.label}</label>
+              </div>
+            ))}
           </div>
         </div>
         <div className="w-full flex justify-center mb-[30px]">
-          <button className="px-[98px] py-[16px] bg-[#4880FF] hover:bg-[#7ca0f6] rounded-[12px] font-[700] text-[18px] text-white text-center mx-auto">
-            Tạo mới
+          <button 
+            className="px-[98px] py-[16px] bg-[#4880FF] hover:bg-[#7ca0f6] rounded-[12px] font-[700] text-[18px] text-white text-center mx-auto"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Đang xử lý..." : "Tạo mới"}
           </button>
         </div>
         <div className="w-full flex justify-center">

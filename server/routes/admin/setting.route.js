@@ -22,4 +22,10 @@ router.patch(
   settingController.websiteInfoPatch
 )
 
+router.post(
+  "/role/create",
+  settingValidate.roleCreatePost,
+  settingController.roleCreatePost,
+)
+
 module.exports = router;

@@ -41,3 +41,28 @@ module.exports.websiteInfoPatch = (req, res, next) => {
 
   next();
 }
+
+module.exports.roleCreatePost = (req, res, next) => {
+  const schema = Joi.object({
+    name: Joi.string()
+      .required()
+      .messages({
+        "string.empty": "Tên bắt buộc!",
+      }),
+    description: Joi.string().allow(""),
+    permissions: Joi.array().allow("")
+  });
+
+  const { error } = schema.validate(req.body);
+
+  if (error) {
+    const errorMessage = error.details[0].message;
+    res.json({
+      code: "error",
+      message: errorMessage
+    })
+    return;
+  }
+
+  next();
+}

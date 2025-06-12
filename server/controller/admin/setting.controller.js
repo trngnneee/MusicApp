@@ -1,3 +1,4 @@
+const Role = require("../../model/role.model");
 const WebsiteInfo = require("../../model/website-info.model");
 
 module.exports.websiteInfoGet = async (req, res) => {
@@ -49,5 +50,15 @@ module.exports.websiteInfoPatch = async (req, res) => {
   res.json({
     code: "success",
     message: "Cập nhật thông tin thành công!"
+  })
+}
+
+module.exports.roleCreatePost = async (req, res) => {
+  const newRecord = new Role(req.body);
+  await newRecord.save();
+
+  res.json({
+    code: "success",
+    message: "Tạo nhóm quyền thành công!"
   })
 }
