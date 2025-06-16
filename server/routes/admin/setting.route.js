@@ -5,7 +5,7 @@ const CloudinaryHelper = require("../../helper/cloudinay.helper");
 const upload = multer({ storage: CloudinaryHelper.storage });
 
 const settingController = require("../../controller/admin/setting.controller");
-const settingValidate = require("../../validate/website-info.validate")
+const settingValidate = require("../../validate/setting.validate")
 
 router.get(
   "/website-info",
@@ -72,6 +72,18 @@ router.patch(
   "/admin-account/delete",
   settingValidate.adminAccountDeletePatch,
   settingController.adminAccountDeletePatch
+)
+
+router.get(
+  "/admin-account/edit/:id",
+  settingController.adminAccountEditGet
+)
+
+router.patch(
+  "/admin-account/edit/:id",
+  upload.single("avatar"),
+  settingValidate.adminAccountEdit,
+  settingController.adminAccountEdit
 )
 
 module.exports = router;

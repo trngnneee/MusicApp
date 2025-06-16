@@ -314,3 +314,74 @@ module.exports.adminAccountDeletePatch = async (req, res) => {
     message: "Xóa thành công!"
   })
 }
+
+module.exports.adminAccountEditGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const rawUserInfo = await AdminAccount.findOne({
+      _id: id
+    })
+
+    const userInfo = {
+      fullName: rawUserInfo.fullName,
+      email: rawUserInfo.email,
+      phone: rawUserInfo.phone,
+      role: rawUserInfo.role,
+      jobPosition: rawUserInfo.jobPosition,
+      status: rawUserInfo.status,
+      avatar: rawUserInfo.avatar
+    };
+
+    const roleRawList = await Role.find({
+      deleted: false
+    })
+    const roleList = [];
+    for (const item of roleRawList) {
+      roleList.push({
+        id: item.id,
+        name: item.name
+      })
+    }
+
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      userInfo: userInfo,
+      roleList: roleList
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.adminAccountEdit = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (req.file) {
+      req.body.avatar = req.file.path;
+    }
+    else delete req.body.avatar;
+
+    req.body.updatedBy = req.account.id;
+
+    await AdminAccount.updateOne({
+      _id: id
+    }, req.body);
+
+    res.json({
+      code: "success",
+      message: "Chỉnh sửa tài khoản quản trị thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
