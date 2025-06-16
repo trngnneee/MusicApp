@@ -262,7 +262,7 @@ export const MainPage = () => {
             <table className="bg-white w-full min-w-[1000px]">
               <thead className="">
                 <tr className="bg-[#FCFDFD]">
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">
+                  <th className="px-[32px] py-[15px] text-left align-middle">
                     <input
                       type="checkbox"
                       className="translate-y-[2px]"
@@ -272,20 +272,20 @@ export const MainPage = () => {
                       }}
                     />
                   </th>
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Tên danh mục</th>
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Ảnh đại diện</th>
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Vị trí</th>
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Trạng thái</th>
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Tạo bởi</th>
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Cập nhật bởi</th>
-                  <th className="px-[15px] xl:px-[32px] py-[15px] text-left align-middle">Hành động</th>
+                  <th className="px-[15px] xl:px-[15px] py-[15px] text-left align-middle">Tên danh mục</th>
+                  <th className="px-[15px] xl:px-[15px] py-[15px] text-left align-middle">Ảnh đại diện</th>
+                  <th className="px-[15px] xl:px-[15px] py-[15px] text-left align-middle">Vị trí</th>
+                  <th className="px-[15px] xl:px-[15px] py-[15px] text-left align-middle">Trạng thái</th>
+                  <th className="px-[15px] xl:px-[15px] py-[15px] text-left align-middle">Tạo bởi</th>
+                  <th className="px-[15px] xl:px-[15px] py-[15px] text-left align-middle">Cập nhật bởi</th>
+                  <th className="px-[15px] xl:px-[15px] py-[15px] text-left align-middle">Hành động</th>
                 </tr>
               </thead>
               <tbody>
                 {
                   categoryList && categoryList.length > 0 && categoryList.map((item, index) => (
                     <tr className="bg-white border-t-[#D5D5D5] border-t-[0.6px]" key={index}>
-                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                      <th className="px-[32px] py-[8px] text-left align-middle">
                         <input
                           type="checkbox"
                           className="translate-y-[2px]"
@@ -295,31 +295,31 @@ export const MainPage = () => {
                           }}
                         />
                       </th>
-                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">{item.name}</th>
-                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                      <th className="px-[15px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">{item.name}</th>
+                      <th className="px-[15px] py-[8px] text-left align-middle">
                         <div className="w-[60px] h-[60px] overflow-hidden">
                           <img src={item.avatar} className="w-full h-full object-cover" />
                         </div>
                       </th>
-                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
+                      <th className="px-[15px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
                         {item.position}
                       </th>
-                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                      <th className="px-[15px] py-[8px] text-left align-middle">
                         {item.status == "active" ? <Active /> : <Inactive />}
                       </th>
-                      <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                      <th className="px-[15px] xl:px-[15px] py-[8px] text-left align-middle">
                         <div className="flex flex-col items-start">
-                          <div className="font-[600] text-[14px] text-dark">{item.createdBy}</div>
-                          <div className="font-[600] text-[12px] text-dark">{item.createdAt}</div>
+                          <div className="font-[600] text-[12px] text-dark">{item.createdBy}</div>
+                          <div className="font-[600] text-[10px] text-dark">{item.createdAt}</div>
                         </div>
                       </th>
-                      <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                      <th className="px-[15px] xl:px-[15px] py-[8px] text-left align-middle">
                         <div className="flex flex-col items-start">
-                          <div className="font-[600] text-[14px] text-dark">{item.updatedBy}</div>
-                          <div className="font-[600] text-[12px] text-dark">{item.updatedAt}</div>
+                          <div className="font-[600] text-[12px] text-dark">{item.updatedBy}</div>
+                          <div className="font-[600] text-[10px] text-dark">{item.updatedAt}</div>
                         </div>
                       </th>
-                      <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
+                      <th className="px-[15px] py-[8px] text-left align-middle">
                         <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
                           <button
                             className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"

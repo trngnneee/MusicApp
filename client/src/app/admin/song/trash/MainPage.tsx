@@ -194,10 +194,10 @@ export const MainPage = () => {
             {/* End Search */}
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
-            <table className="bg-white w-full min-w-[1000px]">
+            <table className="bg-white w-full min-w-[1200px]">
               <thead className="">
                 <tr className="bg-[#FCFDFD]">
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">
+                  <th className="px-[20px] py-[15px] text-left align-middle">
                     <input
                       type="checkbox"
                       className="translate-y-[2px]"
@@ -207,20 +207,20 @@ export const MainPage = () => {
                       }}
                     />
                   </th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Tên bài hát</th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Ảnh đại diện</th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Ca sĩ</th>
-                  <th className="px-[15px] xl:px-[20px] py-[15px] text-left align-middle">Danh mục</th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Trạng thái</th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Tạo bởi</th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Cập nhật bởi</th>
-                  <th className="px-[15px] xl:px-[25px] py-[15px] text-left align-middle">Hành động</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Tên bài hát</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Ảnh đại diện</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Ca sĩ</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Danh mục</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Trạng thái</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Tạo bởi</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Cập nhật bởi</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Hành động</th>
                 </tr>
               </thead>
               <tbody>
                 {songList && songList.length > 0 && songList.map((item, index) => (
                   <tr className="bg-white border-t-[#D5D5D5] border-t-[0.6px]" key={index}>
-                    <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                    <th className="px-[20px] py-[8px] text-left align-middle">
                       <input
                         type="checkbox"
                         className="translate-y-[2px]"
@@ -230,23 +230,23 @@ export const MainPage = () => {
                         }}
                       />
                     </th>
-                    <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark w-[200px]">
+                    <th className="px-[15px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark w-[200px]">
                       {item.name}
                     </th>
-                    <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                    <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="w-[60px] h-[60px] overflow-hidden">
                         <img src={item.avatar} className="w-full h-full object-cover" />
                       </div>
                     </th>
-                    <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
+                    <th className="px-[15px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">
                       {item.singerList && item.singerList.length > 0 && item.singerList.map((singer: string, index: number) => (
                         <div className="font-[600] text-[12px] text-dark truncate" key={index}>{singer}</div>
                       ))}
                     </th>
-                    <th className="px-[15px] xl:px-[20px] py-[8px] text-left align-middle font-[600] text-[12px] text-dark">
+                    <th className="px-[15px] py-[8px] text-left align-middle font-[600] text-[12px] text-dark">
                       {item.categoryName}
                     </th>
-                    <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                    <th className="px-[15px] py-[8px] text-left align-middle">
                       {item.status == "active" ? <Active /> : <Inactive />}
                     </th>
                     <th className="px-[10px] xl:px-[10px] py-[8px] text-left align-middle">
@@ -261,7 +261,7 @@ export const MainPage = () => {
                         <div className="font-[600] text-[10px] text-dark">{item.updatedAt}</div>
                       </div>
                     </th>
-                    <th className="px-[15px] xl:px-[25px] py-[8px] text-left align-middle">
+                    <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
                         <button
                           className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
