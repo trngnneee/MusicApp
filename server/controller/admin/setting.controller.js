@@ -1,6 +1,8 @@
+const AdminAccount = require("../../model/admin-account.model");
 const Role = require("../../model/role.model");
 const WebsiteInfo = require("../../model/website-info.model");
 const slugify = require("slugify")
+const bcrypt = require("bcryptjs");
 
 module.exports.websiteInfoGet = async (req, res) => {
   const existRecord = await WebsiteInfo.findOne({});
@@ -102,6 +104,7 @@ module.exports.roleListGet = async (req, res) => {
       description: item.description
     })
   }
+
   res.json({
     code: "success",
     message: "Lấy dữ liệu thành công!",
@@ -135,5 +138,56 @@ module.exports.roleListDeletePatch = async (req, res) => {
   res.json({
     code: "success",
     message: "Xóa thành công!"
+  })
+}
+
+module.exports.adminAccountRoleListGet = async (req, res) => {
+  const roleRawList = await Role.find({
+    deleted: false
+  })
+
+  const roleList = [];
+  for (const item of roleRawList)
+  {
+    roleList.push({
+      id: item.id,
+      name: item.name
+    })
+  }
+  
+  res.json({
+    code: "success",
+    message: 'Lấy dữ liệu thành công!',
+    roleList: roleList
+  })
+}
+
+module.exports.adminAccountCreate = async (req, res) => {
+  const existAccount = await AdminAccount.findOne({
+    email: req.body.email
+  })
+  if (existAccount)
+  {
+    res.json({
+      code: "error",
+      message: "Email đã tồn tại trong hệ thống!"
+    });
+    return;
+  }
+
+  const salt = bcrypt.genSaltSync(10);
+  req.body.password = bcrypt.hashSync(req.body.password, salt);
+  
+  if (req.file)
+  {
+    req.body.avatar = req.file.path;
+  }
+
+  const newRecord = new AdminAccount(req.body);
+  await newRecord.save();
+
+  res.json({
+    code: "success",
+    message: "Tạo tài khoản quản trị thành công!"
   })
 }

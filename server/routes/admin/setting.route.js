@@ -45,4 +45,16 @@ router.patch(
   settingController.roleListDeletePatch
 )
 
+router.get(
+  "/admin-account/create",
+  settingController.adminAccountRoleListGet
+)
+
+router.post(
+  "/admin-account/create",
+  upload.single("avatar"),
+  settingValidate.adminAccountCreate,
+  settingController.adminAccountCreate
+)
+
 module.exports = router;
