@@ -210,7 +210,7 @@ export const SongEditForm = () => {
                     className="w-[18px] h-[18px]"
                     value={item.id}
                     onChange={() => { }}
-                    checked={songDetail.singers.includes(item.id)}
+                    defaultChecked={songDetail.singers.includes(item.id)}
                   />
                   <label htmlFor="singer" className="text-[14px] font-[600] text-dark">{item.name}</label>
                 </div>

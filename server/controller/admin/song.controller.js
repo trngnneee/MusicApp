@@ -153,7 +153,7 @@ module.exports.listGet = async (req, res) => {
       const singerInfo = await Singer.findOne({
         _id: id
       });
-      tmp.singerList.push(singerInfo.name);
+      if (singerInfo) tmp.singerList.push(singerInfo.name);
     }
 
     songList.push(tmp);

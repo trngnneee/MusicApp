@@ -57,4 +57,21 @@ router.post(
   settingController.adminAccountCreate
 )
 
+router.get(
+  "/admin-account/list",
+  settingController.adminAccountListGet
+)
+
+router.patch(
+  "/admin-account/apply-multi",
+  settingValidate.adminAccountApplyMulti,
+  settingController.adminAccountApplyMulti
+)
+
+router.patch(
+  "/admin-account/delete",
+  settingValidate.adminAccountDeletePatch,
+  settingController.adminAccountDeletePatch
+)
+
 module.exports = router;
