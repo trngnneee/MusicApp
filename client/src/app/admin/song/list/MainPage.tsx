@@ -6,14 +6,14 @@ import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Trash } from "@/app/components/Admin/Trash/Trash";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
-import { FiEdit, FiFilter } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import { FaUndoAlt } from "react-icons/fa";
 import React from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { DeleteButton } from "@/app/components/Admin/Button/DeleteButton/DeleteButton";
 import { Search } from "@/app/components/Admin/Search/Search";
+import { SongFilter } from "./SongFilter";
 
 export const MainPage = () => {
   const router = useRouter();
@@ -55,17 +55,6 @@ export const MainPage = () => {
         setPagination(data.pagination);
       })
   }, [status, createdBy, startDate, endDate, category, search, page]);
-
-  const renderOption = (categoryTree: any[], level = 0) => {
-    return categoryTree.map((category, index) => (
-      <React.Fragment key={index}>
-        <option value={category.id}>
-          {`${'--'.repeat(level + 1)} ${category.name}`}
-        </option>
-        {category.children && category.children.length && renderOption(category.children, level + 1)}
-      </React.Fragment>
-    ))
-  };
 
   const handleClearFilter = () => {
     setStatus("");
@@ -138,73 +127,21 @@ export const MainPage = () => {
       {isLogin && (
         <>
           <Title title={"Quản lý bài hát"} />
-          {/* Filter */}
-          <div className="w-full overflow-x-auto">
-            <ul className="flex items-center mt-[30px] min-w-[900px] w-fit">
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] rounded-l-[14px] flex gap-[12px] items-center bg-white">
-                <FiFilter className="text-dark" />
-                <div className="text-[14px] font-[700] text-dark truncate">Bộ Lọc</div>
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
-                <select
-                  className="text-[14px] font-[700] text-dark outline-none"
-                  onChange={(event) => setStatus(event.target.value)}
-                  value={status}
-                >
-                  <option value="">Trạng thái</option>
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Tạm dừng</option>
-                </select>
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
-                <select
-                  className="text-[14px] font-[700] text-dark outline-none"
-                  onChange={(event) => setCreatedBy(event.target.value)}
-                  value={createdBy}
-                >
-                  <option value="">Người tạo</option>
-                  {adminAccountList && adminAccountList.length > 0 && adminAccountList.map((item, index) => (
-                    <option value={item.id} key={index}>{item.fullName}</option>
-                  ))}
-                </select>
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[15px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
-                <input
-                  type="date"
-                  className="text-[12px] font-[700] text-dark outline-none"
-                  onChange={(event) => setStartDate(event.target.value)}
-                  value={startDate}
-                />
-                <span className="text-[14px] font-[700] text-dark outline-none">-</span>
-                <input
-                  type="date"
-                  className="text-[12px] font-[700] text-dark outline-none"
-                  onChange={(event) => setEndDate(event.target.value)}
-                  value={endDate}
-                />
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[15px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
-                <select
-                  className="text-[14px] font-[700] text-dark outline-none"
-                  onChange={(event) => setCategory(event.target.value)}
-                  value={category}
-                >
-                  <option value="">Danh mục</option>
-                  {categoryTree && categoryTree.length > 0 && renderOption(categoryTree)}
-                </select>
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[15px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
-                <button
-                  className="flex items-center gap-[10px] text-[#EA0234] truncate"
-                  onClick={handleClearFilter}
-                >
-                  <FaUndoAlt />
-                  <div className="text-[14px] font-[700]">Xóa bộ lọc</div>
-                </button>
-              </li>
-            </ul>
-          </div>
-          {/* End Filter */}
+          <SongFilter
+            status={status}
+            setStatus={setStatus}
+            createdBy={createdBy}
+            setCreatedBy={setCreatedBy}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            category={category}
+            setCategory={setCategory}
+            adminAccountList={adminAccountList}
+            categoryTree={categoryTree}
+            handleClearFilter={handleClearFilter}
+          />
           <div className="flex gap-[20px] mt-[15px] flex-wrap">
             {/* Apply Multi */}
             <ul className="flex flex-row items-center">

@@ -197,7 +197,7 @@ export const MainPage = () => {
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
                         <RecoveryButton
-                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/recovery/${item.id}`}
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/trash/recovery/${item.id}`}
                           id={item.id}
                           handleRecoverySuccess={() => handleRecoverySuccess(item.id)}
                         />
