@@ -37,7 +37,6 @@ export const SongEditForm = () => {
     })
       .then(res => res.json())
       .then((data) => {
-        console.log(data);
         setSongDetail(data.songDetail);
         setCategoryTree(data.categoryTree);
         setSingerList(data.singerList);
@@ -206,13 +205,14 @@ export const SongEditForm = () => {
                 <div className="flex items-center gap-[10px]" key={index}>
                   <input
                     name="singer"
+                    id={item.id}
                     type="checkbox"
                     className="w-[18px] h-[18px]"
                     value={item.id}
                     onChange={() => { }}
                     defaultChecked={songDetail.singers.includes(item.id)}
                   />
-                  <label htmlFor="singer" className="text-[14px] font-[600] text-dark">{item.name}</label>
+                  <label htmlFor={item.id} className="text-[14px] font-[600] text-dark">{item.name}</label>
                 </div>
               ))}
             </div>

@@ -385,3 +385,51 @@ module.exports.adminAccountEdit = async (req, res) => {
     })
   }
 }
+
+module.exports.roleEditGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const rawRoleInfo = await Role.findOne({
+      _id: id
+    })
+
+    const roleInfo = {
+      name: rawRoleInfo.name,
+      description: rawRoleInfo.description,
+      permissions: rawRoleInfo.permissions
+    }
+
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      roleInfo: roleInfo
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.roleEditPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Role.updateOne({
+      _id: id
+    }, req.body)
+
+    res.json({
+      code: "success",
+      message: "Chỉnh sửa nhóm quyền thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}

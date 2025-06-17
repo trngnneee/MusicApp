@@ -5,6 +5,7 @@ import { RoleMultipleApply } from "@/app/components/Admin/MultipleApply/RoleMult
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
@@ -12,6 +13,7 @@ import { IoSearch } from "react-icons/io5";
 import { toast, Toaster } from "sonner";
 
 export const MainPage = () => {
+  const router = useRouter();
   const { isLogin, userInfo } = useAuth();
   const [roleList, setRoleList] = useState<any[]>([]);
   const [pagination, setPagination] = useState<any>();
@@ -192,7 +194,12 @@ export const MainPage = () => {
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">{item.description}</th>
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"><FiEdit /></button>
+                        <button 
+                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+                          onClick={() => router.push(`/admin/setting/role/edit/${item.id}`)}
+                        >
+                          <FiEdit />
+                        </button>
                         <button
                           className="px-[16px] py-[11px] text-[#EF3826]"
                           onClick={() => handleDelete(item.id)}

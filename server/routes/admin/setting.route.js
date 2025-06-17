@@ -86,4 +86,15 @@ router.patch(
   settingController.adminAccountEdit
 )
 
+router.get(
+  "/role/edit/:id",
+  settingController.roleEditGet
+)
+
+router.patch(
+  "/role/edit/:id",
+  settingValidate.roleEditPatch,
+  settingController.roleEditPatch
+)
+
 module.exports = router;
