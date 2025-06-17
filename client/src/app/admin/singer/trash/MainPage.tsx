@@ -26,12 +26,11 @@ export const MainPage = () => {
   const [page, setPage] = useState("");
 
   useEffect(() => {
-    let query = "";
+    const params = new URLSearchParams();
+    if (search) params.append("search", search);
+    if (page) params.append("page", page);
 
-    if (page) query += `?page=${page}`;
-    if (search) query += `?search=${search}`;
-
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/trash/list${query}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/trash/list?${params.toString()}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -135,12 +134,7 @@ export const MainPage = () => {
                 type="text"
                 placeholder="Tìm kiếm"
                 className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onKeyUp={(event) => {
-                  if (event.key === "Enter") {
-                    const target = event.target as HTMLInputElement;
-                    setSearch(target.value);
-                  }
-                }}
+                onChange={(event) => setSearch(event.target.value)}
               />
             </div>
             {/* End Search */}

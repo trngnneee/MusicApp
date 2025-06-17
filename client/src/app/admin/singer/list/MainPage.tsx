@@ -31,14 +31,14 @@ export const MainPage = () => {
   const [applyStatus, setApplyStatus] = useState("");
 
   useEffect(() => {
-    let query = "";
-    if (status) query += `?status=${status}`;
-    if (startDate) query += `?startDate=${startDate}`;
-    if (endDate) query += `?endDate=${endDate}`;
-    if (search) query += `?search=${search}`;
-    if (page) query += `?page=${page}`;
+    const params = new URLSearchParams();
+    if (status) params.append("status", status);
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    if (search) params.append("search", search);
+    if (page) params.append("page", page);
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/list${query}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/list?${params.toString()}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -196,12 +196,7 @@ export const MainPage = () => {
                 type="text"
                 placeholder="Tìm kiếm"
                 className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onKeyUp={(event) => {
-                  if (event.key === "Enter") {
-                    const target = event.target as HTMLInputElement;
-                    setSearch(target.value);
-                  }
-                }}
+                onChange={(event) => setSearch(event.target.value)}
               />
             </div>
             {/* End Search */}

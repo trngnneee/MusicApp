@@ -21,9 +21,6 @@ export const MainPage = () => {
   const [adminAccountList, setAdminAccountList] = useState<any[]>();
   const [pagination, setPagination] = useState<any>();
 
-  const [applying, setApplying] = useState(false);
-  const [deleting, setDeleting] = useState(false);
-
   const [status, setStatus] = useState("");
   const [createdBy, setCreatedBy] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -35,15 +32,15 @@ export const MainPage = () => {
   const [applyMulti, setApplyMulti] = useState("");
 
   useEffect(() => {
-    let query = "";
-    if (status) query += `?status=${status}`;
-    if (createdBy) query += `?createdBy=${createdBy}`;
-    if (startDate) query += `?startDate=${startDate}`;
-    if (endDate) query += `?endDate=${endDate}`;
-    if (search) query += `?search=${search}`;
-    if (page) query += `?page=${page}`;
+    const params = new URLSearchParams();
+    if (status) params.append("status", status);
+    if (createdBy) params.append("createdBy", createdBy);
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    if (search) params.append("search", search);
+    if (page) params.append("page", page);
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/list${query}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/list?${params.toString()}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -64,9 +61,7 @@ export const MainPage = () => {
   };
 
   const handleApplyMulti = () => {
-    if (applying) return;
     if (applyMulti && checkList && checkList.length) {
-      setApplying(true);
 
       const finalData = {
         status: applyMulti,
@@ -109,7 +104,6 @@ export const MainPage = () => {
         },
         error: (data) => data.message
       })
-      setApplying(false);
     }
     else {
       toast.error('Vui lòng chọn Danh mục hoặc Phần tử cần áp dụng!')
@@ -202,7 +196,6 @@ export const MainPage = () => {
                 <button
                   className="text-[#EA0234] text-[14px] font-[700]"
                   onClick={handleApplyMulti}
-                  disabled={applying}
                 >
                   Áp dụng
                 </button>
@@ -216,12 +209,7 @@ export const MainPage = () => {
                 type="text"
                 placeholder="Tìm kiếm"
                 className="text-dark text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onKeyUp={(event) => {
-                  if (event.key === "Enter") {
-                    const target = event.target as HTMLInputElement;
-                    setSearch(target.value);
-                  }
-                }}
+                onChange={(event) => setSearch(event.target.value)}
               />
             </div>
             {/* End Search */}

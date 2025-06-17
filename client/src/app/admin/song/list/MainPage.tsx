@@ -36,16 +36,16 @@ export const MainPage = () => {
   const [applyMultiStatus, setApplyMultiStatus] = useState("");
 
   useEffect(() => {
-    let query = "";
-    if (status) query += `?status=${status}`;
-    if (createdBy) query += `?createdBy=${createdBy}`;
-    if (startDate) query += `?startDate=${startDate}`;
-    if (endDate) query += `?endDate=${endDate}`;
-    if (category) query += `?category=${category}`;
-    if (search) query += `?search=${search}`;
-    if (page) query += `?page=${page}`;
+    const params = new URLSearchParams();
+    if (status) params.append("status", status);
+    if (createdBy) params.append("createdBy", createdBy);
+    if (startDate) params.append("startDate", startDate);
+    if (endDate) params.append("endDate", endDate);
+    if (search) params.append("search", search);
+    if (category) params.append("category", category);
+    if (page) params.append("page", page);
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/list${query}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/list?${params.toString()}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -238,12 +238,7 @@ export const MainPage = () => {
                 type="text"
                 placeholder="Tìm kiếm"
                 className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onKeyUp={(event) => {
-                  if (event.key === "Enter") {
-                    const target = event.target as HTMLInputElement;
-                    setSearch(target.value);
-                  }
-                }}
+                onChange={(event) => setSearch(event.target.value)}
               />
             </div>
             {/* End Search */}
