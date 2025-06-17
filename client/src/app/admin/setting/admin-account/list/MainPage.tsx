@@ -81,7 +81,7 @@ export const MainPage = () => {
               setAdminAccountList(adminAccountList.filter((item) => !checkList.includes(item.id)));
               setPagination(prev => ({
                 ...prev,
-                totalRecord: prev.totalRecord - 1
+                totalRecord: prev.totalRecord - checkList.length
               }));
             }
             else {

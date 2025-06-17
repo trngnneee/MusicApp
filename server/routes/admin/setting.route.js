@@ -56,6 +56,27 @@ router.patch(
 )
 
 router.get(
+  "/role/trash/list",
+  settingController.roleTrashGet
+)
+
+router.delete(
+  "/role/trash/hard-delete/:id",
+  settingController.roleTrashHardDelete
+)
+
+router.patch(
+  "/role/trash/recovery/:id",
+  settingController.roleTrashRecoveryPatch
+)
+
+router.patch(
+  "/role/trash/apply-multi",
+  settingValidate.roleTrashApplyMulti,
+  settingController.roleTrashApplyMulti,
+)
+
+router.get(
   "/admin-account/create",
   settingController.adminAccountRoleListGet
 )

@@ -84,7 +84,7 @@ export const MainPage = () => {
               setSingerList(singerList.filter((item) => !idList.includes(item.id)));
               setPagination(prev => ({
                 ...prev,
-                totalRecord: prev.totalRecord - 1
+                totalRecord: prev.totalRecord - idList.length
               }));
             }
             else {

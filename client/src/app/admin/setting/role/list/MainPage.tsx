@@ -4,6 +4,7 @@ import { DeleteButton } from "@/app/components/Admin/Button/DeleteButton/DeleteB
 import { Create } from "@/app/components/Admin/Create/Create";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
+import { Trash } from "@/app/components/Admin/Trash/Trash";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -63,7 +64,7 @@ export const MainPage = () => {
             setRoleList(roleList.filter((item) => !idList.includes(item.id)));
             setPagination(prev => ({
               ...prev,
-              totalRecord: prev.totalRecord - 1
+              totalRecord: prev.totalRecord - idList.length
             }));
           }
           return data.message;
@@ -112,7 +113,10 @@ export const MainPage = () => {
             <Search
               onSearchChange={setSearch}
             />
-            <Create link={"/admin/setting/role/create"} />
+            <div className="flex gap-[10px]">
+              <Create link={"/admin/setting/role/create"} />
+              <Trash link={"/admin/setting/role/trash"}/>
+            </div>
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
             <table className="bg-white w-full min-w-[600px]">

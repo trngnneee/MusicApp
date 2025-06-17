@@ -198,6 +198,129 @@ module.exports.roleEditPatch = async (req, res) => {
   }
 }
 
+module.exports.roleTrashGet = async (req, res) => {
+  const find = {
+    deleted: true
+  };
+
+  if (req.query.search) {
+    const search = slugify(req.query.search, {
+      lower: true
+    });
+    const searchRegex = new RegExp(search);
+    find.slug = searchRegex;
+  }
+
+  const limitItem = 5;
+  const totalRecord = await Role.countDocuments(find);
+  const totalPage = Math.ceil(totalRecord / limitItem);
+
+  let page = 1;
+  if (req.query.page) {
+    const tmp = parseInt(req.query.page);
+    if (tmp > 0) page = tmp;
+  }
+  if (totalPage != 0 && page > totalPage) {
+    page = totalPage;
+  }
+  const skip = (page - 1) * limitItem;
+
+  const pagination = {
+    limitItem: limitItem,
+    totalRecord: totalRecord,
+    totalPage: totalPage,
+    skip: skip
+  };
+
+  const rawRoleList = await Role.find(find).limit(limitItem).skip(skip);
+  const roleList = [];
+  for (const item of rawRoleList) {
+    roleList.push({
+      id: item.id,
+      name: item.name,
+      description: item.description
+    })
+  }
+
+  res.json({
+    code: "success",
+    message: "Lấy dữ liệu thành công!",
+    roleList: roleList,
+    pagination: pagination
+  })
+}
+
+module.exports.roleTrashHardDelete = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Role.deleteOne({
+      _id: id
+    })
+
+    res.json({
+      code: "success",
+      message: "Xóa thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.roleTrashRecoveryPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Role.updateOne({
+      _id: id
+    }, {
+      deleted: false,
+      updatedAt: Date.now(),
+      updatedBy: req.account.id
+    })
+
+    res.json({
+      code: "success",
+      message: "Khôi phục thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.roleTrashApplyMulti = async (req, res) => {
+  switch (req.body.status) {
+    case "hard-delete": 
+      {
+        await Role.deleteMany({
+          _id: { $in: req.body.idList }
+        })
+        break;
+      }
+    case "recovery":
+      {
+        await Role.updateMany({
+          _id: { $in: req.body.idList }
+        }, {
+          deleted: false,
+          updatedBy: req.account.id,
+          updatedAt: Date.now()
+        })
+        break;
+      }
+  }
+  res.json({
+    code: "success",
+    message: "Áp dụng thành công!"
+  })
+}
+
 module.exports.adminAccountRoleListGet = async (req, res) => {
   const roleRawList = await Role.find({
     deleted: false
@@ -590,7 +713,7 @@ module.exports.trashRecoveryPatch = async (req, res) => {
       deleted: false,
       updatedAt: Date.now(),
       updatedBy: req.account.id
-    }) 
+    })
     res.json({
       code: "success",
       message: "Khôi phục thành công!"
