@@ -95,4 +95,25 @@ router.patch(
   settingController.adminAccountEdit
 )
 
+router.get(
+  "/admin-account/trash",
+  settingController.trashListGet
+)
+
+router.patch(
+  "/admin-account/trash/apply-multi",
+  settingValidate.trashApplyMulti,
+  settingController.trashApplyMulti
+)
+
+router.delete(
+  "/admin-account/trash/hard-delete/:id",
+  settingController.trashHardDelete
+)
+
+router.patch(
+  "/admin-account/trash/recovery/:id",
+  settingController.trashRecoveryPatch
+)
+
 module.exports = router;

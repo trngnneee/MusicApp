@@ -74,7 +74,7 @@ export const AdminAccountEditForm = () => {
     const status = event.target.status.value;
 
     let avatar = null;
-    if (avatars.length > 0) {
+    if (avatars && avatars.length > 0) {
       avatar = avatars[0].file;
     }
 
@@ -94,6 +94,7 @@ export const AdminAccountEditForm = () => {
     })
       .then(res => res.json())
       .then((data) => {
+        setIsSubmitting(false);
         return data;
       })
 
@@ -101,13 +102,10 @@ export const AdminAccountEditForm = () => {
       loading: "Đang xử lý...",
       success: (data) => {
         if (data.code == "success") {
-          setIsSubmitting(false);
-
         }
         return data.message;
       },
       error: (data) => {
-        setIsSubmitting(false);
         return data.message;
       }
     })

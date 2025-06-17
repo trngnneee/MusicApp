@@ -103,6 +103,7 @@ export const SongEditForm = () => {
       })
         .then(res => res.json())
         .then((data) => {
+          setIsSubmitting(false);
           return data;
         })
 
@@ -110,12 +111,10 @@ export const SongEditForm = () => {
         loading: "Đang xử lý...",
         success: (data) => {
           if (data.code == "success") {
-            setIsSubmitting(false);
           }
           return data.message;
         },
         error: (data) => {
-          setIsSubmitting(false);
           return data.message;
         }
       })

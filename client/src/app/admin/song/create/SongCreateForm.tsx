@@ -112,6 +112,7 @@ export const SongCreateForm = () => {
       })
         .then(res => res.json())
         .then((data) => {
+          setIsSubmitting(false);
           return data;
         })
       
@@ -121,12 +122,10 @@ export const SongCreateForm = () => {
           if (data.code == "success")
           {
             router.push("/admin/song/list");
-            setIsSubmitting(false);
           }
           return data.message;
         },
         error: (data) => {
-          setIsSubmitting(false);
           return data.message;
         }
       })

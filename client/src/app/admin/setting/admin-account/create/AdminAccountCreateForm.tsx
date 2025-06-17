@@ -47,7 +47,7 @@ export const AdminAccountCreateForm = () => {
       const password = event.target.password.value;
 
       let avatar = null;
-      if (avatars.length > 0) {
+      if (avatars && avatars.length > 0) {
         avatar = avatars[0].file;
       }
 
@@ -68,6 +68,7 @@ export const AdminAccountCreateForm = () => {
       })
         .then(res => res.json())
         .then((data) => {
+          setIsSubmitting(false);
           return data;
         })
 
@@ -76,13 +77,10 @@ export const AdminAccountCreateForm = () => {
         success: (data) => {
           if (data.code == "success") {
             router.push("/admin/setting/admin-account/list");
-            setIsSubmitting(false);
-
           }
           return data.message;
         },
         error: (data) => {
-          setIsSubmitting(false);
           return data.message;
         }
       })

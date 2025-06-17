@@ -22,7 +22,7 @@ export const SingerEditForm = () => {
 
   const [status, setStatus] = useState("");
 
-  const fetchData = () => {
+  useEffect(() => {
     const id = params.id;
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/edit/${id}`, {
       credentials: "include"
@@ -37,10 +37,6 @@ export const SingerEditForm = () => {
           }
         ])
       })
-  }
-
-  useEffect(() => {
-    fetchData();
   }, [])
 
   useEffect(() => {
@@ -68,7 +64,7 @@ export const SingerEditForm = () => {
       const description = event.target.description.value;
 
       let avatar = null;
-      if (avatars.length > 0) {
+      if (avatars && avatars.length > 0) {
         avatar = avatars[0].file;
       }
 
@@ -86,6 +82,7 @@ export const SingerEditForm = () => {
       })
         .then(res => res.json())
         .then(data => {
+          setIsSubmitting(false);
           return data;
         })
 
@@ -93,13 +90,10 @@ export const SingerEditForm = () => {
         loading: "Đang xử lý...",
         success: (data) => {
           if (data.code == "success") {
-            fetchData();
-            setIsSubmitting(false);
           }
           return data.message;
         },
         error: (data) => {
-          setIsSubmitting(false);
           return data.message;
         }
       })

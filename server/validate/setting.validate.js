@@ -247,3 +247,31 @@ module.exports.roleEditPatch = (req, res, next) => {
 
   next();
 }
+
+module.exports.trashApplyMulti = (req, res, next) => {
+  const schema = Joi.object({
+    status: Joi.string()
+      .required()
+      .messages({
+        "string.empty": "Trạng thái áp dụng bắt buộc!",
+      }),
+    idList: Joi.array()
+      .required()
+      .messages({
+        "string.empty": "Danh sách phần tử cần áp dụng bắt buộc!",
+      }),
+  });
+
+  const { error } = schema.validate(req.body);
+
+  if (error) {
+    const errorMessage = error.details[0].message;
+    res.json({
+      code: "error",
+      message: errorMessage
+    })
+    return;
+  }
+
+  next();
+}

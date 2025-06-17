@@ -42,7 +42,7 @@ export const SingerCreateForm = () => {
       const description = event.target.description.value;
 
       let avatar = null;
-      if (avatars.length > 0) {
+      if (avatar && avatars.length > 0) {
         avatar = avatars[0].file;
       }
 

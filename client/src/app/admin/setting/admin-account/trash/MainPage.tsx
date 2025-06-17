@@ -1,6 +1,5 @@
 "use client"
 
-import { Create } from "@/app/components/Admin/Create/Create";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
@@ -10,9 +9,8 @@ import { useEffect, useState } from "react";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { toast, Toaster } from "sonner";
 import { useRouter } from "next/navigation";
-import { DeleteButton } from "@/app/components/Admin/Button/DeleteButton/DeleteButton";
-import { AdminAccountFilter } from "./AdminAccountFilter";
-import { Trash } from "@/app/components/Admin/Trash/Trash";
+import { HardDeleteButton } from "@/app/components/Admin/Button/HardDeleteButton/HardDeleteButton";
+import { RecoveryButton } from "@/app/components/Admin/Button/RecoveryButton/RecoveryButton";
 
 export const MainPage = () => {
   const router = useRouter();
@@ -37,7 +35,7 @@ export const MainPage = () => {
     if (search) params.append("search", search);
     if (page) params.append("page", page);
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/list?${params.toString()}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/trash?${params.toString()}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -48,11 +46,6 @@ export const MainPage = () => {
       })
   }, [status, role, search, page])
 
-  const handleClearFilter = () => {
-    setStatus("");
-    setRole("");
-  }
-
   const handleApplyMulti = () => {
     if (applyMulti && checkList && checkList.length) {
 
@@ -60,7 +53,7 @@ export const MainPage = () => {
         status: applyMulti,
         idList: checkList
       };
-      const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/apply-multi`, {
+      const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/trash/apply-multi`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -76,23 +69,11 @@ export const MainPage = () => {
       toast.promise(promise, {
         loading: "Đang xử lý...",
         success: (data) => {
-          if (data.code == "success") {
-            if (applyMulti == "delete") {
-              setAdminAccountList(adminAccountList.filter((item) => !checkList.includes(item.id)));
-              setPagination(prev => ({
-                ...prev,
-                totalRecord: prev.totalRecord - 1
-              }));
-            }
-            else {
-              setAdminAccountList(adminAccountList.map((item) => {
-                if (checkList.includes(item.id)) {
-                  return { ...item, status: applyMulti };
-                }
-                return item;
-              }))
-            }
-          }
+          setAdminAccountList(adminAccountList.filter((item) => !checkList.includes(item.id)));
+          setPagination(prev => ({
+            ...prev,
+            totalRecord: prev.totalRecord - 1
+          }));
           return data.message;
         },
         error: (data) => data.message
@@ -103,6 +84,10 @@ export const MainPage = () => {
     }
   }
 
+  const handleRecoverySuccess = (id: string) => {
+    setAdminAccountList(adminAccountList.filter((item) => item.id != id));
+  }
+  
   const handleDeleteSuccess = (id: string) => {
     setAdminAccountList(adminAccountList.filter((item) => item.id != id));
   }
@@ -112,15 +97,7 @@ export const MainPage = () => {
       {isLogin && (
         <>
           <Toaster />
-          <Title title={"Tài khoản quản trị"} />
-          <AdminAccountFilter
-            status={status}
-            setStatus={setStatus}
-            role={role}
-            setRole={setRole}
-            roleList={roleList}
-            handleClearFilter={handleClearFilter}
-          />
+          <Title title={"Thùng rác tài khoản quản trị"} />
           <div className="flex gap-[20px] sm:gap-[30px] mt-[15px] flex-wrap">
             {/* Apply Multi */}
             <ul className="flex flex-row items-center">
@@ -131,9 +108,8 @@ export const MainPage = () => {
                   onChange={(event) => setApplyMulti(event.target.value)}
                 >
                   <option value="">-- Hành động --</option>
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Tạm dừng</option>
-                  <option value="delete">Xóa</option>
+                  <option value="recovery">Khôi phục</option>
+                  <option value="hard-delete">Xóa vĩnh viễn</option>
                 </select>
               </li>
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
@@ -149,10 +125,6 @@ export const MainPage = () => {
             <Search
               onSearchChange={setSearch}
             />
-            <div className="flex gap-[10px]">
-              <Create link={"/admin/setting/admin-account/create"} />
-              <Trash link={"/admin/setting/admin-account/trash"}/>
-            </div>
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
             <table className="bg-white w-full min-w-[1000px]">
@@ -208,14 +180,13 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button
-                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                          onClick={() => router.push(`/admin/setting/admin-account/edit/${item.id}`)}
-                        >
-                          <FiEdit />
-                        </button>
-                        <DeleteButton
-                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/delete/${item.id}`}
+                        <RecoveryButton
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/trash/recovery/${item.id}`}
+                          id={item.id}
+                          handleRecoverySuccess={() => handleRecoverySuccess(item.id)}
+                        />
+                        <HardDeleteButton
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/trash/hard-delete/${item.id}`}
                           id={item.id}
                           handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
                         />
