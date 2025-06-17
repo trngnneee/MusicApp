@@ -1,6 +1,7 @@
 "use client"
 
 import { HardDeleteButton } from "@/app/components/Admin/Button/HardDeleteButton/HardDeleteButton";
+import { RecoveryButton } from "@/app/components/Admin/Button/RecoveryButton/RecoveryButton";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Title } from "@/app/components/Admin/Title/Title";
@@ -77,42 +78,20 @@ export const MainPage = () => {
     }
   }
 
-  const handleRecover = (id: string) => {
-    const finalData = {
-      id: id
-    };
-
-    const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/recovery`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(finalData),
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then(data => {
-        return data;
-      });
-
-    toast.promise(promise, {
-      loading: "Đang xử lý...",
-      success: (data) => {
-        if (data.code == "success") {
-          setTrashList(trashList.filter((item) => item.id != id));
-          setPagination(prev => ({
-            ...prev,
-            totalRecord: prev.totalRecord - 1
-          }));
-        }
-        return data.message;
-      },
-      error: (data) => data.message
-    })
+  const handleRecoverySuccess = (id: string) => {
+    setTrashList(trashList.filter((item) => item.id != id));
+    setPagination(prev => ({
+      ...prev,
+      totalRecord: prev.totalRecord - 1
+    }));
   }
 
   const handleDeleteSuccess = (id: string) => {
     setTrashList(trashList.filter((item) => item.id != id));
+    setPagination(prev => ({
+      ...prev,
+      totalRecord: prev.totalRecord - 1
+    }));
   }
 
   return (
@@ -223,12 +202,11 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button
-                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                          onClick={() => handleRecover(item.id)}
-                        >
-                          <RiResetLeftFill />
-                        </button>
+                        <RecoveryButton
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/recovery/${item.id}`}
+                          id={item.id}
+                          handleRecoverySuccess={() => handleRecoverySuccess(item.id)}
+                        />
                         <HardDeleteButton
                           api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/hard-delete/${item.id}`}
                           id={item.id}

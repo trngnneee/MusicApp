@@ -128,6 +128,10 @@ export const MainPage = () => {
 
   const handleDeleteSuccess = (id: string) => {
     setSongList(songList.filter((item) => item.id != id));
+    setPagination(prev => ({
+      ...prev,
+      totalRecord: prev.totalRecord - 1
+    }));
   }
 
   return (

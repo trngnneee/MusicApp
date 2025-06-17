@@ -59,8 +59,7 @@ router.patch(
 )
 
 router.patch(
-  "/trash/recovery",
-  categoryValidate.recoveryPatch,
+  "/trash/recovery/:id",
   categoryController.recoveryPatch,
 )
 

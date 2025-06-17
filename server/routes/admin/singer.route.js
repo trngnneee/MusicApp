@@ -42,8 +42,7 @@ router.patch(
 )
 
 router.patch(
-  "/trash/recovery",
-  singerValidate.recoveryPatch,
+  "/trash/recovery/:id",
   singerController.recoveryPatch,
 )
 

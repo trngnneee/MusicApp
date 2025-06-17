@@ -83,29 +83,6 @@ module.exports.trashApplyMultiPatch = (req, res, next) => {
   next();
 }
 
-module.exports.recoveryPatch = (req, res, next) => {
-  const schema = Joi.object({
-    id: Joi.string()
-      .required()
-      .messages({
-        "string.empty": "ID bắt buộc!",
-      })
-  });
-
-  const { error } = schema.validate(req.body);
-
-  if (error) {
-    const errorMessage = error.details[0].message;
-    res.json({
-      code: "error",
-      message: errorMessage
-    })
-    return;
-  }
-
-  next();
-}
-
 module.exports.editPatch = (req, res, next) => {
   const schema = Joi.object({
     name: Joi.string()

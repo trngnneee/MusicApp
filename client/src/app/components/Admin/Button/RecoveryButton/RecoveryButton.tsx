@@ -1,14 +1,14 @@
-import { FaRegTrashCan } from "react-icons/fa6";
+import { RiResetLeftFill } from "react-icons/ri";
 import { toast } from "sonner";
 
-export const DeleteButton = (props: {
+export const RecoveryButton = (props: {
   api: string,
   id: string,
-  handleDeleteSuccess: (id: string) => void
+  handleRecoverySuccess: (id: string) => void
 }) => {  
-  const { api, id, handleDeleteSuccess } = props;
+  const { api, id, handleRecoverySuccess } = props;
 
-  const handleDelete = () => {
+  const handleRecovery = () => {
     const promise = fetch(api, {
       credentials: "include",
       method: "PATCH"
@@ -21,7 +21,7 @@ export const DeleteButton = (props: {
     toast.promise(promise, {
       loading: 'Đang xử lý...',
       success: (data) => {
-        handleDeleteSuccess(id);
+        handleRecoverySuccess(id);
         return data.message;
       },
       error: (data) => {
@@ -33,10 +33,10 @@ export const DeleteButton = (props: {
   return (
     <>
       <button
-        className="px-[16px] py-[11px] text-[#EF3826]"
-        onClick={() => handleDelete()}
+        className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+        onClick={() => handleRecovery()}
       >
-        <FaRegTrashCan />
+        <RiResetLeftFill />
       </button>
     </>
   );

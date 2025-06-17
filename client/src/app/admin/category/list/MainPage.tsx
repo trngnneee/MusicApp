@@ -99,7 +99,7 @@ export const MainPage = () => {
             else {
               setCategoryList(categoryList.map((item) => {
                 if (checkList.includes(item.id)) {
-                  return { ...item, status: applyMulti }; 
+                  return { ...item, status: applyMulti };
                 }
                 return item;
               }))
@@ -118,6 +118,10 @@ export const MainPage = () => {
 
   const handleDeleteSuccess = (id: string) => {
     setCategoryList(categoryList.filter((item) => item.id != id));
+    setPagination(prev => ({
+      ...prev,
+      totalRecord: prev.totalRecord - 1
+    }));
   }
 
   return (

@@ -440,18 +440,26 @@ module.exports.trashApplyMultiPatch = async (req, res) => {
 }
 
 module.exports.recoveryPatch = async (req, res) => {
-  await Song.updateOne({
-    _id: req.body.id
-  }, {
-    deleted: false,
-    updatedAt: Date.now(),
-    updatedBy: req.account.id
-  })
-
-  res.json({
-    code: "success",
-    message: "Khôi phục thành công!"
-  })
+  try {
+    const id = req.params.id;
+    await Song.updateOne({
+      _id: id
+    }, {
+      deleted: false,
+      updatedBy: req.account.id,
+      updatedAt: Date.now()
+    })
+    res.json({
+      code: "success",
+      message: "Khôi phục thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }
 
 module.exports.hardDelete = async (req, res) => {
