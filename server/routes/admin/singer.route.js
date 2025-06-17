@@ -26,8 +26,7 @@ router.patch(
 )
 
 router.patch(
-  "/delete",
-  singerValidate.deletePatch,
+  "/delete/:id",
   singerController.deletePatch
 )
 
@@ -49,8 +48,7 @@ router.patch(
 )
 
 router.delete(
-  "/trash/hard-delete",
-  singerValidate.hardDelete,
+  "/trash/hard-delete/:id",
   singerController.hardDelete,
 )
 

@@ -31,8 +31,7 @@ router.patch(
 )
 
 router.patch(
-  "/delete",
-  categoryValidate.deletePatch,
+  "/delete/:id",
   categoryController.deletePatch
 )
 
@@ -66,8 +65,7 @@ router.patch(
 )
 
 router.delete(
-  "/trash/hard-delete",
-  categoryValidate.hardDelete,
+  "/trash/hard-delete/:id",
   categoryController.hardDelete
 )
 

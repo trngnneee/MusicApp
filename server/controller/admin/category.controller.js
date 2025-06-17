@@ -171,17 +171,26 @@ module.exports.applyMultiPatch = async (req, res) => {
 }
 
 module.exports.deletePatch = async (req, res) => {
-  await Category.updateOne({
-    _id: req.body.id
-  }, {
-    deleted: true,
-    deletedBy: req.account.id,
-    deletedAt: Date.now()
-  })
-  res.json({
-    code: "success",
-    message: "Xóa thành công!"
-  })
+  try {
+    const id = req.params.id;
+    await Category.updateOne({
+      _id: id
+    }, {
+      deleted: true,
+      deletedBy: req.account.id,
+      deletedAt: Date.now()
+    })
+    res.json({
+      code: "success",
+      message: "Xóa thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }
 
 module.exports.editGet = async (req, res) => {
@@ -254,8 +263,7 @@ module.exports.trashGet = async (req, res) => {
     deleted: true
   };
 
-  if (req.query.search)
-  {
+  if (req.query.search) {
     const search = slugify(req.query.search, {
       lower: true
     });
@@ -268,13 +276,11 @@ module.exports.trashGet = async (req, res) => {
   const totalPage = Math.ceil(totalRecord / limitItem);
 
   let page = 1;
-  if (req.query.page)
-  {
+  if (req.query.page) {
     const tmp = parseInt(req.query.page);
     if (tmp > 0) page = tmp;
   }
-  if (totalRecord != 0 && page > totalPage)
-  {
+  if (totalRecord != 0 && page > totalPage) {
     page = totalPage;
   }
   const skip = (page - 1) * limitItem;
@@ -321,8 +327,7 @@ module.exports.trashGet = async (req, res) => {
 }
 
 module.exports.trashApplyMultiPatch = async (req, res) => {
-  switch(req.body.status)
-  {
+  switch (req.body.status) {
     case "hard-delete":
       {
         await Category.deleteMany({
@@ -333,7 +338,7 @@ module.exports.trashApplyMultiPatch = async (req, res) => {
     case "recovery":
       {
         await Category.updateMany({
-          _id: { $in: req.body.idList } 
+          _id: { $in: req.body.idList }
         }, {
           deleted: false,
           updatedBy: req.account.id,
@@ -351,13 +356,13 @@ module.exports.trashApplyMultiPatch = async (req, res) => {
 
 module.exports.recoveryPatch = async (req, res) => {
   await Category.updateOne({
-    _id: req.body.id 
+    _id: req.body.id
   }, {
     deleted: false,
     updatedBy: req.account.id,
     updatedAt: Date.now()
   })
-  
+
   res.json({
     code: "success",
     message: "Khôi phục thành công!"
@@ -365,12 +370,20 @@ module.exports.recoveryPatch = async (req, res) => {
 }
 
 module.exports.hardDelete = async (req, res) => {
-  await Category.deleteOne({
-    _id: req.body.id 
-  })
-  
-  res.json({
-    code: "success",
-    message: "Xóa vĩnh viễn thành công!"
-  })
+  try {
+    const id = req.params.id;
+    await Category.deleteOne({
+      _id: id
+    })
+    res.json({
+      code: "success",
+      message: "Xóa thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }

@@ -143,18 +143,26 @@ module.exports.applyMultiPatch = async (req, res) => {
 }
 
 module.exports.deletePatch = async (req, res) => {
-  await Singer.updateOne({
-    _id: req.body.id
-  }, {
-    deleted: true,
-    deletedBy: req.account.id,
-    deletedAt: Date.now()
-  })
-
-  res.json({
-    code: "success",
-    message: "Xóa thành công!"
-  })
+  try {
+    const id = req.params.id;
+    await Singer.updateOne({
+      _id: id
+    }, {
+      deleted: true,
+      deletedBy: req.account.id,
+      deletedAt: Date.now()
+    })
+    res.json({
+      code: "success",
+      message: "Xóa thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }
 
 module.exports.trashListGet = async (req, res) => {
@@ -271,14 +279,22 @@ module.exports.recoveryPatch = async (req, res) => {
 }
 
 module.exports.hardDelete = async (req, res) => {
-  await Singer.deleteOne({
-    _id: req.body.id
-  })
-
-  res.json({
-    code: "success",
-    message: "Xóa vĩnh viễn thành công!"
-  })
+  try {
+    const id = req.params.id;
+    await Singer.deleteOne({
+      _id: id
+    })
+    res.json({
+      code: "success",
+      message: "Xóa thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }
 
 module.exports.editGet = async (req, res) => {

@@ -13,6 +13,7 @@ import { FaUndoAlt } from "react-icons/fa";
 import { toast, Toaster } from "sonner";
 import { IoSearch } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { DeleteButton } from "@/app/components/Admin/Button/DeleteButton/DeleteButton";
 
 export const MainPage = () => {
   const router = useRouter();
@@ -104,38 +105,8 @@ export const MainPage = () => {
     }
   }
 
-  const handleDelete = (id) => {
-    const finalData = {
-      id: id
-    };
-
-    const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/delete`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(finalData),
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then((data) => {
-        return data;
-      })
-
-    toast.promise(promise, {
-      loading: "Đang xử lý...",
-      success: (data) => {
-        if (data.code == "success") {
-          setSingerList(singerList.filter((item) => item.id != id));
-          setPagination(prev => ({
-            ...prev,
-            totalRecord: prev.totalRecord - 1
-          }));
-        }
-        return data.message;
-      },
-      error: (data) => data.message
-    })
+  const handleDeleteSuccess = (id: string) => {
+    setSingerList(singerList.filter((item) => item.id != id));
   }
 
   return (
@@ -303,12 +274,11 @@ export const MainPage = () => {
                         >
                           <FiEdit />
                         </button>
-                        <button
-                          className="px-[16px] py-[11px] text-[#EF3826]"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          <FaRegTrashCan />
-                        </button>
+                        <DeleteButton
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/delete/${item.id}`}
+                          id={item.id}
+                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                        />
                       </div>
                     </th>
                   </tr>

@@ -1,5 +1,6 @@
 "use client"
 
+import { HardDeleteButton } from "@/app/components/Admin/Button/HardDeleteButton/HardDeleteButton";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Title } from "@/app/components/Admin/Title/Title";
@@ -110,38 +111,8 @@ export const MainPage = () => {
     })
   }
 
-  const handleDelete = (id: string) => {
-    const finalData = {
-      id: id
-    };
-
-    const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/hard-delete`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(finalData),
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then(data => {
-        return data;
-      });
-
-    toast.promise(promise, {
-      loading: "Đang xử lý...",
-      success: (data) => {
-        if (data.code == "success") {
-          setTrashList(trashList.filter((item) => item.id != id));
-          setPagination(prev => ({
-            ...prev,
-            totalRecord: prev.totalRecord - 1
-          }));
-        }
-        return data.message;
-      },
-      error: (data) => data.message
-    })
+  const handleDeleteSuccess = (id: string) => {
+    setTrashList(trashList.filter((item) => item.id != id));
   }
 
   return (
@@ -258,12 +229,11 @@ export const MainPage = () => {
                         >
                           <RiResetLeftFill />
                         </button>
-                        <button
-                          className="px-[16px] py-[11px] text-[#EF3826]"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          <FaRegTrashCan />
-                        </button>
+                        <HardDeleteButton
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/hard-delete/${item.id}`}
+                          id={item.id}
+                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                        />
                       </div>
                     </th>
                   </tr>
