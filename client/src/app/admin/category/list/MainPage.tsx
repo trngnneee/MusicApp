@@ -67,6 +67,7 @@ export const MainPage = () => {
         status: applyMulti,
         idList: checkList
       };
+      
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/apply-multi`, {
         method: "PATCH",
         headers: {

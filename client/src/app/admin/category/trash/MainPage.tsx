@@ -9,6 +9,7 @@ import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
+import Swal from 'sweetalert2'
 
 export const MainPage = () => {
   const { isLogin, userInfo } = useAuth();
@@ -43,33 +44,75 @@ export const MainPage = () => {
         idList: idList
       };
 
-      const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/apply-multi`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(finalData),
-        credentials: "include"
-      })
-        .then(res => res.json())
-        .then(data => {
-          return data;
-        })
+      if (status == "hard-delete") {
+        Swal.fire({
+          title: "Xác nhận xóa?",
+          text: "Hành động này không thể hoàn tác!",
+          showDenyButton: true,
+          confirmButtonText: "Xóa",
+          denyButtonText: `Hủy`
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/apply-multi`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(finalData),
+              credentials: "include"
+            })
+              .then(res => res.json())
+              .then(data => {
+                return data;
+              })
 
-      toast.promise(promise, {
-        loading: "Đang xử lý...",
-        success: (data) => {
-          if (data.code == "success") {
-            setTrashList(trashList.filter((item) => !idList.includes(item.id)));
-            setPagination(prev => ({
-              ...prev,
-              totalRecord: prev.totalRecord - 1
-            }));
+            toast.promise(promise, {
+              loading: "Đang xử lý...",
+              success: (data) => {
+                if (data.code == "success") {
+                  setTrashList(trashList.filter((item) => !idList.includes(item.id)));
+                  setPagination(prev => ({
+                    ...prev,
+                    totalRecord: prev.totalRecord - 1
+                  }));
+                }
+                return data.message;
+              },
+              error: (data) => data.message
+            })
+          } else if (result.isDenied) {
           }
-          return data.message;
-        },
-        error: (data) => data.message
-      })
+        });
+      }
+      else {
+        const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/trash/apply-multi`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(finalData),
+          credentials: "include"
+        })
+          .then(res => res.json())
+          .then(data => {
+            return data;
+          })
+
+        toast.promise(promise, {
+          loading: "Đang xử lý...",
+          success: (data) => {
+            if (data.code == "success") {
+              setTrashList(trashList.filter((item) => !idList.includes(item.id)));
+              setPagination(prev => ({
+                ...prev,
+                totalRecord: prev.totalRecord - 1
+              }));
+            }
+            return data.message;
+          },
+          error: (data) => data.message
+        })
+      }
     }
     else {
       toast.error("Vui lòng chọn Danh mục hoặc Phần tử cần áp dụng!");
