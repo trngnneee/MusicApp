@@ -6,15 +6,14 @@ import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Trash } from "@/app/components/Admin/Trash/Trash";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
-import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit, FiFilter } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { FaUndoAlt } from "react-icons/fa";
 import React from "react";
 import { toast } from "sonner";
-import { IoSearch } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { DeleteButton } from "@/app/components/Admin/Button/DeleteButton/DeleteButton";
+import { Search } from "@/app/components/Admin/Search/Search";
 
 export const MainPage = () => {
   const router = useRouter();
@@ -231,17 +230,9 @@ export const MainPage = () => {
               </li>
             </ul>
             {/* End Apply Multi */}
-            {/* Search */}
-            <div className="flex gap-[15px] p-[25px] w-[366px] bg-white border-[1px] border-[#E2E2E2] rounded-[14px]">
-              <IoSearch className="text-[#979797] text-[20px]" />
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onChange={(event) => setSearch(event.target.value)}
-              />
-            </div>
-            {/* End Search */}
+            <Search
+              onSearchChange={setSearch}
+            />
             <div className="flex gap-[20px]">
               <Create link={"/admin/song/create"} />
               <Trash link={"/admin/song/trash"} />

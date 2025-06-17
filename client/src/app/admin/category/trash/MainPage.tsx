@@ -2,14 +2,12 @@
 
 import { HardDeleteButton } from "@/app/components/Admin/Button/HardDeleteButton/HardDeleteButton";
 import { RecoveryButton } from "@/app/components/Admin/Button/RecoveryButton/RecoveryButton";
+import { Search } from "@/app/components/Admin/Search/Search";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { IoSearch } from "react-icons/io5";
-import { RiResetLeftFill } from "react-icons/ri";
 import { toast, Toaster } from "sonner";
 
 export const MainPage = () => {
@@ -123,17 +121,9 @@ export const MainPage = () => {
               </li>
             </ul>
             {/* End Apply Multi */}
-            {/* Search */}
-            <div className="flex gap-[15px] p-[25px] w-[366px] bg-white border-[1px] border-[#E2E2E2] rounded-[14px]">
-              <IoSearch className="text-[#979797] text-[20px]" />
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onChange={(event) => setSearch(event.target.value)}
-              />
-            </div>
-            {/* End Search */}
+            <Search
+              onSearchChange={setSearch}
+            />
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-scroll w-full">
             <table className="bg-white w-full min-w-[1000px]">

@@ -1,16 +1,12 @@
 "use client"
 
-import { MultipleApplyTrash } from "@/app/components/Admin/MultipleApply/MultipleApplyTrash";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { RiResetLeftFill } from "react-icons/ri";
 import { toast } from "sonner";
-import { IoSearch } from "react-icons/io5";
 import { HardDeleteButton } from "@/app/components/Admin/Button/HardDeleteButton/HardDeleteButton";
 import { RecoveryButton } from "@/app/components/Admin/Button/RecoveryButton/RecoveryButton";
 
@@ -127,17 +123,9 @@ export const MainPage = () => {
               </li>
             </ul>
             {/* End Apply Multi */}
-            {/* Search */}
-            <div className="flex gap-[15px] p-[25px] w-[366px] bg-white border-[1px] border-[#E2E2E2] rounded-[14px]">
-              <IoSearch className="text-[#979797] text-[20px]" />
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onChange={(event) => setSearch(event.target.value)}
-              />
-            </div>
-            {/* End Search */}
+            <Search
+              onSearchChange={setSearch}
+            />
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-scroll w-full">
             <table className="bg-white w-full min-w-[1000px]">
@@ -153,7 +141,7 @@ export const MainPage = () => {
                       }}
                     />
                   </th>
-                  <th className="px-[15px] py-[15px] text-left align-middle">Tên bài hát</th>
+                  <th className="px-[15px] py-[15px] text-left align-middle">Tên ca sĩ</th>
                   <th className="px-[15px] py-[15px] text-left align-middle">Ảnh đại diện</th>
                   <th className="px-[15px] py-[15px] text-left align-middle">Vị trí</th>
                   <th className="px-[15px] py-[15px] text-left align-middle">Trạng thái</th>
@@ -185,7 +173,7 @@ export const MainPage = () => {
                       {item.position}
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
-                      <Active />
+                      {item.status == "active" ? <Active /> : <Inactive />}
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="flex flex-col items-start">
