@@ -128,17 +128,74 @@ module.exports.roleListApplyMultiPatch = async (req, res) => {
 }
 
 module.exports.roleListDeletePatch = async (req, res) => {
-  await Role.updateOne({
-    _id: req.body.id
-  }, {
-    deleted: true,
-    deletedAt: Date.now(),
-    deletedBy: req.account.id
-  });
-  res.json({
-    code: "success",
-    message: "Xóa thành công!"
-  })
+  try {
+    const id = req.params.id;
+    await Role.updateOne({
+      _id: id
+    }, {
+      deleted: true,
+      deletedBy: req.account.id,
+      deletedAt: Date.now()
+    })
+    res.json({
+      code: "success",
+      message: "Xóa thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.roleEditGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const rawRoleInfo = await Role.findOne({
+      _id: id
+    })
+
+    const roleInfo = {
+      name: rawRoleInfo.name,
+      description: rawRoleInfo.description,
+      permissions: rawRoleInfo.permissions
+    }
+
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      roleInfo: roleInfo
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.roleEditPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Role.updateOne({
+      _id: id
+    }, req.body)
+
+    res.json({
+      code: "success",
+      message: "Chỉnh sửa nhóm quyền thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }
 
 module.exports.adminAccountRoleListGet = async (req, res) => {
@@ -302,18 +359,28 @@ module.exports.adminAccountApplyMulti = async (req, res) => {
 }
 
 module.exports.adminAccountDeletePatch = async (req, res) => {
-  await AdminAccount.updateOne({
-    _id: req.body.id
-  }, {
-    deleted: true,
-    deletedBy: req.account.id,
-    deletedAt: Date.now()
-  })
-  res.json({
-    code: "success",
-    message: "Xóa thành công!"
-  })
+  try {
+    const id = req.params.id;
+    await AdminAccount.updateOne({
+      _id: id
+    }, {
+      deleted: true,
+      deletedBy: req.account.id,
+      deletedAt: Date.now()
+    })
+    res.json({
+      code: "success",
+      message: "Xóa thành công!"
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }
+
 
 module.exports.adminAccountEditGet = async (req, res) => {
   try {
@@ -376,54 +443,6 @@ module.exports.adminAccountEdit = async (req, res) => {
     res.json({
       code: "success",
       message: "Chỉnh sửa tài khoản quản trị thành công!"
-    })
-  }
-  catch (error) {
-    res.json({
-      code: "error",
-      message: error
-    })
-  }
-}
-
-module.exports.roleEditGet = async (req, res) => {
-  try {
-    const id = req.params.id;
-
-    const rawRoleInfo = await Role.findOne({
-      _id: id
-    })
-
-    const roleInfo = {
-      name: rawRoleInfo.name,
-      description: rawRoleInfo.description,
-      permissions: rawRoleInfo.permissions
-    }
-
-    res.json({
-      code: "success",
-      message: "Lấy dữ liệu thành công!",
-      roleInfo: roleInfo
-    })
-  }
-  catch (error) {
-    res.json({
-      code: "error",
-      message: error
-    })
-  }
-}
-
-module.exports.roleEditPatch = async (req, res) => {
-  try {
-    const id = req.params.id;
-    await Role.updateOne({
-      _id: id
-    }, req.body)
-
-    res.json({
-      code: "success",
-      message: "Chỉnh sửa nhóm quyền thành công!"
     })
   }
   catch (error) {

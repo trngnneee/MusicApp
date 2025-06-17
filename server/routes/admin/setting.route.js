@@ -34,15 +34,25 @@ router.get(
 )
 
 router.patch(
-  "/role/list/apply-multi",
+  "/role/apply-multi",
   settingValidate.roleListApplyMultiPatch,
   settingController.roleListApplyMultiPatch
 )
 
 router.patch(
-  "/role/list/delete",
-  settingValidate.roleListDeletePatch,
+  "/role/delete/:id",
   settingController.roleListDeletePatch
+)
+
+router.get(
+  "/role/edit/:id",
+  settingController.roleEditGet
+)
+
+router.patch(
+  "/role/edit/:id",
+  settingValidate.roleEditPatch,
+  settingController.roleEditPatch
 )
 
 router.get(
@@ -69,8 +79,7 @@ router.patch(
 )
 
 router.patch(
-  "/admin-account/delete",
-  settingValidate.adminAccountDeletePatch,
+  "/admin-account/delete/:id",
   settingController.adminAccountDeletePatch
 )
 
@@ -84,17 +93,6 @@ router.patch(
   upload.single("avatar"),
   settingValidate.adminAccountEdit,
   settingController.adminAccountEdit
-)
-
-router.get(
-  "/role/edit/:id",
-  settingController.roleEditGet
-)
-
-router.patch(
-  "/role/edit/:id",
-  settingValidate.roleEditPatch,
-  settingController.roleEditPatch
 )
 
 module.exports = router;

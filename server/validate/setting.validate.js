@@ -95,29 +95,6 @@ module.exports.roleListApplyMultiPatch = (req, res, next) => {
   next();
 }
 
-module.exports.roleListDeletePatch = (req, res, next) => {
-  const schema = Joi.object({
-    id: Joi.string()
-      .required()
-      .messages({
-        "string.empty": "ID bắt buộc!",
-      }),
-  });
-
-  const { error } = schema.validate(req.body);
-
-  if (error) {
-    const errorMessage = error.details[0].message;
-    res.json({
-      code: "error",
-      message: errorMessage
-    })
-    return;
-  }
-
-  next();
-}
-
 module.exports.adminAccountCreate = (req, res, next) => {
   const schema = Joi.object({
     fullName: Joi.string()
@@ -190,29 +167,6 @@ module.exports.adminAccountApplyMulti = (req, res, next) => {
       .required()
       .messages({
         "string.empty": "Danh sách phần tử cần áp dụng bắt buộc!",
-      }),
-  });
-
-  const { error } = schema.validate(req.body);
-
-  if (error) {
-    const errorMessage = error.details[0].message;
-    res.json({
-      code: "error",
-      message: errorMessage
-    })
-    return;
-  }
-
-  next();
-}
-
-module.exports.adminAccountDeletePatch = (req, res, next) => {
-  const schema = Joi.object({
-    id: Joi.string()
-      .required()
-      .messages({
-        "string.empty": "ID bắt buộc!",
       }),
   });
 

@@ -1,20 +1,17 @@
 "use client"
 
 import { Create } from "@/app/components/Admin/Create/Create";
-import { MultipleApply } from "@/app/components/Admin/MultipleApply/MultipleApply";
 import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FiEdit, FiFilter } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
-import { FaUndoAlt } from "react-icons/fa";
 import { toast, Toaster } from "sonner";
-import { IoSearch } from "react-icons/io5";
-import { Trash } from "@/app/components/Admin/Trash/Trash";
 import { useRouter } from "next/navigation";
+import { DeleteButton } from "@/app/components/Admin/Button/DeleteButton/DeleteButton";
+import { AdminAccountFilter } from "./AdminAccountFilter";
 
 export const MainPage = () => {
   const router = useRouter();
@@ -33,13 +30,13 @@ export const MainPage = () => {
   const [applyMulti, setApplyMulti] = useState("");
 
   useEffect(() => {
-    let query = "";
-    if (status) query += `?status=${status}`;
-    if (role) query += `?role=${role}`
-    if (search) query += `?search=${search}`;
-    if (page) query += `?page=${page}`;
+    const params = new URLSearchParams();
+    if (status) params.append("status", status);
+    if (role) params.append("role", role);
+    if (search) params.append("search", search);
+    if (page) params.append("page", page);
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/list${query}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/list?${params.toString()}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -105,37 +102,8 @@ export const MainPage = () => {
     }
   }
 
-  const handleDelete = (id: string) => {
-    const finalData = {
-      id: id
-    };
-    const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/delete`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(finalData),
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then(data => {
-        return data;
-      })
-
-    toast.promise(promise, {
-      loading: "Đang xử lý...",
-      success: (data) => {
-        if (data.code == "success") {
-          setAdminAccountList(adminAccountList.filter((item) => item.id !== id));
-          setPagination(prev => ({
-            ...prev,
-            totalRecord: prev.totalRecord - 1
-          }))
-        }
-        return data.message;
-      },
-      error: (data) => data.message
-    })
+  const handleDeleteSuccess = (id: string) => {
+    setAdminAccountList(adminAccountList.filter((item) => item.id != id));
   }
 
   return (
@@ -144,47 +112,14 @@ export const MainPage = () => {
         <>
           <Toaster />
           <Title title={"Tài khoản quản trị"} />
-          {/* Filter */}
-          <div className="w-full overflow-x-auto">
-            <ul className="flex items-center mt-[30px] min-w-[900px] w-fit">
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] rounded-l-[14px] flex gap-[12px] items-center bg-white">
-                <FiFilter className="text-dark" />
-                <div className="text-[14px] font-[700] text-dark">Bộ Lọc</div>
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
-                <select
-                  className="text-[14px] font-[700] text-dark outline-none"
-                  value={status}
-                  onChange={(event) => setStatus(event.target.value)}
-                >
-                  <option value="">Trạng thái</option>
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Tạm dừng</option>
-                </select>
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 flex gap-[12px] items-center bg-white">
-                <select
-                  className="text-[14px] font-[700] text-dark outline-none"
-                  value={role}
-                  onChange={(event) => setRole(event.target.value)}
-                >
-                  <option value="">Nhóm quyền</option>
-                  {roleList && roleList.length > 0 && roleList.map((item, index) => (
-                    <option value={item.id} key={index}>{item.name}</option>
-                  ))}
-                </select>
-              </li>
-              <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
-                <button
-                  className="flex items-center gap-[10px] text-[#EA0234]"
-                >
-                  <FaUndoAlt />
-                  <div className="text-[14px] font-[700]" onClick={handleClearFilter}>Xóa bộ lọc</div>
-                </button>
-              </li>
-            </ul>
-          </div>
-          {/* End Filter */}
+          <AdminAccountFilter
+            status={status}
+            setStatus={setStatus}
+            role={role}
+            setRole={setRole}
+            roleList={roleList}
+            handleClearFilter={handleClearFilter}
+          />
           <div className="flex gap-[20px] sm:gap-[30px] mt-[15px] flex-wrap">
             {/* Apply Multi */}
             <ul className="flex flex-row items-center">
@@ -210,22 +145,9 @@ export const MainPage = () => {
               </li>
             </ul>
             {/* End Apply Multi */}
-            {/* Search */}
-            <div className="flex gap-[15px] p-[25px] w-[366px] bg-white border-[1px] border-[#E2E2E2] rounded-[14px]">
-              <IoSearch className="text-[#979797] text-[20px]" />
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onKeyUp={(event) => {
-                  if (event.key === "Enter") {
-                    const target = event.target as HTMLInputElement;
-                    setSearch(target.value);
-                  }
-                }}
-              />
-            </div>
-            {/* End Search */}
+            <Search
+              onSearchChange={setSearch}
+            />
             <div className="flex gap-[10px]">
               <Create link={"/admin/setting/admin-account/create"} />
             </div>
@@ -284,18 +206,17 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button 
+                        <button
                           className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
                           onClick={() => router.push(`/admin/setting/admin-account/edit/${item.id}`)}
                         >
                           <FiEdit />
                         </button>
-                        <button 
-                          className="px-[16px] py-[11px] text-[#EF3826]"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          <FaRegTrashCan />
-                        </button>
+                        <DeleteButton
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/delete/${item.id}`}
+                          id={item.id}
+                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                        />
                       </div>
                     </th>
                   </tr>

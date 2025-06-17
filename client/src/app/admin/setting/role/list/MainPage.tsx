@@ -1,15 +1,13 @@
 "use client"
 
+import { DeleteButton } from "@/app/components/Admin/Button/DeleteButton/DeleteButton";
 import { Create } from "@/app/components/Admin/Create/Create";
-import { RoleMultipleApply } from "@/app/components/Admin/MultipleApply/RoleMultipleApply";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
-import { IoSearch } from "react-icons/io5";
 import { toast, Toaster } from "sonner";
 
 export const MainPage = () => {
@@ -25,11 +23,11 @@ export const MainPage = () => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    let query = "";
-    if (search) query += `?search=${search}`;
-    if (page) query += `?page=${page}`;
+    const params = new URLSearchParams();
+    if (search) params.append("search", search);
+    if (page) params.append("page", page);
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/list${query}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/list?${params.toString()}`, {
       credentials: "include"
     })
       .then(res => res.json())
@@ -45,7 +43,7 @@ export const MainPage = () => {
         status: status,
         idList: idList
       };
-      const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/list/apply-multi`, {
+      const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/apply-multi`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -78,37 +76,8 @@ export const MainPage = () => {
     }
   }
 
-  const handleDelete = (id: string) => {
-    const finalData = {
-      id: id
-    };
-    const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/list/delete`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(finalData),
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then(data => {
-        return data;
-      })
-
-    toast.promise(promise, {
-      loading: "Đang xử lý...",
-      success: (data) => {
-        if (data.code == "success") {
-          setRoleList(roleList.filter((item) => item.id !== id));
-          setPagination(prev => ({
-            ...prev,
-            totalRecord: prev.totalRecord - 1
-          }))
-        }
-        return data.message;
-      },
-      error: (data) => data.message
-    })
+  const handleDeleteSuccess = (id: string) => {
+    setRoleList(roleList.filter((item) => item.id != id));
   }
 
   return (
@@ -140,22 +109,9 @@ export const MainPage = () => {
               </li>
             </ul>
             {/* End Apply Multi */}
-            {/* Search */}
-            <div className="flex gap-[15px] p-[25px] w-[366px] bg-white border-[1px] border-[#E2E2E2] rounded-[14px]">
-              <IoSearch className="text-[#979797] text-[20px]" />
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                className="text-[#979797] text-[14px] font-[700] flex-1 outline-none translate-y-[1px]"
-                onKeyUp={(event) => {
-                  if (event.code == "Enter") {
-                    const target = event.target as HTMLInputElement;
-                    setSearch(target.value);
-                  }
-                }}
-              />
-            </div>
-            {/* End Search */}
+            <Search
+              onSearchChange={setSearch}
+            />
             <Create link={"/admin/setting/role/create"} />
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
@@ -194,18 +150,17 @@ export const MainPage = () => {
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">{item.description}</th>
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button 
+                        <button
                           className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
                           onClick={() => router.push(`/admin/setting/role/edit/${item.id}`)}
                         >
                           <FiEdit />
                         </button>
-                        <button
-                          className="px-[16px] py-[11px] text-[#EF3826]"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          <FaRegTrashCan />
-                        </button>
+                        <DeleteButton
+                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/delete/${item.id}`}
+                          id={item.id}
+                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                        />
                       </div>
                     </th>
                   </tr>
