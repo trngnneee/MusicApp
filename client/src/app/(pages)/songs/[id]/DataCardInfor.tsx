@@ -1,46 +1,29 @@
 "use client"
 
 import { CardInfor } from "@/app/components/CardInfor/CardInfor";
-import { dbFirebase } from "@/app/FirebaseConfig";
-import { get, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 
-export const DataCardInfor = (props) => {
-    const { id } = props;
-    const [dataCardInfor, setDataCardInfor] = useState(null);
-    const songRef = ref(dbFirebase, '/songs/' + id);
+export const DataCardInfor = (props: {
+    id: string,
+    onFetchSuccess?: (item: any) => void
+}) => {
+    const { id, onFetchSuccess } = props;
+    const [songDetail, setSongDetail] = useState<any>({})
 
     useEffect(() => {
-        let tmp = {};
-        
-        const fetchData = async () => {
-            const snapshot = await get(songRef);
-            const data = snapshot.val();
-
-            const singerArray = [];
-            for (const singer of data.singerId)
-            {
-                const singerRef = ref(dbFirebase, 'singers/' + singer);
-                const snapshot = await get(singerRef);
-                const dataSinger = snapshot.val();
-                singerArray.push(dataSinger.title);
-            }
-            const singerList = singerArray.join(", ");
-
-            tmp = {
-                img: data.image,
-                title: data.title,
-                content: singerList
-            }
-            setDataCardInfor(tmp);
-        }
-        fetchData();
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/song/detail/${id}`)
+            .then(res => res.json())
+            .then((data) => {
+                setSongDetail(data.songDetail);
+                onFetchSuccess(data.songDetail);
+            })
     }, [])
+
     return (
         <>
-            {dataCardInfor && (
+            {songDetail && (
                 <CardInfor
-                    item={dataCardInfor}
+                    item={songDetail}
                 />
             )}
         </>

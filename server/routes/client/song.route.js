@@ -13,8 +13,18 @@ router.get(
 )
 
 router.get(
+  "/song-list/:id",
+  songController.listGetToSong
+)
+
+router.get(
   "/list",
   songController.listGet
+)
+
+router.get(
+  "/detail/:id",
+  songController.detailGet
 )
 
 module.exports = router;

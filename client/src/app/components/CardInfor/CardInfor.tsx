@@ -11,6 +11,7 @@ export const CardInfor = (props: {item: any}) => {
                 <div>
                     <div className="text-[16px] sm:text-[24px] lg:text-[35px] font-[700] text-[#00ADEF] mb-[10px]">{item.name}</div>
                     <div className="text-[8px] sm:text-[10px] lg:text-[14px] font-[300] text-[#EFEEE0]">{item.description}</div>
+                    <div className="text-[8px] sm:text-[10px] lg:text-[14px] font-[300] text-[#EFEEE0]">{item.singer && item.singer.length && item.singer.join(", ")}</div>
                 </div>
             </div>
         </>

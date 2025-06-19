@@ -36,7 +36,8 @@ module.exports.listGetToCategory = async (req, res) => {
       const tmp = {
         name: song.name,
         avatar: song.avatar,
-        singer: []
+        singer: [],
+        link: `/songs/${song.id}`
       };
 
       for (const singer of song.singers) {
@@ -83,7 +84,8 @@ module.exports.listGetToSinger = async (req, res) => {
       const tmp = {
         name: song.name,
         avatar: song.avatar,
-        singer: []
+        singer: [],
+        link: `/songs/${song.id}`
       };
 
       for (const singer of song.singers) {
@@ -95,6 +97,57 @@ module.exports.listGetToSinger = async (req, res) => {
 
       songList.push(tmp);
     }
+
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      songList: songList
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.listGetToSong = async (req, res) => {
+  try {
+    const categoryID = req.params.id;
+    const rawSongList = await Song.find({
+      deleted: false,
+      status: 'active',
+      category: categoryID
+    })
+
+    let songList = [];
+    for (const song of rawSongList) {
+      const tmp = {
+        name: song.name,
+        avatar: song.avatar,
+        singer: [],
+        link: `/songs/${song.id}`
+      };
+
+      for (const singer of song.singers) {
+        const singerDetail = await Singer.findOne({
+          _id: singer
+        });
+        tmp.singer.push(singerDetail.name);
+      }
+
+      songList.push(tmp);
+    }
+
+    if (req.query.limit) {
+      const limit = parseInt(req.query.limit);
+      if (!isNaN(limit) && limit > 0) {
+        songList = songList.sort(() => Math.random() - 0.5);
+        songList = songList.slice(0, limit);
+      }
+    }
+
 
     res.json({
       code: "success",
@@ -122,7 +175,7 @@ module.exports.listGet = async (req, res) => {
       name: song.name,
       avatar: song.avatar,
       singer: [],
-      link: `songs/${song.slug}`
+      link: `songs/${song.id}`
     };
 
     for (const singer of song.singers) {
@@ -147,4 +200,41 @@ module.exports.listGet = async (req, res) => {
     message: "Lấy dữ liệu thành công!",
     songList: songList
   })
+}
+
+module.exports.detailGet = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const rawSongDetail = await Song.findOne({
+      _id: id
+    })
+
+    const songDetail = {
+      name: rawSongDetail.name,
+      avatar: rawSongDetail.avatar,
+      category: rawSongDetail.category,
+      lyric: rawSongDetail.lyric,
+      singer: []
+    };
+
+    for (const singer of rawSongDetail.singers) {
+      const singerDetail = await Singer.findOne({
+        _id: singer
+      });
+      songDetail.singer.push(singerDetail.name);
+    }
+
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      songDetail: songDetail
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
 }

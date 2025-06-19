@@ -1,8 +1,5 @@
-import { Title } from "@/app/components/Title/Title";
 import { Metadata } from "next";
-import { DataCardInfor } from "./DataCardInfor";
-import { Lyrics } from "./Lyrics";
-import { SongList } from "./SongList";
+import { MainPage } from "./MainPage"
 
 export const metadata: Metadata = {
   title: "Chi tiết bài hát",
@@ -15,19 +12,7 @@ export default async function SongDetailPage(props: any) {
 
   return (
     <>
-      {/* Section1 */}
-      <DataCardInfor
-        id={id}
-      />
-      {/* Section2 */}
-      <Lyrics
-        id={id}
-      />
-      {/* Section3 */}
-      <Title
-        title="Bài Hát Cùng Danh Mục"
-      />
-      <SongList
+      <MainPage
         id={id}
       />
     </>
