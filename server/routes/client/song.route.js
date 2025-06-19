@@ -12,4 +12,9 @@ router.get(
   songController.listGetToSinger
 )
 
+router.get(
+  "/list",
+  songController.listGet
+)
+
 module.exports = router;
