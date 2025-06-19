@@ -6,7 +6,7 @@ module.exports.listGet = async (req, res) => {
     status: "active"
   })
 
-  const categoryList = [];
+  let categoryList = [];
   for (const item of categoryRawList) {
     categoryList.push({
       avatar: item.avatar,
@@ -15,6 +15,15 @@ module.exports.listGet = async (req, res) => {
       slug: item.slug,
       link: `/category/${item.slug}`
     });
+  }
+
+  if (req.query.limit)
+  {
+    const limit = parseInt(req.query.limit);
+    if (!isNaN(limit) && limit > 0)
+    {
+      categoryList = categoryList.slice(0, limit);
+    }
   }
 
   res.json({

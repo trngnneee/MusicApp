@@ -1,40 +1,22 @@
 "use client"
 
 import { CardItem } from "@/app/components/CardItem/CardItem";
-import { dbFirebase } from "@/app/FirebaseConfig";
-import { get, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 
 export const DataSection3 = () => {
-    const [dataSection, setDataSection] = useState(null);
-    const categoryRef = ref(dbFirebase, 'singers');
+    const [singerList, setSingerList] = useState<any[]>([])
     useEffect(() => {
-        const fetchData = async () => {
-            const items = await get(categoryRef);
-            const tmp = [];
-            items.forEach((item) => {
-                const key = item.key;
-                const data = item.val();
-                if (tmp.length < 5)
-                {
-                    tmp.push({
-                        id: key,
-                        img: data.image,
-                        title: data.title,
-                        content: data.description,
-                        link: `/singers/${key}`
-                    })
-                }
-                setDataSection(tmp);
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/singer/list?limit=5`)
+            .then((res) => res.json())
+            .then((data) => {
+                setSingerList(data.singerList);
             })
-        }
-        fetchData();
     }, [])
 
     return (
         <>
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-[20px]">
-                {dataSection && dataSection.map((item, index) => (
+                {singerList && singerList.map((item, index) => (
                     <div data-aos="fade-up" key={index}>
                         <CardItem
                             item={item}
