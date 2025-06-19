@@ -148,7 +148,6 @@ module.exports.listGetToSong = async (req, res) => {
       }
     }
 
-
     res.json({
       code: "success",
       message: "Lấy dữ liệu thành công!",
@@ -191,6 +190,7 @@ module.exports.listGet = async (req, res) => {
   if (req.query.limit) {
     const limit = parseInt(req.query.limit);
     if (!isNaN(limit) && limit > 0) {
+      songList = songList.sort(() => Math.random() - 0.5);
       songList = songList.slice(0, limit);
     }
   }

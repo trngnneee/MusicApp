@@ -1,81 +1,155 @@
 "use client"
 
-import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { ref, set } from "firebase/database";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import { useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import JustValidate from 'just-validate';
+import { toast, Toaster } from "sonner";
 
 export const RegisterForm = () => {
     const router = useRouter();
     const [view, setView] = useState(false);
     const [view2, setView2] = useState(false);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
-        const fullName = event.target.fullName.value;
-        const email = event.target.email.value
-        const password = event.target.password.value;
-        const confirmPass = event.target.confirmPass.value;
+    useEffect(() => {
+        const validation = new JustValidate('#register-form');
 
-        if (!fullName || !email || !password || !confirmPass)
-        {
-            Swal.fire({
-                title: "Vui Lòng Điền Đủ Thông Tin!",
-                icon: "error",
-            });
-        }
-        else if (password.length < 7)
-        {
-            Swal.fire({
-                title: "Độ dài mật khẩu phải lớn hơn 7 kí tự!",
-                icon: "error",
-            });
-        }
-        else if (password != confirmPass) {
-            Swal.fire({
-                title: "Mật Khẩu Không Trùng!",
-                icon: "error",
-            });
-        }
-        else if (fullName && email && password && password == confirmPass) {
-            createUserWithEmailAndPassword(authFireBase, email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    if (user) {
-                        set(ref(dbFirebase, `users/${user.uid}`), {
-                            fullName: fullName
-                        }).then(() => {
-                            Swal.fire({
-                                title: "Đăng kí thành công!",
-                                icon: "success",
-                            });
-                            router.push("/");
-                        })
-                    }
+        validation
+            .addField('#fullName', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Vui lòng nhập họ tên!'
+                },
+                {
+                    rule: 'minLength',
+                    value: 5,
+                    errorMessage: 'Họ tên phải có ít nhất 5 ký tự!',
+                },
+                {
+                    rule: 'maxLength',
+                    value: 50,
+                    errorMessage: 'Họ tên không được vượt quá 50 ký tự!',
+                },
+            ], {
+                errorsContainer: '#fullName-container'
+            })
+            .addField('#email', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Email bắt buộc!'
+                },
+                {
+                    rule: 'email',
+                    errorMessage: 'Email sai định dạng!',
+                },
+            ], {
+                errorsContainer: '#email-container'
+            })
+            .addField('#password', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Vui lòng nhập mật khẩu!',
+                },
+                {
+                    validator: (value) => value.length >= 8,
+                    errorMessage: 'Mật khẩu phải chứa ít nhất 8 ký tự!',
+                },
+                {
+                    validator: (value) => /[A-Z]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái in hoa!',
+                },
+                {
+                    validator: (value) => /[a-z]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái thường!',
+                },
+                {
+                    validator: (value) => /\d/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ số!',
+                },
+                {
+                    validator: (value) => /[@$!%*?&]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt!',
+                },
+            ], {
+                errorsContainer: '#password-container'
+            })
+            .addField('#confirmPass', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Vui lòng nhập mật khẩu!',
+                },
+                {
+                    validator: (value) => value.length >= 8,
+                    errorMessage: 'Mật khẩu phải chứa ít nhất 8 ký tự!',
+                },
+                {
+                    validator: (value) => /[A-Z]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái in hoa!',
+                },
+                {
+                    validator: (value) => /[a-z]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái thường!',
+                },
+                {
+                    validator: (value) => /\d/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ số!',
+                },
+                {
+                    validator: (value) => /[@$!%*?&]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt!',
+                },
+                {
+                    validator: (value, fields) => {
+                        const password = fields['#password'].elem.value;
+                        return value == password;
+                    },
+                    errorMessage: 'Mật khẩu xác nhận không khớp!',
+                }
+            ], {
+                errorsContainer: '#confirmPass-container'
+            })
+            .onSuccess((event => {
+                event.preventDefault();
+                const fullName = event.target.fullName.value;
+                const email = event.target.email.value
+                const password = event.target.password.value;
+                const confirmPass = event.target.confirmPass.value;
+
+                const finalData = {
+                    fullName: fullName, 
+                    email: email,
+                    password: password
+                };
+
+                const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/user/register`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(finalData)
                 })
-                .catch((error) => {
-                    console.log(error);
-                    Swal.fire({
-                        title: "Email Đã Được Sử Dụng",
-                        icon: "error",
-                    });
-                });
-        }
-    }
+                    .then(res => res.json())
+                    .then((data) => {
+                        return data;
+                    })
+                
+                toast.promise(promise, {
+                    loading: "Đang xử lý...",
+                    success: (data) => {
+                        router.push("/login");
+                        return data.message
+                    },
+                    error: (data) => data.message
+                })
+            }))
+    }, [])
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleViewPassword = (event: any) => {
         event.preventDefault();
         setView(!view);
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleViewPassword2 = (event: any) => {
         event.preventDefault();
         setView2(!view2);
@@ -83,8 +157,9 @@ export const RegisterForm = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-[15px]">
+            <Toaster/>
+            <form id="register-form">
+                <div className="">
                     <label
                         className="flex gap-[5px] mb-[5px]"
                         htmlFor="fullName"
@@ -100,7 +175,8 @@ export const RegisterForm = () => {
                         className="px-[16px] py-[14px] rounded-[6px] outline-none w-[300px] sm:w-[500px]"
                     />
                 </div>
-                <div className="mb-[15px]">
+                <div className="mb-[15px] text-[12px]" id="fullName-container"></div>
+                <div>
                     <label
                         className="flex gap-[5px] mb-[5px]"
                         htmlFor="email"
@@ -116,7 +192,8 @@ export const RegisterForm = () => {
                         className="px-[16px] py-[14px] rounded-[6px] outline-none w-[300px] sm:w-[500px]"
                     />
                 </div>
-                <div className="mb-[15px]">
+                <div className="mb-[15px] text-[12px]" id="email-container"></div>
+                <div>
                     <label
                         className="flex gap-[5px] mb-[5px]"
                         htmlFor="password"
@@ -139,7 +216,8 @@ export const RegisterForm = () => {
                         </button>
                     </div>
                 </div>
-                <div className="mb-[15px]">
+                <div className="mb-[15px] text-[12px]" id="password-container"></div>
+                <div>
                     <label
                         className="flex gap-[5px] mb-[5px]"
                         htmlFor="confirmPass"
@@ -162,6 +240,7 @@ export const RegisterForm = () => {
                         </button>
                     </div>
                 </div>
+                <div className="mb-[15px] text-[12px]" id="confirmPass-container"></div>
                 <button className="bg-[#00ADEF] w-[300px] sm:w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng Kí</button>
                 <div className="mt-[10px] flex text-white gap-[8px] justify-end items-center">
                     <div className="">Đã có tài khoản?</div>
