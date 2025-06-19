@@ -1,0 +1,116 @@
+const { categoryTreeBuild, findNode, collectAllChild } = require("../../helper/category.helper");
+const Category = require("../../model/category.model");
+const Singer = require("../../model/singer.model");
+const Song = require("../../model/song.model");
+
+module.exports.listGetToCategory = async (req, res) => {
+  try {
+    const slug = req.params.slug;
+  
+    const categoryDetail = await Category.findOne({
+      deleted: false,
+      status: "active",
+      slug: slug
+    })
+
+    const categoryID = categoryDetail.id;
+    const categoryList = await Category.find({
+      deleted: false,
+      status: "active"
+    });
+    const tree = categoryTreeBuild(categoryList);
+    const targetNode = findNode(tree, categoryID);
+    const idList = collectAllChild(targetNode);
+  
+    const find = {
+      deleted: false,
+      status: "active"
+    };
+    if (idList && idList.length)
+    {
+      find.category = { $in: idList }
+    };
+    const rawSongList = await Song.find(find);
+    
+    const songList = [];
+    for (const song of rawSongList)
+    {
+      const tmp = {
+        name: song.name,
+        avatar: song.avatar,
+        singer: []
+      };
+
+      for (const singer of song.singers)
+      {
+        const singerDetail = await Singer.findOne({
+          _id: singer
+        });
+        tmp.singer.push(singerDetail.name);
+      }
+
+      songList.push(tmp);
+    }
+
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      songList: songList
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}
+
+module.exports.listGetToSinger = async (req, res) => {
+  try {
+    const slug = req.params.slug;
+  
+    const singerDetail = await Singer.findOne({
+      deleted: false,
+      status: "active",
+      slug: slug
+    });
+
+    const singerID = singerDetail.id;
+    const find = {
+      singers: singerID
+    }
+    const rawSongList = await Song.find(find);
+    const songList = [];
+    for (const song of rawSongList)
+    {
+      const tmp = {
+        name: song.name,
+        avatar: song.avatar,
+        singer: []
+      };
+
+      for (const singer of song.singers)
+      {
+        const singerDetail = await Singer.findOne({
+          _id: singer
+        });
+        tmp.singer.push(singerDetail.name);
+      }
+
+      songList.push(tmp);
+    }
+
+    res.json({
+      code: "success",
+      message: "Lấy dữ liệu thành công!",
+      songList: songList
+    })
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}

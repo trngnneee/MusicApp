@@ -7,12 +7,14 @@ export const CardItem = (props: { item: any }) => {
         <>
             <Link href={item.link}>
                 <div className="flex flex-col">
-                    <img
-                        src={item.img}
-                        className="mb-[10px]"
-                    />
-                    <div className="text-[12px] md:text-[14px] font-[700] mb-[5px] md:mb-[10px] text-white">{item.title}</div>
-                    <div className="text-[10px] md:text-[12px] font-[300] text-[#FFFFFF80] line-clamp-1">{item.content}</div>
+                    <div className="w-full h-[200px] overflow-hidden mb-[10px] rounded-[10px]">
+                        <img
+                            src={item.avatar}
+                            className="mb-[10px] w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="text-[12px] md:text-[14px] font-[700] mb-[5px] md:mb-[8px] text-white">{item.name}</div>
+                    <div className="text-[10px] md:text-[12px] font-[300] text-[#FFFFFF80] line-clamp-1">{item.description}</div>
                 </div>
             </Link>
         </>

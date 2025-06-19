@@ -24,6 +24,9 @@ app.use(cookieParser());
 const adminRoute = require("./routes/admin/index.route");
 app.use(`/admin`, adminRoute);
 
+const clientRoute = require("./routes/client/index.route");
+app.use(`/`, clientRoute);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
