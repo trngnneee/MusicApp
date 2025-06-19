@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsMusicPlayer } from "react-icons/bs";
 import { FaListUl } from "react-icons/fa6";
 import { AdminSider } from "../Sider/Sider";
@@ -25,12 +25,12 @@ export const Header = () => {
                 <span className="font-[800] text-[20px] sm:text-[24px] text-[#4880FF]">Admin</span>
               </div>
               <div className="hidden sm:flex items-center gap-[10px]">
-                <div className="rounded-[50%] overflow-hidden">
-                  <img src="/adminAvatar.png" className="w-full h-full object-cover" />
+                <div className="rounded-[50%] overflow-hidden w-[50px]">
+                  <img src={userInfo.avatar} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex flex-col gap-[3px]">
                   <div className="font-[700] text-[14px] text-dark">{userInfo.fullName}</div>
-                  <div className="font-[600] text-[12px] text-dark">Admin</div>
+                  <div className="font-[600] text-[12px] text-dark">{userInfo.role}</div>
                 </div>
               </div>
             </div>
