@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Title } from "../../components/Title/Title";
+import { Title } from "../../../components/Title/Title";
 import { DataSection1 } from "./DataSection1";
 import { DataSection2 } from "./DataSection2";
 import { DataSection3 } from "./DataSection3";

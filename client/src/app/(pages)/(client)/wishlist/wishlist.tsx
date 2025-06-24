@@ -31,15 +31,17 @@ export const Wishlist = () => {
 
     return (
         <>
-            {songList && (
-                songList.map((item, index) => (
-                    <div data-aos="fade-up" key={index}>
-                        <SongItem2
-                            item={item}
-                        />
-                    </div>
-                ))
-            )}
+            <div className="flex flex-col gap-[10px]">
+                {songList && (
+                    songList.map((item, index) => (
+                        <div data-aos="fade-up" key={index}>
+                            <SongItem2
+                                item={item}
+                            />
+                        </div>
+                    ))
+                )}
+            </div>
         </>
     );
 }

@@ -20,7 +20,7 @@ export const SearchResult = () => {
 
     return (
         <>
-            <div>
+            <div className="flex flex-col gap-[10px]">
                 {songList && (
                     <>
                         {songList.map((item: any, index: number) => (
