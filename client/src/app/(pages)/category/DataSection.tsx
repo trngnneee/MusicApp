@@ -9,6 +9,10 @@ export const DataSection = () => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/category/list`)
             .then((res) => res.json())
             .then((data) => {
+                for (const item of data.categoryList)
+                {
+                    item.api = `${process.env.NEXT_PUBLIC_BASE_URL}/song/category-list/${item.slug}`;
+                }
                 setCategoryList(data.categoryList);
             })
     }, [])

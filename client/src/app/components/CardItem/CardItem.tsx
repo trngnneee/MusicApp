@@ -17,7 +17,7 @@ export const CardItem = (props: { item: any }) => {
         fetch(api)
             .then((res) => res.json())
             .then((data) => {
-                if (!data.songList.length)
+                if (!data.songList || !data.songList.length)
                 {
                     toast.error("Chưa có bài hát nào trong Danh mục!");
                     return;

@@ -25,7 +25,7 @@ export const SongItem2 = (props: { item: any }) => {
 
     return (
         <>
-            <div className="mb-[12px]">
+            <Link href={`/songs/${item.id}`} className="mb-[12px]">
                 <div className="grid grid-cols-12 items-center bg-[#212121] px-[15px] py-[10px] rounded-[15px] gap-[10px]">
                     {/* Avatar - 1 column */}
                     <div className="col-span-1">
@@ -67,7 +67,7 @@ export const SongItem2 = (props: { item: any }) => {
                         )}
                     </div>
                 </div>
-            </div>
+            </Link>
         </>
     );
 }
