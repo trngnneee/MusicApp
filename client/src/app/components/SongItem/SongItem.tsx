@@ -1,27 +1,24 @@
 "use client"
 
+import { playSong } from "@/helper/playSong";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { PlayButton } from "../Button/PlayButton";
-import { HeartButton } from "../Button/HeartButton";
-import { AddPlayListButton } from "../Button/AddPlaylistButton";
-import { authFireBase } from "@/app/FirebaseConfig";
+import { FaPlay } from "react-icons/fa6";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SongItem = (props: { item: any }) => {
     const { item } = props;
-    const [userId, setUserId] = useState(null);
 
-    useEffect(() => {
-        const fecthUserID = () => {
-            onAuthStateChanged(authFireBase, (user) => {
-                if (user) setUserId(user.uid);
-                else setUserId(null);
-            })
-        }
-        fecthUserID();
-    }, [])
+    const handlePlaySong = (event: React.MouseEvent, item: any) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const currentPlayList = [];
+        currentPlayList.push(item);
+        localStorage.setItem("currentPlaylist", JSON.stringify(currentPlayList));
+        localStorage.setItem("currentSongIndex", JSON.stringify(0));
+        localStorage.setItem("currentSong", JSON.stringify(item));
+
+        playSong(item);
+    }
 
     return (
         <>
@@ -29,7 +26,7 @@ export const SongItem = (props: { item: any }) => {
                 <div className="flex gap-[5px] sm:gap-[15px] items-center bg-[#212121] px-[10px] py-[5px] xl:py-[10px] rounded-[15px]">
                     <img
                         src={item.avatar}
-                        className="w-[76px] lg:w-[50px] xl:w-[76px] h-auto"
+                        className="w-[76px] lg:w-[50px] xl:w-[76px] h-auto rounded-[10px]"
                     />
                     <Link href={item.link} className="flex flex-col flex-1 ml-[10px] p-0">
                         <div className="text-white font-[600] text-[10px] lg:text-[14px] xl:text-[15px] mb-[2px] xl:mb-[5px]">{item.name}</div>
@@ -37,18 +34,13 @@ export const SongItem = (props: { item: any }) => {
                     </Link>
                     <div className="flex gap-[10px] items-center">
                         <div>
-                            <PlayButton item={item} />
+                            <button
+                                onClick={(event) => handlePlaySong(event, item)}
+                                className="w-[50px] h-[50px] flex items-center justify-center text-white rounded-full bg-[#00ADEF] hover:bg-[#277594] transition-all duration-200"
+                            >
+                                <FaPlay className="ml-1" />
+                            </button>
                         </div>
-                        {userId && (
-                            <>
-                                <div className="block lg:hidden xl:block">
-                                    <HeartButton item={item} />
-                                </div>
-                                <div className="block lg:hidden xl:block">
-                                    <AddPlayListButton item={item} />
-                                </div>
-                            </>
-                        )}
                     </div>
                 </div>
             </div>

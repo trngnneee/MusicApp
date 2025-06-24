@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   description: "Nghe nhạc trực tuyến",
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function CategoryDetailPage(props: any) {
   const { slug } = await props.params;
 
@@ -17,7 +16,7 @@ export default async function CategoryDetailPage(props: any) {
       <DataCardInfor
         slug={slug}
       />
-      <div>
+      <div className="mt-[30px]">
         <Title
           title="Danh Sách Bài Hát"
         />

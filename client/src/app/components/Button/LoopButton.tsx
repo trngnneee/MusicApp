@@ -8,18 +8,12 @@ export const LoopButton = () => {
     const [active, setActive] = useState(false);
     
     const handleClick = () => {
-        const loopButton = document.querySelector(".loop-button");
-        if (loopButton) {
-            setActive(!active);
-            if (loopButton.getAttribute("id") == "")
-                loopButton.setAttribute("id", "1");
-            else loopButton.setAttribute("id", "");
-        }
+        setActive(!active);
     }
 
     return (
         <>
-            <button className="p-0 loop-button" id="" onClick={handleClick}>
+            <button className="p-0 loop-button" onClick={handleClick} data-loop-active={active}>
                 {active ? <MdOutlineReplayCircleFilled /> : <MdReplay />}
             </button>
         </>

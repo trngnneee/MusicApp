@@ -37,7 +37,8 @@ module.exports.listGetToCategory = async (req, res) => {
         name: song.name,
         avatar: song.avatar,
         singer: [],
-        link: `/songs/${song.id}`
+        link: `/songs/${song.id}`,
+        audio: song.audio
       };
 
       for (const singer of song.singers) {
@@ -85,7 +86,8 @@ module.exports.listGetToSinger = async (req, res) => {
         name: song.name,
         avatar: song.avatar,
         singer: [],
-        link: `/songs/${song.id}`
+        link: `/songs/${song.id}`,
+        audio: song.audio
       };
 
       for (const singer of song.singers) {
@@ -174,7 +176,8 @@ module.exports.listGet = async (req, res) => {
       name: song.name,
       avatar: song.avatar,
       singer: [],
-      link: `songs/${song.id}`
+      link: `songs/${song.id}`,
+      audio: song.audio
     };
 
     for (const singer of song.singers) {

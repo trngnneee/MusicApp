@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { SongItem } from "../SongItem/SongItem";
+import { SongItem } from "../../components/SongItem/SongItem";
 
 export const DataSection1 = () => {
     const [songList, setSongList] = useState<any[]>([])

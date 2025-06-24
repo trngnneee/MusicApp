@@ -2,10 +2,10 @@ export const PlayLeft = () => {
     return (
         <>
             <div className="flex gap-[10px] sm:gap-[13px] items-center ml-[15px] md:ml-[0px]">
-                <div className="w-[50px]">
+                <div className="w-[50px] h-[50px]">
                     <img
                         src="/"
-                        className="inner-image w-[100%] object-cover"
+                        className="inner-image w-full h-full object-cover"
                     />
                 </div>
                 <div>

@@ -65,7 +65,7 @@ export const MainLayout = ({
             <Sider />
           </div>
           <Overlay />
-          <div className="container mx-auto">
+          <div className="container mx-auto mb-[100px]">
             <div className="flex item-start">
               <div className={"hidden md:block w-[280px]"}>
                 <Sider />
