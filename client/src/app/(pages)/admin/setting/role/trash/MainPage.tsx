@@ -27,6 +27,8 @@ export const MainPage = () => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return;
+
     const params = new URLSearchParams();
     if (search) params.append("search", search);
     if (page) params.append("page", page);
@@ -39,7 +41,7 @@ export const MainPage = () => {
         setRoleList(data.roleList);
         setPagination(data.pagination);
       })
-  }, [search, page])
+  }, [search, page, isLogin])
 
   const handleApplyMulti = () => {
     if (status && idList && idList.length) {
@@ -133,7 +135,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("role-trash") && (
         <>
           <Toaster />
           <Title title={"Thùng rác nhóm quyền"} />

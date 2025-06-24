@@ -19,6 +19,14 @@ module.exports.createGet = async (req, res) => {
 }
 
 module.exports.createPost = async (req, res) => {
+  if (!req.account.permission.includes("category-create")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
+
   const documentNum = await Category.countDocuments({
     deleted: false
   });
@@ -143,6 +151,13 @@ module.exports.applyMultiPatch = async (req, res) => {
   switch (req.body.status) {
     case "active": case "inactive":
       {
+        if (!req.account.permission.includes("category-edit")) {
+          res.json({
+            code: "error",
+            message: "Không có quyền sử dụng tính năng này!"
+          })
+          return;
+        }
         await Category.updateMany({
           _id: { $in: req.body.idList }
         }, {
@@ -154,6 +169,14 @@ module.exports.applyMultiPatch = async (req, res) => {
       }
     case "delete":
       {
+        if (!req.account.permission.includes("category-delete")) {
+          res.json({
+            code: "error",
+            message: "Không có quyền sử dụng tính năng này!"
+          })
+          return;
+        }
+
         await Category.updateMany({
           _id: { $in: req.body.idList }
         }, {
@@ -171,6 +194,14 @@ module.exports.applyMultiPatch = async (req, res) => {
 }
 
 module.exports.deletePatch = async (req, res) => {
+  if (!req.account.permission.includes("category-delete")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
+
   try {
     const id = req.params.id;
     await Category.updateOne({
@@ -232,6 +263,14 @@ module.exports.editGet = async (req, res) => {
 }
 
 module.exports.editPatch = async (req, res) => {
+  if (!req.account.permission.includes("category-edit")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
+
   try {
     const id = req.params.id;
 
@@ -327,6 +366,13 @@ module.exports.trashGet = async (req, res) => {
 }
 
 module.exports.trashApplyMultiPatch = async (req, res) => {
+  if (!req.account.permission.includes("category-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   switch (req.body.status) {
     case "hard-delete":
       {
@@ -355,6 +401,13 @@ module.exports.trashApplyMultiPatch = async (req, res) => {
 }
 
 module.exports.recoveryPatch = async (req, res) => {
+  if (!req.account.permission.includes("category-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Category.updateOne({
@@ -378,6 +431,13 @@ module.exports.recoveryPatch = async (req, res) => {
 }
 
 module.exports.hardDelete = async (req, res) => {
+  if (!req.account.permission.includes("category-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Category.deleteOne({

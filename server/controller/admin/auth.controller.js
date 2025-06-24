@@ -40,7 +40,8 @@ module.exports.verifyToken = async (req, res) => {
       fullName: existAccount.fullName,
       email: existAccount.email,
       avatar: existAccount.avatar,
-      role: roleInfo.name
+      role: roleInfo.name,
+      permission: roleInfo.permissions
     };
 
     res.json({

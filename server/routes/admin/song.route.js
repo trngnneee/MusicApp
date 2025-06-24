@@ -6,6 +6,7 @@ const upload = multer({ storage: CloudinaryHelper.storage });
 
 const songController = require("../../controller/admin/song.controller");
 const songValidate = require("../../validate/song.validate");
+const adminMiddleware = require("../../middleware/auth.middleware");
 
 router.get(
   "/create",
@@ -19,6 +20,7 @@ router.post(
     { name: 'audio', maxCount: 1 }
   ]),
   songValidate.createPost,
+  adminMiddleware.verifyToken,
   songController.createPost
 )
 
@@ -30,11 +32,13 @@ router.get(
 router.patch(
   "/apply-multi",
   songValidate.applyMultiPatch,
+  adminMiddleware.verifyToken,
   songController.applyMultiPatch
 )
 
 router.patch(
   '/delete/:id',
+  adminMiddleware.verifyToken,
   songController.deletePatch
 )
 
@@ -50,6 +54,7 @@ router.patch(
     { name: "audio", maxCount: 1 },
   ]),
   songValidate.editPatch,
+  adminMiddleware.verifyToken,
   songController.editPatch
 )
 
@@ -61,16 +66,19 @@ router.get(
 router.patch(
   "/trash/apply-multi",
   songValidate.trashApplyMultiPatch,
+  adminMiddleware.verifyToken,
   songController.trashApplyMultiPatch,
 )
 
 router.patch(
   "/trash/recovery/:id",
+  adminMiddleware.verifyToken,
   songController.recoveryPatch,
 )
 
 router.delete(
   "/trash/hard-delete/:id",
+  adminMiddleware.verifyToken,
   songController.hardDelete,
 )
 

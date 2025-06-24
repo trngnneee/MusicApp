@@ -13,28 +13,30 @@ export const AdminSider = (props: { className?}) => {
   const pathName = usePathname();
   const router = useRouter();
   const { className } = props;
-  const { isLogin } = useAuth();
+  const { isLogin, userInfo } = useAuth();
+
+  const hasPermission = (permission: string) => {
+    return userInfo?.permission?.includes(permission) || false;
+  };
 
   const data = [
     {
       icon: <TbCategory className="translate-y-[1.5px]" />,
       link: "/admin/category/list",
-      title: "Quản lý danh mục"
+      title: "Quản lý danh mục",
+      display: hasPermission("category-view")
     },
     {
       icon: <GiMicrophone className="translate-y-[1.5px]" />,
       link: "/admin/singer/list",
-      title: "Quản lý ca sĩ"
+      title: "Quản lý ca sĩ",
+      display: hasPermission("singer-view")
     },
     {
       icon: <IoMdMusicalNotes className="translate-y-[1.5px]" />,
       link: "/admin/song/list",
-      title: "Quản lý bài hát"
-    },
-    {
-      icon: <FaRegUser className="translate-y-[1.5px]" />,
-      link: "/admin/user/list",
-      title: "Quản lý người dùng"
+      title: "Quản lý bài hát",
+      display: hasPermission("song-view")
     }
   ]
 
@@ -42,12 +44,14 @@ export const AdminSider = (props: { className?}) => {
     {
       icon: <IoSettingsOutline className="translate-y-[1.5px]" />,
       link: "/admin/setting/list",
-      title: "Cài đặt chung"
+      title: "Cài đặt chung",
+      display: hasPermission("setting-view")
     },
     {
       icon: <FaRegUser className="translate-y-[1.5px]" />,
       link: "/admin/setting/profile/edit",
-      title: "Thông tin cá nhân"
+      title: "Thông tin cá nhân",
+      display: true
     }
   ]
 
@@ -84,14 +88,16 @@ export const AdminSider = (props: { className?}) => {
               <ul>
                 {
                   data.map((item, index) => (
-                    <li className="" key={index}>
-                      <div className={`w-[80%] hover:bg-[#4880FF] text-dark hover:text-white py-[12px] px-[10px] mx-auto rounded-[10px] ${(item.link == pathName ? " bg-[#4880FF] text-white" : "")}`}>
-                        <Link href={item.link} className="flex gap-[16px] w-full">
-                          {item.icon}
-                          <div className="text-[14px] font-[600]">{item.title}</div>
-                        </Link>
-                      </div>
-                    </li>
+                    item.display && (
+                      <li className="" key={index}>
+                        <div className={`w-[80%] hover:bg-[#4880FF] text-dark hover:text-white py-[12px] px-[10px] mx-auto rounded-[10px] ${(item.link == pathName ? " bg-[#4880FF] text-white" : "")}`}>
+                          <Link href={item.link} className="flex gap-[16px] w-full">
+                            {item.icon}
+                            <div className="text-[14px] font-[600]">{item.title}</div>
+                          </Link>
+                        </div>
+                      </li>
+                    )
                   ))
                 }
               </ul>
@@ -100,14 +106,16 @@ export const AdminSider = (props: { className?}) => {
               <ul>
                 {
                   data2.map((item, index) => (
-                    <li className="" key={index}>
-                      <div className={`w-[80%] hover:bg-[#4880FF] text-dark hover:text-white py-[12px] px-[10px] mx-auto rounded-[10px] ${(item.link == pathName ? " bg-[#4880FF] text-white" : "")}`}>
-                        <Link href={item.link} className="flex gap-[16px] w-full">
-                          {item.icon}
-                          <div className="text-[14px] font-[600]">{item.title}</div>
-                        </Link>
-                      </div>
-                    </li>
+                    item.display && (
+                      <li className="" key={index}>
+                        <div className={`w-[80%] hover:bg-[#4880FF] text-dark hover:text-white py-[12px] px-[10px] mx-auto rounded-[10px] ${(item.link == pathName ? " bg-[#4880FF] text-white" : "")}`}>
+                          <Link href={item.link} className="flex gap-[16px] w-full">
+                            {item.icon}
+                            <div className="text-[14px] font-[600]">{item.title}</div>
+                          </Link>
+                        </div>
+                      </li>
+                    )
                   ))
                 }
                 <li className="">

@@ -22,6 +22,13 @@ module.exports.websiteInfoGet = async (req, res) => {
 }
 
 module.exports.websiteInfoPatch = async (req, res) => {
+  if (!req.account.permission.includes("website-edit")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   if (req.files) {
     if (req.files.logo && req.files.logo.length) {
       req.body.logo = req.files.logo[0].path;
@@ -52,6 +59,13 @@ module.exports.websiteInfoPatch = async (req, res) => {
 }
 
 module.exports.roleCreatePost = async (req, res) => {
+  if (!req.account.permission.includes("role-create")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   const newRecord = new Role(req.body);
   await newRecord.save();
 
@@ -114,6 +128,13 @@ module.exports.roleListGet = async (req, res) => {
 }
 
 module.exports.roleListApplyMultiPatch = async (req, res) => {
+  if (!req.account.permission.includes("role-delete")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   await Role.updateMany({
     _id: { $in: req.body.idList }
   }, {
@@ -128,6 +149,13 @@ module.exports.roleListApplyMultiPatch = async (req, res) => {
 }
 
 module.exports.roleListDeletePatch = async (req, res) => {
+  if (!req.account.permission.includes("role-delete")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Role.updateOne({
@@ -179,6 +207,13 @@ module.exports.roleEditGet = async (req, res) => {
 }
 
 module.exports.roleEditPatch = async (req, res) => {
+  if (!req.account.permission.includes("role-edit")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Role.updateOne({
@@ -251,6 +286,13 @@ module.exports.roleTrashGet = async (req, res) => {
 }
 
 module.exports.roleTrashHardDelete = async (req, res) => {
+  if (!req.account.permission.includes("role-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Role.deleteOne({
@@ -271,6 +313,13 @@ module.exports.roleTrashHardDelete = async (req, res) => {
 }
 
 module.exports.roleTrashRecoveryPatch = async (req, res) => {
+  if (!req.account.permission.includes("role-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Role.updateOne({
@@ -295,8 +344,15 @@ module.exports.roleTrashRecoveryPatch = async (req, res) => {
 }
 
 module.exports.roleTrashApplyMulti = async (req, res) => {
+  if (!req.account.permission.includes("role-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   switch (req.body.status) {
-    case "hard-delete": 
+    case "hard-delete":
       {
         await Role.deleteMany({
           _id: { $in: req.body.idList }
@@ -342,6 +398,13 @@ module.exports.adminAccountRoleListGet = async (req, res) => {
 }
 
 module.exports.adminAccountCreate = async (req, res) => {
+  if (!req.account.permission.includes("admin-account-create")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   const existAccount = await AdminAccount.findOne({
     email: req.body.email
   })
@@ -456,6 +519,13 @@ module.exports.adminAccountApplyMulti = async (req, res) => {
   switch (req.body.status) {
     case "active": case "inactive":
       {
+        if (!req.account.permission.includes("admin-account-edit")) {
+          res.json({
+            code: "error",
+            message: "Không có quyền sử dụng tính năng này!"
+          })
+          return;
+        }
         await AdminAccount.updateMany({
           _id: { $in: req.body.idList }
         }, {
@@ -467,6 +537,13 @@ module.exports.adminAccountApplyMulti = async (req, res) => {
       }
     case "delete":
       {
+        if (!req.account.permission.includes("admin-account-delete")) {
+          res.json({
+            code: "error",
+            message: "Không có quyền sử dụng tính năng này!"
+          })
+          return;
+        }
         await AdminAccount.updateMany({
           _id: { $in: req.body.idList }
         }, {
@@ -484,6 +561,13 @@ module.exports.adminAccountApplyMulti = async (req, res) => {
 }
 
 module.exports.adminAccountDeletePatch = async (req, res) => {
+  if (!req.account.permission.includes("admin-account-delete")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await AdminAccount.updateOne({
@@ -505,7 +589,6 @@ module.exports.adminAccountDeletePatch = async (req, res) => {
     })
   }
 }
-
 
 module.exports.adminAccountEditGet = async (req, res) => {
   try {
@@ -552,6 +635,13 @@ module.exports.adminAccountEditGet = async (req, res) => {
 }
 
 module.exports.adminAccountEdit = async (req, res) => {
+  if (!req.account.permission.includes("admin-account-edit")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     if (req.file) {
@@ -659,6 +749,13 @@ module.exports.trashListGet = async (req, res) => {
 }
 
 module.exports.trashApplyMulti = async (req, res) => {
+  if (!req.account.permission.includes("admin-account-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   switch (req.body.status) {
     case "hard-delete":
       {
@@ -686,6 +783,13 @@ module.exports.trashApplyMulti = async (req, res) => {
 }
 
 module.exports.trashHardDelete = async (req, res) => {
+  if (!req.account.permission.includes("admin-account-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await AdminAccount.deleteOne({
@@ -705,6 +809,13 @@ module.exports.trashHardDelete = async (req, res) => {
 }
 
 module.exports.trashRecoveryPatch = async (req, res) => {
+  if (!req.account.permission.includes("admin-account-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await AdminAccount.updateOne({

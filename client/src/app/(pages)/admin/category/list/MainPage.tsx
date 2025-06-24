@@ -32,6 +32,8 @@ export const MainPage = () => {
   const [applyMulti, setApplyMulti] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return;
+
     const params = new URLSearchParams();
     if (status) params.append("status", status);
     if (createdBy) params.append("createdBy", createdBy);
@@ -49,7 +51,7 @@ export const MainPage = () => {
         setAdminAccountList(data.adminAccountList);
         setPagination(data.pagination);
       })
-  }, [status, createdBy, startDate, endDate, search, page])
+  }, [status, createdBy, startDate, endDate, search, page, isLogin])
 
   const handleClearFilter = () => {
     setStatus("");
@@ -67,7 +69,7 @@ export const MainPage = () => {
         status: applyMulti,
         idList: checkList
       };
-      
+
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/apply-multi`, {
         method: "PATCH",
         headers: {
@@ -121,7 +123,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("category-view") && (
         <>
           <Toaster />
           <Title title="Quản lý danh mục" />
@@ -145,9 +147,15 @@ export const MainPage = () => {
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] rounded-l-[14px] flex gap-[12px] items-center bg-white">
                 <select className="text-[14px] font-[700] text-dark outline-none" onChange={(event) => setApplyMulti(event.target.value)}>
                   <option value="">-- Hành động --</option>
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Tạm dừng</option>
-                  <option value="delete">Xóa</option>
+                  {userInfo.permission.includes("category-edit") && (
+                    <>
+                      <option value="active">Hoạt động</option>
+                      <option value="inactive">Tạm dừng</option>
+                    </>
+                  )}
+                  {userInfo.permission.includes("category-delete") && (
+                    <option value="delete">Xóa</option>
+                  )}
                 </select>
               </li>
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
@@ -164,8 +172,12 @@ export const MainPage = () => {
               onSearchChange={setSearch}
             />
             <div className="flex gap-[20px]">
-              <Create link={`/admin/category/create`} />
-              <Trash link={"/admin/category/trash"} />
+              {userInfo.permission.includes("category-create") && (
+                <Create link={`/admin/category/create`} />
+              )}
+              {userInfo.permission.includes("category-trash") && (
+                <Trash link={"/admin/category/trash"} />
+              )}
             </div>
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
@@ -231,19 +243,23 @@ export const MainPage = () => {
                       </th>
                       <th className="px-[15px] py-[8px] text-left align-middle">
                         <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                          <button
-                            className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                            onClick={() => {
-                              router.push(`/admin/category/edit/${item.id}`)
-                            }}
-                          >
-                            <FiEdit />
-                          </button>
-                          <DeleteButton
-                            api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/delete/${item.id}`}
-                            id={item.id}
-                            handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
-                          />
+                          {userInfo.permission.includes("category-edit") && (
+                            <button
+                              className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+                              onClick={() => {
+                                router.push(`/admin/category/edit/${item.id}`)
+                              }}
+                            >
+                              <FiEdit />
+                            </button>
+                          )}
+                          {userInfo.permission.includes("category-delete") && (
+                            <DeleteButton
+                              api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/delete/${item.id}`}
+                              id={item.id}
+                              handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                            />
+                          )}
                         </div>
                       </th>
                     </tr>

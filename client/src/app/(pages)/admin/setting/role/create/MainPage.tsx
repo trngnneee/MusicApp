@@ -9,7 +9,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("role-create") && (
         <>
           <Title title={"Tạo nhóm quyền"} />
           <div className="mt-[30px]">

@@ -31,6 +31,8 @@ export const MainPage = () => {
   const [applyMulti, setApplyMulti] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return;
+
     const params = new URLSearchParams();
     if (status) params.append("status", status);
     if (role) params.append("role", role);
@@ -46,7 +48,7 @@ export const MainPage = () => {
         setRoleList(data.roleList);
         setPagination(data.pagination);
       })
-  }, [status, role, search, page])
+  }, [status, role, search, page, isLogin])
 
   const handleClearFilter = () => {
     setStatus("");
@@ -109,7 +111,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("admin-account-view") && (
         <>
           <Toaster />
           <Title title={"Tài khoản quản trị"} />
@@ -131,9 +133,15 @@ export const MainPage = () => {
                   onChange={(event) => setApplyMulti(event.target.value)}
                 >
                   <option value="">-- Hành động --</option>
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Tạm dừng</option>
-                  <option value="delete">Xóa</option>
+                  {userInfo.permission.includes("admin-account-edit") && (
+                    <>
+                      <option value="active">Hoạt động</option>
+                      <option value="inactive">Tạm dừng</option>
+                    </>
+                  )}
+                  {userInfo.permission.includes("admin-account-delete") && (
+                    <option value="delete">Xóa</option>
+                  )}
                 </select>
               </li>
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
@@ -150,8 +158,12 @@ export const MainPage = () => {
               onSearchChange={setSearch}
             />
             <div className="flex gap-[10px]">
-              <Create link={"/admin/setting/admin-account/create"} />
-              <Trash link={"/admin/setting/admin-account/trash"}/>
+              {userInfo.permission.includes("admin-account-create") && (
+                <Create link={"/admin/setting/admin-account/create"} />
+              )}
+              {userInfo.permission.includes("admin-account-trash") && (
+                <Trash link={"/admin/setting/admin-account/trash"} />
+              )}
             </div>
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
@@ -208,17 +220,21 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button
-                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                          onClick={() => router.push(`/admin/setting/admin-account/edit/${item.id}`)}
-                        >
-                          <FiEdit />
-                        </button>
-                        <DeleteButton
-                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/delete/${item.id}`}
-                          id={item.id}
-                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
-                        />
+                        {userInfo.permission.includes("admin-account-delete") && (
+                          <button
+                            className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+                            onClick={() => router.push(`/admin/setting/admin-account/edit/${item.id}`)}
+                          >
+                            <FiEdit />
+                          </button>
+                        )}
+                        {userInfo.permission.includes("admin-account-edit") && (
+                          <DeleteButton
+                            api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/delete/${item.id}`}
+                            id={item.id}
+                            handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                          />
+                        )}
                       </div>
                     </th>
                   </tr>

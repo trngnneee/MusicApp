@@ -24,6 +24,8 @@ export const MainPage = () => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return;
+
     const params = new URLSearchParams();
     if (search) params.append("search", search);
     if (page) params.append("page", page);
@@ -36,7 +38,7 @@ export const MainPage = () => {
         setRoleList(data.roleList);
         setPagination(data.pagination);
       })
-  }, [search, page])
+  }, [search, page, isLogin])
 
   const handleApplyMulti = () => {
     if (status && idList && idList.length) {
@@ -83,7 +85,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("role-view") && (
         <>
           <Toaster />
           <Title title={"Nhóm quyền"} />
@@ -97,7 +99,9 @@ export const MainPage = () => {
                   onChange={(event) => setStatus(event.target.value)}
                 >
                   <option value="">-- Hành động --</option>
-                  <option value="delete">Xóa</option>
+                  {userInfo.permission.includes("role-delete") && (
+                    <option value="delete">Xóa</option>
+                  )}
                 </select>
               </li>
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
@@ -114,8 +118,12 @@ export const MainPage = () => {
               onSearchChange={setSearch}
             />
             <div className="flex gap-[10px]">
-              <Create link={"/admin/setting/role/create"} />
-              <Trash link={"/admin/setting/role/trash"}/>
+              {userInfo.permission.includes("role-create") && (
+                <Create link={"/admin/setting/role/create"} />
+              )}
+              {userInfo.permission.includes("role-trash") && (
+                <Trash link={"/admin/setting/role/trash"} />
+              )}
             </div>
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
@@ -154,17 +162,21 @@ export const MainPage = () => {
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">{item.description}</th>
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button
-                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                          onClick={() => router.push(`/admin/setting/role/edit/${item.id}`)}
-                        >
-                          <FiEdit />
-                        </button>
-                        <DeleteButton
-                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/delete/${item.id}`}
-                          id={item.id}
-                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
-                        />
+                        {userInfo.permission.includes("role-edit") && (
+                          <button
+                            className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+                            onClick={() => router.push(`/admin/setting/role/edit/${item.id}`)}
+                          >
+                            <FiEdit />
+                          </button>
+                        )}
+                        {userInfo.permission.includes("role-delete") && (
+                          <DeleteButton
+                            api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/delete/${item.id}`}
+                            id={item.id}
+                            handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                          />
+                        )}
                       </div>
                     </th>
                   </tr>

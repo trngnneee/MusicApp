@@ -1,5 +1,6 @@
 const AdminAccount = require("../model/admin-account.model");
 const jwt = require("jsonwebtoken");
+const Role = require("../model/role.model");
 
 module.exports.verifyToken = async (req, res, next) => {
   try {
@@ -32,6 +33,10 @@ module.exports.verifyToken = async (req, res, next) => {
     }
 
     req.account = existAccount;
+    const roleDetail = await Role.findOne({
+      _id: existAccount.role
+    })
+    req.account.permission = roleDetail.permissions;
   }
   catch (error) {
     res.clearCookie();

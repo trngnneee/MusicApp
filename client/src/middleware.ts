@@ -30,7 +30,6 @@ export const config = {
     '/admin/setting/:path*',
     '/admin/singer/:path*',
     '/admin/song/:path*',
-    '/admin/user/:path*',
     '/wishlist',
     '/reset-password'
   ],

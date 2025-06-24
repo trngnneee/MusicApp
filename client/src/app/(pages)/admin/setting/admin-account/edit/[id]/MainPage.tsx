@@ -9,7 +9,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("admin-account-edit") && (
         <>
           <Title title={"Chỉnh sửa tài khoản quản trị"} />
           <div className="mt-[30px]">

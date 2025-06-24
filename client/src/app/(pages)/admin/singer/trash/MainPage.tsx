@@ -23,6 +23,8 @@ export const MainPage = () => {
   const [page, setPage] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return
+
     const params = new URLSearchParams();
     if (search) params.append("search", search);
     if (page) params.append("page", page);
@@ -37,7 +39,7 @@ export const MainPage = () => {
           setPagination(data.pagination);
         }
       })
-  }, [page, search])
+  }, [page, search, isLogin])
 
   const handleApplyMulti = () => {
     if (idList && idList.length && applyMultiStatus) {
@@ -138,7 +140,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("singer-trash") && (
         <>
           <Title title={"Thùng rác"} />
           <div className="flex gap-[20px] mt-[30px] flex-wrap">

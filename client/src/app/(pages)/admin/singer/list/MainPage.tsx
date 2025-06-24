@@ -30,6 +30,8 @@ export const MainPage = () => {
   const [applyStatus, setApplyStatus] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return;
+
     const params = new URLSearchParams();
     if (status) params.append("status", status);
     if (startDate) params.append("startDate", startDate);
@@ -45,7 +47,7 @@ export const MainPage = () => {
         setSingerList(data.singerList);
         setPagination(data.pagination);
       })
-  }, [status, startDate, endDate, search, page])
+  }, [status, startDate, endDate, search, page, isLogin])
 
 
   const handleClearFilter = () => {
@@ -116,7 +118,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("singer-view") && (
         <>
           <Toaster />
           <Title title={"Quản lý ca sĩ"} />
@@ -139,9 +141,15 @@ export const MainPage = () => {
                   onChange={(event) => setApplyStatus(event.target.value)}
                 >
                   <option value="">-- Hành động --</option>
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Tạm dừng</option>
-                  <option value="delete">Xóa</option>
+                  {userInfo.permission.includes("singer-edit") && (
+                    <>
+                      <option value="active">Hoạt động</option>
+                      <option value="inactive">Tạm dừng</option>
+                    </>
+                  )}
+                  {userInfo.permission.includes("singer-delete") && (
+                    <option value="delete">Xóa</option>
+                  )}
                 </select>
               </li>
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
@@ -158,8 +166,12 @@ export const MainPage = () => {
               onSearchChange={setSearch}
             />
             <div className="flex gap-[20px]">
-              <Create link={"/admin/singer/create"} />
-              <Trash link={"/admin/singer/trash"} />
+              {userInfo.permission.includes("singer-create") && (
+                <Create link={"/admin/singer/create"} />
+              )}
+              {userInfo.permission.includes("singer-trash") && (
+                <Trash link={"/admin/singer/trash"} />
+              )}
             </div>
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-scroll w-full">
@@ -224,17 +236,21 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] xl:px-[32px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button
-                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                          onClick={() => router.push(`/admin/singer/edit/${item.id}`)}
-                        >
-                          <FiEdit />
-                        </button>
-                        <DeleteButton
-                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/delete/${item.id}`}
-                          id={item.id}
-                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
-                        />
+                        {userInfo.permission.includes("singer-edit") && (
+                          <button
+                            className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+                            onClick={() => router.push(`/admin/singer/edit/${item.id}`)}
+                          >
+                            <FiEdit />
+                          </button>
+                        )}
+                        {userInfo.permission.includes("singer-delete") && (
+                          <DeleteButton
+                            api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/delete/${item.id}`}
+                            id={item.id}
+                            handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                          />
+                        )}
                       </div>
                     </th>
                   </tr>

@@ -9,7 +9,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("singer-create") && (
         <>
           <Title title={"Thêm ca sĩ"} />
           <div className="mt-[30px]">

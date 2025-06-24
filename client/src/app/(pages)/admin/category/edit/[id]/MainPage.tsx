@@ -9,7 +9,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("category-edit") && (
         <>
           <Title title={"Chỉnh sửa danh mục"} />
           <div className="mt-[30px]">

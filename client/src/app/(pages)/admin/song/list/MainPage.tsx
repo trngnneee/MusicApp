@@ -35,6 +35,8 @@ export const MainPage = () => {
   const [applyMultiStatus, setApplyMultiStatus] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return;
+
     const params = new URLSearchParams();
     if (status) params.append("status", status);
     if (createdBy) params.append("createdBy", createdBy);
@@ -54,7 +56,7 @@ export const MainPage = () => {
         setCategoryTree(data.categoryTree);
         setPagination(data.pagination);
       })
-  }, [status, createdBy, startDate, endDate, category, search, page]);
+  }, [status, createdBy, startDate, endDate, category, search, page, isLogin]);
 
   const handleClearFilter = () => {
     setStatus("");
@@ -124,7 +126,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("song-view") && (
         <>
           <Title title={"Quản lý bài hát"} />
           <SongFilter
@@ -152,9 +154,15 @@ export const MainPage = () => {
                   onChange={(event) => setApplyMultiStatus(event.target.value)}
                 >
                   <option value="">-- Hành động --</option>
-                  <option value="active">Hoạt động</option>
-                  <option value="inactive">Tạm dừng</option>
-                  <option value="delete">Xóa</option>
+                  {userInfo.permission.includes("song-edit") && (
+                    <>
+                      <option value="active">Hoạt động</option>
+                      <option value="inactive">Tạm dừng</option>
+                    </>
+                  )}
+                  {userInfo.permission.includes("song-delete") && (
+                    <option value="delete">Xóa</option>
+                  )}
                 </select>
               </li>
               <li className="py-[15px] xl:py-[26px] px-[15px] xl:px-[24px] border-[0.6px] border-[#D5D5D5] border-l-0 rounded-r-[14px] flex gap-[12px] items-center bg-white">
@@ -171,8 +179,12 @@ export const MainPage = () => {
               onSearchChange={setSearch}
             />
             <div className="flex gap-[20px]">
-              <Create link={"/admin/song/create"} />
-              <Trash link={"/admin/song/trash"} />
+              {userInfo.permission.includes("song-create") && (
+                <Create link={"/admin/song/create"} />
+              )}
+              {userInfo.permission.includes("song-trash") && (
+                <Trash link={"/admin/song/trash"} />
+              )}
             </div>
           </div>
           <div className="border-[0.6px] border-[#D5D5D5] rounded-[14px] mt-[30px] overflow-x-auto w-full">
@@ -245,17 +257,21 @@ export const MainPage = () => {
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="bg-[#FAFBFD] border-[0.6px] border-[#D5D5D5] rounded-[8px] w-[100px]">
-                        <button
-                          className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
-                          onClick={() => { router.push(`/admin/song/edit/${item.id}`) }}
-                        >
-                          <FiEdit />
-                        </button>
-                        <DeleteButton
-                          api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/delete/${item.id}`}
-                          id={item.id}
-                          handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
-                        />
+                        {userInfo.permission.includes("song-edit") && (
+                          <button
+                            className="px-[16px] py-[11px] border-r-[0.6px] border-[#D5D5D5]"
+                            onClick={() => { router.push(`/admin/song/edit/${item.id}`) }}
+                          >
+                            <FiEdit />
+                          </button>
+                        )}
+                        {userInfo.permission.includes("song-delete") && (
+                          <DeleteButton
+                            api={`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/delete/${item.id}`}
+                            id={item.id}
+                            handleDeleteSuccess={() => handleDeleteSuccess(item.id)}
+                          />
+                        )}
                       </div>
                     </th>
                   </tr>

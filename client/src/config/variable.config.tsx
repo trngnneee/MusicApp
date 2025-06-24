@@ -60,24 +60,12 @@ export const permissionList = [
     value: "song-trash"
   },
   {
+    label: "Danh sách cài đặt",
+    value: "setting-view"
+  },
+  {
     label: "Chỉnh sửa thông tin website",
     value: "website-edit"
-  },
-  {
-    label: "Xem trang Quản lý người dùng",
-    value: "user-view"
-  },
-  {
-    label: "Sửa người dùng",
-    value: "user-edit"
-  },
-  {
-    label: "Xóa người dùng",
-    value: "user-delete"
-  },
-  {
-    label: "Thùng rác người dùng",
-    value: "user-trash"
   },
   {
     label: "Xem trang Tài khoản quản trị",

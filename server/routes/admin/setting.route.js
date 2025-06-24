@@ -6,6 +6,7 @@ const upload = multer({ storage: CloudinaryHelper.storage });
 
 const settingController = require("../../controller/admin/setting.controller");
 const settingValidate = require("../../validate/setting.validate")
+const adminMiddleware = require("../../middleware/auth.middleware")
 
 router.get(
   "/website-info",
@@ -19,12 +20,14 @@ router.patch(
     { name: "favicon", maxCount: 1 },
   ]),
   settingValidate.websiteInfoPatch,
+  adminMiddleware.verifyToken,
   settingController.websiteInfoPatch
 )
 
 router.post(
   "/role/create",
   settingValidate.roleCreatePost,
+  adminMiddleware.verifyToken,
   settingController.roleCreatePost,
 )
 
@@ -36,11 +39,13 @@ router.get(
 router.patch(
   "/role/apply-multi",
   settingValidate.roleListApplyMultiPatch,
+  adminMiddleware.verifyToken,
   settingController.roleListApplyMultiPatch
 )
 
 router.patch(
   "/role/delete/:id",
+  adminMiddleware.verifyToken,
   settingController.roleListDeletePatch
 )
 
@@ -52,6 +57,7 @@ router.get(
 router.patch(
   "/role/edit/:id",
   settingValidate.roleEditPatch,
+  adminMiddleware.verifyToken,
   settingController.roleEditPatch
 )
 
@@ -62,17 +68,20 @@ router.get(
 
 router.delete(
   "/role/trash/hard-delete/:id",
+  adminMiddleware.verifyToken,
   settingController.roleTrashHardDelete
 )
 
 router.patch(
   "/role/trash/recovery/:id",
+  adminMiddleware.verifyToken,
   settingController.roleTrashRecoveryPatch
 )
 
 router.patch(
   "/role/trash/apply-multi",
   settingValidate.roleTrashApplyMulti,
+  adminMiddleware.verifyToken,
   settingController.roleTrashApplyMulti,
 )
 
@@ -85,6 +94,7 @@ router.post(
   "/admin-account/create",
   upload.single("avatar"),
   settingValidate.adminAccountCreate,
+  adminMiddleware.verifyToken,
   settingController.adminAccountCreate
 )
 
@@ -96,11 +106,13 @@ router.get(
 router.patch(
   "/admin-account/apply-multi",
   settingValidate.adminAccountApplyMulti,
+  adminMiddleware.verifyToken,
   settingController.adminAccountApplyMulti
 )
 
 router.patch(
   "/admin-account/delete/:id",
+  adminMiddleware.verifyToken,
   settingController.adminAccountDeletePatch
 )
 
@@ -113,6 +125,7 @@ router.patch(
   "/admin-account/edit/:id",
   upload.single("avatar"),
   settingValidate.adminAccountEdit,
+  adminMiddleware.verifyToken,
   settingController.adminAccountEdit
 )
 
@@ -124,16 +137,19 @@ router.get(
 router.patch(
   "/admin-account/trash/apply-multi",
   settingValidate.trashApplyMulti,
+  adminMiddleware.verifyToken,
   settingController.trashApplyMulti
 )
 
 router.delete(
   "/admin-account/trash/hard-delete/:id",
+  adminMiddleware.verifyToken,
   settingController.trashHardDelete
 )
 
 router.patch(
   "/admin-account/trash/recovery/:id",
+  adminMiddleware.verifyToken,
   settingController.trashRecoveryPatch
 )
 

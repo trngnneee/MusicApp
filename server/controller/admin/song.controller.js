@@ -31,6 +31,13 @@ module.exports.createGet = async (req, res) => {
 }
 
 module.exports.createPost = async (req, res) => {
+  if (!req.account.permission.includes("song-create")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   const numDoc = await Song.countDocuments({});
   if (req.body.position) {
     req.body.position = parseInt(req.body.position);
@@ -187,6 +194,13 @@ module.exports.applyMultiPatch = async (req, res) => {
   switch (req.body.status) {
     case "delete":
       {
+        if (!req.account.permission.includes("song-delete")) {
+          res.json({
+            code: "error",
+            message: "Không có quyền sử dụng tính năng này!"
+          })
+          return;
+        }
         await Song.updateMany({
           _id: { $in: req.body.idList }
         }, {
@@ -198,6 +212,13 @@ module.exports.applyMultiPatch = async (req, res) => {
       }
     case "active": case "inactive":
       {
+        if (!req.account.permission.includes("song-edit")) {
+          res.json({
+            code: "error",
+            message: "Không có quyền sử dụng tính năng này!"
+          })
+          return;
+        }
         await Song.updateMany({
           _id: { $in: req.body.idList }
         }, {
@@ -216,6 +237,13 @@ module.exports.applyMultiPatch = async (req, res) => {
 }
 
 module.exports.deletePatch = async (req, res) => {
+  if (!req.account.permission.includes("song-delete")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Song.updateOne({
@@ -288,6 +316,13 @@ module.exports.editGet = async (req, res) => {
 }
 
 module.exports.editPatch = async (req, res) => {
+  if (!req.account.permission.includes("song-edit")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
 
@@ -412,6 +447,13 @@ module.exports.trashListGet = async (req, res) => {
 }
 
 module.exports.trashApplyMultiPatch = async (req, res) => {
+  if (!req.account.permission.includes("song-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   switch (req.body.status) {
     case "hard-delete":
       {
@@ -440,6 +482,13 @@ module.exports.trashApplyMultiPatch = async (req, res) => {
 }
 
 module.exports.recoveryPatch = async (req, res) => {
+  if (!req.account.permission.includes("song-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Song.updateOne({
@@ -463,6 +512,13 @@ module.exports.recoveryPatch = async (req, res) => {
 }
 
 module.exports.hardDelete = async (req, res) => {
+  if (!req.account.permission.includes("song-trash")) {
+    res.json({
+      code: "error",
+      message: "Không có quyền sử dụng tính năng này!"
+    })
+    return;
+  }
   try {
     const id = req.params.id;
     await Song.deleteOne({

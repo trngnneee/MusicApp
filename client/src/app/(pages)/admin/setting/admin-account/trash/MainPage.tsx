@@ -4,7 +4,6 @@ import { Active } from "@/app/components/Admin/StatusBar/Active";
 import { Search } from "@/app/components/Admin/Search/Search";
 import { Title } from "@/app/components/Admin/Title/Title";
 import { useAuth } from "@/hooks/useAuth";
-import { FiEdit } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { Inactive } from "@/app/components/Admin/StatusBar/Inactive";
 import { toast, Toaster } from "sonner";
@@ -29,6 +28,8 @@ export const MainPage = () => {
   const [applyMulti, setApplyMulti] = useState("");
 
   useEffect(() => {
+    if (!isLogin) return;
+
     const params = new URLSearchParams();
     if (status) params.append("status", status);
     if (role) params.append("role", role);
@@ -44,7 +45,7 @@ export const MainPage = () => {
         setRoleList(data.roleList);
         setPagination(data.pagination);
       })
-  }, [status, role, search, page])
+  }, [status, role, search, page, isLogin])
 
   const handleApplyMulti = () => {
     if (applyMulti && checkList && checkList.length) {
@@ -94,7 +95,7 @@ export const MainPage = () => {
 
   return (
     <>
-      {isLogin && (
+      {isLogin && userInfo.permission.includes("admin-account-trash") && (
         <>
           <Toaster />
           <Title title={"Thùng rác tài khoản quản trị"} />
