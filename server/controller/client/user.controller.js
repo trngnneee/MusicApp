@@ -201,3 +201,42 @@ module.exports.resetPasswordPost = async (req, res) => {
     message: "Đổi mật khẩu thành công!"
   })
 }
+
+module.exports.wishlistPatch = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (req.account.wishlist.includes(id)) {
+      req.account.wishlist = req.account.wishlist.filter((item) => item != id);
+      await User.updateOne({
+        _id: req.account.id
+      }, {
+        wishlist: req.account.wishlist
+      })
+      res.json({
+        code: "success",
+        message: "Xóa khỏi danh sách yêu thích thành công!",
+        successCode: 0
+      })
+    }
+    else {
+      req.account.wishlist.push(id);
+      await User.updateOne({
+        _id: req.account.id
+      }, {
+        wishlist: req.account.wishlist
+      })
+      res.json({
+        code: "success",
+        message: "Thêm vào danh sách yêu thích thành công!",
+        successCode: 1
+      })
+    }
+  }
+  catch (error) {
+    res.json({
+      code: "error",
+      message: error
+    })
+  }
+}

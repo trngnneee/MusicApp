@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const songController = require("../../controller/client/song.controller");
+const userMiddleware = require("../../middleware/user.middleware");
 
 router.get(
   "/category-list/:slug",
@@ -26,5 +27,12 @@ router.get(
   "/detail/:id",
   songController.detailGet
 )
+
+router.post(
+  "/wishlist",
+  userMiddleware.verifyToken,
+  songController.wishlistGet
+)
+
 
 module.exports = router;

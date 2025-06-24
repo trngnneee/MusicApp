@@ -8,7 +8,8 @@ const schema = new mongoose.Schema({
     type: String,
     default: "active"
   },
-  avatar: String
+  avatar: String,
+  wishlist: Array
 }, {
   timestamps: true
 })

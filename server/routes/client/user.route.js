@@ -40,4 +40,10 @@ router.post(
   userController.resetPasswordPost
 )
 
+router.patch(
+  "/wishlist/:id",
+  userMiddleware.verifyToken,
+  userController.wishlistPatch,
+)
+
 module.exports = router;

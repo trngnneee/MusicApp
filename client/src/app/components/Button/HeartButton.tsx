@@ -1,64 +1,41 @@
 "use client"
-import { authFireBase, dbFirebase } from "@/app/FirebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
-import { ref, runTransaction } from "firebase/database";
+
 import { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { toast } from "sonner";
 import 'sweetalert2/src/sweetalert2.scss'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const HeartButton = (props: any) => {
-    const { item } = props;
+export const HeartButton = (props: {
+    item: any,
+    api: string,
+    wishlist: string[]
+}) => {
+    const { item, api, wishlist } = props;
     const [isActive, setIsActive] = useState(false);
 
-    useEffect(() => {
-        onAuthStateChanged(authFireBase, (user) => {
-            if (user) {
-                const userId = user.uid;
-                const wishlist = item.wishlist;
-                if (wishlist) {
-                    if (wishlist[userId]) {
-                        setIsActive(true);
-                    }
-                }
-            }
-        })
-    }, [])
-
     const handleClick = () => {
-        const userId = authFireBase?.currentUser?.uid;
-        if (userId && item.id) {
-            const songRef = ref(dbFirebase, `/songs/${item.id}`);
-            runTransaction(songRef, (song) => {
-                if (song) {
-                    if (song.wishlist && song.wishlist[userId]) {
-                        song.wishlist[userId] = null;
-                        setIsActive(false);
-                        Swal.fire({
-                            title: "Đã xóa khỏi Yêu thích!",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    } else {
-                        if (!song.wishlist) {
-                            song.wishlist = {};
-                        }
-                        song.wishlist[userId] = true;
-                        setIsActive(true);
-                        Swal.fire({
-                            title: "Đã thêm vào Yêu thích!",
-                            icon: "success",
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    }
-                }
-                return song;
+        const promise = fetch(api, {
+            method: "PATCH",
+            credentials: "include"
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                return data;
             });
-        }
+
+        toast.promise(promise, {
+            loading: "Đang xử lý...",
+            success: (data) => {
+                if (data.code == "success")
+                {
+                    if (data.successCode == 0) setIsActive(false);
+                    else setIsActive(true);
+                };
+                return data.message;
+            },
+            error: (data) => data.message
+        })
     }
 
     return (
@@ -67,7 +44,7 @@ export const HeartButton = (props: any) => {
                 className="text-[white] rounded-[50%] border-[1px] md:border-[2px] border-[white] hover:bg-[#9d9c9c43] p-[5px] sm:p-[8px] text-[10px] sm:text-[15px]"
                 onClick={handleClick}
             >
-                {isActive ? (<div className="text-[#00ADEF]"><FaHeart /></div>) : (<FaRegHeart />)}
+                {(isActive || wishlist.includes(item.id)) ? (<div className="text-[#00ADEF]"><FaHeart /></div>) : (<FaRegHeart />)}
             </button>
         </>
     );

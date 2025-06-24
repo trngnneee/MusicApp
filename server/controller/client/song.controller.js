@@ -35,6 +35,7 @@ module.exports.listGetToCategory = async (req, res) => {
     const songList = [];
     for (const song of rawSongList) {
       const tmp = {
+        id: song.id,
         name: song.name,
         avatar: song.avatar,
         singer: [],
@@ -84,6 +85,7 @@ module.exports.listGetToSinger = async (req, res) => {
     const songList = [];
     for (const song of rawSongList) {
       const tmp = {
+        id: song.id,
         name: song.name,
         avatar: song.avatar,
         singer: [],
@@ -127,6 +129,7 @@ module.exports.listGetToSong = async (req, res) => {
     let songList = [];
     for (const song of rawSongList) {
       const tmp = {
+        id: song.id,
         name: song.name,
         avatar: song.avatar,
         singer: [],
@@ -184,6 +187,7 @@ module.exports.listGet = async (req, res) => {
   let songList = [];
   for (const song of rawSongList) {
     const tmp = {
+      id: song.id,
       name: song.name,
       avatar: song.avatar,
       singer: [],
@@ -251,4 +255,42 @@ module.exports.detailGet = async (req, res) => {
       message: error
     })
   }
+}
+
+module.exports.wishlistGet = async (req, res) => {
+  const find = {
+    _id: { $in: req.body.wishlist },
+    status: "active",
+    deleted: false
+  }
+
+  const rawSongList = await Song.find(find);
+
+  let songList = [];
+  for (const song of rawSongList) {
+    const tmp = {
+      id: song.id,
+      name: song.name,
+      avatar: song.avatar,
+      singer: [],
+      link: `songs/${song.id}`,
+      audio: song.audio
+    };
+
+    for (const singer of song.singers) {
+      const singerDetail = await Singer.findOne({
+        _id: singer
+      });
+      tmp.singer.push(singerDetail.name);
+    }
+
+    songList.push(tmp);
+
+  }
+
+  res.json({
+    code: "success",
+    message: "Lấy dữ liệu thành công!",
+    songList: songList
+  })
 }

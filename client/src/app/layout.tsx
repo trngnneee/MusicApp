@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { AOSConfig } from "./AOSConfig";
+import { AOSConfig } from "../config/AOSConfig";
 import { MainLayout } from "./components/MainLayout/MainLayout";
 
 export const metadata: Metadata = {
