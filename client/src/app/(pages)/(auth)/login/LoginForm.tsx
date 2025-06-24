@@ -1,59 +1,104 @@
 "use client"
 
-import { authFireBase } from "@/app/FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import JustValidate from 'just-validate';
 
 export const LoginForm = () => {
     const router = useRouter();
     const [view, setView] = useState(false);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleLogin = async (event: any) => {
-        event.preventDefault();
-        const email = event.target.email.value
-        const password = event.target.password.value;
-        if (!email || !password)
-        {
-            Swal.fire({
-                title: "Vui Lòng Nhập Đủ Thông Tin!",
-                icon: "error",
-            });
-        }
-        else
-        {
-            try {
-                await signInWithEmailAndPassword(authFireBase, email, password);
-                router.push("/");
-                Swal.fire({
-                    title: "Đăng nhập thành công!",
-                    icon: "success",
-                });
-            } catch (error) {
-                console.log(error);
-                Swal.fire({
-                    title: "Thông Tin Đăng Nhập Không Chính Xác!",
-                    icon: "error",
-                });
-            }
-        }
-    }
+    useEffect(() => {
+        const validation = new JustValidate('#login-form');
+
+        validation
+            .addField('#email', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Email bắt buộc!'
+                },
+                {
+                    rule: 'email',
+                    errorMessage: 'Email sai định dạng!',
+                },
+            ], {
+                errorsContainer: '#email-container'
+            })
+            .addField('#password', [
+                {
+                    rule: 'required',
+                    errorMessage: 'Vui lòng nhập mật khẩu!',
+                },
+                {
+                    validator: (value) => value.length >= 8,
+                    errorMessage: 'Mật khẩu phải chứa ít nhất 8 ký tự!',
+                },
+                {
+                    validator: (value) => /[A-Z]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái in hoa!',
+                },
+                {
+                    validator: (value) => /[a-z]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ cái thường!',
+                },
+                {
+                    validator: (value) => /\d/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một chữ số!',
+                },
+                {
+                    validator: (value) => /[@$!%*?&]/.test(value),
+                    errorMessage: 'Mật khẩu phải chứa ít nhất một ký tự đặc biệt!',
+                },
+            ], {
+                errorsContainer: '#password-container'
+            })
+            .onSuccess((event) => {
+                event.preventDefault();
+                const email = event.target.email.value
+                const password = event.target.password.value;
+
+                const finalData = {
+                    email: email,
+                    password: password
+                };
+
+                const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/user/login`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(finalData),
+                    credentials: "include"
+                })
+                    .then(res => res.json())
+                    .then((data) => {
+                        return data;
+                    })
+
+                toast.promise(promise, {
+                    loading: "Đang xử lý...",
+                    success: (data) => {
+                        router.push("/");
+                        return data.message
+                    },
+                    error: (data) => data.message
+                })
+            })
+    }, [])
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleViewPassword = (event:any) => {
+    const handleViewPassword = (event: any) => {
         event.preventDefault();
         setView(!view);
     }
 
     return (
         <>
-            <form onSubmit={handleLogin}>
+            <form id="login-form">
                 <div className="mb-[15px]">
                     <label
                         className="flex gap-[5px] mb-[5px]"
@@ -70,6 +115,7 @@ export const LoginForm = () => {
                         className="px-[16px] py-[14px] rounded-[6px] outline-none w-[300px] sm:w-[500px]"
                     />
                 </div>
+                <div className="mb-[15px] text-[12px]" id="email-container"></div>
                 <div className="mb-[15px]">
                     <label
                         className="flex gap-[5px] mb-[5px]"
@@ -85,7 +131,7 @@ export const LoginForm = () => {
                             id="password"
                             className="outline-none w-full"
                         />
-                        <button 
+                        <button
                             type="button"
                             onClick={handleViewPassword}
                         >
@@ -93,6 +139,7 @@ export const LoginForm = () => {
                         </button>
                     </div>
                 </div>
+                <div className="mb-[15px] text-[12px]" id="password-container"></div>
                 <button className="bg-[#00ADEF] w-[300px] sm:w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng nhập</button>
                 <div className="mt-[10px] flex text-white gap-[8px] justify-end items-center">
                     <div className="">Chưa có tài khoản?</div>

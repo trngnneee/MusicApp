@@ -1,21 +1,22 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 
-export const useAuth = () => {
+export const userUseAuth = () => {
   const router = useRouter();
   const pathName = usePathname();
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState<any>();
   
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/auth/verifyToken`, {
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/verifyToken`, {
       credentials: "include"
     })
       .then(res => res.json())
       .then(data => {
         if (data.code == "error")
         {
-          router.push("/admin/account/login");
+          setIsLogin(false);
+          setUserInfo({});
         }
         if (data.code == "success")
         {

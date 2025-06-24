@@ -1,23 +1,27 @@
 "use client"
 
-import { authFireBase } from "@/app/FirebaseConfig";
-import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { toast } from "sonner";
 import 'sweetalert2/src/sweetalert2.scss'
 
 export default function LogoutPage() {
     const router = useRouter();
 
     useEffect(() => {
-        Swal.fire({
-            title: "Đăng xuất thành công!",
-            icon: "success",
-        });
-        router.push("/login");
-        signOut(authFireBase).catch((error) => {
-            console.log(error);
+        const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/user/logout`, {
+            credentials: "include"
+        })
+            .then(res => res.json())
+            .then((data) => {
+                router.push("/");
+                return data;
+            })
+
+        toast.promise(promise, {
+            loading: "Đang xử lý...",
+            success: (data) => data.message,
+            error: (data) => data.message,
         })
     }, [])
 

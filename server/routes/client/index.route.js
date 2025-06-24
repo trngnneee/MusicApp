@@ -4,6 +4,7 @@ const categoryRoute = require("./category.route");
 const songRoute = require("./song.route");
 const singerRoute = require("./singer.route");
 const userRoute = require("./user.route");
+const authRoute = require("./auth.route");
 
 router.use(
   "/category", 
@@ -23,6 +24,11 @@ router.use(
 router.use(
   "/user", 
   userRoute
+);
+
+router.use(
+  "/auth", 
+  authRoute
 );
 
 module.exports = router;
