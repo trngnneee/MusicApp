@@ -60,10 +60,12 @@ export const LoginForm = () => {
                 event.preventDefault();
                 const email = event.target.email.value
                 const password = event.target.password.value;
+                const rememberPassword = event.target.rememberPassword.checked;
 
                 const finalData = {
                     email: email,
-                    password: password
+                    password: password,
+                    rememberPassword: rememberPassword
                 };
 
                 const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/user/login`, {
@@ -82,7 +84,10 @@ export const LoginForm = () => {
                 toast.promise(promise, {
                     loading: "Đang xử lý...",
                     success: (data) => {
-                        router.push("/");
+                        if (data.code == "success")
+                        {
+                            router.push("/");
+                        }
                         return data.message
                     },
                     error: (data) => data.message
@@ -140,11 +145,20 @@ export const LoginForm = () => {
                     </div>
                 </div>
                 <div className="mb-[15px] text-[12px]" id="password-container"></div>
+                <div className="mb-[20px] flex justify-between">
+                    <div className="flex items-center gap-[10px]">
+                        <input name="rememberPassword" id="rememberPassword" type="checkbox" className="w-[15px] h-[15px] cursor-pointer" />
+                        <label htmlFor="rememberPassword" className="text-white text-[14px]">Nhớ mật khẩu</label>
+                    </div>
+                    <div>
+                        <Link href="forgot-password" className="text-white text-[14px] hover:text-[#00ADEF] cursor-pointer">Quên mật khẩu?</Link>
+                    </div>
+                </div>
                 <button className="bg-[#00ADEF] w-[300px] sm:w-[500px] text-[white] text-[16px] font-[700] rounded-[6px] py-[14px]">Đăng nhập</button>
                 <div className="mt-[10px] flex text-white gap-[8px] justify-end items-center">
                     <div className="">Chưa có tài khoản?</div>
                     <Link href="/register">
-                        <u>Đăng ký</u>
+                        <u className="hover:text-[#00ADEF]">Đăng ký</u>
                     </Link>
                 </div>
             </form>

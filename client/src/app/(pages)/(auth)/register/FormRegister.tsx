@@ -138,7 +138,10 @@ export const RegisterForm = () => {
                 toast.promise(promise, {
                     loading: "Đang xử lý...",
                     success: (data) => {
-                        router.push("/login");
+                        if (data.code == "success")
+                        {
+                            router.push("/login");
+                        }
                         return data.message
                     },
                     error: (data) => data.message

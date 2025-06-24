@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const userController = require("../../controller/client/user.controller");
 const userValidate = require("../../validate/user.validate");
+const userMiddleware = require("../../middleware/user.middleware");
 
 router.post(
   "/register",
@@ -18,6 +19,25 @@ router.post(
 router.get(
   "/logout",
   userController.logout
+)
+
+router.post(
+  "/forgot-password",
+  userValidate.forgotPasswordPost,
+  userController.forgotPasswordPost
+)
+
+router.post(
+  "/otp-password",
+  userValidate.otpPasswordPost,
+  userController.otpPasswordPost
+)
+
+router.post(
+  "/reset-password",
+  userMiddleware.verifyToken,
+  userValidate.resetPasswordPost,
+  userController.resetPasswordPost
 )
 
 module.exports = router;
