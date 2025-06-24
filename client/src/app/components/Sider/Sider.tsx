@@ -12,9 +12,11 @@ import { BsFillMusicPlayerFill } from "react-icons/bs";
 import { userUseAuth } from "@/hooks/userUseAuth";
 import { usePathname, useRouter } from "next/navigation";
 import { toast, Toaster } from "sonner";
+import { useWebsiteInfo } from "@/hooks/websiteInfo";
 
 export const Sider = () => {
     const { isLogin, userInfo } = userUseAuth();
+    const { websiteInfo } = useWebsiteInfo();
     const router = useRouter();
     const pathName = usePathname();
 
@@ -61,9 +63,11 @@ export const Sider = () => {
             <Toaster/>
             <div className="bg-[#212121] h-[100vh] fixed w-[200px] lg:w-[250px] xl:w-[280px] z-[999]">
                 <div className="">
-                    <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] xl:text-[36px] flex items-center gap-[30px] justify-center">
-                        <BsFillMusicPlayerFill />
-                        <div className="font-[800]">Music App</div>
+                    <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] flex items-center gap-[10px] justify-center">
+                        <div className="w-[100px] h-[100px] overflow-hidden rounded-[10px]">
+                            <img src={websiteInfo.logo} className="w-full h-full object-cover"/>
+                        </div>
+                        <div className="font-[800]">{websiteInfo && websiteInfo.name}</div>
                     </div>
                     <nav className="">
                         <ul className="flex flex-col justify-center border-b-[1px] border-b-[#4d4d4d] w-full px-[30px]">
