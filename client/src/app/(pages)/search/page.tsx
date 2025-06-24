@@ -13,6 +13,7 @@ export default function SearchPage() {
     <>
       <Title
         title="Kết Quả Tìm Kiếm"
+        className="mt-[30px]"
       />
       <Suspense>
         <SearchResult/>

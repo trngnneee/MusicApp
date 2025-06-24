@@ -2,6 +2,7 @@ const { categoryTreeBuild, findNode, collectAllChild } = require("../../helper/c
 const Category = require("../../model/category.model");
 const Singer = require("../../model/singer.model");
 const Song = require("../../model/song.model");
+const slugify = require("slugify");
 
 module.exports.listGetToCategory = async (req, res) => {
   try {
@@ -165,10 +166,20 @@ module.exports.listGetToSong = async (req, res) => {
 }
 
 module.exports.listGet = async (req, res) => {
-  const rawSongList = await Song.find({
+  const find = {
     deleted: false,
     status: "active"
-  })
+  };
+
+  if (req.query.keyword) {
+    const search = slugify(req.query.keyword, {
+      lower: true
+    });
+    const searchRegex = new RegExp(search);
+    find.slug = searchRegex;
+  }
+
+  const rawSongList = await Song.find(find);
 
   let songList = [];
   for (const song of rawSongList) {
