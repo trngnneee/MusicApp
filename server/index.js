@@ -26,17 +26,15 @@ app.use(cors({
   credentials: true
 }));
 
-app.options('*', cors());
-
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 const adminRoute = require("./routes/admin/index.route");
-app.use(`/admin`, adminRoute);
+app.use("/admin", adminRoute);
 
 const clientRoute = require("./routes/client/index.route");
-app.use(`/`, clientRoute);
+app.use("/", clientRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
