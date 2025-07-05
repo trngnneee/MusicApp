@@ -11,7 +11,7 @@ const port = 8000
 mongoose.connect(process.env.DATABASE);
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://musicapp-di4d.onrender.com',
   methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
