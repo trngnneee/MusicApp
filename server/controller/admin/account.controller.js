@@ -76,8 +76,8 @@ module.exports.loginPost = async (req, res) => {
   res.cookie("token", token, {
     maxAge: req.body.rememberPassword == true ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production" ? true : false,
-    sameSite: "None"
+    secure: true,
+    sameSite: "none"
   });
 
   res.json({
@@ -184,8 +184,9 @@ module.exports.otpPasswordPost = async (req, res) => {
   res.cookie("token", token, {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production" ? true : false,
-    sameSite: "None"
+    secure: true,
+    sameSite: "none",
+    domain: ".vercel.app"
   });
 
   await ForgotPassword.deleteOne({
