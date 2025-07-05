@@ -11,11 +11,22 @@ const port = 8000
 mongoose.connect(process.env.DATABASE);
 
 app.use(cors({
-  origin: 'https://music-app-nine-fawn.vercel.app',
-  methods: ["GET", "POST", "PATCH", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: [
+    'https://music-app-nine-fawn.vercel.app',
+    'http://localhost:3000'
+  ],
+  methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "Cookie",
+    "X-Requested-With",
+    "Accept"
+  ],
   credentials: true
 }));
+
+app.options('*', cors());
 
 app.use(express.json());
 app.use(bodyParser.json());
