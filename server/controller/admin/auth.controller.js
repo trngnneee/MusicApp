@@ -21,9 +21,13 @@ module.exports.verifyToken = async (req, res) => {
       _id: id
     });
 
-    if (!existAccount)
-    {
-      res.clearCookie();
+    if (!existAccount) {
+      res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/"
+      });
       res.json({
         code: "error",
         message: "Tài khoản không tồn tại trong hệ thống!"
@@ -51,7 +55,12 @@ module.exports.verifyToken = async (req, res) => {
     })
   }
   catch (error) {
-    res.clearCookie();
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/"
+    });
     res.json({
       code: "error",
       message: error

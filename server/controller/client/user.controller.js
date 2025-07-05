@@ -75,7 +75,12 @@ module.exports.loginPost = async (req, res) => {
 }
 
 module.exports.logout = (req, res) => {
-  res.clearCookie("userToken");
+  res.clearCookie("userToken", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    path: "/"
+  });
   res.json({
     code: "success",
     message: "Đăng xuất thành công!"
