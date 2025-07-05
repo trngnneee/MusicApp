@@ -11,10 +11,18 @@ const port = 8000
 mongoose.connect(process.env.DATABASE);
 
 app.use(cors({
-  origin: [
-    'https://music-app-nine-fawn.vercel.app',
-    'http://localhost:3000'
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://music-app-nine-fawn.vercel.app',
+      'http://localhost:3000'
+    ];
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
   allowedHeaders: [
     "Content-Type",
