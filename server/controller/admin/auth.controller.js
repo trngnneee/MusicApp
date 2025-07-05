@@ -7,14 +7,28 @@ module.exports.verifyToken = async (req, res) => {
     const token = req.cookies.token;
 
     if (!token) {
-      res.json({
+      return res.json({
         code: "error",
         message: "Token không tồn tại!"
       });
-      return;
     }
 
-    const decoded = jwt.decode(token, process.env.JWT_SECRET);
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET); // Sử dụng verify thay vì decode
+    } catch (err) {
+      res.clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/"
+      });
+      return res.json({
+        code: "error",
+        message: "Token không hợp lệ hoặc đã hết hạn!"
+      });
+    }
+
     const { id, email } = decoded;
 
     const existAccount = await AdminAccount.findOne({
@@ -28,11 +42,10 @@ module.exports.verifyToken = async (req, res) => {
         sameSite: "none",
         path: "/"
       });
-      res.json({
+      return res.json({
         code: "error",
         message: "Tài khoản không tồn tại trong hệ thống!"
       });
-      return;
     }
 
     const roleInfo = await Role.findOne({
@@ -44,17 +57,16 @@ module.exports.verifyToken = async (req, res) => {
       fullName: existAccount.fullName,
       email: existAccount.email,
       avatar: existAccount.avatar,
-      role: roleInfo.name,
-      permission: roleInfo.permissions
+      role: roleInfo?.name,
+      permission: roleInfo?.permissions
     };
 
     res.json({
       code: "success",
       message: "Token hợp lệ!",
       userInfo: userInfo
-    })
-  }
-  catch (error) {
+    });
+  } catch (error) {
     res.clearCookie("token", {
       httpOnly: true,
       secure: true,
@@ -63,7 +75,7 @@ module.exports.verifyToken = async (req, res) => {
     });
     res.json({
       code: "error",
-      message: error
-    })
+      message: "Có lỗi xảy ra khi xác thực!"
+    });
   }
 }

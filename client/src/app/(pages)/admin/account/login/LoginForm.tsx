@@ -49,6 +49,8 @@ export const LoginForm = () => {
         },
       ])
       .onSuccess((event) => {
+        event.preventDefault();
+
         const email = event.target.email.value;
         const password = event.target.password.value;
         const rememberPassword = event.target.rememberPassword.checked ? true : false;
@@ -76,9 +78,7 @@ export const LoginForm = () => {
           loading: "Đang xử lý...",
           success: (data) => {
             if (data.code == "success") {
-              setTimeout(() => {
-                router.push("/admin/category/list");
-              }, 1000);
+              router.replace("/admin/category/list");
             }
             return data.message;
           },
