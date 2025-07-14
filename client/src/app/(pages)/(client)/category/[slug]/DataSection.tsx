@@ -21,7 +21,7 @@ export const DataSection = (props: {
         <>
             {songList && (
                 songList.map((item, index) => (
-                    <div data-aos="fade-up" key={index}>
+                    <div data-aos="fade-up" key={index} className="mb-[10px]">
                         <SongItem2
                             item={item}
                         />

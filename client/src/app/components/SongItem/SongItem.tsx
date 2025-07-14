@@ -27,10 +27,12 @@ export const SongItem = (props: { item: any }) => {
         <>
             <div className="mb-[12px]">
                 <div className="flex gap-[5px] sm:gap-[15px] items-center bg-[#212121] px-[10px] py-[5px] xl:py-[10px] rounded-[15px]">
-                    <img
-                        src={item.avatar}
-                        className="w-[76px] lg:w-[50px] xl:w-[76px] h-auto rounded-[10px]"
-                    />
+                    <div className="w-[76px] lg:w-[50px] xl:w-[76px] h-[76px] lg:h-[50px] xl:h-[76px]">
+                        <img
+                            src={item.avatar}
+                            className="w-full h-full rounded-[10px]"
+                        />
+                    </div>
                     <Link href={item.link} className="flex flex-col flex-1 ml-[10px] p-0">
                         <div className="text-white font-[600] text-[10px] lg:text-[14px] xl:text-[15px] mb-[2px] xl:mb-[5px]">{item.name}</div>
                         <div className="text-[#FFFFFF80] font-[400] text-[9px] xl:text-[12px] mb-[2px] xl:mb-[8px]">{item.singer.join(", ")}</div>
