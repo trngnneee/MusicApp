@@ -1,56 +1,91 @@
-# 🎵 MusicApp  
+# 🎵 MusicApp
 
-Welcome to **MusicApp**, your ultimate tool for discovering, playing, and sharing music effortlessly! This project is built using **[Next.js](https://nextjs.org)** and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).  
+Welcome to **MusicApp**, your ultimate tool for discovering, playing, and sharing music effortlessly! This project is built using **[Next.js](https://nextjs.org)**, **[TailwindCSS Framework](https://tailwindcss.com/)** for Frontend, **[Nodejs](https://nodejs.org/en)**, **[ExpressJS](https://expressjs.com/)** for Backend and **[MongoDB/Mongoose](https://www.mongodb.com/)** for storage our huge music source.
 
-## 🚀 Features  
-- **Trending Songs**: Stay updated with the hottest tracks in real-time.  
-- **Auto-Add to Playlist**: Seamlessly add your favorite songs to playlists with one click.  
-- **Playlist Archiving**: Automatically save every song you add for easy access later.  
-- **Wishlist**: Keep track of your favorite songs.  
-- **User Accounts**: Log in or sign up to enjoy personalized features like Wishlist and Playlist management.  
+## 🚀 Features
 
-🌐 **[MusicApp](https://music-app-sigma-eight.vercel.app/)**  
-🌐 **[MusicApp (Other link)](https://music-app-sigma-eight.vercel.app/)**  
+- **Trending Songs**: Stay updated with the hottest tracks in real-time.
+- **Wishlist**: Keep track of your favorite songs.
+- **User Accounts**: Log in or sign up to enjoy personalized features: Wishlist management.
+- **Admin Dashboard**: Comprehensive admin panel for content management
+   - Category management
+   - Singer management
+   - Song management
+   - Admin profile setting
+   - Role decentralization
+   - Website information setting
 
-## 📞 Contact Us  
-If you have questions or need support, feel free to reach out:  
-- **Email**: [dtn06052005@gmail.com](dtn06052005@gmail.com) 
-- **Instagram**: [@trngnneee](https://www.instagram.com/trngn.neee/)  
+🌐 **[MusicApp - Live Demo (access /admin/account/login for Admin Control Panel)](https://music-app-nine-fawn.vercel.app/)**
 
-## 🛠 Getting Started  
+## 📞 Contact Us
 
-Follow these steps to set up **MusicApp** on your local machine and get it running in no time!  
+If you have questions or need support, feel free to reach out:
 
-### Prerequisites  
-Before starting, ensure you have the following tools installed:  
-- **[Node.js](https://nodejs.org/)** (v16 or higher recommended)  
-- **A package manager**: [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/)  
+- **Email**: [dtn06052005@gmail.com](dtn06052005@gmail.com)
+- **Instagram**: [@trngnneee](https://www.instagram.com/trngn.neee/)
 
-### Installation  
+## 🛠 Running on Local
 
-1. **Clone the repository**:  
-   Open your terminal and run the following command to clone the project:  
-   ```bash
-   git clone https://github.com/your-username/musicapp.git
-   cd musicapp
-2. **Install dependencies**:
-    Use your preferred package manager to install the required dependencies:
-    ```bash
-    npm install
-    # or
-    yarn install
-    # or
-    pnpm install
-### Running the Development Server
-3. **Start the server**:
-    Run the following command to start the development server:
-    ```bash
-    npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm dev
-    # or
-    bun dev
-4. **Open the app in your browser**:
-    Navigate to http://localhost:3000 to view the app.
+Follow these steps to set up **MusicApp** on your local machine and get it running in no time!
+
+### Prerequisites
+
+Before starting, ensure you have the following tools installed:
+
+- **[Node.js](https://nodejs.org/)** (v16 or higher recommended)
+- **A package manager**: [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/), or [bun](https://bun.sh/)
+
+### 🛠️ How to Run
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/trngnneeee/IoT-Web
+cd IoT-Web
+```
+
+### 2. Install Dependencies
+
+#### Frontend (Next.js)
+
+```bash
+cd client
+npm install
+```
+
+#### Backend (Express)
+
+```bash
+cd server
+yarn install
+```
+
+### 3. Set Up Environment Variables
+
+Create the following environment configuration files:
+
+* `client/.env.local` for the Next.js frontend
+* `server/.env` for the Express backend
+
+These should include necessary variables such as API base URLs, JWT secrets, database URIs, SMTP settings, etc.
+
+### 4. Run the Project
+
+#### Start Backend Server
+
+```bash
+cd server
+npm run dev
+```
+
+#### Start Frontend
+
+```bash
+cd client
+yarn start
+```
+
+Your application should now be running locally.
+
+* Frontend: [http://localhost:3000](http://localhost:3000)
+* Backend API: [http://localhost:8000](http://localhost:8000)
