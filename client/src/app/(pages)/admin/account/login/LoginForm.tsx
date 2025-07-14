@@ -67,21 +67,20 @@ export const LoginForm = () => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(finalData),
-          credentials: "include"
         })
           .then(res => res.json())
           .then((data) => {
+            if (data.code == "success")
+            {
+              localStorage.setItem("adminToken", data.token);
+              router.push("/admin/category/list");
+            }
             return data;
           })
 
         toast.promise(promise, {
           loading: "Đang xử lý...",
-          success: (data) => {
-            if (data.code == "success") {
-              router.replace("/admin/category/list");
-            }
-            return data.message;
-          },
+          success: (data) => data.message,
           error: (data) => data.message
         })
       })

@@ -29,13 +29,14 @@ export const RoleCreateForm = () => {
         permissions: permissions
       };
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/create`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(finalData),
-        credentials: "include"
       })
         .then(res => res.json())
         .then((data) => {

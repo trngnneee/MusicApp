@@ -53,10 +53,13 @@ export const SingerCreateForm = () => {
       formData.append("description", description);
       formData.append("avatar", avatar);
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/create`, {
         method: "POST",
         body: formData,
-        credentials: "include"
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       })
         .then(res => res.json())
         .then(data => {

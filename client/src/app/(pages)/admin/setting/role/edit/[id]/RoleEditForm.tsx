@@ -18,8 +18,11 @@ export const RoleCreateForm = () => {
 
   useEffect(() => {
     const id = params.id;
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/edit/${id}`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -46,13 +49,14 @@ export const RoleCreateForm = () => {
         permissions: permissions
       };
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/role/edit/${id}`, {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(finalData),
-        credentials: "include"
+        body: JSON.stringify(finalData)
       })
         .then(res => res.json())
         .then((data) => {

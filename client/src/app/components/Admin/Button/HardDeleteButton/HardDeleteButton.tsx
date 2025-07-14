@@ -18,8 +18,11 @@ export const HardDeleteButton = (props: {
       denyButtonText: `Hủy`
     }).then((result) => {
       if (result.isConfirmed) {
+        const token = localStorage.getItem("adminToken");
         const promise = fetch(api, {
-          credentials: "include",
+          headers: {
+             "Authorization": `Bearer ${token}`
+          },
           method: "DELETE"
         })
           .then(res => res.json())

@@ -73,31 +73,19 @@ module.exports.loginPost = async (req, res) => {
     }
   );
 
-  res.cookie("token", token, {
-    maxAge: req.body.rememberPassword == true ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-    path: "/"
-  });
+  // res.cookie("token", token, {
+  //   maxAge: req.body.rememberPassword == true ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000,
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: "none",
+  //   path: "/"
+  // });
 
   res.json({
     code: "success",
-    message: "Đăng nhập thành công!"
+    message: "Đăng nhập thành công!",
+    token: token
   })
-}
-
-module.exports.logoutGet = (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-    path: "/"
-  });
-  res.json({
-    code: "success",
-    message: "Đăng xuất thành công!"
-  });
 }
 
 module.exports.forgotPasswordPost = async (req, res) => {

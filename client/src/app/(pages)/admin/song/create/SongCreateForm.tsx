@@ -26,8 +26,11 @@ export const SongCreateForm = () => {
   const [singerList, setSingerList] = useState<any[]>([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/create`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then((data) => {
@@ -105,10 +108,13 @@ export const SongCreateForm = () => {
       formData.append("avatar", avatar);
       formData.append("audio", audio);
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/create`, {
         method: "POST",
         body: formData,
-        credentials: "include"
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       })
         .then(res => res.json())
         .then((data) => {

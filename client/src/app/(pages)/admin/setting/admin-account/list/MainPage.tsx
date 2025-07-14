@@ -39,8 +39,11 @@ export const MainPage = () => {
     if (search) params.append("search", search);
     if (page) params.append("page", page);
 
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/list?${params.toString()}`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then((data) => {
@@ -62,13 +65,14 @@ export const MainPage = () => {
         status: applyMulti,
         idList: checkList
       };
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/apply-multi`, {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify(finalData),
-        credentials: "include"
+        body: JSON.stringify(finalData)
       })
         .then(res => res.json())
         .then(data => {

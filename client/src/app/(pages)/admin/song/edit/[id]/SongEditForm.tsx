@@ -32,8 +32,11 @@ export const SongEditForm = () => {
 
   useEffect(() => {
     const id = params.id;
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/edit/${id}`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then((data) => {
@@ -96,10 +99,13 @@ export const SongEditForm = () => {
       formData.append("avatar", avatar);
       formData.append("audio", audio);
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/song/edit/${id}`, {
         method: "PATCH",
         body: formData,
-        credentials: "include"
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       })
         .then(res => res.json())
         .then((data) => {

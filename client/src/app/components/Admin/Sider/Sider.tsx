@@ -56,26 +56,11 @@ export const AdminSider = (props: { className?}) => {
   ]
 
   const handleLogout = () => {
-    const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/account/logout`, {
-      credentials: "include"
-    })
-      .then(res => res.json())
-      .then((data) => {
-        return data;
-      })
-
-    toast.promise(promise, {
-      loading: "Đang xử lý...",
-      success: (data) => {
-        if (data.code == "success") {
-          setTimeout(() => {
-            router.push("/admin/account/login");
-          }, 1000);
-        }
-        return data.message;
-      },
-      error: (data) => data.message
-    })
+    toast.success("Đăng xuất thành công!");
+    localStorage.removeItem("adminToken");
+    setTimeout(() => {
+      router.push("/admin/account/login");
+    }, 1000);
   }
 
   return (

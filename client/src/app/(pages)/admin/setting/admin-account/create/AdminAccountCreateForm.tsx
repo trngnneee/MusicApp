@@ -23,8 +23,11 @@ export const AdminAccountCreateForm = () => {
   const [roleList, setRoleList] = useState<any[]>([])
 
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/create`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then((data) => {
@@ -61,9 +64,12 @@ export const AdminAccountCreateForm = () => {
       formData.append("password", password);
       formData.append("avatar", avatar);
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/create`, {
         method: "POST",
-        credentials: "include",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
         body: formData
       })
         .then(res => res.json())

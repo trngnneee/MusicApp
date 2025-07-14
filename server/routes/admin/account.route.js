@@ -16,11 +16,6 @@ router.post(
   accountController.loginPost
 )
 
-router.get(
-  '/logout',
-  accountController.logoutGet
-)
-
 router.post(
   '/forgot-password',
   accountValidate.forgotPasswordPost,

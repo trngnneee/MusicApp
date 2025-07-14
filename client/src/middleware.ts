@@ -2,25 +2,27 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const pathName = request.nextUrl.pathname;
-  const token = request.cookies.get("token")?.value;
-  const userToken = request.cookies.get("userToken")?.value;
-  if (pathName.startsWith("/admin")) {
-    if (token) {
-      return NextResponse.next();
-    }
-    else {
-      return NextResponse.redirect(new URL('/admin/account/login', request.url))
-    }
-  }
-  else {
-    if (userToken) {
-      return NextResponse.next();
-    }
-    else {
-      return NextResponse.redirect(new URL('/login', request.url))
-    }
-  }
+  // const pathName = request.nextUrl.pathname;
+  // const token = request.cookies.get("token")?.value;
+  // const userToken = request.cookies.get("userToken")?.value;
+  // if (pathName.startsWith("/admin")) {
+  //   if (token) {
+  //     return NextResponse.next();
+  //   }
+  //   else {
+  //     return NextResponse.redirect(new URL('/admin/account/login', request.url))
+  //   }
+  // }
+  // else {
+  //   if (userToken) {
+  //     return NextResponse.next();
+  //   }
+  //   else {
+  //     return NextResponse.redirect(new URL('/login', request.url))
+  //   }
+  // }
+
+  return NextResponse.next();
 }
 
 export const config = {

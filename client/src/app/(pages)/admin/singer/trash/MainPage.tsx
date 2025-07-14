@@ -29,8 +29,11 @@ export const MainPage = () => {
     if (search) params.append("search", search);
     if (page) params.append("page", page);
 
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/trash/list?${params.toString()}`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -57,13 +60,15 @@ export const MainPage = () => {
           denyButtonText: `Hủy`
         }).then((result) => {
           if (result.isConfirmed) {
+            const token = localStorage.getItem("adminToken");
             const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/trash/apply-multi`, {
               method: "PATCH",
               headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
               },
               body: JSON.stringify(finalData),
-              credentials: "include"
+  
             })
               .then(res => res.json())
               .then(data => {
@@ -88,13 +93,14 @@ export const MainPage = () => {
         })
       }
       else {
+        const token = localStorage.getItem("adminToken");
         const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/trash/apply-multi`, {
           method: "PATCH",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
           },
           body: JSON.stringify(finalData),
-          credentials: "include"
         })
           .then(res => res.json())
           .then(data => {

@@ -8,14 +8,25 @@ export const useAuth = () => {
   const [userInfo, setUserInfo] = useState<any>();
   
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+
+    if (!token)
+    {
+      router.push("/admin/account/login");
+      return;
+    }
+
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/auth/verifyToken`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then(data => {
         if (data.code == "error")
         {
-          router.push("/admin/account/login");
+          localStorage.removeItem("adminToken");
+          // router.push("/admin/account/login");
         }
         if (data.code == "success")
         {

@@ -4,29 +4,37 @@ const Role = require("../../model/role.model");
 
 module.exports.verifyToken = async (req, res) => {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
-      return res.json({
+    if (!authHeader || !authHeader.startsWith('Bearer '))
+    {
+      res.json({
         code: "error",
+        message: "Token không tồn tại hoặc không đúng định dạng!"
+      });
+      return;
+    }
+
+    const token = authHeader.split(" ")[1];
+
+    if (!token)
+    {
+      res.json({
+        code: 'error',
         message: "Token không tồn tại!"
       });
+      return;
     }
 
     let decoded;
     try {
-      decoded = jwt.verify(token, process.env.JWT_SECRET); // Sử dụng verify thay vì decode
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch (err) {
-      res.clearCookie("token", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        path: "/"
-      });
-      return res.json({
+      res.json({
         code: "error",
         message: "Token không hợp lệ hoặc đã hết hạn!"
       });
+      return;
     }
 
     const { id, email } = decoded;
@@ -36,12 +44,6 @@ module.exports.verifyToken = async (req, res) => {
     });
 
     if (!existAccount) {
-      res.clearCookie("token", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        path: "/"
-      });
       return res.json({
         code: "error",
         message: "Tài khoản không tồn tại trong hệ thống!"
@@ -67,12 +69,6 @@ module.exports.verifyToken = async (req, res) => {
       userInfo: userInfo
     });
   } catch (error) {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      path: "/"
-    });
     res.json({
       code: "error",
       message: "Có lỗi xảy ra khi xác thực!"

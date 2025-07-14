@@ -24,8 +24,11 @@ export const SingerEditForm = () => {
 
   useEffect(() => {
     const id = params.id;
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/edit/${id}`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -75,10 +78,13 @@ export const SingerEditForm = () => {
       formData.append("avatar", avatar);
       formData.append("description", description);
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/singer/edit/${id}`, {
         method: "PATCH",
         body: formData,
-        credentials: "include"
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       })
         .then(res => res.json())
         .then(data => {

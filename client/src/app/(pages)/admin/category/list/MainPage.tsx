@@ -42,7 +42,17 @@ export const MainPage = () => {
     if (search) params.append("search", search);
     if (page) params.append("page", page);
 
+    const token = localStorage.getItem("adminToken");
+    if (!token)
+    {
+      router.push("/admin/account/login");
+      return;
+    }
+
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/list?${params.toString()}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include"
     })
       .then(res => res.json())
@@ -70,13 +80,14 @@ export const MainPage = () => {
         idList: checkList
       };
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/apply-multi`, {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(finalData),
-        credentials: "include"
       })
         .then(res => res.json())
         .then(data => {

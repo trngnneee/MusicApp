@@ -22,8 +22,12 @@ export const CategoryCreateForm = () => {
   const [categoryTree, setCategoryTree] = useState<any[]>();
 
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/create`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -53,6 +57,7 @@ export const CategoryCreateForm = () => {
 
       event.preventDefault();
 
+      const token = localStorage.getItem("adminToken");
       const name = event.target.name.value;
       const parent = event.target.parent.value;
       const position = event.target.position.value;
@@ -75,7 +80,9 @@ export const CategoryCreateForm = () => {
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/category/create`, {
         method: "POST",
         body: formData,
-        credentials: "include"
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       })
         .then(res => res.json())
         .then(data => {

@@ -19,8 +19,11 @@ export const ProfileEditForm = () => {
   const [userInfo, setUserInfo] = useState<any>({})
 
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/profile`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then((res) => res.json())
       .then((data) => {
@@ -65,9 +68,12 @@ export const ProfileEditForm = () => {
       formData.append("phone", phone);
       formData.append("avatar", avatar);
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/profile`, {
         method: "POST",
-        credentials: "include",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
         body: formData
       })
         .then(res => res.json())

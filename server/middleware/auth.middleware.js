@@ -4,17 +4,37 @@ const Role = require("../model/role.model");
 
 module.exports.verifyToken = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      res.json({
+        code: "error",
+        message: "Token không tồn tại hoặc không đúng định dạng!"
+      });
+      return;
+    }
+
+    const token = authHeader.split(" ")[1];
 
     if (!token) {
       res.json({
-        code: "error",
+        code: 'error',
         message: "Token không tồn tại!"
       });
       return;
     }
 
-    const decoded = jwt.decode(token, process.env.JWT_SECRET);
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+      res.json({
+        code: "error",
+        message: "Token không hợp lệ hoặc đã hết hạn!"
+      });
+      return;
+    }
+
     const { id, email } = decoded;
 
     const existAccount = await AdminAccount.findOne({

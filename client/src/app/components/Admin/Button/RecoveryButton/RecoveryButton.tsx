@@ -9,8 +9,11 @@ export const RecoveryButton = (props: {
   const { api, id, handleRecoverySuccess } = props;
 
   const handleRecovery = () => {
+    const token = localStorage.getItem("adminToken");
     const promise = fetch(api, {
-      credentials: "include",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       method: "PATCH"
     })
       .then(res => res.json())

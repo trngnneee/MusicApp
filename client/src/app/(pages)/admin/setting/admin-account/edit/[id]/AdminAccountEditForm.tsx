@@ -28,8 +28,11 @@ export const AdminAccountEditForm = () => {
 
   useEffect(() => {
     const id = params.id;
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/edit/${id}`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then((data) => {
@@ -87,9 +90,12 @@ export const AdminAccountEditForm = () => {
     formData.append("status", status);
     formData.append("avatar", avatar);
 
+    const token = localStorage.getItem("adminToken");
     const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/admin-account/edit/${id}`, {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       body: formData
     })
       .then(res => res.json())

@@ -20,8 +20,11 @@ export const WebsiteEditForm = () => {
   const [websiteInfo, setWebsiteInfo] = useState<any>({});
 
   useEffect(() => {
+    const token = localStorage.getItem("adminToken");
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/website-info`, {
-      credentials: "include"
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
     })
       .then(res => res.json())
       .then((data) => {
@@ -74,10 +77,13 @@ export const WebsiteEditForm = () => {
       formData.append("logo", logo);
       formData.append("favicon", favicon);
 
+      const token = localStorage.getItem("adminToken");
       const promise = fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/setting/website-info`, {
         method: "PATCH",
         body: formData,
-        credentials: "include"
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       })
         .then(res => res.json())
         .then((data) => {
