@@ -25,7 +25,7 @@ export const SongItem2 = (props: { item: any }) => {
 
     return (
         <>
-            <Link href={`/songs/${item.id}`} className="mb-[12px]">
+            <div className="mb-[12px]">
                 <div className="grid grid-cols-12 items-center bg-[#212121] px-[15px] py-[10px] rounded-[15px] gap-[10px]">
                     {/* Avatar - 1 column */}
                     <div className="col-span-1">
@@ -45,8 +45,12 @@ export const SongItem2 = (props: { item: any }) => {
 
                     {/* Singer name - responsive columns */}
                     <div className="col-span-4 lg:col-span-4">
-                        <div className="text-white font-[400] text-[8px] sm:text-[10px] lg:text-[12px] xl:text-[14px] opacity-70 line-clamp-1">
-                            {item.singer.join(", ")}
+                        <div className="flex gap-[3px]">
+                            {item.singer.map((singer: any, index: number) => (
+                                <Link href={`/singers/${singer.slug}`} key={index} className="text-white font-[400] text-[8px] sm:text-[10px] lg:text-[12px] xl:text-[14px] opacity-70 line-clamp-1 hover:underline">
+                                    {singer.name} {index != item.singer.length - 1 ? "," : ""}
+                                </Link>
+                            ))}
                         </div>
                     </div>
 
@@ -67,7 +71,7 @@ export const SongItem2 = (props: { item: any }) => {
                         )}
                     </div>
                 </div>
-            </Link>
+            </div>
         </>
     );
 }

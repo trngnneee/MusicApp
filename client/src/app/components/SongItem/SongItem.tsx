@@ -33,10 +33,14 @@ export const SongItem = (props: { item: any }) => {
                             className="w-full h-full rounded-[10px]"
                         />
                     </div>
-                    <Link href={item.link} className="flex flex-col flex-1 ml-[10px] p-0">
-                        <div className="text-white font-[600] text-[10px] lg:text-[14px] xl:text-[15px] mb-[2px] xl:mb-[5px]">{item.name}</div>
-                        <div className="text-[#FFFFFF80] font-[400] text-[9px] xl:text-[12px] mb-[2px] xl:mb-[8px]">{item.singer.join(", ")}</div>
-                    </Link>
+                    <div className="flex flex-col flex-1 ml-[10px] p-0">
+                        <Link href={item.link} className="text-white font-[600] text-[10px] lg:text-[14px] xl:text-[15px] mb-[2px] xl:mb-[5px]">{item.name}</Link>
+                        <div className="flex gap-[3px]">
+                            {item.singer.map((singer: any, index: number) => (
+                                <Link href={`/singers/${singer.slug}`} className="text-[#FFFFFF80] font-[400] text-[9px] xl:text-[12px] mb-[2px] xl:mb-[8px] hover:underline" key={index}>{singer.name} {index != item.singer.length - 1 ? "," : ""}</Link>
+                            ))}
+                        </div>
+                    </div>
                     <div className="flex gap-[10px] items-center">
                         <button
                             onClick={(event) => handlePlaySong(event, item)}

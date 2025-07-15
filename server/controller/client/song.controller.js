@@ -97,7 +97,10 @@ module.exports.listGetToSinger = async (req, res) => {
         const singerDetail = await Singer.findOne({
           _id: singer
         });
-        tmp.singer.push(singerDetail.name);
+        tmp.singer.push({
+          name: singerDetail.name,
+          slug: singerDetail.slug
+        });
       }
 
       songList.push(tmp);
@@ -140,7 +143,10 @@ module.exports.listGetToSong = async (req, res) => {
         const singerDetail = await Singer.findOne({
           _id: singer
         });
-        tmp.singer.push(singerDetail.name);
+        tmp.singer.push({
+          name: singerDetail.name,
+          slug: singerDetail.slug
+        });
       }
 
       songList.push(tmp);
@@ -199,7 +205,10 @@ module.exports.listGet = async (req, res) => {
       const singerDetail = await Singer.findOne({
         _id: singer
       });
-      tmp.singer.push(singerDetail.name);
+      tmp.singer.push({
+        name: singerDetail.name,
+        slug: singerDetail.slug
+      });
     }
 
     songList.push(tmp);
@@ -291,6 +300,42 @@ module.exports.wishlistGet = async (req, res) => {
   res.json({
     code: "success",
     message: "Lấy dữ liệu thành công!",
+    songList: songList
+  })
+}
+
+module.exports.randomListGet = async (req, res) => {
+  const rawSongList = await Song.aggregate([
+    { $sample: { size: 3 } }
+  ]);
+
+  let songList = [];
+  for (const song of rawSongList) {
+    const tmp = {
+      id: song.id,
+      name: song.name,
+      avatar: song.avatar,
+      singer: [],
+      link: `songs/${song.id}`,
+      audio: song.audio
+    };
+
+    for (const singer of song.singers) {
+      const singerDetail = await Singer.findOne({
+        _id: singer
+      });
+      tmp.singer.push({
+        name: singerDetail.name,
+        slug: singerDetail.slug
+      });
+    }
+
+    songList.push(tmp);
+  }
+
+  res.json({
+    code: "success",
+    data: "Lấy dữ liệu thành công!",
     songList: songList
   })
 }

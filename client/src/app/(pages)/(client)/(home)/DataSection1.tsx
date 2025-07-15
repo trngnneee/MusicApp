@@ -6,7 +6,7 @@ import { SongItem } from "../../../components/SongItem/SongItem";
 export const DataSection1 = () => {
     const [songList, setSongList] = useState<any[]>([])
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/song/list?limit=3`)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/song/random-list`)
             .then((res) => res.json())
             .then((data) => {
                 setSongList(data.songList);

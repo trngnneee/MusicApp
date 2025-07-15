@@ -34,5 +34,9 @@ router.post(
   songController.wishlistGet
 )
 
+router.get(
+  "/random-list",
+  songController.randomListGet
+)
 
 module.exports = router;
