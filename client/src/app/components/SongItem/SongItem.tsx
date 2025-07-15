@@ -33,18 +33,18 @@ export const SongItem = (props: { item: any }) => {
                             className="w-full h-full rounded-[10px]"
                         />
                     </div>
-                    <div className="flex flex-col flex-1 ml-[10px] p-0">
-                        <Link href={item.link} className="text-white font-[600] text-[10px] lg:text-[14px] xl:text-[15px] mb-[2px] xl:mb-[5px]">{item.name}</Link>
+                    <div className="flex flex-col flex-1 ml-[5px] sm:ml-[10px] p-0">
+                        <Link href={item.link} className="text-white font-[600] text-[10px] lg:text-[14px] xl:text-[15px] mb-[2px] xl:mb-[5px] line-clamp-1">{item.name}</Link>
                         <div className="flex gap-[3px]">
                             {item.singer.map((singer: any, index: number) => (
-                                <Link href={`/singers/${singer.slug}`} className="text-[#FFFFFF80] font-[400] text-[9px] xl:text-[12px] mb-[2px] xl:mb-[8px] hover:underline" key={index}>{singer.name} {index != item.singer.length - 1 ? "," : ""}</Link>
+                                <Link href={`/singers/${singer.slug}`} className="text-[#FFFFFF80] font-[400] text-[9px] xl:text-[12px] mb-[2px] xl:mb-[8px] hover:underline line-clamp-1" key={index}>{singer.name} {index != item.singer.length - 1 ? "," : ""}</Link>
                             ))}
                         </div>
                     </div>
                     <div className="flex gap-[10px] items-center">
                         <button
                             onClick={(event) => handlePlaySong(event, item)}
-                            className="text-[white] rounded-[50%] p-[5px] sm:p-[8px] text-[10px] sm:text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
+                            className="text-[white] rounded-[50%] p-[10px] text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
                         >
                             <FaPlay className="ml-1" />
                         </button>

@@ -15,19 +15,19 @@ export default function Home() {
     <>
       {/* Section1 */}
       <div>
-        <div className="flex gap-[21px]">
+        <div className="flex gap-[15px] xl:gap-[20px] mb-[15px] lg:mb-[30px]">
           <Link
             href="/category/nhac-hiphop"
-            className="w-full lg:w-[400px] xl:w-[534px] h-auto lg:h-[270px] xl:h-[361px] flex items-center gap-[34px] px-[20px] pt-[40px]"
+            className="w-full lg:w-[400px] xl:w-[534px] h-auto lg:h-[270px] xl:h-[361px] flex items-center gap-[20px] xl:gap-[34px] px-[20px] pt-[40px] rounded-[20px]"
             style={{
               backgroundImage: "url('/background1.png')",
               backgroundSize: "cover"
             }}
           >
             <div className="w-[50%]">
-              <div className="font-[700] text-[20px] sm:text-[28px] xl:text-[32px] text-white mb-[6px]">Nhạc Hiphop</div>
+              <div className="font-[700] text-[20px] sm:text-[25px] xl:text-[32px] text-white mb-[6px]">Nhạc Hiphop</div>
               <div className="font-[400] text-[8px] sm:text-[12px] xl:text-[14px] text-white">
-                <div className="text-[16px] font-bold">Nhạc Hiphop mới nhất 2025</div>
+                <div className="text-[12px] xl:text-[16px] font-bold">Nhạc Hiphop mới nhất 2025</div>
                 <div>🔥 Không chỉ nghe – mà còn cảm</div>
                 <div>🔥 Không chỉ chill – mà phải real</div>
                 Vì đây không chỉ là âm nhạc, đây là hip-hop life!
@@ -47,10 +47,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="block lg:hidden">
+        <div className="block lg:hidden mb-[15px] lg:mb-[30px]">
           <Title
             title="Nghe nhiều"
-            className="mt-[10px] mb-[5px]"
+            className="mt-[10px] mb-[20px]"
           />
           <div>
             <DataSection1 />
@@ -58,12 +58,12 @@ export default function Home() {
         </div>
       </div>
       {/* Section2 */}
-      <div className="mb-[30px]">
+      <div className="mb-[15px] lg:mb-[30px]">
         <Title title="Danh Mục Nổi Bật" />
         <DataSection2 />
       </div>
       {/* Section3 */}
-      <div className="mb-[30px]">
+      <div className="mb-[15px] lg:mb-[30px]">
         <Title title="Ca Sĩ Nổi Bật" />
         <DataSection3 />
       </div>

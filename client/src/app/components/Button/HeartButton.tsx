@@ -41,7 +41,7 @@ export const HeartButton = (props: {
     return (
         <>
             <button
-                className="text-[white] rounded-[50%] border-[1px] md:border-[2px] border-[white] hover:bg-[#9d9c9c43] p-[5px] sm:p-[8px] text-[10px] sm:text-[15px]"
+                className="text-[white] rounded-[50%] border-[1px] md:border-[2px] border-[white] hover:bg-[#9d9c9c43] p-[10px] text-[15px]"
                 onClick={handleClick}
             >
                 {(isActive || wishlist.includes(item.id)) ? (<div className="text-[#00ADEF]"><FaHeart /></div>) : (<FaRegHeart />)}

@@ -9,10 +9,10 @@ export const PlayLeft = () => {
                     />
                 </div>
                 <div>
-                    <div className="text-white text-[10px] md:text-[15px] font-[700px] inner-title">
+                    <div className="text-white text-[10px] md:text-[15px] font-[700px] inner-title line-clamp-1">
 
                     </div>
-                    <div className="text-[#FFFFFF70] text-[10px] md:text-[12px] font-[700px] inner-singer">
+                    <div className="text-[#FFFFFF70] text-[10px] md:text-[12px] font-[700px] inner-singer line-clamp-1">
 
                     </div>
                 </div>

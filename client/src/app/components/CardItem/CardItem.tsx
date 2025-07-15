@@ -40,7 +40,7 @@ export const CardItem = (props: { item: any }) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
-                    <div className="w-full h-[150px] overflow-hidden mb-[10px] relative">
+                    <div className="w-full aspect-square overflow-hidden mb-[10px] relative">
                         <img
                             src={item.avatar}
                             className="mb-[10px] w-full h-full object-cover rounded-[10px]"
@@ -56,7 +56,7 @@ export const CardItem = (props: { item: any }) => {
                             </div>
                         )}
                     </div>
-                    <div className="text-[12px] md:text-[14px] font-[700] mb-[5px] md:mb-[8px] text-white">{item.name}</div>
+                    <div className="text-[12px] md:text-[14px] font-[700] mb-[5px] md:mb-[8px] text-white line-clamp-1">{item.name}</div>
                     <div className="text-[10px] md:text-[12px] font-[300] text-[#FFFFFF80] line-clamp-1">{item.description}</div>
                 </div>
             </Link>

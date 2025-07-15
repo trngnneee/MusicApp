@@ -70,7 +70,7 @@ export const MainLayout = ({
               <div className={"hidden md:block w-[280px]"}>
                 <Sider />
               </div>
-              <div className="w-[550px] lg:flex-1 ml-[10px] xl:ml-[20px] relative">
+              <div className="w-[550px] lg:flex-1 mx-[10px] xl:mx-[20px] relative">
                 <Suspense>
                   <Search />
                 </Suspense>

@@ -35,7 +35,7 @@ module.exports.listGetToCategory = async (req, res) => {
     const songList = [];
     for (const song of rawSongList) {
       const tmp = {
-        id: song.id,
+        id: song._id,
         name: song.name,
         avatar: song.avatar,
         singer: [],
@@ -47,7 +47,10 @@ module.exports.listGetToCategory = async (req, res) => {
         const singerDetail = await Singer.findOne({
           _id: singer
         });
-        tmp.singer.push(singerDetail.name);
+        tmp.singer.push({
+          name: singerDetail.name,
+          slug: singerDetail.slug
+        });
       }
 
       songList.push(tmp);
@@ -85,7 +88,7 @@ module.exports.listGetToSinger = async (req, res) => {
     const songList = [];
     for (const song of rawSongList) {
       const tmp = {
-        id: song.id,
+        id: song._id,
         name: song.name,
         avatar: song.avatar,
         singer: [],
@@ -132,7 +135,7 @@ module.exports.listGetToSong = async (req, res) => {
     let songList = [];
     for (const song of rawSongList) {
       const tmp = {
-        id: song.id,
+        id: song._id,
         name: song.name,
         avatar: song.avatar,
         singer: [],
@@ -193,11 +196,11 @@ module.exports.listGet = async (req, res) => {
   let songList = [];
   for (const song of rawSongList) {
     const tmp = {
-      id: song.id,
+      id: song._id,
       name: song.name,
       avatar: song.avatar,
       singer: [],
-      link: `songs/${song.id}`,
+      link: `songs/${song._id}`,
       audio: song.audio
     };
 
@@ -278,11 +281,11 @@ module.exports.wishlistGet = async (req, res) => {
   let songList = [];
   for (const song of rawSongList) {
     const tmp = {
-      id: song.id,
+      id: song._id,
       name: song.name,
       avatar: song.avatar,
       singer: [],
-      link: `songs/${song.id}`,
+      link: `songs/${song._id}`,
       audio: song.audio
     };
 
@@ -290,7 +293,10 @@ module.exports.wishlistGet = async (req, res) => {
       const singerDetail = await Singer.findOne({
         _id: singer
       });
-      tmp.singer.push(singerDetail.name);
+      tmp.singer.push({
+        name: singerDetail.name,
+        slug: singerDetail.slug
+      });
     }
 
     songList.push(tmp);
@@ -312,11 +318,11 @@ module.exports.randomListGet = async (req, res) => {
   let songList = [];
   for (const song of rawSongList) {
     const tmp = {
-      id: song.id,
+      id: song._id,
       name: song.name,
       avatar: song.avatar,
       singer: [],
-      link: `songs/${song.id}`,
+      link: `songs/${song._id}`,
       audio: song.audio
     };
 

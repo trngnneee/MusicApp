@@ -61,16 +61,16 @@ export const Sider = () => {
     return (
         <>
             <Toaster/>
-            <div className="bg-[#212121] h-[100vh] fixed w-[200px] lg:w-[250px] xl:w-[280px] z-[999]">
+            <div className="bg-[#212121] h-[100vh] fixed w-[250px] xl:w-[280px] z-[999]">
                 <div className="">
                     <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] flex items-center gap-[10px] justify-center">
-                        <div className="w-[100px] h-[100px] overflow-hidden rounded-[10px]">
+                        <div className="w-[75px] lg:w-[100px] h-[75px] lg:h-[100px] overflow-hidden rounded-[10px]">
                             <img src={websiteInfo.logo} className="w-full h-full object-cover"/>
                         </div>
                         <div className="font-[800]">{websiteInfo && websiteInfo.name}</div>
                     </div>
                     <nav className="">
-                        <ul className="flex flex-col justify-center border-b-[1px] border-b-[#4d4d4d] w-full px-[30px]">
+                        <ul className="flex flex-col justify-center border-b-[1px] border-b-[#4d4d4d] w-full px-[25px] lg:px-[30px]">
                             {menu.map((item, index) => (
                                 <MenuItem
                                     item={item}

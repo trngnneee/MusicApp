@@ -22,7 +22,12 @@ export const playSong = (item: any) => {
   elementTitle.innerHTML = item.name;
 
   const elementSinger = elementPlayAudio.querySelector(".inner-singer");
-  elementSinger.innerHTML = item.singer.join(", ");
+  let singerTitle = "";
+  item.singer.map((singer, index) => {
+    singerTitle += singer.name;
+    if (index != item.singer.length - 1) singerTitle += ", ";
+  })
+  elementSinger.innerHTML = singerTitle;
 
   const elementPauseButton = elementPlayAudio.querySelector(".inner-button-play");
   elementPauseButton.classList.add("play");
