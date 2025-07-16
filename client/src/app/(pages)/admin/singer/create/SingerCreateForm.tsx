@@ -42,10 +42,10 @@ export const SingerCreateForm = () => {
       const description = event.target.description.value;
 
       let avatar = null;
-      if (avatar && avatars.length > 0) {
+      if (avatars && avatars.length > 0) {
         avatar = avatars[0].file;
       }
-
+      
       const formData = new FormData();
       formData.append("name", name);
       formData.append("position", position);

@@ -40,6 +40,7 @@ export const SongEditForm = () => {
     })
       .then(res => res.json())
       .then((data) => {
+        console.log(data);
         setSongDetail(data.songDetail);
         setCategoryTree(data.categoryTree);
         setSingerList(data.singerList);
@@ -52,6 +53,7 @@ export const SongEditForm = () => {
             }
           ])
         }
+
         if (data.songDetail.audio) {
           setAudios([
             {
@@ -174,7 +176,7 @@ export const SongEditForm = () => {
 
   return (
     <>
-      <Toaster/>
+      <Toaster />
       <form id="song-edit-form" className="bg-white border-[0.3px] border-[#B9B9B9] rounded-[14px] p-[20px] sm:p-[50px]" onSubmit={handleSubmit}>
         <div className="flex flex-col sm:flex-row gap-[15px] sm:gap-[30px] w-full mb-[15px] sm:mb-[30px]">
           <div className="w-full sm:w-[48%]">

@@ -300,7 +300,7 @@ module.exports.editGet = async (req, res) => {
     }
 
     res.json({
-      code: "error",
+      code: "success",
       message: "Lấy data thành công!",
       songDetail: songDetail,
       categoryTree: categoryTree,
