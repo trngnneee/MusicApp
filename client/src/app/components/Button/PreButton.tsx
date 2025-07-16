@@ -21,6 +21,7 @@ export const PreButton = () => {
         <>
             <button
                 onClick={handlePre}
+                className="text-[25px]"
             >
                 <MdSkipPrevious />
             </button>

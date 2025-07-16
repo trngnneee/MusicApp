@@ -20,13 +20,14 @@ export const SearchResult = () => {
 
     return (
         <>
-            <div className="flex flex-col gap-[10px]">
+            <div className="flex flex-col">
                 {songList && (
                     <>
                         {songList.map((item: any, index: number) => (
                             <div data-aos="fade-up" key={index}>
                                 <SongItem2
                                     item={item}
+                                    api={`${process.env.NEXT_PUBLIC_BASE_URL}/song/list?keyword=${defaultKeyword}`}
                                 />
                             </div>
                         ))}

@@ -6,6 +6,7 @@ import { PreButton } from "../Button/PreButton";
 import { NextButton } from "../Button/NextButton";
 import { LoopButton } from "../Button/LoopButton";
 import { QueueButton } from "../Button/QueueButton";
+import { ShuffleButton } from "../Button/ShuffleButton";
 
 export const PlayMidButton = () => {
 
@@ -25,6 +26,7 @@ export const PlayMidButton = () => {
     return (
         <>
             <div className="text-white flex justify-center items-center gap-[30px] md:gap-[52px]">
+                <ShuffleButton/>
                 <PreButton />
                 <button
                     className="inner-button-play"

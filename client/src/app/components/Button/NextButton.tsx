@@ -16,7 +16,7 @@ export const NextButton = () => {
         <>
             <button
                 onClick={handleNext}
-                className="next-button"
+                className="next-button text-[25px]"
             >
                 <MdSkipNext />
             </button>
