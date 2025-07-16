@@ -24,6 +24,7 @@ export const SongList = (props: {
                     <div data-aos="fade-up" key={index} className="mb-[10px]">
                         <SongItem2
                             item={item}
+                            api={`${process.env.NEXT_PUBLIC_BASE_URL}/song/singer-list/${slug}`}
                         />
                     </div>
                 ))

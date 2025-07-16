@@ -10,8 +10,9 @@ export const HeartButton = (props: {
     item: any,
     api: string,
     wishlist: string[]
+    onClickSuccess?: (id: string) => void
 }) => {
-    const { item, api, wishlist } = props;
+    const { item, api, wishlist, onClickSuccess } = props;
     const [isActive, setIsActive] = useState(false);
 
     const handleClick = () => {
@@ -31,6 +32,7 @@ export const HeartButton = (props: {
                 {
                     if (data.successCode == 0) setIsActive(false);
                     else setIsActive(true);
+                    onClickSuccess(item.id);
                 };
                 return data.message;
             },

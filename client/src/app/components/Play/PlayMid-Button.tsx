@@ -5,6 +5,7 @@ import { FaPause } from "react-icons/fa";
 import { PreButton } from "../Button/PreButton";
 import { NextButton } from "../Button/NextButton";
 import { LoopButton } from "../Button/LoopButton";
+import { QueueButton } from "../Button/QueueButton";
 
 export const PlayMidButton = () => {
 
@@ -34,6 +35,7 @@ export const PlayMidButton = () => {
                 </button>
                 <NextButton />
                 <LoopButton />
+                <QueueButton/>
             </div>
         </>
     );

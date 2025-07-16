@@ -6,21 +6,28 @@ import { FaPlay } from "react-icons/fa6";
 import { HeartButton } from "../Button/HeartButton";
 import { userUseAuth } from "@/hooks/userUseAuth";
 
-export const SongItem2 = (props: { item: any }) => {
-    const { item } = props;
+export const SongItem2 = (props: { item: any, api: string }) => {
+    const { item, api } = props;
     const { isLogin, userInfo } = userUseAuth();
 
     const handlePlaySong = (event: React.MouseEvent, item: any) => {
         event.preventDefault();
         event.stopPropagation();
 
-        const currentPlayList = [];
-        currentPlayList.push(item);
-        localStorage.setItem("currentPlaylist", JSON.stringify(currentPlayList));
-        localStorage.setItem("currentSongIndex", JSON.stringify(0));
-        localStorage.setItem("currentSong", JSON.stringify(item));
-
-        playSong(item);
+        let currentPlayList = [];
+        fetch(api)
+            .then(res => res.json())
+            .then((data) => {
+                currentPlayList = data.songList;
+                const itemIndex = currentPlayList.findIndex(song => song.id == item.id);
+                const newPlaylist = currentPlayList.slice(itemIndex);
+        
+                localStorage.setItem("currentPlaylist", JSON.stringify(newPlaylist));
+                localStorage.setItem("currentSongIndex", JSON.stringify(0));
+                localStorage.setItem("currentSong", JSON.stringify(item));
+        
+                playSong(item);
+            })
     }
 
     return (

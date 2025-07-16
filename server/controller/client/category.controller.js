@@ -9,6 +9,7 @@ module.exports.listGet = async (req, res) => {
   let categoryList = [];
   for (const item of categoryRawList) {
     categoryList.push({
+      id: item._id,
       avatar: item.avatar,
       name: item.name,
       description: item.description,
