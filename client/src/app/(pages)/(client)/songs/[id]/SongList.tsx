@@ -15,7 +15,6 @@ export const SongList = (props: {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/song/song-list/${id}?limit=3`)
             .then(res => res.json())
             .then((data) => {
-                console.log(data);
                 setSongList(data.songList);
             })
     }, [id])
@@ -27,6 +26,7 @@ export const SongList = (props: {
                     <div data-aos="fade-up" key={index}>
                         <SongItem2
                             item={item}
+                            api={`${process.env.NEXT_PUBLIC_BASE_URL}/song/song-list/${id}?limit=3`}
                         />
                     </div>
                 ))

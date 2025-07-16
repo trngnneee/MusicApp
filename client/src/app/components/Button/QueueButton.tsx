@@ -102,9 +102,9 @@ export const QueueButton = () => {
                     </div>
                   </div>
                   <div>
-                    <div className="text-[14px] font-bold text-white text-left line-clamp-1">
+                    <Link href={`/songs/${currentSong.id}`} className="text-[14px] font-bold text-white text-left line-clamp-1">
                       {currentSong.name} <span className="text-[10px] opacity-50">(Đang phát)</span>
-                    </div>
+                    </Link>
                     <div className="flex gap-[3px] text-white/70">
                       {currentSong.singer.map((singer: any, index: number) => (
                         <Link 

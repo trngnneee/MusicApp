@@ -42,9 +42,9 @@ export const QueueItem = (props: {
           </div>
         </div>
         <div>
-          <div className="text-[14px] font-bold text-left line-clamp-1">
+          <Link href={`/songs/${item.id}`} className="text-[14px] font-bold text-left line-clamp-1">
             {item.name}
-          </div>
+          </Link>
           <div className="flex gap-[3px]">
             {item.singer.map((singer, index) => (
               <Link href={`/songs/${singer.slug}`} className="line-clamp-1 hover:underline text-[10px]" key={index}>{singer.name} {index != item.singer.length - 1 ? "," : ""}</Link>

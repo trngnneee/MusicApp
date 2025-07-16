@@ -17,8 +17,7 @@ export const CardItem = (props: { item: any }) => {
         fetch(api)
             .then((res) => res.json())
             .then((data) => {
-                if (!data.songList || !data.songList.length)
-                {
+                if (!data.songList || !data.songList.length) {
                     toast.error("Chưa có bài hát nào trong Danh mục!");
                     return;
                 }
@@ -44,6 +43,10 @@ export const CardItem = (props: { item: any }) => {
                         <img
                             src={item.avatar}
                             className="mb-[10px] w-full h-full object-cover rounded-[10px]"
+                            onError={(e) => {
+                                e.currentTarget.onerror = null; 
+                                e.currentTarget.src = "/adminAvatar.png"; 
+                            }}
                         />
                         {isHovered && (
                             <div className="absolute bottom-[5px] right-[5px] rounded-[10px]">

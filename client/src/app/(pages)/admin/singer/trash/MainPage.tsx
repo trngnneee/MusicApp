@@ -216,7 +216,14 @@ export const MainPage = () => {
                     <th className="px-[15px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">{item.name}</th>
                     <th className="px-[15px] py-[8px] text-left align-middle">
                       <div className="w-[60px] h-[60px] overflow-hidden">
-                        <img src={item.avatar} className="w-full h-full object-cover" />
+                        <img 
+                          src={item.avatar} 
+                          className="w-full h-full object-cover" 
+                          onError={(e) => {
+                              e.currentTarget.onerror = null; 
+                              e.currentTarget.src = "/adminAvatar.png"; 
+                            }}
+                        />
                       </div>
                     </th>
                     <th className="px-[15px] py-[8px] text-left align-middle font-[600] text-[14px] text-dark">

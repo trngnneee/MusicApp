@@ -31,6 +31,10 @@ export const SongItem = (props: { item: any }) => {
                         <img
                             src={item.avatar}
                             className="w-full h-full rounded-[10px]"
+                            onError={(e) => {
+                                e.currentTarget.onerror = null; 
+                                e.currentTarget.src = "/music.png"; 
+                            }}
                         />
                     </div>
                     <div className="flex flex-col flex-1 ml-[5px] sm:ml-[10px] p-0">

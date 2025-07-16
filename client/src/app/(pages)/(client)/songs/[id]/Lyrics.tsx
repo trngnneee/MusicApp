@@ -15,7 +15,7 @@ export const Lyrics = (props: {
                 className="mt-[20px]"
             />
             <div className="bg-[#212121] rounded-[15px] p-[20px] mb-[15px] text-white text-[14px] font-[500] whitespace-pre-line">
-                {lyric}
+                {lyric || "Chưa có lời bài hát"}
             </div>
         </>
     );

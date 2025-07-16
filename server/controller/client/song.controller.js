@@ -139,7 +139,8 @@ module.exports.listGetToSong = async (req, res) => {
         name: song.name,
         avatar: song.avatar,
         singer: [],
-        link: `/songs/${song.id}`
+        link: `/songs/${song.id}`,
+        audio: song.audio
       };
 
       for (const singer of song.singers) {

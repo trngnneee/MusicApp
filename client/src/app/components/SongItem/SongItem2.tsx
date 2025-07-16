@@ -21,11 +21,11 @@ export const SongItem2 = (props: { item: any, api: string }) => {
                 currentPlayList = data.songList;
                 const itemIndex = currentPlayList.findIndex(song => song.id == item.id);
                 const newPlaylist = currentPlayList.slice(itemIndex);
-        
+
                 localStorage.setItem("currentPlaylist", JSON.stringify(newPlaylist));
                 localStorage.setItem("currentSongIndex", JSON.stringify(0));
                 localStorage.setItem("currentSong", JSON.stringify(item));
-        
+
                 playSong(item);
             })
     }
@@ -37,9 +37,13 @@ export const SongItem2 = (props: { item: any, api: string }) => {
                     {/* Avatar - 1 column */}
                     <div className="col-span-2">
                         <img
-                            src={item.avatar}
+                            src={item?.avatar || "/adminAvatar.png"}
                             className="w-[40px] sm:w-[50px] xl:w-[60px] aspect-square object-cover rounded-[8px]"
                             alt={item.name}
+                            onError={(e) => {
+                                e.currentTarget.onerror = null; 
+                                e.currentTarget.src = "/music.png"; 
+                            }}
                         />
                     </div>
 
