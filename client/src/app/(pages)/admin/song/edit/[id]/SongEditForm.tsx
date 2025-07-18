@@ -40,7 +40,6 @@ export const SongEditForm = () => {
     })
       .then(res => res.json())
       .then((data) => {
-        console.log(data);
         setSongDetail(data.songDetail);
         setCategoryTree(data.categoryTree);
         setSingerList(data.singerList);

@@ -15,7 +15,7 @@ Welcome to **MusicApp**, your ultimate tool for discovering, playing, and sharin
    - Role decentralization
    - Website information setting
 
-🌐 **[MusicApp - Live Demo (access /admin/account/login for Admin Control Panel)](https://music-app-nine-fawn.vercel.app/)**
+🌐 **[MusicApp - Live Demo (access /admin/account/login for Admin Control Panel)](https://musicapp.io.vn/)**
 
 ## 📞 Contact Us
 
