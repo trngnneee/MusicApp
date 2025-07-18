@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export const DataSection3 = () => {
     const [singerList, setSingerList] = useState<any[]>([])
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/singer/list?limit=6`)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/singer/list?limit=6&rand=1`)
             .then((res) => res.json())
             .then((data) => {
                 for (const item of data.singerList) {

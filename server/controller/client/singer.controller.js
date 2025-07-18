@@ -6,6 +6,35 @@ module.exports.listGet = async (req, res) => {
     status: "active"
   })
 
+  if (req.query.rand) {
+    const randomList = await Singer.aggregate([
+      {
+        $match: {
+          deleted: false,
+          status: "active"
+        }
+      },
+      { $sample: { size: 5 } }
+    ]);
+
+    let singerList = [];
+    for (const item of randomList) {
+      singerList.push({
+        avatar: item.avatar,
+        name: item.name,
+        description: item.description,
+        slug: item.slug,
+        link: `/singers/${item.slug}`
+      });
+    }
+
+    return res.json({
+      code: "success",
+      message: "Lấy dữ liệu random thành công!",
+      singerList: singerList
+    });
+  }
+
   let singerList = [];
   for (const item of rawSingerList) {
     singerList.push({
@@ -17,11 +46,9 @@ module.exports.listGet = async (req, res) => {
     });
   }
 
-  if (req.query.limit)
-  {
+  if (req.query.limit) {
     const limit = parseInt(req.query.limit);
-    if (!isNaN(limit) && limit > 0)
-    {
+    if (!isNaN(limit) && limit > 0) {
       singerList = singerList.slice(0, limit);
     }
   }
