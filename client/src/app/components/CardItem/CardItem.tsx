@@ -22,7 +22,12 @@ export const CardItem = (props: { item: any }) => {
                     return;
                 }
 
-                const songList = data.songList;
+                const songList = [...data.songList];
+                for (let i = songList.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [songList[i], songList[j]] = [songList[j], songList[i]];
+                }
+
                 localStorage.setItem("currentPlaylist", JSON.stringify(songList));
                 localStorage.setItem("currentSongIndex", JSON.stringify(0));
                 localStorage.setItem("currentSong", JSON.stringify(songList[0]));
@@ -44,8 +49,8 @@ export const CardItem = (props: { item: any }) => {
                             src={item.avatar}
                             className="mb-[10px] w-full h-full object-cover rounded-[10px]"
                             onError={(e) => {
-                                e.currentTarget.onerror = null; 
-                                e.currentTarget.src = "/adminAvatar.png"; 
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/adminAvatar.png";
                             }}
                         />
                         {isHovered && (
