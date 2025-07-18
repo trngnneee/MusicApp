@@ -53,6 +53,7 @@ export const playSong = (item: any) => {
     else {
       const nextButton = document.querySelector(".next-button");
       (nextButton as HTMLElement).click();
+
     }
   };
 }

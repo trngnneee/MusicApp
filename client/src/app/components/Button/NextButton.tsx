@@ -3,13 +3,13 @@ import { MdSkipNext } from "react-icons/md";
 
 export const NextButton = () => {
     const handleNext = () => {
-        const currentSongIndex = JSON.parse(localStorage.getItem("currentSongIndex"));
         const currentPlaylist = JSON.parse(localStorage.getItem("currentPlaylist"));
-        
-        const nextSongIndex = (currentSongIndex + 1) % currentPlaylist.length;
-        localStorage.setItem("currentSong", JSON.stringify(currentPlaylist[nextSongIndex]));
-        localStorage.setItem("currentSongIndex", JSON.stringify(nextSongIndex));
-        playSong(currentPlaylist[nextSongIndex]);
+
+        const newPlaylist = currentPlaylist.slice(1);
+        localStorage.setItem("currentPlaylist", JSON.stringify(newPlaylist));
+        localStorage.setItem("currentSong", JSON.stringify(currentPlaylist[1]));
+        localStorage.setItem("currentSongIndex", JSON.stringify(0));
+        playSong(currentPlaylist[1]);
     }
 
     return (

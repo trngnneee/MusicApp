@@ -16,7 +16,7 @@ export const QueueButton = () => {
       if (currentPlaylist) {
         setSongList(JSON.parse(currentPlaylist));
       }
-      
+
       const currentSongData = localStorage.getItem("currentSong");
       if (currentSongData) {
         setCurrentSong(JSON.parse(currentSongData));
@@ -41,7 +41,7 @@ export const QueueButton = () => {
 
     window.addEventListener("storage", handleStorageChange);
     window.addEventListener("playlistUpdated", handlePlaylistUpdated);
-    
+
     window.addEventListener("currentSongUpdated", loadPlaylist);
 
     if (isVisible) {
@@ -60,7 +60,7 @@ export const QueueButton = () => {
     if (intervalRef.current) return;
 
     intervalRef.current = setInterval(() => {
-      loadPlaylist(); 
+      loadPlaylist();
     }, 1000);
   };
 
@@ -86,17 +86,24 @@ export const QueueButton = () => {
 
   return (
     <>
-      <button onClick={handleViewQueue} className="relative">
+      <button onClick={handleViewQueue} className="relative hidden md:block">
         <HiOutlineQueueList />
         {songList && songList.length > 0 && (
           <div className={`absolute bottom-[20px] right-[-150px] w-[350px] max-h-[500px] overflow-y-auto rounded-[10px] bg-[#333232] p-[10px] z-50 ${isVisible ? "block" : "hidden"}`}>
             <div className="text-white font-bold mb-2">Danh sách phát ({songList.length})</div>
-            
+
             {currentSong && (
               <div className="border-b-[1px] border-b-[#ddd] mb-2">
                 <div className="flex items-center gap-[20px] hover:bg-[#ffffff0b] mb-[10px] p-[10px] rounded-[8px] bg-[#ffffff1a]">
                   <div className="w-[50px] aspect-square relative">
-                    <img src={currentSong.avatar} className="w-full h-full object-cover rounded-[5px]" />
+                    <img
+                      src={currentSong.avatar}
+                      className="w-full h-full object-cover rounded-[5px]"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = "/music.png";
+                      }}
+                    />
                     <div className="absolute bottom-0 right-0 w-4 h-4 bg-[#00ADEF] flex items-center justify-center rounded-full">
                       <div className="w-1 h-1 bg-white rounded-full animate-ping"></div>
                     </div>
@@ -107,9 +114,9 @@ export const QueueButton = () => {
                     </Link>
                     <div className="flex gap-[3px] text-white/70">
                       {currentSong.singer.map((singer: any, index: number) => (
-                        <Link 
-                          href={`/singers/${singer.slug}`} 
-                          className="line-clamp-1 hover:underline text-[10px]" 
+                        <Link
+                          href={`/singers/${singer.slug}`}
+                          className="line-clamp-1 hover:underline text-[10px]"
                           key={index}
                         >
                           {singer.name}{index !== currentSong.singer.length - 1 ? ", " : ""}
@@ -120,7 +127,7 @@ export const QueueButton = () => {
                 </div>
               </div>
             )}
-            
+
             {songList.map((item, index) => (
               currentSong && item.id !== currentSong.id && (
                 <QueueItem

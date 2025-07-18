@@ -60,75 +60,82 @@ export const Sider = () => {
 
     return (
         <>
-            <Toaster/>
-            <div className="bg-[#212121] h-[100vh] fixed w-[250px] xl:w-[280px] z-[999]">
-                <div className="">
-                    <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] flex items-center gap-[10px] justify-center">
-                        <div className="w-[75px] lg:w-[100px] h-[75px] lg:h-[100px] overflow-hidden rounded-[10px]">
-                            <img src={websiteInfo.logo} className="w-full h-full object-cover"/>
-                        </div>
-                        <div className="font-[800]">{websiteInfo && websiteInfo.name}</div>
-                    </div>
-                    <nav className="">
-                        <ul className="flex flex-col justify-center border-b-[1px] border-b-[#4d4d4d] w-full px-[25px] lg:px-[30px]">
-                            {menu.map((item, index) => (
-                                <MenuItem
-                                    item={item}
-                                    isLogin={isLogin}
-                                    key={index}
-                                />
-                            ))}
+            {websiteInfo && (
+                <>
+                    <Toaster />
+                    <div className="bg-[#212121] h-[100vh] fixed w-[250px] xl:w-[280px] z-[999]">
+                        <div className="">
+                            <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] flex items-center gap-[10px] justify-center">
+                                <div className="w-[75px] lg:w-[100px] h-[75px] lg:h-[100px] overflow-hidden rounded-[10px]">
+                                    <img
+                                        src={websiteInfo.logo}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="font-[800]">{websiteInfo && websiteInfo.name}</div>
+                            </div>
+                            <nav className="">
+                                <ul className="flex flex-col justify-center border-b-[1px] border-b-[#4d4d4d] w-full px-[25px] lg:px-[30px]">
+                                    {menu.map((item, index) => (
+                                        <MenuItem
+                                            item={item}
+                                            isLogin={isLogin}
+                                            key={index}
+                                        />
+                                    ))}
 
-                        </ul>
-                        <ul className="flex flex-col justify-center mx-[30px] mt-[30px]">
-                            {!isLogin && (
-                                <>
-                                    <li className="mb-[30px]">
-                                        <button
-                                            onClick={() => router.push("/login")}
-                                            className={`flex items-center hover:text-[#00ADEF] ${pathName === "/login" ? "text-[#00ADEF]" : "text-white"}`}
-                                        >
-                                            <span className="text-[14px] xl:text-[20px] mr-[15px]"><FaUser /></span>
-                                            <span className="font-[700] text-[14px] xl:text-[18px]">Đăng nhập</span>
-                                        </button>
-                                    </li>
-                                    <li className="mb-[30px]">
-                                        <button
-                                            onClick={() => router.push("/register")}
-                                            className={`flex items-center hover:text-[#00ADEF] ${pathName === "/register" ? "text-[#00ADEF]" : "text-white"}`}
-                                        >
-                                            <span className="text-[14px] xl:text-[23px] mr-[15px]"><FaUserPlus /></span>
-                                            <span className="font-[700] text-[14px] xl:text-[18px]">Đăng ký</span>
-                                        </button>
-                                    </li>
-                                </>
-                            )}
-                            {isLogin && (
-                                <>
-                                    <li className="mb-[30px]">
-                                        <button
-                                            onClick={() => router.push("/wishlist")}
-                                            className={`flex items-center hover:text-[#00ADEF] ${pathName === "/register" ? "text-[#00ADEF]" : "text-white"}`}
-                                        >
-                                            <span className="text-[14px] xl:text-[23px] mr-[15px]"><FaHeart /></span>
-                                            <span className="font-[700] text-[14px] xl:text-[18px]">Bài hát yêu thích</span>
-                                        </button>
-                                    </li>
-                                    <li className="mb-[30px]">
-                                        <button
-                                            onClick={handleLogout}
-                                            className={`flex items-center hover:text-[#00ADEF] ${pathName === "/register" ? "text-[#00ADEF]" : "text-white"}`}
-                                        >
-                                            <span className="text-[14px] xl:text-[23px] mr-[15px]"><MdLogout /></span>
-                                            <span className="font-[700] text-[14px] xl:text-[18px]">Đăng xuất</span>
-                                        </button>
-                                    </li>
-                                </>
-                            )}
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+                                </ul>
+                                <ul className="flex flex-col justify-center mx-[30px] mt-[30px]">
+                                    {!isLogin && (
+                                        <>
+                                            <li className="mb-[30px]">
+                                                <button
+                                                    onClick={() => router.push("/login")}
+                                                    className={`flex items-center hover:text-[#00ADEF] ${pathName === "/login" ? "text-[#00ADEF]" : "text-white"}`}
+                                                >
+                                                    <span className="text-[14px] xl:text-[20px] mr-[15px]"><FaUser /></span>
+                                                    <span className="font-[700] text-[14px] xl:text-[18px]">Đăng nhập</span>
+                                                </button>
+                                            </li>
+                                            <li className="mb-[30px]">
+                                                <button
+                                                    onClick={() => router.push("/register")}
+                                                    className={`flex items-center hover:text-[#00ADEF] ${pathName === "/register" ? "text-[#00ADEF]" : "text-white"}`}
+                                                >
+                                                    <span className="text-[14px] xl:text-[23px] mr-[15px]"><FaUserPlus /></span>
+                                                    <span className="font-[700] text-[14px] xl:text-[18px]">Đăng ký</span>
+                                                </button>
+                                            </li>
+                                        </>
+                                    )}
+                                    {isLogin && (
+                                        <>
+                                            <li className="mb-[30px]">
+                                                <button
+                                                    onClick={() => router.push("/wishlist")}
+                                                    className={`flex items-center hover:text-[#00ADEF] ${pathName === "/register" ? "text-[#00ADEF]" : "text-white"}`}
+                                                >
+                                                    <span className="text-[14px] xl:text-[23px] mr-[15px]"><FaHeart /></span>
+                                                    <span className="font-[700] text-[14px] xl:text-[18px]">Bài hát yêu thích</span>
+                                                </button>
+                                            </li>
+                                            <li className="mb-[30px]">
+                                                <button
+                                                    onClick={handleLogout}
+                                                    className={`flex items-center hover:text-[#00ADEF] ${pathName === "/register" ? "text-[#00ADEF]" : "text-white"}`}
+                                                >
+                                                    <span className="text-[14px] xl:text-[23px] mr-[15px]"><MdLogout /></span>
+                                                    <span className="font-[700] text-[14px] xl:text-[18px]">Đăng xuất</span>
+                                                </button>
+                                            </li>
+                                        </>
+                                    )}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     );
 }

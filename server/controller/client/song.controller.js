@@ -82,6 +82,8 @@ module.exports.listGetToSinger = async (req, res) => {
 
     const singerID = singerDetail.id;
     const find = {
+      deleted: false,
+      status: "active",
       singers: singerID
     }
     const rawSongList = await Song.find(find);

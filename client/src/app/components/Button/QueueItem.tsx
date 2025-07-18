@@ -33,7 +33,14 @@ export const QueueItem = (props: {
         onMouseLeave={() => setHover(false)}
       >
         <div className="w-[50px] aspect-square relative">
-          <img src={item.avatar} className="w-full h-full object-cover" />
+          <img
+            src={item.avatar}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "/music.png";
+            }}
+          />
           <div
             className={`absolute top-[18px] left-[18px] ${hover ? "block" : "hidden"}`}
             onClick={(event) => { handlePlay(event, item) }}
