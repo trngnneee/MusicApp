@@ -13,7 +13,7 @@ mongoose.connect(process.env.DATABASE);
 app.use(cors({
   origin: function (origin, callback) {
     const allowedOrigins = [
-      'https://music-app-nine-fawn.vercel.app',
+      'https://music-app-bt4z.vercel.app',
       'http://localhost:3000'
     ];
     if (!origin) return callback(null, true);
