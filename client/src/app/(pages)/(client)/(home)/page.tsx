@@ -41,7 +41,7 @@ export default function Home() {
             </div>
           </Link>
           <div className="flex-1 hidden lg:block">
-            <div className="text-white font-[700] text-[20px] xl:text-[24px] mb-[10px] xl:mb-[20px]">Nghe nhiều</div>
+            <div className="text-white font-[700] text-[20px] xl:text-[24px] mb-[10px] xl:mb-[10px]">Nghe nhiều</div>
             <div className="">
               <DataSection1 />
             </div>

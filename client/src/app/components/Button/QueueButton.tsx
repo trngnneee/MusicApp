@@ -9,6 +9,8 @@ export const QueueButton = () => {
   const [songList, setSongList] = useState<any[]>([]);
   const [currentSong, setCurrentSong] = useState<any>();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const boxRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const loadPlaylist = () => {
     try {
@@ -84,12 +86,43 @@ export const QueueButton = () => {
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        boxRef.current &&
+        !boxRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsVisible(false);
+        stopPolling();
+      }
+    };
+
+    if (isVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isVisible]);
+
   return (
     <>
-      <button onClick={handleViewQueue} className="relative hidden md:block">
-        <HiOutlineQueueList />
+      <button 
+        ref={buttonRef}
+        onClick={handleViewQueue} 
+        className="relative hidden md:block"
+      >
+        <HiOutlineQueueList className="text-[24px]" />
         {songList && songList.length > 0 && (
-          <div className={`absolute bottom-[20px] right-[-150px] w-[350px] max-h-[500px] overflow-y-auto rounded-[10px] bg-[#333232] p-[10px] z-50 ${isVisible ? "block" : "hidden"}`}>
+          <div 
+            className={`absolute bottom-[40px] right-[-150px] w-[350px] max-h-[500px] overflow-y-auto rounded-[10px] bg-[#333232] p-[10px] z-50 ${isVisible ? "block" : "hidden"}`}
+            ref={boxRef}
+          >
             <div className="text-white font-bold mb-2">Danh sách phát ({songList.length})</div>
 
             {currentSong && (

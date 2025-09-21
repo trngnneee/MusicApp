@@ -41,7 +41,7 @@ export const ShuffleButton = () => {
 
   return (
     <>
-      <button onClick={hanldeShuffle} className={`text-[20px] ${active ? "text-[#00ADEF]" : "text-white"}`}>
+      <button onClick={hanldeShuffle} className={`text-[25px] ${active ? "text-[#00ADEF]" : "text-white"}`}>
         <TbArrowsShuffle />
       </button>
     </>

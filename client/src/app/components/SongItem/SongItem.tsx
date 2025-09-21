@@ -27,7 +27,7 @@ export const SongItem = (props: { item: any }) => {
         <>
             <div className="mb-[12px]">
                 <div className="flex gap-[5px] sm:gap-[15px] items-center bg-[#212121] px-[10px] py-[5px] xl:py-[10px] rounded-[15px]">
-                    <div className="w-[76px] lg:w-[50px] xl:w-[76px] h-[76px] lg:h-[50px] xl:h-[76px]">
+                    <div className="w-[76px] lg:w-[50px] xl:w-[60px] h-[76px] lg:h-[50px] xl:h-[60px]">
                         <img
                             src={item.avatar}
                             className="w-full h-full rounded-[10px]"
@@ -50,7 +50,7 @@ export const SongItem = (props: { item: any }) => {
                             onClick={(event) => handlePlaySong(event, item)}
                             className="text-[white] rounded-[50%] p-[10px] text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
                         >
-                            <FaPlay className="ml-1" />
+                            <FaPlay className="" />
                         </button>
                         {isLogin && (
                             <HeartButton

@@ -54,7 +54,7 @@ export const CardItem = (props: { item: any }) => {
                             }}
                         />
                         {isHovered && (
-                            <div className="absolute bottom-[5px] right-[5px] rounded-[10px]">
+                            <div className="absolute bottom-[5px] right-[5px] rounded-[10px]" data-aos="fade-up">
                                 <button
                                     onClick={(event) => handlePlayPlaylist(event, item.api)}
                                     className="w-[50px] h-[50px] flex items-center justify-center text-white rounded-full bg-[#00ADEF] hover:bg-[#277594] transition-all duration-200"

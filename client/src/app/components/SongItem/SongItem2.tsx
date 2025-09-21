@@ -71,7 +71,7 @@ export const SongItem2 = (props: { item: any, api: string }) => {
                             onClick={(event) => handlePlaySong(event, item)}
                             className="text-[white] rounded-[50%] p-[10px] text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
                         >
-                            <FaPlay className="ml-1" />
+                            <FaPlay className="" />
                         </button>
                         {isLogin && (
                             <HeartButton

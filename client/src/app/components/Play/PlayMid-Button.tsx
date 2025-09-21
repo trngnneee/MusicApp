@@ -32,8 +32,8 @@ export const PlayMidButton = () => {
                     className="inner-button-play"
                     onClick={handleClick}
                 >
-                    <FaPause className="inner-icon-pause" />
-                    <FaPlay className="inner-icon-play" />
+                    <FaPause className="inner-icon-pause text-[20px]" />
+                    <FaPlay className="inner-icon-play text-[20px]" />
                 </button>
                 <NextButton />
                 <LoopButton />

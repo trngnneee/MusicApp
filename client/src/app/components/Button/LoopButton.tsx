@@ -13,7 +13,7 @@ export const LoopButton = () => {
 
     return (
         <>
-            <button className={`text-[25px] p-0 loop-button ${active ? "text-[#00ADEF]" : "text-white"}`} onClick={handleClick} data-loop-active={active}>
+            <button className={`text-[24px] p-0 loop-button ${active ? "text-[#00ADEF]" : "text-white"}`} onClick={handleClick} data-loop-active={active}>
                 <MdReplay />
             </button>
         </>
