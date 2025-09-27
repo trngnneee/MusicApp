@@ -59,7 +59,7 @@ export const PlaylistCreateBox = () => {
 
   return (
     <>
-      <div className={`fixed left-[10%] sm:left-[40%] mt-[250px] sm:mt-[100px] w-[250px] sm:w-[500px] z-[999] bg-[#333232] rounded-[20px] shadow-lg hidden playlist-box`}>
+      <div className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] sm:w-[500px] z-[999] bg-[#333232] rounded-[20px] shadow-lg hidden playlist-box`}>
         <div className="flex justify-end mt-[10px] mr-[10px]">
           <button onClick={handleClose} >
             <IoClose className="text-white text-[30px]" />
