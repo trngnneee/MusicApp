@@ -27,7 +27,7 @@ export default function Playlist(){
       <Title
         title="Danh sách Playlist"
       />
-      <div className="flex flex-col justify-between gap-[15px]">
+      <div className="flex flex-col justify-between gap-[5px] sm:gap-[15px]">
         {userInfo && playlist.length > 0 && playlist.map((item, index) => (
           <PlaylistItem
             item={item}

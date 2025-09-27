@@ -36,7 +36,7 @@ export const SongItem2 = (props: { item: any, api: string }) => {
     return (
         <>
             <div className="mb-[5px] md:mb-[12px]">
-                <div className="grid grid-cols-12 items-center bg-[#212121] px-[15px] py-[10px] rounded-[15px] gap-[10px]">
+                <div className="grid grid-cols-12 items-center bg-[#212121] px-[5px] sm:px-[15px] py-[5px] sm:py-[10px] rounded-[15px] gap-[10px]">
                     {/* Avatar - 1 column */}
                     <div className="col-span-2">
                         <img
@@ -51,17 +51,17 @@ export const SongItem2 = (props: { item: any, api: string }) => {
                     </div>
 
                     {/* Song name - responsive columns */}
-                    <Link href={item.link} className="col-span-3">
-                        <div className="text-white font-[600] text-[10px] sm:text-[12px] lg:text-[14px] xl:text-[16px] line-clamp-1">
+                    <Link href={item.link} className="col-span-2">
+                        <div className="text-white font-[600] text-[8px] sm:text-[12px] lg:text-[14px] xl:text-[16px] line-clamp-1">
                             {item.name}
                         </div>
                     </Link>
 
                     {/* Singer name - responsive columns */}
-                    <div className="col-span-5">
+                    <div className="col-span-6">
                         <div className="flex gap-[3px]">
                             {item.singer.map((singer: any, index: number) => (
-                                <Link href={`/singers/${singer.slug}`} key={index} className="text-white font-[400] text-[8px] sm:text-[10px] lg:text-[12px] xl:text-[14px] opacity-70 line-clamp-1 hover:underline">
+                                <Link href={`/singers/${singer.slug}`} key={index} className="text-white font-[400] text-[6px] sm:text-[10px] lg:text-[12px] xl:text-[14px] opacity-70 line-clamp-1 hover:underline">
                                     {singer.name} {index != item.singer.length - 1 ? "," : ""}
                                 </Link>
                             ))}
@@ -72,7 +72,7 @@ export const SongItem2 = (props: { item: any, api: string }) => {
                     <div className="col-span-2 flex justify-end items-center gap-[8px]">
                         <button
                             onClick={(event) => handlePlaySong(event, item)}
-                            className="text-[white] rounded-[50%] p-[10px] text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
+                            className="text-[white] rounded-[50%] p-[5px] sm:p-[10px] text-[15px] sm:text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
                         >
                             <FaPlay className="" />
                         </button>

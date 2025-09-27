@@ -28,14 +28,14 @@ export const QueueItem = (props: {
   return (
     <>
       <div
-        className="flex items-center gap-[20px] hover:bg-[#ffffff0b] mb-[10px] p-[10px] rounded-[8px]"
+        className="flex items-center gap-[20px] hover:bg-[#ffffff0b] mb-[5px] sm:mb-[10px] p-[5px] sm:p-[10px] rounded-[8px]"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
         <div className="w-[50px] aspect-square relative">
           <img
             src={item.avatar}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-[5px]"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = "/music.png";
@@ -49,12 +49,12 @@ export const QueueItem = (props: {
           </div>
         </div>
         <div>
-          <Link href={`/songs/${item.id}`} className="text-[14px] font-bold text-left line-clamp-1">
+          <Link href={`/songs/${item.id}`} className="text-[10px] sm:text-[14px] font-bold text-left line-clamp-1">
             {item.name}
           </Link>
           <div className="flex gap-[3px]">
             {item.singer.map((singer, index) => (
-              <Link href={`/songs/${singer.slug}`} className="line-clamp-1 hover:underline text-[10px]" key={index}>{singer.name} {index != item.singer.length - 1 ? "," : ""}</Link>
+              <Link href={`/songs/${singer.slug}`} className="line-clamp-1 hover:underline text-[8px] sm:text-[10px]" key={index}>{singer.name} {index != item.singer.length - 1 ? "," : ""}</Link>
             ))}
           </div>
         </div>

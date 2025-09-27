@@ -22,7 +22,7 @@ export const NextButton = () => {
         <>
             <button
                 onClick={handleNext}
-                className="next-button text-[30px]"
+                className="next-button text-[30px] hidden sm:block"
             >
                 <MdSkipNext />
             </button>

@@ -19,7 +19,7 @@ export const DataSection = () => {
 
     return (
         <>
-            <div className="grid grid-cols-3 lg:grid-cols-5 gap-[20px]">
+            <div className="grid grid-cols-3 lg:grid-cols-5 gap-[5px] sm:gap-[20px]">
                 {singerList && singerList.map((item, index) => (
                     <div data-aos="fade-up" key={index}>
                         <CardItem

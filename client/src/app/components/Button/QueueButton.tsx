@@ -115,19 +115,19 @@ export const QueueButton = () => {
       <button 
         ref={buttonRef}
         onClick={handleViewQueue} 
-        className="relative hidden md:block"
+        className="relative"
       >
-        <HiOutlineQueueList className="text-[24px]" />
+        <HiOutlineQueueList className="text-[20px] sm:text-[24px]" />
         {songList && songList.length > 0 && (
           <div 
-            className={`absolute bottom-[40px] right-[-150px] w-[350px] max-h-[500px] overflow-y-auto rounded-[10px] bg-[#333232] p-[10px] z-50 ${isVisible ? "block" : "hidden"}`}
+            className={`absolute bottom-[40px] right-0 sm:right-[-150px] w-[250px] sm:w-[350px] max-h-[500px] overflow-y-auto rounded-[10px] bg-[#333232] p-[10px] z-50 ${isVisible ? "block" : "hidden"}`}
             ref={boxRef}
           >
             <div className="text-white font-bold mb-2">Danh sách phát ({songList.length})</div>
 
             {currentSong && (
               <div className="border-b-[1px] border-b-[#ddd] mb-2">
-                <div className="flex items-center gap-[20px] hover:bg-[#ffffff0b] mb-[10px] p-[10px] rounded-[8px] bg-[#ffffff1a]">
+                <div className="flex items-center gap-[20px] hover:bg-[#ffffff0b] mb-[10px] p-[5px] sm:p-[10px] rounded-[8px] bg-[#ffffff1a]">
                   <div className="w-[50px] aspect-square relative">
                     <img
                       src={currentSong.avatar}
@@ -142,14 +142,14 @@ export const QueueButton = () => {
                     </div>
                   </div>
                   <div>
-                    <Link href={`/songs/${currentSong.id}`} className="text-[14px] font-bold text-white text-left line-clamp-1">
-                      {currentSong.name} <span className="text-[10px] opacity-50">(Đang phát)</span>
+                    <Link href={`/songs/${currentSong.id}`} className="text-[10px] sm:text-[14px] font-bold text-white text-left line-clamp-1">
+                      {currentSong.name} <span className="text-[8px] sm:text-[10px] opacity-50">(Đang phát)</span>
                     </Link>
                     <div className="flex gap-[3px] text-white/70">
                       {currentSong.singer.map((singer: any, index: number) => (
                         <Link
                           href={`/singers/${singer.slug}`}
-                          className="line-clamp-1 hover:underline text-[10px]"
+                          className="line-clamp-1 hover:underline text-[8px] sm:text-[10px]"
                           key={index}
                         >
                           {singer.name}{index !== currentSong.singer.length - 1 ? ", " : ""}

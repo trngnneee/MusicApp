@@ -40,7 +40,7 @@ export const CardItem = (props: { item: any }) => {
         <>
             <Link href={item.link}>
                 <div
-                    className="flex flex-col hover:bg-[#ffffff0b] p-[10px] rounded-[10px]"
+                    className="flex flex-col hover:bg-[#ffffff0b] p-[5px] sm:p-[10px] rounded-[10px]"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -57,7 +57,7 @@ export const CardItem = (props: { item: any }) => {
                             <div className="absolute bottom-[5px] right-[5px] rounded-[10px]" data-aos="fade-up">
                                 <button
                                     onClick={(event) => handlePlayPlaylist(event, item.api)}
-                                    className="w-[50px] h-[50px] flex items-center justify-center text-white rounded-full bg-[#00ADEF] hover:bg-[#277594] transition-all duration-200"
+                                    className="w-[30px] sm:w-[50px] h-[30px] sm:h-[50px] flex items-center justify-center text-white rounded-full bg-[#00ADEF] hover:bg-[#277594] transition-all duration-200"
                                 >
                                     <FaPlay className="ml-1" />
                                 </button>

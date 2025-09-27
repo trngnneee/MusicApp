@@ -13,7 +13,7 @@ export default async function SingerDetailPage(props: any) {
   const { slug } = await props.params;
   return (
     <>
-      <div className="mb-[30px]">
+      <div className="mb-[10px] sm:mb-[30px]">
         <DataCardInfor
           slug={slug}
         />

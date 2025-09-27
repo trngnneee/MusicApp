@@ -59,18 +59,18 @@ export const PlaylistCreateBox = () => {
 
   return (
     <>
-      <div className={`fixed left-[40%] mt-[100px] w-[500px] z-[999] bg-[#333232] rounded-[20px] shadow-lg hidden playlist-box`}>
+      <div className={`fixed left-[10%] sm:left-[40%] mt-[250px] sm:mt-[100px] w-[250px] sm:w-[500px] z-[999] bg-[#333232] rounded-[20px] shadow-lg hidden playlist-box`}>
         <div className="flex justify-end mt-[10px] mr-[10px]">
           <button onClick={handleClose} >
             <IoClose className="text-white text-[30px]" />
           </button>
         </div>
-        <div className="flex flex-col items-center mt-[30px] ">
-          <div className="text-[36px] font-bold text-white mb-[30px]">Tên Playlist của bạn</div>
-          <form id="playlist-form" className="w-full px-[40px] flex flex-col items-center">
-            <input id="name" type="text" placeholder={"Playlist #1"} className="bg-[#333232] outline-none text-[#F1F4F9] border-b-[1px] border-b-[black] py-[10px] w-full text-center text-[16px] mb-[5px]" />
-            <div className="mb-[20px] text-[12px]" id="name-container"></div>
-            <button className="bg-main py-[10px] px-[50px] text-white font-bold rounded-[12px] mb-[20px] hover:bg-hoverMain">Tạo</button>
+        <div className="flex flex-col items-center mt-[10px] sm:mt-[30px] ">
+          <div className="text-[20px] sm:text-[36px] font-bold text-white mb-[10px] sm:mb-[30px]">Tên Playlist của bạn</div>
+          <form id="playlist-form" className="w-full px-[15px] sm:px-[40px] flex flex-col items-center">
+            <input id="name" type="text" placeholder={"Playlist #1"} className="bg-[#333232] outline-none text-[#F1F4F9] border-b-[1px] border-b-[black] py-[5px] sm:py-[10px] w-full text-center text-[12px] sm:text-[16px] mb-[5px]" />
+            <div className="mb-[10px] sm:mb-[20px] text-[8px] sm:text-[12px]" id="name-container"></div>
+            <button className="bg-main py-[10px] px-[30px] sm:px-[50px] text-white text-[10px] sm:text-[16px] font-bold rounded-[12px] mb-[10px] sm:mb-[20px] hover:bg-hoverMain">Tạo</button>
           </form>
         </div>
       </div>

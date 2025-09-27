@@ -28,7 +28,7 @@ export const SongItem = (props: { item: any }) => {
         <>
             <div className="mb-[12px]">
                 <div className="flex gap-[5px] sm:gap-[15px] items-center bg-[#212121] px-[10px] py-[5px] xl:py-[10px] rounded-[15px]">
-                    <div className="w-[76px] lg:w-[50px] xl:w-[60px] h-[76px] lg:h-[50px] xl:h-[60px]">
+                    <div className="w-[50px] lg:w-[50px] xl:w-[60px] h-[50px] lg:h-[50px] xl:h-[60px]">
                         <img
                             src={item.avatar}
                             className="w-full h-full rounded-[10px]"

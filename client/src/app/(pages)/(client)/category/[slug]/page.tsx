@@ -16,7 +16,7 @@ export default async function CategoryDetailPage(props: any) {
       <DataCardInfor
         slug={slug}
       />
-      <div className="mt-[30px]">
+      <div className="mt-[10px] sm:mt-[30px]">
         <Title
           title="Danh Sách Bài Hát"
         />

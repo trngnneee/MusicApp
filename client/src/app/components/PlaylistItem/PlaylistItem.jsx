@@ -38,21 +38,21 @@ export const PlaylistItem = ({ item, userInfo }) => {
     <>
       <Link
         href={`/playlist/detail?name=${item.name}`}
-        className="bg-[#1a1a1a34] hover:bg-[#ffffff0b] p-[20px] rounded-[20px] border-[1px] border-[grey] relative"
+        className="bg-[#1a1a1a34] hover:bg-[#ffffff0b] p-[5px] sm:p-[20px] rounded-[20px] border-[1px] border-[grey] relative"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className="flex items-center gap-[20px]">
-          <div className="w-[100px] h-[100px] overflow-hidden aspect-square rounded-[10px]">
+          <div className="w-[50px] sm:w-[100px] h-[50px] sm:h-[100px] overflow-hidden aspect-square rounded-[10px]">
             <img
               src={item.avatar}
               className="w-full h-full object-cover"
             />
           </div>
           <div>
-            <div className="text-white text-[20px] font-bold">{item.name}</div>
-            <div className="text-white text-[14px] font-semibold">{userInfo.fullName}</div>
-            <div className="text-[grey] text-[12px] font-semibold">{item.idList.length} Bài hát</div>
+            <div className="text-white text-[14px] sm:text-[20px] font-bold">{item.name}</div>
+            <div className="text-white text-[10px] sm:text-[14px] font-semibold">{userInfo.fullName}</div>
+            <div className="text-[grey] text-[8px] sm:text-[12px] font-semibold">{item.idList.length} Bài hát</div>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export const PlaylistItem = ({ item, userInfo }) => {
         >
           <button
             onClick={(event) => handlePlayPlaylist(event)}
-            className="w-[50px] h-[50px] flex items-center justify-center text-white rounded-full bg-[#00ADEF] hover:bg-[#277594] transition-all duration-200"
+            className="w-[30px] sm:w-[50px] h-[30px] sm:h-[50px] flex items-center justify-center text-white rounded-full bg-[#00ADEF] hover:bg-[#277594] transition-all duration-200"
           >
             <FaPlay className="ml-1" />
           </button>

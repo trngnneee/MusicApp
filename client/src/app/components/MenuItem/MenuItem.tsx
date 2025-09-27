@@ -8,13 +8,13 @@ export const MenuItem = (props: any) => {
     return (
         <>
             {(item.isLogin === undefined || item.isLogin === isLogin) && (
-                <li className="mb-[30px]">
+                <li className="mb-[15px] sm:mb-[30px]">
                     <Link
                         href={item.link}
                         className={`flex items-center hover:text-[#00ADEF] transition ${pathname === item.link ? "text-[#00ADEF]" : "text-white"}`}
                     >
-                        <span className="text-[14px] xl:text-[20px] mr-[15px]">{item.icon}</span>
-                        <span className="font-[700] text-[14px] xl:text-[18px]">{item.title}</span>
+                        <span className="text-[12px] xl:text-[20px] mr-[15px]">{item.icon}</span>
+                        <span className="font-[700] text-[12px] xl:text-[18px]">{item.title}</span>
                     </Link>
                 </li>
             )}

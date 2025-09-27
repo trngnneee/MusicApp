@@ -40,10 +40,10 @@ function DetailPlaylistContent() {
       <Title title="Chi tiết danh sách phát" />
 
       {playlistDetail && (
-        <div className="flex items-center gap-[20px] mb-[20px]">
+        <div className="flex items-center gap-[20px] mb-[5px] sm:mb-[20px]">
           <img
             src={playlistDetail.avatar}
-            className="w-[120px] md:w-[180px] object-cover"
+            className="w-[70px] sm:w-[120px] md:w-[180px] object-cover"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = "/adminAvatar.png";

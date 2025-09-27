@@ -25,15 +25,15 @@ export const PlayMidButton = () => {
 
     return (
         <>
-            <div className="text-white flex justify-center items-center gap-[30px] md:gap-[52px]">
+            <div className="text-white flex justify-center items-center gap-[20px] sm:gap-[30px] md:gap-[52px]">
                 <ShuffleButton/>
                 <PreButton />
                 <button
                     className="inner-button-play"
                     onClick={handleClick}
                 >
-                    <FaPause className="inner-icon-pause text-[20px]" />
-                    <FaPlay className="inner-icon-play text-[20px]" />
+                    <FaPause className="inner-icon-pause text-[15px] sm:text-[20px]" />
+                    <FaPlay className="inner-icon-play text-[15px] sm:text-[20px]" />
                 </button>
                 <NextButton />
                 <LoopButton />

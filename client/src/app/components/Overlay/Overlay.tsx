@@ -10,7 +10,7 @@ export const Overlay = () => {
     
     return (
         <>
-            <div className="overlay hidden absolute top-0 left-0 bg-[#000000a8] w-full h-full z-[900] cursor-pointer" onClick={handleClick}></div>
+            <div className="overlay hidden absolute top-0 left-0 bg-[#000000a8] w-[100vh] h-[100vh] z-[10] cursor-pointer" onClick={handleClick}></div>
         </>
     );
 }
