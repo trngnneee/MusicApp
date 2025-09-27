@@ -9,7 +9,8 @@ const schema = new mongoose.Schema({
     default: "active"
   },
   avatar: String,
-  wishlist: Array
+  wishlist: Array,
+  playlist: Array,
 }, {
   timestamps: true
 })

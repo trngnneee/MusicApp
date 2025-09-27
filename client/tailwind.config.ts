@@ -17,6 +17,8 @@ export default {
     extend: {
       colors: {
         dark: '#202224',
+        main: "#00ADEF",
+        hoverMain: "#277594"
       }
     },
   },

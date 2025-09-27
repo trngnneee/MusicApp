@@ -1,4 +1,11 @@
+import { toast } from "sonner";
+
 export const playSong = (item: any) => {
+  if (!item){
+    toast.error("Danh sách phát trống!");
+    return;
+  }
+
   const elementPlayAudio: any = document.querySelector(".play-audio");
   const elementAudio = elementPlayAudio?.querySelector(".inner-audio");
   const elementSource = elementAudio?.querySelector("source");

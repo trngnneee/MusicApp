@@ -39,4 +39,15 @@ router.get(
   songController.randomListGet
 )
 
+router.post(
+  "/playlist",
+  songController.playlistGet
+)
+
+router.get(
+  "/playlist/:name",
+  userMiddleware.verifyToken,
+  songController.playlistDetailGet
+)
+
 module.exports = router;

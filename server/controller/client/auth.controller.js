@@ -38,7 +38,8 @@ module.exports.verifyToken = async (req, res) => {
       id: existAccount.id,
       fullName: existAccount.fullName,
       email: existAccount.email,
-      wishlist: existAccount.wishlist
+      wishlist: existAccount.wishlist,
+      playlist: existAccount.playlist
     };
 
     res.json({

@@ -8,11 +8,13 @@ import { FaUser } from "react-icons/fa";
 import { FaUserPlus } from "react-icons/fa6";
 import { FaPodcast } from "react-icons/fa";
 import { MenuItem } from "../MenuItem/MenuItem";
-import { BsFillMusicPlayerFill } from "react-icons/bs";
 import { userUseAuth } from "@/hooks/userUseAuth";
 import { usePathname, useRouter } from "next/navigation";
 import { toast, Toaster } from "sonner";
+import { MdOutlineAddToPhotos } from "react-icons/md";
 import { useWebsiteInfo } from "@/hooks/websiteInfo";
+import { useEffect, useRef, useState } from "react";
+import { BiSolidPlaylist } from "react-icons/bi";
 
 export const Sider = () => {
     const { isLogin, userInfo } = userUseAuth();
@@ -58,12 +60,24 @@ export const Sider = () => {
         })
     }
 
+    const handleCreatePlaylist = () => {
+        const playlistBox = document.querySelector(".playlist-box");
+        if (playlistBox.classList.contains("hidden"))
+        {
+            playlistBox.classList.remove("hidden");
+        }
+        else
+        {
+            playlistBox.classList.add("hidden");
+        }
+    }
+
     return (
         <>
             {websiteInfo && (
-                <>
+                <> 
                     <Toaster />
-                    <div className="bg-[#212121] h-[100vh] fixed w-[250px] xl:w-[280px] z-[999]">
+                    <div className="bg-[#212121] h-[100vh] fixed w-[250px] xl:w-[280px] z-[99]">
                         <div className="">
                             <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] flex items-center gap-[10px] justify-center">
                                 <div className="w-[75px] lg:w-[100px] h-[75px] lg:h-[100px] overflow-hidden rounded-[10px]">
@@ -117,6 +131,24 @@ export const Sider = () => {
                                                 >
                                                     <span className="text-[14px] xl:text-[23px] mr-[15px]"><FaHeart /></span>
                                                     <span className="font-[700] text-[14px] xl:text-[18px]">Bài hát yêu thích</span>
+                                                </button>
+                                            </li>
+                                            <li className="mb-[30px]">
+                                                <button
+                                                    onClick={() => router.push("/playlist")}
+                                                    className={`flex items-center hover:text-[#00ADEF] ${pathName === "/playlist" ? "text-[#00ADEF]" : "text-white"}`}
+                                                >
+                                                    <span className="text-[14px] xl:text-[23px] mr-[15px]"><BiSolidPlaylist /></span>
+                                                    <span className="font-[700] text-[14px] xl:text-[18px]">Danh sách Playlist</span>
+                                                </button>
+                                            </li>
+                                            <li className="mb-[30px]">
+                                                <button
+                                                    onClick={handleCreatePlaylist}
+                                                    className={`flex items-center hover:text-[#00ADEF] text-white`}
+                                                >
+                                                    <span className="text-[14px] xl:text-[25px] mr-[15px]"><MdOutlineAddToPhotos /></span>
+                                                    <span className="font-[700] text-[14px] xl:text-[18px]">Tạo Playlist</span>
                                                 </button>
                                             </li>
                                             <li className="mb-[30px]">

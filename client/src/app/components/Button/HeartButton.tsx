@@ -13,7 +13,7 @@ export const HeartButton = (props: {
     onClickSuccess?: (id: string) => void
 }) => {
     const { item, api, wishlist, onClickSuccess } = props;
-    const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(wishlist.includes(item.id));
 
     const handleClick = () => {
         const promise = fetch(api, {
@@ -28,8 +28,7 @@ export const HeartButton = (props: {
         toast.promise(promise, {
             loading: "Đang xử lý...",
             success: (data) => {
-                if (data.code == "success")
-                {
+                if (data.code == "success") {
                     if (data.successCode == 0) setIsActive(false);
                     else setIsActive(true);
                     onClickSuccess(item.id);
@@ -46,7 +45,7 @@ export const HeartButton = (props: {
                 className="text-[white] rounded-[50%] border-[1px] md:border-[2px] border-[white] hover:bg-[#9d9c9c43] p-[10px] text-[15px]"
                 onClick={handleClick}
             >
-                {(isActive || wishlist.includes(item.id)) ? (<div className="text-[#00ADEF]"><FaHeart /></div>) : (<FaRegHeart />)}
+                {(isActive) ? (<div className="text-[#00ADEF]"><FaHeart /></div>) : (<FaRegHeart />)}
             </button>
         </>
     );

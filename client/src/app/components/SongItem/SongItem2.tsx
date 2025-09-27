@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaPlay } from "react-icons/fa6";
 import { HeartButton } from "../Button/HeartButton";
 import { userUseAuth } from "@/hooks/userUseAuth";
+import { AddPlaylistButton } from "../Button/AddPlaylistButton";
 
 export const SongItem2 = (props: { item: any, api: string }) => {
     const { item, api } = props;
@@ -15,7 +16,9 @@ export const SongItem2 = (props: { item: any, api: string }) => {
         event.stopPropagation();
 
         let currentPlayList = [];
-        fetch(api)
+        fetch(api, {
+            credentials: "include"
+        })
             .then(res => res.json())
             .then((data) => {
                 currentPlayList = data.songList;
@@ -41,8 +44,8 @@ export const SongItem2 = (props: { item: any, api: string }) => {
                             className="w-[40px] sm:w-[50px] xl:w-[60px] aspect-square object-cover rounded-[8px]"
                             alt={item.name}
                             onError={(e) => {
-                                e.currentTarget.onerror = null; 
-                                e.currentTarget.src = "/music.png"; 
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/music.png";
                             }}
                         />
                     </div>
@@ -78,6 +81,12 @@ export const SongItem2 = (props: { item: any, api: string }) => {
                                 item={item}
                                 api={`${process.env.NEXT_PUBLIC_BASE_URL}/user/wishlist/${item.id}`}
                                 wishlist={userInfo.wishlist}
+                                onClickSuccess={() => {}}
+                            />
+                        )}
+                        {isLogin && (
+                            <AddPlaylistButton
+                                item={item}
                             />
                         )}
                     </div>

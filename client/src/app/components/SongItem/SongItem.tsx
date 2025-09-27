@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaPlay } from "react-icons/fa6";
 import { HeartButton } from "../Button/HeartButton";
 import { userUseAuth } from "@/hooks/userUseAuth";
+import { AddPlaylistButton } from "../Button/AddPlaylistButton";
 
 export const SongItem = (props: { item: any }) => {
     const { item } = props;
@@ -32,8 +33,8 @@ export const SongItem = (props: { item: any }) => {
                             src={item.avatar}
                             className="w-full h-full rounded-[10px]"
                             onError={(e) => {
-                                e.currentTarget.onerror = null; 
-                                e.currentTarget.src = "/music.png"; 
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = "/music.png";
                             }}
                         />
                     </div>
@@ -45,7 +46,7 @@ export const SongItem = (props: { item: any }) => {
                             ))}
                         </div>
                     </div>
-                    <div className="flex gap-[10px] items-center">
+                    <div className="flex gap-[10px] items-center relative">
                         <button
                             onClick={(event) => handlePlaySong(event, item)}
                             className="text-[white] rounded-[50%] p-[10px] text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
@@ -58,7 +59,8 @@ export const SongItem = (props: { item: any }) => {
                                 api={`${process.env.NEXT_PUBLIC_BASE_URL}/user/wishlist/${item.id}`}
                                 wishlist={userInfo.wishlist}
                             />
-                        )}
+                        )
+                        }
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@ export const QueueButton = () => {
         setCurrentSong(JSON.parse(currentSongData));
       }
     } catch (error) {
-      console.error("Error loading data from localStorage:", error);
+      setSongList([]);
     }
   };
 

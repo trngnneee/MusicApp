@@ -9,6 +9,7 @@ import { Search } from "../Search/Search";
 import { SearchMobile } from "../Search/SearchMobile";
 import { Play } from "../Play/Play";
 import { Header } from "../Admin/Header/Header";
+import { PlaylistCreateBox } from "../Playlist/PlaylistCreateBox";
 
 export const MainLayout = ({
   children,
@@ -35,19 +36,15 @@ export const MainLayout = ({
       return (
         <>
           <body className="admin bg-[#F5F6FA] relative min-h-screen">
-            {/* Sticky Header */}
             <div className="sticky top-0 z-50">
               <Header />
             </div>
 
-            {/* Layout wrapper */}
             <div className="flex">
-              {/* Fixed Sidebar */}
               <div className="hidden xl:block fixed top-[var(--header-height)] left-0 h-[calc(100vh-var(--header-height))] w-[250px]">
                 <AdminSider />
               </div>
 
-              {/* Main content */}
               <main className="flex-1 xl:ml-[250px] p-[30px] overflow-y-auto">
                 {children}
               </main>
@@ -60,11 +57,14 @@ export const MainLayout = ({
   else {
     return (
       <>
-        <body className="bg-[#292929] relative client">
+        <body
+          className="bg-[#292929] relative client"
+        >
           <div className="hidden sider">
             <Sider />
           </div>
           <Overlay />
+          <PlaylistCreateBox />
           <div className="container mx-auto mb-[100px]">
             <div className="flex item-start">
               <div className={"hidden md:block w-[280px]"}>
