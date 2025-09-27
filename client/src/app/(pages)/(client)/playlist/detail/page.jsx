@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
 import { Title } from "@/app/components/Title/Title";
 import { userUseAuth } from "@/hooks/userUseAuth";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-export default function DetailPlaylist() {
+function DetailPlaylistContent() {
   const { isLogin, userInfo } = userUseAuth();
   const [songList, setSongList] = useState([]);
   const [playlistDetail, setPlaylistDetail] = useState();
@@ -17,31 +17,28 @@ export default function DetailPlaylist() {
   useEffect(() => {
     if (!userInfo) return;
 
-    const playlistDetail = userInfo.playlist.find((item) => item.name == name);
-    const idList = playlistDetail.idList;
+    const playlistDetail = userInfo.playlist.find((item) => item.name === name);
+    if (!playlistDetail) return;
+
     setPlaylistDetail(playlistDetail);
-    const finalData = {
-      idList: idList
-    }
+
+    const finalData = { idList: playlistDetail.idList };
 
     fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/song/playlist`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(finalData)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(finalData),
     })
       .then((res) => res.json())
       .then((data) => {
         setSongList(data.songList);
-      })
-  }, [userInfo])
+      });
+  }, [userInfo, name]);
 
   return (
     <>
-      <Title
-        title="Chi tiết danh sách phát"
-      />
+      <Title title="Chi tiết danh sách phát" />
+
       {playlistDetail && (
         <div className="flex items-center gap-[20px] mb-[20px]">
           <img
@@ -53,13 +50,20 @@ export default function DetailPlaylist() {
             }}
           />
           <div>
-            <div className="text-[16px] sm:text-[24px] lg:text-[35px] font-[700] text-[#00ADEF] mb-[5px]">{playlistDetail.name}</div>
-            <div className="text-[8px] sm:text-[10px] lg:text-[14px] font-bold text-[#EFEEE0]">{userInfo.fullName}</div>
-            <div className="text-[8px] sm:text-[10px] lg:text-[14px] font-[300] text-[#EFEEE0]">{playlistDetail.idList.length} Bài hát</div>
+            <div className="text-[16px] sm:text-[24px] lg:text-[35px] font-[700] text-[#00ADEF] mb-[5px]">
+              {playlistDetail.name}
+            </div>
+            <div className="text-[8px] sm:text-[10px] lg:text-[14px] font-bold text-[#EFEEE0]">
+              {userInfo.fullName}
+            </div>
+            <div className="text-[8px] sm:text-[10px] lg:text-[14px] font-[300] text-[#EFEEE0]">
+              {playlistDetail.idList.length} Bài hát
+            </div>
           </div>
         </div>
       )}
-      {songList.length > 0 && (
+
+      {songList.length > 0 &&
         songList.map((item, index) => (
           <div data-aos="fade-up" key={index} className="mb-[10px]">
             <SongItem2
@@ -67,8 +71,15 @@ export default function DetailPlaylist() {
               api={`${process.env.NEXT_PUBLIC_BASE_URL}/song/playlist/${name}`}
             />
           </div>
-        ))
-      )}
+        ))}
     </>
+  );
+}
+
+export default function DetailPlaylist() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DetailPlaylistContent />
+    </Suspense>
   );
 }
