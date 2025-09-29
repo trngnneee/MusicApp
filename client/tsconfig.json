@@ -36,7 +36,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/components/CardInfor/CardInforSekeleton.jsx"  ],
   "exclude": [
     "node_modules"
   ]

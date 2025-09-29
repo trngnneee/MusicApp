@@ -1,4 +1,4 @@
-export const CardInforSkeleton = ({ className }) => {
+export const CardInforSkeleton = ({ className = "" }) => {
     return (
         <div className={`flex items-center gap-[20px] animate-pulse ${className}`}>
             <div className="w-[120px] md:w-[180px] aspect-square rounded-[12px] bg-[#333]"></div>
