@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { SongItem } from "../../../components/SongItem/SongItem";
+import { SongItemSkeleton } from "@/app/components/SongItem/SongItemSkeleton";
 
 export const DataSection1 = () => {
     const [songList, setSongList] = useState<any[]>([])
@@ -15,15 +16,9 @@ export const DataSection1 = () => {
 
     return (
         <>
-            {songList && (
-                songList.map((item, index) => (
-                    <div data-aos="fade-left" key={index}>
-                        <SongItem
-                            item={item}
-                        />
-                    </div>
-                ))
-            )}
+            {!songList.length
+                ? Array.from({ length: 3 }).map((_, i) => <SongItemSkeleton key={i} />)
+                : songList.map((item, i) => <SongItem key={i} item={item} />)}
         </>
     );
 }

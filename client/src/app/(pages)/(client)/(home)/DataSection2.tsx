@@ -1,6 +1,7 @@
 "use client"
 
 import { CardItem } from "@/app/components/CardItem/CardItem";
+import { CardItemSkeleton } from "@/app/components/CardItem/CardItemSekeleton";
 import { useEffect, useState } from "react";
 
 export const DataSection2 = () => {
@@ -28,13 +29,13 @@ export const DataSection2 = () => {
     return (
         <>
             <div className="grid grid-cols-3 xl:grid-cols-5 gap-[5px] sm:gap-[10px] lg:gap-[20px]">
-                {categoryList && categoryList.slice(0, getMaxItems()).map((item, index) => (
-                    <div data-aos="fade-up" key={index}>
-                        <CardItem
-                            item={item}
-                        />
-                    </div>
-                ))}
+                {!categoryList.length
+                    ? Array.from({ length: 5 }).map((_, index) => (
+                        <CardItemSkeleton key={index} />
+                    ))
+                    : categoryList.slice(0, getMaxItems()).map((item, index) => (
+                        <CardItem key={index} item={item} />
+                    ))}
             </div>
         </>
     );

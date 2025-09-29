@@ -1,6 +1,7 @@
 "use client"
 
 import { CardInfor } from "@/app/components/CardInfor/CardInfor";
+import { CardInforSkeleton } from "@/app/components/CardInfor/CardInforSekeleton";
 import { useEffect, useState } from "react";
 
 export const DataCardInfor = (props: {
@@ -8,7 +9,7 @@ export const DataCardInfor = (props: {
 }) => {
     const { slug } = props;
 
-    const [singerDetail, setSingerDetail] = useState<any[]>([])
+    const [singerDetail, setSingerDetail] = useState<any[]>(null)
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/singer/detail/${slug}`)
             .then((res) => res.json())
@@ -19,10 +20,12 @@ export const DataCardInfor = (props: {
 
     return (
         <>
-            {singerDetail && (
+            {singerDetail ? (
                 <CardInfor
                     item={singerDetail}
                 />
+            ) : (
+                <CardInforSkeleton/>
             )}
         </>
     );

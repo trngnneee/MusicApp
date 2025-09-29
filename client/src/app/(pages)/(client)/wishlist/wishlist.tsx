@@ -2,6 +2,7 @@
 
 import { HeartButton } from "@/app/components/Button/HeartButton";
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
+import { SongItem2Skeleton } from "@/app/components/SongItem/SongItem2Sekeleton";
 import { playSong } from "@/helper/playSong";
 import { userUseAuth } from "@/hooks/userUseAuth";
 import Link from "next/link";
@@ -56,7 +57,7 @@ export const Wishlist = () => {
     return (
         <>
             <div className="flex flex-col">
-                {songList && (
+                {songList.length > 0 ? (
                     songList.map((item, index) => (
                         <div key={index} className="mb-[5px] md:mb-[12px]">
                             <div className="grid grid-cols-12 items-center bg-[#212121] px-[5px] sm:px-[15px] py-[5px] sm:py-[10px] rounded-[15px] gap-[10px]">
@@ -106,6 +107,10 @@ export const Wishlist = () => {
                                 </div>
                             </div>
                         </div>
+                    ))
+                ) : (
+                    Array.from({ length: 5 }).map((_, i) => (
+                        <SongItem2Skeleton key={i} />
                     ))
                 )}
             </div>

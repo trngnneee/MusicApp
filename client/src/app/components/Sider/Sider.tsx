@@ -62,12 +62,10 @@ export const Sider = () => {
 
     const handleCreatePlaylist = () => {
         const playlistBox = document.querySelector(".playlist-box");
-        if (playlistBox.classList.contains("hidden"))
-        {
+        if (playlistBox.classList.contains("hidden")) {
             playlistBox.classList.remove("hidden");
         }
-        else
-        {
+        else {
             playlistBox.classList.add("hidden");
         }
     }
@@ -75,16 +73,24 @@ export const Sider = () => {
     return (
         <>
             {websiteInfo && (
-                <> 
+                <>
                     <Toaster />
                     <div className="bg-[#212121] h-[100vh] fixed w-[200px] sm:w-[250px] xl:w-[280px] z-[99]">
                         <div className="">
                             <div className="bg-[#1C1C1C] py-[25px] px-[10px] mb-[30px] text-[white] text-[24px] flex items-center gap-[10px] justify-center">
                                 <div className="w-[50px] sm:w-[75px] lg:w-[100px] h-[50px] sm:h-[75px] lg:h-[100px] overflow-hidden rounded-[10px]">
-                                    <img
-                                        src={websiteInfo.logo}
-                                        className="w-full h-full object-cover"
-                                    />
+                                    {websiteInfo?.logo ? (
+                                        <img
+                                            src={websiteInfo.logo}
+                                            className="w-full h-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.onerror = null;
+                                                // e.currentTarget.src = "/fallback.png"; 
+                                            }}
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-gray-700 animate-pulse" />
+                                    )}
                                 </div>
                                 <div className="font-[800]">{websiteInfo && websiteInfo.name}</div>
                             </div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { SongItem2 } from "@/app/components/SongItem/SongItem2";
+import { SongItem2Skeleton } from "@/app/components/SongItem/SongItem2Sekeleton";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -21,7 +22,7 @@ export const SearchResult = () => {
     return (
         <>
             <div className="flex flex-col">
-                {songList && (
+                {songList.length > 0 ? (
                     <>
                         {songList.map((item: any, index: number) => (
                             <div data-aos="fade-up" key={index}>
@@ -32,6 +33,12 @@ export const SearchResult = () => {
                             </div>
                         ))}
                     </>
+                ) : (
+                    [...Array(5)].map((_, index) => 
+                        <SongItem2Skeleton
+                            key={index}
+                        />
+                    )
                 )}
             </div>
         </>

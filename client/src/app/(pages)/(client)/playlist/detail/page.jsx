@@ -5,6 +5,8 @@ import { Title } from "@/app/components/Title/Title";
 import { userUseAuth } from "@/hooks/userUseAuth";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import { SongItem2Skeleton } from "../../../../components/SongItem/SongItem2Sekeleton"
+import { CardInforSkeleton } from "@/app/components/CardInfor/CardInforSekeleton";
 
 function DetailPlaylistContent() {
   const { isLogin, userInfo } = userUseAuth();
@@ -39,7 +41,7 @@ function DetailPlaylistContent() {
     <>
       <Title title="Chi tiết danh sách phát" />
 
-      {playlistDetail && (
+      {playlistDetail ? (
         <div className="flex items-center gap-[20px] mb-[5px] sm:mb-[20px]">
           <img
             src={playlistDetail.avatar}
@@ -61,9 +63,13 @@ function DetailPlaylistContent() {
             </div>
           </div>
         </div>
+      ) : (
+        <CardInforSkeleton 
+          className="mb-[20px]"
+        />
       )}
 
-      {songList.length > 0 &&
+      {songList.length > 0 ?
         songList.map((item, index) => (
           <div data-aos="fade-up" key={index} className="mb-[10px]">
             <SongItem2
@@ -71,7 +77,11 @@ function DetailPlaylistContent() {
               api={`${process.env.NEXT_PUBLIC_BASE_URL}/song/playlist/${name}`}
             />
           </div>
-        ))}
+        )) : (
+          Array.from({ length: 5 }).map((_, i) => (
+            <SongItem2Skeleton key={i} />
+          ))
+        )}
     </>
   );
 }
