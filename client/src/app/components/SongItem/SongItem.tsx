@@ -49,7 +49,7 @@ export const SongItem = (props: { item: any }) => {
                     <div className="flex gap-[10px] items-center relative">
                         <button
                             onClick={(event) => handlePlaySong(event, item)}
-                            className="text-[white] rounded-[50%] p-[10px] text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
+                            className="text-[white] rounded-[50%] p-[5px] sm:p-[10px] text-[15px] bg-[#00ADEF] hover:bg-[#277594]"
                         >
                             <FaPlay className="" />
                         </button>

@@ -6,6 +6,9 @@ export const playSong = (item: any) => {
     return;
   }
 
+  const mainContent = document.querySelector(".main-content");
+  mainContent.classList.add("mb-[70px]");
+
   const elementPlayAudio: any = document.querySelector(".play-audio");
   const elementAudio = elementPlayAudio?.querySelector(".inner-audio");
   const elementSource = elementAudio?.querySelector("source");

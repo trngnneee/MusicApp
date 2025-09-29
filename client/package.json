@@ -23,7 +23,8 @@
     "react-loading-skeleton": "^3.5.0",
     "sass": "^1.83.1",
     "sonner": "^2.0.5",
-    "sweetalert2": "^11.22.0"
+    "sweetalert2": "^11.22.0",
+    "typed.js": "^2.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",

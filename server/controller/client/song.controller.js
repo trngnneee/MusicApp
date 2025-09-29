@@ -315,7 +315,7 @@ module.exports.wishlistGet = async (req, res) => {
 
 module.exports.randomListGet = async (req, res) => {
   const rawSongList = await Song.aggregate([
-    { $sample: { size: 3 } }
+    { $sample: { size: 4 } }
   ]);
 
   let songList = [];

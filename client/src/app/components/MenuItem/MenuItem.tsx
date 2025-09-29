@@ -8,7 +8,7 @@ export const MenuItem = (props: any) => {
     return (
         <>
             {(item.isLogin === undefined || item.isLogin === isLogin) && (
-                <li className="mb-[15px] sm:mb-[30px]">
+                <li className="mb-[15px] sm:mb-[20px]">
                     <Link
                         href={item.link}
                         className={`flex items-center hover:text-[#00ADEF] transition ${pathname === item.link ? "text-[#00ADEF]" : "text-white"}`}

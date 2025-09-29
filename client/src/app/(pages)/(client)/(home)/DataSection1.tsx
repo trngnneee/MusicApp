@@ -17,7 +17,7 @@ export const DataSection1 = () => {
     return (
         <>
             {!songList.length
-                ? Array.from({ length: 3 }).map((_, i) => <SongItemSkeleton key={i} />)
+                ? Array.from({ length: 4 }).map((_, i) => <SongItemSkeleton key={i} />)
                 : songList.map((item, i) => <SongItem key={i} item={item} />)}
         </>
     );

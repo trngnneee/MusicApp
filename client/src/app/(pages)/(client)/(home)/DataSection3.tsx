@@ -28,7 +28,7 @@ export const DataSection3 = () => {
 
     return (
         <>
-            <div className="grid grid-cols-3 xl:grid-cols-5 gap-[5px] sm:gap-[10px] lg:gap-[20px]">
+            <div className="grid grid-cols-3 xl:grid-cols-5 gap-[5px] sm:gap-[10px] lg:gap-[15px]">
                 {!singerList.length
                     ? Array.from({ length: 5 }).map((_, index) => (
                         <CardItemSkeleton key={index} />
