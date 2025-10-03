@@ -5,10 +5,7 @@ export const playSong = (item: any) => {
     toast.error("Danh sách phát trống!");
     return;
   }
-
-  const mainContent = document.querySelector(".main-content");
-  mainContent.classList.add("mb-[70px]");
-
+  
   const elementPlayAudio: any = document.querySelector(".play-audio");
   const elementAudio = elementPlayAudio?.querySelector(".inner-audio");
   const elementSource = elementAudio?.querySelector("source");
