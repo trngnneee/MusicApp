@@ -1,0 +1,83 @@
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fb;
+  color: #333;
+  line-height: 1.6;
+}
+
+.header {
+  background: #00adef;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.header .subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+.api-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.api-table th,
+.api-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.api-table th {
+  background: #f0f4f9;
+  font-weight: 600;
+  color: #555;
+}
+
+.api-table td {
+  font-size: 14px;
+}
+
+.api-table tr:hover {
+  background: #f9fcff;
+}
+
+.api-table td.active {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.api-table td.inactive {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.footer {
+  text-align: center;
+  margin: 30px 0 10px;
+  font-size: 13px;
+  color: #777;
+}

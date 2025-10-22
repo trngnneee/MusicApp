@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
+const path = require('path');
 
 const app = express()
 const port = 8000
@@ -40,9 +41,17 @@ app.use((req, res, next) => {
   next();
 });
 
+app.set('views', path.join(__dirname, "views"));
+app.set('view engine', 'pug');
+
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+const indexRoute = require("./routes/index.route")
+app.use("/", indexRoute);
 
 const adminRoute = require("./routes/admin/index.route");
 app.use("/admin", adminRoute);

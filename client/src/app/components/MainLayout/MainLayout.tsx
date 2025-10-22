@@ -9,7 +9,6 @@ import { Search } from "../Search/Search";
 import { SearchMobile } from "../Search/SearchMobile";
 import { Play } from "../Play/Play";
 import { Header } from "../Admin/Header/Header";
-import { PlaylistCreateBox } from "../Playlist/PlaylistCreateBox";
 
 export const MainLayout = ({
   children,
@@ -64,7 +63,6 @@ export const MainLayout = ({
             <Sider />
           </div>
           <Overlay />
-          <PlaylistCreateBox />
           <div className="container mx-auto mb-[100px]">
             <div className="flex item-start">
               <div className={"hidden md:block w-[280px]"}>

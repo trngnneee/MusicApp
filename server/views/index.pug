@@ -1,0 +1,44 @@
+doctype html
+html(lang="vi")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Quản lý API - Trang chủ
+    link(rel="stylesheet", href="/styles/style.css")
+  body
+    header.header
+      h1 Quản lý API - MusicApp
+      p.subtitle Theo dõi và quản lý các API đang sử dụng cho trang chủ
+
+    main.container
+      h2.api-title Danh sách API dành cho Admin đang sử dụng
+      table.api-table
+        thead
+          tr
+            th Endpoint
+            th Method
+            th Mô tả
+        tbody
+          each item in adminEndpoint 
+            tr
+              td #{item.url}
+              td #{item.method}
+              td #{item.desc}
+          
+      //- h2.api-title Danh sách API dành cho Client đang sử dụng
+      //- table.api-table
+      //-   thead
+      //-     tr
+      //-       th Endpoint
+      //-       th Method
+      //-       th Mô tả
+      //-       th Trạng thái
+      //-   tbody
+      //-     tr
+      //-       td /category/list
+      //-       td GET
+      //-       td Lấy danh sách thể loại (limit=6)
+      //-       td.active Hoạt động
+
+    footer.footer
+      p © 2025 MusicApp. Quản lý API.
